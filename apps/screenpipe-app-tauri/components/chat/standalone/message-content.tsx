@@ -4,6 +4,7 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Check, Calendar, ChevronDown, ChevronRight, ChevronUp, Plug, RefreshCw } from "lucide-react";
@@ -46,11 +47,12 @@ const MermaidDiagram = React.lazy(() =>
 );
 
 function MermaidDiagramBlock({ chart }: { chart: string }) {
+  const t = useTranslations("messageContentUi");
   return (
     <React.Suspense
       fallback={
         <div className="my-4 text-xs text-muted-foreground">
-          rendering diagram...
+          {t("renderingDiagram")}
         </div>
       }
     >
@@ -73,6 +75,7 @@ export function GridDissolveLoader({
   label?: string;
   toolName?: string;
 }) {
+  const t = useTranslations("toolUi");
   const ROWS = 3;
   const COLS = 5;
   const TOTAL = ROWS * COLS;
@@ -115,9 +118,9 @@ export function GridDissolveLoader({
   }, [phase]);
 
   const displayLabel = label ?? (
-    phase === "tool" ? (toolName ?? "running tool...") :
-    phase === "streaming" ? "writing..." :
-    "analyzing..."
+    phase === "tool" ? (toolName ?? t("runningTool")) :
+    phase === "streaming" ? t("writing") :
+    t("analyzing")
   );
 
   return (
@@ -255,6 +258,9 @@ function bashToolDetailsPresentation(toolCall: ToolCall): BashToolDetailsPresent
 }
 
 function BashToolDetails({ toolCall }: { toolCall: ToolCall }) {
+  const t = useTranslations("messageContentUi");
+  const p = useTranslations("toolPresentationUi");
+  const p2 = useTranslations("toolPresentationUi2");
   const details = bashToolDetailsPresentation(toolCall);
   if (!details) {
     return (
@@ -271,15 +277,15 @@ function BashToolDetails({ toolCall }: { toolCall: ToolCall }) {
       <div className="rounded-md border border-border/50 bg-muted/20 px-2.5 py-2">
         <div className="mb-1 flex min-w-0 items-center gap-1.5">
           <span className="shrink-0 rounded border border-border/50 px-1.5 py-0.5 text-[10px] font-mono uppercase leading-none text-muted-foreground">
-            {details.eyebrow}
+            {translateToolPresentation(details.eyebrow, p, p2)}
           </span>
           {details.resultSummary && (
             <span className="min-w-0 truncate text-[11px] text-muted-foreground">
-              {details.resultSummary}
+              {translateToolPresentation(details.resultSummary, p, p2)}
             </span>
           )}
         </div>
-        <div className="text-sm font-medium text-foreground/85">{details.title}</div>
+        <div className="text-sm font-medium text-foreground/85">{translateToolPresentation(details.title, p, p2)}</div>
         {details.fields.length > 0 && (
           <div className="mt-2 flex flex-wrap gap-1">
             {details.fields.map((field) => (
@@ -287,7 +293,7 @@ function BashToolDetails({ toolCall }: { toolCall: ToolCall }) {
                 key={`${field.label}:${field.value}`}
                 className="max-w-full rounded border border-border/40 bg-background/60 px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground"
               >
-                <span className="text-muted-foreground/60">{field.label}</span>{" "}
+                <span className="text-muted-foreground/60">{translateToolPresentation(field.label, p, p2)}</span>{" "}
                 <span className="text-foreground/70">{field.value}</span>
               </span>
             ))}
@@ -297,11 +303,11 @@ function BashToolDetails({ toolCall }: { toolCall: ToolCall }) {
 
       <details className="group rounded-md border border-border/30 bg-background/40 px-2 py-1.5">
         <summary className="cursor-pointer select-none text-[10px] font-mono uppercase tracking-wide text-muted-foreground/70 transition-colors hover:text-foreground/70">
-          technical details
+          {t("technicalDetails")}
         </summary>
         <div className="mt-2 space-y-2">
-          <ToolCodeBlock label="command" code={sanitizeCommand(details.rawCommand)} language="shell" />
-          {formattedResult && <ToolCodeBlock label="response" code={formattedResult} language="json" />}
+          <ToolCodeBlock label={t("commandLabel")} code={sanitizeCommand(details.rawCommand)} language="shell" />
+          {formattedResult && <ToolCodeBlock label={t("responseLabel")} code={formattedResult} language="json" />}
         </div>
       </details>
     </div>
@@ -408,9 +414,13 @@ function ToolCallRailItem({
   isLast: boolean;
   onAskUserReply?: (reply: string, displayLabel: string) => void | Promise<void>;
 }) {
+  const toolT = useTranslations("toolUi");
   const [expanded, setExpanded] = useState(false);
   const presentation = presentToolActivity(toolCall);
-  const label = toolCall.isRunning ? presentation.runningLabel : presentation.completedLabel;
+  const label = localizeToolLabel(
+    toolCall.isRunning ? presentation.runningLabel : presentation.completedLabel,
+    toolT,
+  );
   const appName = extractAppFromToolCall(toolCall);
   const connectionIconName = extractConnectionIconFromToolCall(toolCall);
   const webTarget = extractWebTargetFromToolCall(toolCall);
@@ -652,16 +662,17 @@ function WebTargetIcon({
 }
 
 export function ConnectionToolIcon({ name }: { name: string }) {
+  const t = useTranslations("messageContentUi");
   const key = normalizeAppKey(name);
   if (key === "connections") {
-    return <Plug className="w-3.5 h-3.5 text-foreground/70" aria-label="connections" />;
+    return <Plug className="w-3.5 h-3.5 text-foreground/70" aria-label={t("connectionsIcon")} />;
   }
   if (key === "windows-calendar") {
-    return <Calendar className="w-3.5 h-3.5 text-muted-foreground" aria-label="Windows Calendar" />;
+    return <Calendar className="w-3.5 h-3.5 text-muted-foreground" aria-label={t("windowsCalendarIcon")} />;
   }
   if (key === "microsoft365" || key === "microsoft-365" || key === "office365" || key === "outlook") {
     return (
-      <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" aria-label="Microsoft 365">
+      <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" aria-label={t("microsoft365Icon")}>
         <path fill="#F25022" d="M1 1h10v10H1z"/>
         <path fill="#7FBA00" d="M13 1h10v10H13z"/>
         <path fill="#00A4EF" d="M1 13h10v10H1z"/>
@@ -671,7 +682,7 @@ export function ConnectionToolIcon({ name }: { name: string }) {
   }
   if (key === "calcom" || key === "cal.com") {
     return (
-      <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 text-foreground" fill="currentColor" aria-label="Cal.com">
+      <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 text-foreground" fill="currentColor" aria-label={t("calcomIcon")}>
         <path d="M2.408 14.488C1.035 14.488 0 13.4 0 12.058c0-1.346.982-2.443 2.408-2.443.758 0 1.282.233 1.691.765l-.66.55a1.343 1.343 0 0 0-1.03-.442c-.93 0-1.44.711-1.44 1.57 0 .86.559 1.557 1.44 1.557.413 0 .765-.147 1.043-.443l.651.573c-.391.51-.929.743-1.695.743zM6.948 10.913h.89v3.49h-.89v-.51c-.185.362-.493.604-1.083.604-.943 0-1.695-.82-1.695-1.826 0-1.007.752-1.825 1.695-1.825.585 0 .898.241 1.083.604zm.026 1.758c0-.546-.374-.998-.964-.998-.568 0-.938.457-.938.998 0 .528.37.998.938.998.586 0 .964-.456.964-.998zM8.467 9.503h.89v4.895h-.89zM9.752 13.937a.53.53 0 0 1 .542-.528c.313 0 .533.242.533.528a.527.527 0 0 1-.533.537.534.534 0 0 1-.542-.537zM14.23 13.839c-.33.403-.832.658-1.426.658a1.806 1.806 0 0 1-1.84-1.826c0-1.007.778-1.825 1.84-1.825.572 0 1.07.241 1.4.622l-.687.577c-.172-.215-.396-.376-.713-.376-.568 0-.938.456-.938.998 0 .541.37.997.938.997.343 0 .58-.179.757-.42zM14.305 12.671c0-1.007.78-1.825 1.84-1.825 1.061 0 1.84.818 1.84 1.825 0 1.007-.779 1.826-1.84 1.826-1.06-.005-1.84-.82-1.84-1.826zm2.778 0c0-.546-.37-.998-.938-.998-.568-.004-.937.452-.937.998 0 .542.37.998.937.998.568 0 .938-.456.938-.998zM24 12.269v2.13h-.89v-1.911c0-.604-.281-.864-.704-.864-.396 0-.678.197-.678.864v1.91h-.89v-1.91c0-.604-.285-.864-.704-.864-.396 0-.744.197-.744.864v1.91h-.89v-3.49h.89v.484c.185-.376.52-.564 1.035-.564.489 0 .898.241 1.123.649.224-.417.554-.65 1.153-.65.731.005 1.299.56 1.299 1.442z"/>
       </svg>
     );
@@ -892,19 +903,20 @@ function InlineConnectionActionCard({
   onContinue?: (prompt: string, label?: string) => void | Promise<void>;
   onDismiss: () => void;
 }) {
+  const t = useTranslations("messageContentUi");
   const [connectState, setConnectState] = useState<"idle" | "waiting" | "error">("idle");
   const [locallyConnected, setLocallyConnected] = useState(false);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const effectiveConnected = connected || locallyConnected;
-  const connectLabel = effectiveConnected ? `${block.connectionName} connected` : `connect ${block.connectionName}`;
-  const continueLabel = block.pendingActionLabel ?? `continue with ${block.connectionName}`;
+  const connectLabel = effectiveConnected ? t("connectedName", { name: block.connectionName }) : t("connectName", { name: block.connectionName });
+  const continueLabel = block.pendingActionLabel ?? t("continueName", { name: block.connectionName });
   const continuePrompt = block.pendingActionPrompt ??
     `${block.connectionName} is connected now. Continue the action we were discussing, but ask me for confirmation before writing to ${block.connectionName}.`;
   const isPiGate = Boolean(block.extensionRequestId);
 
   const handleConnect = async () => {
     setConnectState("waiting");
-    setStatusMessage("opening authorization in your browser...");
+    setStatusMessage(t("openingAuthorization"));
     try {
       const result = await onConnect();
       if (result?.status === "error") {
@@ -919,7 +931,7 @@ function InlineConnectionActionCard({
       }
       if (result?.status === "connected") {
         setLocallyConnected(true);
-        setStatusMessage("connected");
+        setStatusMessage(t("connected"));
       }
     } finally {
       setTimeout(() => {
@@ -948,11 +960,11 @@ function InlineConnectionActionCard({
             {connectLabel}
           </div>
           <div className="mt-1 max-w-md text-xs leading-5 text-muted-foreground">
-            {statusMessage ?? block.extensionReason ?? "token stays in the local secret store and is never shown to the model."}
+            {statusMessage ?? block.extensionReason ?? t("tokenStore")}
           </div>
           {effectiveConnected && isPiGate ? (
             <div className="mt-3 text-xs uppercase tracking-wide text-muted-foreground">
-              continuing...
+              {t("continuing")}
             </div>
           ) : effectiveConnected ? (
             <div className="mt-3 flex flex-wrap gap-2">
@@ -968,7 +980,7 @@ function InlineConnectionActionCard({
                 onClick={onDismiss}
                 className="border border-border px-2.5 py-1.5 text-xs uppercase tracking-wide text-muted-foreground transition-colors duration-150 hover:bg-foreground hover:text-background"
               >
-                dismiss
+                {t("dismiss")}
               </button>
             </div>
           ) : (
@@ -979,14 +991,14 @@ function InlineConnectionActionCard({
                 disabled={connectState === "waiting"}
                 className="border border-foreground bg-foreground px-2.5 py-1.5 text-xs uppercase tracking-wide text-background transition-opacity duration-150 disabled:opacity-60"
               >
-                {connectState === "waiting" ? "waiting" : connectState === "error" ? "retry" : "connect"}
+                {connectState === "waiting" ? t("waiting") : connectState === "error" ? t("retry") : t("connect")}
               </button>
               <button
                 type="button"
                 onClick={onDismiss}
                 className="border border-border px-2.5 py-1.5 text-xs uppercase tracking-wide text-muted-foreground transition-colors duration-150 hover:bg-foreground hover:text-background"
               >
-                not now
+                {t("notNow")}
               </button>
             </div>
           )}
@@ -1039,6 +1051,89 @@ function friendlyCompletedSummary(summary?: string): string | undefined {
   return summary;
 }
 
+function localizeToolLabel(label: string, t: (key: string) => string): string {
+  const exact: Record<string, string> = {
+    "Preparing your answer": "preparing",
+    "Working on your request": "working",
+    "Analyzing information": "analyzing",
+    "Analyzed information": "analyzed",
+    "Finding relevant information": "findingInformation",
+    "Found relevant information": "foundInformation",
+    "Updating files": "updatingFiles",
+    "Updated files": "updatedFiles",
+    "Reviewing instructions": "reviewingInstructions",
+    "Reviewed instructions": "reviewedInstructions",
+    "Reviewing a file": "reviewingFile",
+    "Reviewed a file": "reviewedFile",
+    "Using the browser": "usingBrowser",
+    "Used the browser": "usedBrowser",
+    "Searching the web": "searchingWeb",
+    "Searched the web": "searchedWeb",
+    "Waiting for your input": "waitingForInput",
+    "Asked for your input": "askedForInput",
+  };
+  const key = exact[label];
+  return key ? t(key) : label;
+}
+
+function translateToolPresentation(
+  value: string,
+  t: (key: string, values?: Record<string, string>) => string,
+  t2?: (key: string, values?: Record<string, string>) => string,
+): string {
+  const key = TOOL_PRESENTATION_KEYS[value];
+  if (key) return t(key);
+  const patterns: Array<[RegExp, string, string]> = [
+    [/^Searched (.+)$/, "searchedTarget", "target"],
+    [/^Fetched (.+)$/, "fetchedTarget", "target"],
+    [/^Checked (.+)$/, "checkedTarget", "target"],
+    [/^Counted (.+)$/, "countedTarget", "target"],
+    [/^Queried (.+)$/, "queriedTarget", "target"],
+    [/^Inserted into (.+)$/, "insertedInto", "target"],
+    [/^Updated (.+)$/, "updatedTarget", "target"],
+    [/^Deleted from (.+)$/, "deletedFrom", "target"],
+    [/^Ran SQL on (.+)$/, "ranSqlOn", "target"],
+    [/^Opened (.+) in agent browser$/, "openedInAgentBrowser", "target"],
+    [/^Ran JS on (.+)$/, "ranJsOn", "target"],
+    [/^Posted to (.+)$/, "postedTo", "target"],
+    [/^Updated via (.+)$/, "updatedVia", "target"],
+    [/^Read from (.+)$/, "readFrom", "target"],
+    [/^Removed (.+) connection$/, "removedConnection", "target"],
+    [/^Configured (.+) connection$/, "configuredConnection", "target"],
+    [/^Ran pipe (.+)$/, "ranPipe", "target"],
+    [/^Pipe (.+)$/, "pipe", "target"],
+    [/^Updated memory #(.+)$/, "updatedMemoryId", "id"],
+    [/^Deleted memory #(.+)$/, "deletedMemoryId", "id"],
+    [/^Got memory #(.+)$/, "gotMemoryId", "id"],
+    [/^Renamed meeting #(.+)$/, "renamedMeetingId", "id"],
+    [/^Summarized meeting #(.+)$/, "summarizedMeetingId", "id"],
+    [/^Deleted meeting #(.+)$/, "deletedMeetingId", "id"],
+  ];
+  for (const [pattern, translationKey, valueKey] of patterns) {
+    const match = value.match(pattern);
+    if (match) return (t2 ?? t)(translationKey, { [valueKey]: match[1] });
+  }
+  return value;
+}
+
+const TOOL_PRESENTATION_KEYS: Record<string, string> = {
+  bash: "bash", GET: "get", POST: "post", PATCH: "patch", PUT: "put", DELETE: "delete",
+  search: "search", query: "query", content: "content", app: "app", window: "window", limit: "limit",
+  tables: "tables", connection: "connection", "Activity summary": "activitySummary", "Saved memory": "savedMemory",
+  "Listed memories": "listedMemories", "Updated memory": "updatedMemory", "Deleted memory": "deletedMemory",
+  "Got memory": "gotMemory", "Listed meetings": "listedMeetings", "Summarized meeting": "summarizedMeeting",
+  "Renamed meeting": "renamedMeeting", "Updated meeting": "updatedMeeting", "Deleted meeting": "deletedMeeting",
+  "Merged speakers": "mergedSpeakers", "Listed unnamed speakers": "listedUnnamedSpeakers", "Installed pipe": "installedPipe",
+  "Listed pipes": "listedPipes", "Exported video": "exportedVideo", "Health check": "healthCheck",
+  "Listed monitors": "listedMonitors", "Listed audio devices": "listedAudioDevices", "Listed tags": "listedTags",
+  "Ran SQL": "ranSql", "Agent browser action": "agentBrowserAction", "Navigated agent browser": "navigatedAgentBrowser",
+  "Ran JS in agent browser": "ranJsInAgentBrowser", "Checked calendar connection": "checkedCalendarConnection",
+  "Listed connections": "listedConnections", "Listed calendar events": "listedCalendarEvents",
+  "Created Google Doc": "createdGoogleDoc", "Edited Google Doc": "editedGoogleDoc", "Read Google Doc": "readGoogleDoc",
+  "Created Drive file": "createdDriveFile", "Exported Drive file": "exportedDriveFile", "Listed Drive files": "listedDriveFiles",
+  "Uploaded file to Drive": "uploadedFileToDrive",
+};
+
 function ToolCallGroup({
   toolCalls,
   defaultExpanded = false,
@@ -1060,6 +1155,7 @@ function ToolCallGroup({
   forceCollapsed?: boolean;
   onAskUserReply?: (reply: string, displayLabel: string) => void | Promise<void>;
 }) {
+  const toolT = useTranslations("toolUi");
   const [manualExpand, setManualExpand] = useState<boolean | null>(null);
   const [runningSummary, setRunningSummary] = useState("Working");
   const [completedLiveSummary, setCompletedLiveSummary] = useState<string | null>(null);
@@ -1072,7 +1168,10 @@ function ToolCallGroup({
   const startedAtMs = toolWorkStartedAt(toolCalls, workStartedAtMs);
   const endedAtMs = allDone ? toolWorkEndedAt(toolCalls) : undefined;
   const completedDurationMs = startedAtMs && endedAtMs ? Math.max(1, endedAtMs - startedAtMs) : undefined;
-  const runningLabel = presentToolActivityStatus(toolCalls, isGenerating);
+  const runningLabel = localizeToolLabel(
+    presentToolActivityStatus(toolCalls, isGenerating),
+    toolT,
+  );
   const justCompletedSummary = !isWorking && wasWorkingRef.current
     ? completedWorkSummaryFromRunning(runningSummary)
     : null;
@@ -1084,7 +1183,7 @@ function ToolCallGroup({
             completedLiveSummary ||
             (completedDurationMs
               ? `done in ${formatDurationParts(completedDurationMs)}`
-              : (friendlyCompletedSummary(summaryOverride) || "done"))
+              : (friendlyCompletedSummary(summaryOverride) || toolT("done")))
       )
     : "";
 
@@ -1211,6 +1310,8 @@ export function MessageContent({
   onDismissConnectionAction?: (messageId: string, connectionId: string) => void;
   onAskUserReply?: (reply: string, displayLabel: string) => void | Promise<void>;
 }) {
+  const cu = useTranslations("chatUi2");
+  const mt = useTranslations("messageContentUi");
   const isUser = message.role === "user";
   const sourceCitations = isUser ? [] : sourceCitationsFromMessage(message);
   const sourceFooter = !deferSourceFooter && sourceCitations.length > 0 ? (
@@ -1235,26 +1336,26 @@ export function MessageContent({
         className="flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg bg-foreground text-background hover:bg-foreground/80 transition-colors"
       >
         <RefreshCw className="h-3 w-3" />
-        Try again
+        {cu("tryAgain")}
       </button>
-      <span className="text-xs text-muted-foreground">or edit your message above</span>
+      <span className="text-xs text-muted-foreground">{cu("editMessageAbove")}</span>
       <button
         type="button"
         onClick={() => openFeedback(`AI error in chat: ${message.content.slice(0, 300)}`)}
         className="ml-auto flex items-center gap-1 text-xs text-muted-foreground/60 hover:text-muted-foreground transition-colors"
       >
-        report issue
+        {cu("reportIssue")}
       </button>
     </div>
   ) : isErrorMessage ? (
     <div className="mt-2 flex items-center gap-1.5">
-      <span className="text-xs text-destructive/60">still happening?</span>
+      <span className="text-xs text-destructive/60">{cu("stillHappening")}</span>
       <button
         type="button"
         onClick={() => openFeedback(`AI error in chat: ${message.content.slice(0, 300)}`)}
         className="text-xs text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2"
       >
-        report issue
+        {cu("reportIssue")}
       </button>
     </div>
   ) : null;
@@ -1270,7 +1371,7 @@ export function MessageContent({
         return (
           <div
             key={`doc-${doc.name}-${i}`}
-            title={`${doc.name} — ${doc.charCount.toLocaleString()} chars${doc.truncated ? " (truncated)" : ""}`}
+            title={`${doc.name} — ${doc.charCount.toLocaleString()} ${mt("attachmentChars")}${doc.truncated ? ` (${mt("truncated")})` : ""}`}
             className="flex items-center gap-2.5 h-20 max-w-[260px] rounded-xl border border-border/50 bg-muted/40 px-3 shadow-sm"
           >
             <div className={`shrink-0 w-11 h-11 rounded-lg flex items-center justify-center text-[10px] font-semibold tracking-tight ${badge.tint}`}>
@@ -1279,7 +1380,7 @@ export function MessageContent({
             <div className="min-w-0 flex-1">
               <div className="truncate text-xs font-medium text-foreground">{doc.name}</div>
               <div className="truncate text-[10px] text-muted-foreground">
-                {doc.charCount.toLocaleString()} chars{doc.truncated ? " • truncated" : ""}
+                {doc.charCount.toLocaleString()} {mt("attachmentChars")}{doc.truncated ? ` • ${mt("truncated")}` : ""}
               </div>
             </div>
           </div>
@@ -1496,6 +1597,7 @@ export function attachmentBadge(ext: string): { label: string; tint: string } {
 
 
 function CollapsibleUserMessage({ label, fullContent }: { label: string; fullContent: string }) {
+  const t = useTranslations("messageContentUi");
   const [expanded, setExpanded] = useState(false);
   const prevLabelRef = useRef(label);
   if (prevLabelRef.current !== label) {
@@ -1513,7 +1615,7 @@ function CollapsibleUserMessage({ label, fullContent }: { label: string; fullCon
           }}
           onMouseUp={(e) => e.stopPropagation()}
           className="shrink-0 p-0.5 rounded hover:bg-muted-foreground/10 text-muted-foreground hover:text-foreground transition-colors"
-          title={expanded ? "Collapse prompt" : "Show full prompt"}
+          title={expanded ? t("collapsePrompt") : t("showPrompt")}
         >
           {expanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
         </button>

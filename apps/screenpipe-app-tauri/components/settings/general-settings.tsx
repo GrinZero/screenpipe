@@ -4,6 +4,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { LockedSetting } from "@/components/enterprise-locked-setting";
 import { useSettings } from "@/lib/hooks/use-settings";
 import { Switch } from "@/components/ui/switch";
@@ -56,6 +57,11 @@ import {
 import LanguageSettings from "@/components/settings/language-settings";
 
 export default function GeneralSettings() {
+  const t = useTranslations("onboarding");
+  const u = useTranslations("residualBulk");
+  const g = useTranslations("generalUi");
+  const gu = useTranslations("generalUi2");
+  const b4 = useTranslations("onboardingBuild4");
   const { isManagedDeployment } = useManagedPolicy();
   const { settings, updateSettings } = useSettings();
   const resetOnboarding = useOnboarding((state) => state.resetOnboarding);
@@ -77,8 +83,8 @@ export default function GeneralSettings() {
     } catch (error) {
       console.error("failed to save user goal:", error);
       toast({
-        title: "couldn't save your goal",
-        description: "please try again",
+        title: u("saveGoalFailed"),
+        description: u("tryAgain"),
         variant: "destructive",
       });
     }
@@ -93,7 +99,7 @@ export default function GeneralSettings() {
     } catch (error) {
       console.error("failed to reset onboarding:", error);
       toast({
-        title: "couldn't reset onboarding",
+        title: u("resetOnboardingFailed"),
         description:
           error instanceof Error ? error.message : "please try again",
         variant: "destructive",
@@ -111,23 +117,23 @@ export default function GeneralSettings() {
         const pending = pendingRes.data;
         if (pending.auth_required) {
           toast({
-            title: "update available",
-            description: `v${pending.version} is available — sign in to download it`,
+            title: u("updateAvailable"),
+            description: gu("versionAvailable", { version: pending.version }),
           });
           return;
         }
 
         if (pending.downloaded) {
           toast({
-            title: "update ready",
-            description: `v${pending.version} is ready — restart to update`,
+            title: u("updateReady"),
+            description: gu("versionReady", { version: pending.version }),
           });
           return;
         }
 
         toast({
-          title: "update found",
-          description: `v${pending.version} is still downloading in the background`,
+            title: u("updateFound"),
+          description: gu("versionDownloading", { version: pending.version }),
         });
         return;
       }
@@ -136,14 +142,14 @@ export default function GeneralSettings() {
       if (res.status === "error") throw new Error(res.error);
       const updateFound = res.data;
       toast({
-        title: updateFound ? "update found" : "you're up to date",
+        title: updateFound ? gu("updateFound") : gu("upToDate"),
         description: updateFound
-          ? "downloading in the background — banner will appear when ready"
-          : `running latest version${currentVersion ? ` (v${currentVersion})` : ""}`,
+          ? gu("downloading")
+          : gu("runningLatest", { version: currentVersion ? ` (v${currentVersion})` : "" }),
       });
     } catch (e: any) {
       toast({
-        title: "update check failed",
+        title: u("updateCheckFailed"),
         description: e?.toString() || "please try again later",
         variant: "destructive",
       });
@@ -175,7 +181,7 @@ export default function GeneralSettings() {
     } catch (e: any) {
       handleSettingsChange({ autoStartEnabled: !checked });
       toast({
-        title: "failed to update auto-start",
+        title: u("autoStartFailed"),
         description: e?.toString() || "check system permissions and try again",
         variant: "destructive",
       });
@@ -214,7 +220,7 @@ export default function GeneralSettings() {
     } catch (e: any) {
       window.open(url, "_blank");
       toast({
-        title: "opened in browser",
+        title: u("openedBrowser"),
         description: e?.toString() || "check your browser for version downloads",
         variant: "destructive",
       });
@@ -224,7 +230,7 @@ export default function GeneralSettings() {
   return (
     <div className="space-y-5" data-testid="section-settings-general">
       <p className="text-muted-foreground text-sm mb-4">
-        Startup, updates, and notifications
+        {g("intro")}
       </p>
 
       <div className="flex items-center justify-end">
@@ -239,8 +245,8 @@ export default function GeneralSettings() {
               <div className="flex items-center space-x-2.5">
                 <Rocket className="h-4 w-4 text-muted-foreground shrink-0" />
                 <div>
-                  <h3 className="text-sm font-medium text-foreground">Auto-start</h3>
-                  <p className="text-xs text-muted-foreground">Start in the background when you log in</p>
+                  <h3 className="text-sm font-medium text-foreground">{g("autoStart")}</h3>
+                  <p className="text-xs text-muted-foreground">{g("autoStartDescription")}</p>
                 </div>
               </div>
               <Switch
@@ -261,8 +267,8 @@ export default function GeneralSettings() {
                 <div className="flex items-center space-x-2.5">
                   <RefreshCw className="h-4 w-4 text-muted-foreground shrink-0" />
                   <div>
-                    <h3 className="text-sm font-medium text-foreground">Auto-update</h3>
-                    <p className="text-xs text-muted-foreground">Restart automatically when an update is downloaded. Off: a &quot;restart to update&quot; banner appears instead.</p>
+                    <h3 className="text-sm font-medium text-foreground">{g("autoUpdate")}</h3>
+                    <p className="text-xs text-muted-foreground">{g("autoUpdateDescription")}</p>
                   </div>
                 </div>
                 <Switch
@@ -285,9 +291,9 @@ export default function GeneralSettings() {
                 <div className="flex items-center space-x-2.5">
                   <RefreshCw className="h-4 w-4 text-muted-foreground shrink-0" />
                   <div>
-                    <h3 className="text-sm font-medium text-foreground">Check for updates</h3>
+                    <h3 className="text-sm font-medium text-foreground">{g("checkUpdates")}</h3>
                     <p className="text-xs text-muted-foreground">
-                      {currentVersion ? `Running v${currentVersion}` : "Look for a new version now"}
+                      {currentVersion ? g("runningVersion", { version: currentVersion }) : g("lookForVersion")}
                     </p>
                   </div>
                 </div>
@@ -298,7 +304,7 @@ export default function GeneralSettings() {
                   disabled={isCheckingForUpdate}
                   className="ml-4 h-8"
                 >
-                  {isCheckingForUpdate ? "checking..." : "check now"}
+                  {isCheckingForUpdate ? g("checking") : g("checkNow")}
                 </Button>
               </div>
             </CardContent>
@@ -312,10 +318,10 @@ export default function GeneralSettings() {
                 <div className="flex items-center space-x-2.5">
                   <RefreshCw className="h-4 w-4 text-muted-foreground shrink-0" />
                   <div>
-                    <h3 className="text-sm font-medium text-foreground">App updates</h3>
+                    <h3 className="text-sm font-medium text-foreground">{g("appUpdates")}</h3>
                     <p className="text-xs text-muted-foreground">
                       {describeEnterpriseUpdateMode(enterpriseAppUpdatePolicy)}
-                      {enterpriseInstallMetadata?.managed ? " · managed device detected" : ""}
+                      {enterpriseInstallMetadata?.managed ? ` · ${g("managedDevice")}` : ""}
                     </p>
                   </div>
                 </div>
@@ -339,8 +345,8 @@ export default function GeneralSettings() {
               <div className="flex items-center space-x-2.5">
                 <RefreshCw className="h-4 w-4 text-muted-foreground shrink-0" />
                 <div>
-                  <h3 className="text-sm font-medium text-foreground">Auto-Update Pipes</h3>
-                  <p className="text-xs text-muted-foreground">Update store pipes you haven&apos;t modified</p>
+                  <h3 className="text-sm font-medium text-foreground">{g("autoUpdatePipes")}</h3>
+                  <p className="text-xs text-muted-foreground">{g("autoUpdatePipesDescription")}</p>
                 </div>
               </div>
               <Switch
@@ -362,12 +368,12 @@ export default function GeneralSettings() {
                 <ExternalLink className="h-4 w-4 text-muted-foreground shrink-0" />
                 <div>
                   <h3 className="text-sm font-medium text-foreground">
-                    Version{currentVersion ? ` ${currentVersion}` : ""}
+                    {g("version")}{currentVersion ? ` ${currentVersion}` : ""}
                   </h3>
                   <p className="text-xs text-muted-foreground">
                     {isManagedDeployment
-                      ? "Open builds managed by your organization"
-                      : "Open recent stable versions on screenpipe.com"}
+                      ? g("managedBuilds")
+                      : g("stableVersions")}
                   </p>
                 </div>
               </div>
@@ -377,7 +383,7 @@ export default function GeneralSettings() {
                 onClick={handleOpenVersions}
                 className="ml-4 h-7 text-xs gap-1.5"
               >
-                open
+                {g("open")}
                 <ExternalLink className="h-3 w-3" />
               </Button>
             </div>
@@ -394,9 +400,9 @@ export default function GeneralSettings() {
             <div className="flex items-center space-x-2.5">
               <Layers className="h-4 w-4 shrink-0 text-muted-foreground" />
               <div>
-                <h3 className="text-sm font-medium text-foreground">Your goal</h3>
+                <h3 className="text-sm font-medium text-foreground">{t("yourGoal")}</h3>
                 <p className="text-xs text-muted-foreground">
-                  What you want screenpipe to help you accomplish
+                  {t("goalDescription")}
                 </p>
               </div>
             </div>
@@ -410,10 +416,10 @@ export default function GeneralSettings() {
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="default">No specific goal</SelectItem>
+                <SelectItem value="default">{t("noSpecificGoal")}</SelectItem>
                 {ONBOARDING_GOALS.map((goal) => (
                   <SelectItem key={goal.category} value={goal.category}>
-                    {goal.title}
+                    {b4(`goal_${goal.category}_title` as any)}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -428,8 +434,8 @@ export default function GeneralSettings() {
             <div className="flex items-center space-x-2.5">
               <RefreshCw className="h-4 w-4 text-muted-foreground shrink-0" />
               <div>
-                <h3 className="text-sm font-medium text-foreground">Reset Onboarding</h3>
-                <p className="text-xs text-muted-foreground">Run the setup wizard again</p>
+                <h3 className="text-sm font-medium text-foreground">{g("resetOnboarding")}</h3>
+                <p className="text-xs text-muted-foreground">{g("resetOnboardingDescription")}</p>
               </div>
             </div>
             <Button
@@ -439,7 +445,7 @@ export default function GeneralSettings() {
               disabled={isResettingOnboarding}
               onClick={() => void handleResetOnboarding()}
             >
-              {isResettingOnboarding ? "resetting..." : "reset"}
+              {isResettingOnboarding ? g("resetting") : g("reset")}
             </Button>
           </div>
         </CardContent>
@@ -451,12 +457,12 @@ export default function GeneralSettings() {
             <div className="flex items-center space-x-2.5">
               <MonitorOff className="h-4 w-4 text-muted-foreground shrink-0" />
               <div>
-                <h3 className="text-sm font-medium text-foreground">Headless</h3>
+                <h3 className="text-sm font-medium text-foreground">{g("headless")}</h3>
                 <p className="text-xs text-muted-foreground">
-                  Close the app UI completely while recording continues in the tray
+                  {g("headlessDescription")}
                 </p>
                 <p className="text-[10px] text-muted-foreground/60 mt-0.5">
-                  App shortcuts and the UI are unavailable until you open screenpipe from the tray.
+                  {g("headlessNote")}
                 </p>
               </div>
             </div>
@@ -470,9 +476,9 @@ export default function GeneralSettings() {
           {settings?.headless && (
             <div className="ml-6 mt-2 border-l border-border pl-3 pt-2 flex items-center justify-between">
               <div>
-                <h4 className="text-xs font-medium text-foreground">Record only</h4>
+                <h4 className="text-xs font-medium text-foreground">{g("recordOnly")}</h4>
                 <p className="text-[10px] text-muted-foreground mt-0.5">
-                  Skip scheduled pipe runs while the UI is headless
+                  {g("recordOnlyDescription")}
                 </p>
               </div>
               <Switch

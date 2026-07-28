@@ -4,6 +4,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   Check,
   ChevronLeft,
@@ -125,6 +126,15 @@ export function LiveViewLayoutEditor({
   onCancel: () => void;
   onSave: () => void;
 }) {
+  const t = useTranslations("dashboard");
+  const u = useTranslations("residualBulk3");
+  const l = useTranslations("layoutUi");
+  const l2 = useTranslations("layoutUi2");
+  const l3 = useTranslations("layoutUi3");
+  const l4 = useTranslations("layoutUi4");
+  const l5 = useTranslations("layoutUi5");
+  const lv = useTranslations("liveViewUi");
+  const tr = useTranslations("timeRangeUi");
   const [selectedSlotId, setSelectedSlotId] = useState<string | null>(null);
   const [draggingId, setDraggingId] = useState<string | null>(null);
   const [dropTargetId, setDropTargetId] = useState<string | null>(null);
@@ -164,7 +174,7 @@ export function LiveViewLayoutEditor({
     }
     const nextSlot: BrainViewSlot = {
       id,
-      title: "New Block",
+          title: u("blockNew"),
       component: "metric.v1",
       width: 6,
       order: slots.length,
@@ -211,15 +221,14 @@ export function LiveViewLayoutEditor({
         <div className="min-w-0">
           <div className="flex items-center gap-2">
             <span className="inline-flex h-6 items-center bg-foreground px-2 font-mono text-[9px] uppercase tracking-wide text-background">
-              editing
+              {lv("editing")}
             </span>
             <h2 className="truncate text-base font-semibold tracking-tight">
-              Arrange your Live View
+              {lv("arrangeLiveView")}
             </h2>
           </div>
           <p className="mt-1.5 text-xs text-muted-foreground">
-            Drag Blocks to move them. Use the width controls or side handle to
-            resize.
+            {l4("dragHelp")}
           </p>
         </div>
         <div className="grid grid-cols-2 gap-2 sm:flex sm:items-center">
@@ -231,7 +240,7 @@ export function LiveViewLayoutEditor({
             className="h-9 rounded-none px-3"
             onClick={addSlot}
           >
-            <Plus className="mr-1.5 h-3.5 w-3.5" /> add Block
+            <Plus className="mr-1.5 h-3.5 w-3.5" /> {l4("addBlock")}
           </Button>
           <Button
             type="button"
@@ -241,7 +250,7 @@ export function LiveViewLayoutEditor({
             disabled={saving}
             onClick={onCancel}
           >
-            cancel
+            {l4("cancel")}
           </Button>
           <Button
             data-testid="overview-save"
@@ -256,7 +265,7 @@ export function LiveViewLayoutEditor({
             ) : (
               <Check className="mr-1.5 h-3.5 w-3.5" />
             )}
-            done
+            {l4("done")}
           </Button>
         </div>
       </div>
@@ -276,7 +285,7 @@ export function LiveViewLayoutEditor({
           }`}
         >
           <span className="text-[10px] uppercase tracking-wide text-muted-foreground">
-            Live View name
+            {t("liveViewName")}
           </span>
           <Input
             data-testid="overview-title"
@@ -291,10 +300,10 @@ export function LiveViewLayoutEditor({
         {hasSelectableTimeRange && (
           <label className="space-y-1.5 p-3">
             <span className="block text-[10px] uppercase tracking-wide text-muted-foreground">
-              Time window
+              {t("timeWindow")}
             </span>
             <select
-              aria-label="template time range"
+              aria-label={t("templateTimeRange")}
               value={draft.timeRange}
               className="h-9 w-full border border-border bg-background px-2 text-xs outline-none focus:border-foreground"
               onChange={(event) =>
@@ -306,7 +315,7 @@ export function LiveViewLayoutEditor({
             >
               {allowedTimeRangeOptions.map((range) => (
                 <option key={range.value} value={range.value}>
-                  {range.label}
+                  {tr(`range_${range.value}`)}
                 </option>
               ))}
             </select>
@@ -318,12 +327,12 @@ export function LiveViewLayoutEditor({
         <section
           data-testid={`overview-block-inspector-${selectedSlot.id}`}
           className="mb-4 border border-foreground bg-muted/20 p-4"
-          aria-label={`Edit ${selectedSlot.title}`}
+            aria-label={`${l("editBlock")}: ${selectedSlot.title}`}
         >
           <div className="mb-3 flex items-start justify-between gap-4">
             <div>
               <p className="text-[10px] uppercase tracking-wide text-muted-foreground">
-                Block settings
+                {t("blockSettings")}
               </p>
               <h3 className="text-sm font-medium">{selectedSlot.title}</h3>
             </div>
@@ -331,7 +340,7 @@ export function LiveViewLayoutEditor({
               type="button"
               variant="ghost"
               size="icon"
-              aria-label="close Block settings"
+              aria-label={t("closeBlockSettings")}
               className="h-8 w-8 rounded-none"
               onClick={() => setSelectedSlotId(null)}
             >
@@ -341,7 +350,7 @@ export function LiveViewLayoutEditor({
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-[minmax(12rem,1.5fr)_minmax(10rem,1fr)_minmax(10rem,1fr)_8rem]">
             <label className="space-y-1">
               <span className="text-[10px] uppercase tracking-wide text-muted-foreground">
-                Block title
+                {lv("blockTitle")}
               </span>
               <Input
                 data-testid={`overview-block-title-${selectedSlot.id}`}
@@ -358,7 +367,7 @@ export function LiveViewLayoutEditor({
             </label>
             <label className="space-y-1">
               <span className="text-[10px] uppercase tracking-wide text-muted-foreground">
-                Block type
+                {lv("blockType")}
               </span>
               <select
                 data-testid={`overview-block-type-${selectedSlot.id}`}
@@ -381,7 +390,7 @@ export function LiveViewLayoutEditor({
             </label>
             <label className="space-y-1">
               <span className="text-[10px] uppercase tracking-wide text-muted-foreground">
-                Connected Pipe
+                {lv("connectedPipe")}
               </span>
               <select
                 data-testid={`overview-pipe-${selectedSlot.id}`}
@@ -397,7 +406,7 @@ export function LiveViewLayoutEditor({
                   }))
                 }
               >
-                <option value="">No Pipe</option>
+                <option value="">{l("noPipe")}</option>
                 {pipeNames.map((pipeName) => (
                   <option key={pipeName} value={pipeName}>
                     {pipeName}
@@ -407,7 +416,7 @@ export function LiveViewLayoutEditor({
             </label>
             <label className="space-y-1">
               <span className="text-[10px] uppercase tracking-wide text-muted-foreground">
-                Width
+                {lv("width")}
               </span>
               <select
                 data-testid={`overview-block-width-${selectedSlot.id}`}
@@ -420,21 +429,21 @@ export function LiveViewLayoutEditor({
                   }))
                 }
               >
-                <option value={3}>Quarter</option>
-                <option value={6}>Half</option>
-                <option value={12}>Full</option>
+                <option value={3}>{l("quarter")}</option>
+                <option value={6}>{l("half")}</option>
+                <option value={12}>{l("full")}</option>
               </select>
             </label>
             <label className="space-y-1 md:col-span-2 xl:col-span-4">
               <span className="text-[10px] uppercase tracking-wide text-muted-foreground">
-                What this Block should show
+                {l("blockShow")}
               </span>
               <textarea
                 data-testid={`overview-block-intent-${selectedSlot.id}`}
                 value={selectedSlot.intent ?? ""}
                 maxLength={800}
                 rows={2}
-                placeholder={`For example: Calculate time spent on GTM as a percentage of all active time in the selected period. Use 0 when no GTM activity is observed.`}
+                placeholder={l3("blockIntentPlaceholder")}
                 className="w-full resize-y border border-border bg-background px-3 py-2 text-xs outline-none focus:border-foreground"
                 onChange={(event) =>
                   updateSlot(selectedSlot.id, (slot) => ({
@@ -452,8 +461,7 @@ export function LiveViewLayoutEditor({
                 (component) => component.value === selectedSlot.component,
               )?.schema
             }
-            . The title is display copy. The instruction above is the data
-            contract the connected Pipe receives on its next run.
+            {l5("schemaContract", { schema: componentOptions.find((component) => component.value === selectedSlot.component)?.schema ?? "" })}
           </p>
         </section>
       )}
@@ -465,9 +473,9 @@ export function LiveViewLayoutEditor({
           onClick={addSlot}
         >
           <Plus className="h-5 w-5" />
-          <span className="text-sm font-medium">Add your first Block</span>
+          <span className="text-sm font-medium">{l2("addFirstBlock")}</span>
           <span className="text-xs text-muted-foreground">
-            Connect it to a Pipe now or fill it with AI later.
+            {l2("addFirstBlockDescription")}
           </span>
         </button>
       ) : (
@@ -505,7 +513,7 @@ export function LiveViewLayoutEditor({
                     type="button"
                     data-testid={`overview-drag-${slot.id}`}
                     aria-label={`Drag ${slot.title}. Use arrow keys to reorder.`}
-                    title="Drag to move"
+                    title={t("dragToMove")}
                     onKeyDown={(event) => {
                       if (
                         event.key !== "ArrowUp" &&
@@ -565,14 +573,14 @@ export function LiveViewLayoutEditor({
                       {slot.title}
                     </p>
                     <p className="font-mono text-[8px] uppercase text-muted-foreground">
-                      {index + 1} of {slots.length} · {WIDTH_LABELS[width]}
+                      {l5("slotPosition", { index: index + 1, total: slots.length })} · {l(WIDTH_LABELS[width])}
                     </p>
                   </div>
                   <div className="hidden items-center border border-border bg-background sm:flex">
                     <button
                       type="button"
                       aria-label={`Shrink ${slot.title}`}
-                      title="Make narrower"
+                      title={t("makeNarrower")}
                       disabled={!canShrink}
                       onClick={() =>
                         updateSlot(slot.id, (current) => ({
@@ -585,12 +593,12 @@ export function LiveViewLayoutEditor({
                       <ChevronLeft className="h-3.5 w-3.5" />
                     </button>
                     <span className="min-w-10 text-center font-mono text-[8px] uppercase text-muted-foreground">
-                      {WIDTH_LABELS[width]}
+                      {l(WIDTH_LABELS[width])}
                     </span>
                     <button
                       type="button"
                       aria-label={`Grow ${slot.title}`}
-                      title="Make wider"
+                      title={t("makeWider")}
                       disabled={!canGrow}
                       onClick={() =>
                         updateSlot(slot.id, (current) => ({
@@ -606,7 +614,7 @@ export function LiveViewLayoutEditor({
                   <button
                     type="button"
                     aria-label={`Edit ${slot.title}`}
-                    title="Edit Block"
+                    title={t("editBlock")}
                     onClick={() => setSelectedSlotId(slot.id)}
                     className="inline-flex h-8 w-8 items-center justify-center text-muted-foreground transition-colors hover:bg-background hover:text-foreground"
                   >
@@ -615,7 +623,7 @@ export function LiveViewLayoutEditor({
                   <button
                     type="button"
                     aria-label={`Delete ${slot.title}`}
-                    title="Delete Block"
+                    title={t("deleteBlock")}
                     onClick={() => {
                       changeSlots(
                         slots.filter((candidate) => candidate.id !== slot.id),
@@ -635,7 +643,7 @@ export function LiveViewLayoutEditor({
                 <button
                   type="button"
                   aria-label={`Resize ${slot.title}. Use left and right arrow keys.`}
-                  title="Drag to resize"
+                  title={t("dragToResize")}
                   onKeyDown={(event) => {
                     if (
                       event.key !== "ArrowLeft" &&

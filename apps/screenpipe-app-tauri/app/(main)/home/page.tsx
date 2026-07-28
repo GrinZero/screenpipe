@@ -85,6 +85,7 @@ import {
 import { PlanExpirationNotice } from "@/components/plan-expiration-notice";
 import type { AppUser } from "@/lib/app-entitlement";
 import { ONBOARDING_BRAIN_HANDOFF_EVENT } from "@/lib/live-views/onboarding-activation";
+import { useTranslations } from "next-intl";
 
 type MainSection = "home" | "timeline" | "brain" | "pipes" | "connections" | "meetings" | "help";
 type ConnectionFocusRequest = {
@@ -110,6 +111,8 @@ const SETTINGS_SECTIONS = new Set<string>([
 ]);
 
 function HomeContent() {
+  const u = useTranslations("residualUi");
+  const t = useTranslations("common");
   const router = useRouter();
   const { isMac } = usePlatform();
   // In fullscreen, macOS hides the traffic lights — collapse the
@@ -229,7 +232,7 @@ function HomeContent() {
     if (isNew) {
       store.actions.upsert({
         id,
-        title: "untitled",
+        title: u("untitled"),
         preview: "",
         status: "idle",
         messageCount: 0,
@@ -965,12 +968,12 @@ function HomeContent() {
     // The first nav item doubles as "go to chat view + start a fresh
     // conversation". Each click allocates a new session id (empty
     // rows are not reused — that felt like opening an old recent).
-    { id: "home", label: "Chat", icon: <Plus className="h-3.5 w-3.5" /> },
-    { id: "pipes", label: "Pipes", icon: <Workflow className="h-3.5 w-3.5" /> },
-    { id: "timeline", label: "Timeline", icon: <Clock className="h-3.5 w-3.5" /> },
-    { id: "meetings", label: "Meetings", icon: <NotebookPen className="h-3.5 w-3.5" /> },
-    { id: "brain", label: "Brain", icon: <Brain className="h-3.5 w-3.5" /> },
-    { id: "connections", label: "Connections", icon: <Plug className="h-3.5 w-3.5" /> },
+    { id: "home", label: t("chat"), icon: <Plus className="h-3.5 w-3.5" /> },
+    { id: "pipes", label: t("pipes"), icon: <Workflow className="h-3.5 w-3.5" /> },
+    { id: "timeline", label: t("timeline"), icon: <Clock className="h-3.5 w-3.5" /> },
+    { id: "meetings", label: t("meetings"), icon: <NotebookPen className="h-3.5 w-3.5" /> },
+    { id: "brain", label: t("brain"), icon: <Brain className="h-3.5 w-3.5" /> },
+    { id: "connections", label: t("connections"), icon: <Plug className="h-3.5 w-3.5" /> },
   ]
     .filter((s) => !isSectionHidden(s.id) && !(s.id === "brain" && isSectionHidden("memories")))
     // Timeline can be turned off in Display settings — when it is, drop it from
@@ -1039,7 +1042,7 @@ function HomeContent() {
               <TooltipTrigger asChild>
                 <button
                   onClick={toggleSidebar}
-                  aria-label={sidebarCollapsed ? "expand sidebar" : "collapse sidebar"}
+                  aria-label={sidebarCollapsed ? t("expandSidebar") : t("collapseSidebar")}
                   className={cn(
                     "p-1 rounded-md transition-colors",
                     sidebarCollapsed && activeSection === "timeline"
@@ -1053,7 +1056,7 @@ function HomeContent() {
                 </button>
               </TooltipTrigger>
               <TooltipContent side="bottom" className="text-xs">
-                {sidebarCollapsed ? "expand sidebar" : "collapse sidebar"} <kbd className="ml-1 px-1 py-0.5 bg-muted rounded text-[10px]">⌘B</kbd>
+                {sidebarCollapsed ? t("expandSidebar") : t("collapseSidebar")} <kbd className="ml-1 px-1 py-0.5 bg-muted rounded text-[10px]">⌘B</kbd>
               </TooltipContent>
             </Tooltip>
 
@@ -1064,7 +1067,7 @@ function HomeContent() {
                     onClick={() => {
                       void commands.showWindow({ Search: { query: null } });
                     }}
-                    aria-label="search"
+                    aria-label={t("search")}
                     className={cn(
                       "p-1 rounded-md transition-colors",
                       isTranslucent ? "vibrant-nav-item" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -1074,7 +1077,7 @@ function HomeContent() {
                   </button>
                 </TooltipTrigger>
                 <TooltipContent side="bottom" className="text-xs">
-                  search
+                  {t("search")}
                   {!settings.disabledShortcuts.includes("searchShortcut") &&
                   settings.searchShortcut ? (
                     <kbd className="ml-1 px-1 py-0.5 bg-muted rounded text-[10px]">
@@ -1191,8 +1194,8 @@ function HomeContent() {
                 {/* Team link — hide invite promo in enterprise (unless team exists) */}
                 {(!isSectionHidden("team") || teamState.team) && (() => {
                   const teamLabel = teamState.team
-                    ? `Your team (${teamState.members.length})`
-                    : "Invite your team";
+                    ? t("yourTeam", { count: teamState.members.length })
+                    : t("inviteTeam");
                   const btn = (
                     <button
                       onClick={() => openSettings("team")}
@@ -1219,7 +1222,7 @@ function HomeContent() {
                       )}
                     >
                       <Gift className={cn("h-3.5 w-3.5 transition-colors flex-shrink-0", isTranslucent ? "" : "text-muted-foreground group-hover:text-foreground")} />
-                      <span className="font-medium text-xs truncate">Get free month</span>
+                      <span className="font-medium text-xs truncate">{t("getFreeMonth")}</span>
                     </button>
                   );
                   return btn;
@@ -1244,7 +1247,7 @@ function HomeContent() {
                       )}>
                         <SettingsIcon className="h-3.5 w-3.5" />
                       </div>
-                      <span className="font-medium text-xs truncate">Settings</span>
+                      <span className="font-medium text-xs truncate">{t("settings")}</span>
                     </button>
                   );
                   return btn;
@@ -1278,7 +1281,7 @@ function HomeContent() {
                       )}>
                         <HelpCircle className="h-3.5 w-3.5" />
                       </div>
-                      <span className="font-medium text-xs truncate">Help</span>
+                    <span className="font-medium text-xs truncate">{t("help")}</span>
                     </button>
                   );
                   return btn;
@@ -1348,9 +1351,10 @@ function HomeContent() {
 }
 
 export default function HomePage() {
+  const t = useTranslations("common");
   return (
     <Suspense fallback={<div className="flex-1 min-w-0 h-full bg-background flex items-center justify-center">
-      <div className="text-muted-foreground">Loading...</div>
+              <div className="text-muted-foreground">{t("loading")}</div>
     </div>}>
       <HomeContent />
     </Suspense>

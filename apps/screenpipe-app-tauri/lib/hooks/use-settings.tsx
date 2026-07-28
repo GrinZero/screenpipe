@@ -9,6 +9,7 @@ import { platform } from "@tauri-apps/plugin-os";
 import { Store } from "@tauri-apps/plugin-store";
 import { emit, listen } from "@tauri-apps/api/event";
 import React, { createContext, useContext, useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import posthog from "posthog-js";
 import { cacheAnalyticsId, cacheAnalyticsEnabled } from "@/lib/analytics-id";
 import { User } from "../utils/tauri";
@@ -1261,6 +1262,7 @@ interface SettingsContextType {
 const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
 
 export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+	const authT = useTranslations("authGuardUi");
 	const [settings, setSettings] = useState<Settings>(createDefaultSettingsObject());
 	const [isSettingsLoaded, setIsSettingsLoaded] = useState(false);
 	const [loadingError, setLoadingError] = useState<string | null>(null);
@@ -1348,7 +1350,8 @@ export const SettingsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 				} catch (e) {
 					console.warn("failed to clear cloud token in sidecar:", e);
 				}
-			}
+			},
+			{ title: authT("sessionExpired"), description: authT("description"), action: authT("signInAction"), signIn: authT("signIn") },
 		);
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 

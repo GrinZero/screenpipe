@@ -11,6 +11,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { useTranslations } from "next-intl";
 import { createPortal } from "react-dom";
 import {
   Loader2,
@@ -204,22 +205,23 @@ function LiveViewCardBody({
   preview?: boolean;
   refreshing?: boolean;
 }) {
+  const lv2 = useTranslations("liveViewUi2");
   const rawPayload = slot.value?.payload;
   const payload = isRecord(rawPayload) ? rawPayload : null;
   if (!payload) {
     return (
       <div className="flex min-h-24 items-center justify-center border border-dashed border-border px-4 text-center text-xs text-muted-foreground">
         {preview ? (
-          "data loads after you apply this dashboard"
+          lv2("previewDataLoads")
         ) : refreshing && slot.binding ? (
           <span className="inline-flex items-center gap-2">
             <Loader2 className="h-3.5 w-3.5 animate-spin" />
-            asking {slot.binding.pipeName} for fresh data
+            {lv2("askingFreshData", { pipe: slot.binding.pipeName })}
           </span>
         ) : slot.binding ? (
-          `${slot.binding.pipeName} has not published this data yet`
+          lv2("notPublished", { pipe: slot.binding.pipeName })
         ) : (
-          "connect a Pipe to fill this Block"
+          lv2("connectPipeToFill")
         )}
       </div>
     );
@@ -333,7 +335,7 @@ function LiveViewCardBody({
             {points[0]?.label || points[0]?.timestamp}
           </span>
           <span className="tabular-nums">
-            {minimum.toLocaleString()} to {maximum.toLocaleString()}
+            {lv2("rangeTo", { minimum: minimum.toLocaleString(), maximum: maximum.toLocaleString() })}
           </span>
         </div>
         <svg
@@ -494,6 +496,9 @@ export function LiveViewCard({
   onRegenerate?: () => void;
   onAiEdit?: (prompt: string) => Promise<boolean>;
 }) {
+  const t = useTranslations("dashboard");
+  const lv2 = useTranslations("liveViewUi2");
+  const rt = useTranslations("timeRangeUi");
   const [aiOpen, setAiOpen] = useState(false);
   const [aiPrompt, setAiPrompt] = useState("");
   const [feedbackOpen, setFeedbackOpen] = useState(false);
@@ -539,7 +544,7 @@ export function LiveViewCard({
           <h3 className="truncate text-sm font-medium">{slot.title}</h3>
           <p className="mt-0.5 text-[10px] uppercase tracking-wide text-muted-foreground">
             {COMPONENT_LABELS[slot.component]} ·{" "}
-            {getLiveViewTimeRangeOption(timeRange).label}
+            {rt(`range_${getLiveViewTimeRangeOption(timeRange).value}`)}
           </p>
         </div>
         {slot.value && !hasActions && (
@@ -610,16 +615,16 @@ export function LiveViewCard({
                 }}
               >
                 <div>
-                  <p className="text-xs font-medium">What should improve?</p>
+                  <p className="text-xs font-medium">{t("whatShouldImprove")}</p>
                   <p className="mt-0.5 text-[10px] text-muted-foreground">
-                    Optional. The connected Pipe will use this next time.
+                    {lv2("feedbackOptional")}
                   </p>
                 </div>
                 <Input
                   autoFocus
                   value={feedbackNote}
                   onChange={(event) => setFeedbackNote(event.target.value)}
-                  placeholder="e.g. exclude meetings"
+                  placeholder={t("improvePlaceholder")}
                   className="h-8 rounded-none text-xs"
                   maxLength={500}
                 />
@@ -633,7 +638,7 @@ export function LiveViewCard({
                       disabled={feedbackSaving !== null}
                       onClick={() => void saveFeedback(null)}
                     >
-                      clear
+                      {lv2("clearFeedback")}
                     </Button>
                   ) : (
                     <span />
@@ -647,7 +652,7 @@ export function LiveViewCard({
                     {feedbackSaving === "down" && (
                       <Loader2 className="mr-1.5 h-3 w-3 animate-spin" />
                     )}
-                    save feedback
+                    {lv2("saveFeedback")}
                   </Button>
                 </div>
               </form>
@@ -658,7 +663,7 @@ export function LiveViewCard({
             variant="ghost"
             size="icon"
             aria-label={`regenerate ${slot.title}`}
-            title="regenerate this section"
+                    title={t("regenerateSection")}
             className="h-7 w-7 rounded-none"
             disabled={!slot.binding || busy}
             onClick={onRegenerate}
@@ -676,7 +681,7 @@ export function LiveViewCard({
                 variant="ghost"
                 size="icon"
                 aria-label={`edit ${slot.title} with AI`}
-                title="edit this section with AI"
+                    title={t("editSectionWithAi")}
                 className="h-7 w-7 rounded-none"
                 disabled={busy}
               >
@@ -694,7 +699,7 @@ export function LiveViewCard({
             >
               <form onSubmit={submitAiEdit} className="space-y-2">
                 <div>
-                  <p className="text-xs font-medium">Edit this section</p>
+                  <p className="text-xs font-medium">{t("editThisSection")}</p>
                   <p className="mt-0.5 truncate text-[10px] text-muted-foreground">
                     {slot.title}
                   </p>
@@ -703,7 +708,7 @@ export function LiveViewCard({
                   autoFocus
                   value={aiPrompt}
                   onChange={(event) => setAiPrompt(event.target.value)}
-                  placeholder="e.g. group by project instead"
+                  placeholder={t("editPlaceholder")}
                   className="h-8 rounded-none text-xs"
                   maxLength={500}
                 />
@@ -717,7 +722,7 @@ export function LiveViewCard({
                     {aiEditing && (
                       <Loader2 className="mr-1.5 h-3 w-3 animate-spin" />
                     )}
-                    update
+                    {lv2("update")}
                   </Button>
                 </div>
               </form>
@@ -740,13 +745,12 @@ export function LiveViewCard({
       <div className="mt-4 flex items-center justify-between gap-3 border-t border-border pt-2 text-[10px] text-muted-foreground">
         <span className="truncate">
           {slot.binding
-            ? `Pipe: ${slot.binding.pipeName}`
-            : "No Pipe connected"}
+            ? lv2("pipeBinding", { pipe: slot.binding.pipeName })
+            : lv2("noPipeConnected")}
         </span>
         {slot.value && (
           <span className="shrink-0">
-            artifact #{slot.value.artifactOutputId} · v
-            {slot.value.artifactVersion}
+            {lv2("artifactVersion", { id: slot.value.artifactOutputId, version: slot.value.artifactVersion })}
           </span>
         )}
       </div>

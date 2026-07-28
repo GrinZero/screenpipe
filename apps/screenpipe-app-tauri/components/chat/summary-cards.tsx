@@ -4,6 +4,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -106,6 +107,8 @@ export function SummaryCards({
   existingPipes = [],
   userGoalCategory = DEFAULT_USER_GOAL_CATEGORY,
 }: SummaryCardsProps) {
+  const su = useTranslations("summaryUi");
+  const scu = useTranslations("summaryCardsUi");
   const [showAll, setShowAll] = useState(false);
   const [showBuilder, setShowBuilder] = useState(false);
   const [editingTemplate, setEditingTemplate] = useState<CustomTemplate | null>(null);
@@ -124,6 +127,14 @@ export function SummaryCards({
     (t): t is TemplatePipe => Boolean(t),
   );
   const discover: TemplatePipe[] = [];
+  const localizedCardNames = new Set([
+    "automate-my-work",
+    "day-recap",
+    "time-breakdown",
+    "missed-todos",
+  ]);
+  const cardText = (pipe: TemplatePipe, field: "title" | "description") =>
+    localizedCardNames.has(pipe.name) ? scu(`${pipe.name}_${field}`) : pipe[field];
 
   const impressionSignature = featured.map((pipe) => pipe.name).join(":");
   useEffect(() => {
@@ -175,10 +186,10 @@ export function SummaryCards({
         <PipeAIIconLarge size={40} thinking={false} className="relative text-foreground/80" />
       </div>
       <h3 className="text-sm font-medium mb-0.5 text-foreground">
-        {userName ? `How can I help, ${userName}?` : "How can I help today?"}
+        {userName ? scu("greetingNamed", { name: userName }) : scu("greeting")}
       </h3>
       <p className="text-xs text-muted-foreground mb-2">
-        From everything you&apos;ve seen, said, or heard
+        {scu("subtitle")}
       </p>
 
       {/* The onboarding goal or General Settings choice determines priority. */}
@@ -195,10 +206,10 @@ export function SummaryCards({
             />
             <div className="flex-1">
               <div className="text-sm font-semibold group-hover:text-background leading-tight">
-                {featured[0].title}
+                {cardText(featured[0], "title")}
               </div>
               <div className="text-xs text-muted-foreground group-hover:text-background/60 leading-tight mt-0.5">
-                {featured[0].description}
+                {cardText(featured[0], "description")}
               </div>
             </div>
             <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground/30 group-hover:text-background/50" strokeWidth={1.5} />
@@ -219,10 +230,10 @@ export function SummaryCards({
               />
               <div className="flex-1">
                 <div className="text-xs font-medium text-muted-foreground group-hover:text-background leading-tight">
-                  {featured[1].title}
+                  {cardText(featured[1], "title")}
                 </div>
                 <div className="text-xs text-muted-foreground/60 group-hover:text-background/60 leading-tight mt-0.5">
-                  {featured[1].description}
+                  {cardText(featured[1], "description")}
                 </div>
               </div>
             </div>
@@ -246,13 +257,13 @@ export function SummaryCards({
             onClick={() => handleCardClick(pipe)}
             className="grow px-2 py-0.5 text-[11px] bg-muted/20 hover:bg-foreground hover:text-background border border-border/30 hover:border-foreground text-muted-foreground transition-all duration-150 cursor-pointer"
           >
-            {pipe.title}
+            {cardText(pipe, "title")}
           </button>
         ))}
         {/* Quick summary chips */}
         {[
-          { label: "Meeting Prep", prompt: "Summarize context I'll need for upcoming meetings" },
-          { label: "Blockers", prompt: "What problems, errors, or blockers did I encounter?" },
+          { label: "meetingPrep", prompt: "meetingPrepPrompt" },
+          { label: "blockers", prompt: "blockersPrompt" },
         ].map((qt) => (
           <button
             key={qt.label}
@@ -260,17 +271,17 @@ export function SummaryCards({
               posthog.capture("home_card_clicked", {
                 kind: "quick_summary_chip",
               });
-              const prompt = `Analyze my screen and audio recordings from today.\n\nUser instructions: ${qt.prompt}\n\nOnly report activities you can verify from the recordings. If uncertain, say so. Format with clear headings and bullet points.`;
+              const prompt = `Analyze my screen and audio recordings from today.\n\nUser instructions: ${su(qt.prompt as any)}\n\nOnly report activities you can verify from the recordings. If uncertain, say so. Format with clear headings and bullet points.`;
               onSendMessage(
                 prompt,
-                `\u2728 ${qt.label} \u2014 Today`,
+                `\u2728 ${su(qt.label as any)} \u2014 ${su("today")}`,
                 "home_card",
                 "other_builtin",
               );
             }}
             className="grow px-2 py-0.5 text-[11px] bg-muted/20 hover:bg-foreground hover:text-background border border-border/30 hover:border-foreground text-muted-foreground transition-all duration-150 cursor-pointer"
           >
-            {qt.label}
+            {su(qt.label as any)}
           </button>
         ))}
         {/* User's saved templates — chips slightly fainter than built-ins with
@@ -294,7 +305,7 @@ export function SummaryCards({
           }}
           className="px-2 py-0.5 text-[11px] border border-dashed border-border/40 text-muted-foreground/50 hover:text-foreground hover:border-foreground transition-all duration-150 cursor-pointer"
         >
-          + custom
+          + {scu("custom")}
         </button>
       </div>
 

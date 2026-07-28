@@ -15,6 +15,7 @@ import { showNotificationPanel } from "@/lib/hooks/use-notification-panel";
 import { showChatWithPrefill } from "@/lib/chat-utils";
 import { localFetch } from "@/lib/api";
 import { routeNotificationDeeplink } from "@/lib/notifications/actions";
+import { useTranslations } from "next-intl";
 import {
   notificationAnalyticsProperties,
   type NotificationAnalyticsContext,
@@ -33,6 +34,8 @@ type NotificationRequested = {
 };
 
 const NotificationHandler: React.FC = () => {
+  const u = useTranslations("residualUi");
+  const u4 = useTranslations("residualUi4");
   const nativeNotificationRef = useRef<NotificationAnalyticsContext | null>(
     null,
   );
@@ -52,8 +55,8 @@ const NotificationHandler: React.FC = () => {
 
           if (!welcomeShown) {
             sendNotification({
-              title: "welcome to screenpipe",
-              body: "thank you for using screenpipe! we're dedicated to help you get the most out of screenpipe.",
+              title: u4("welcomeTitle"),
+              body: u4("welcomeBody"),
             });
             localStorage?.setItem("welcomeNotificationShown", "true");
           }
@@ -256,7 +259,7 @@ const NotificationHandler: React.FC = () => {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
-                title: "HD recording started",
+                title: u("hdRecordingStarted"),
                 body: "Capturing this meeting at high frame rate. Stops automatically when the call ends.",
               }),
             }).catch(() => {});

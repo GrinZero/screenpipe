@@ -11,6 +11,7 @@
 // content transits a third party, so the privacy note is always visible.
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Check, ExternalLink, Loader2, LogOut, Pencil, Plus, X } from "lucide-react";
 import { openUrl } from "@tauri-apps/plugin-opener";
@@ -101,6 +102,9 @@ export function ComposioCard({
   initialConnected?: boolean;
   onChanged?: (status: ComposioStatusMap) => void;
 }) {
+  const t = useTranslations("connections");
+  const cu = useTranslations("composioUi2");
+  const cu3 = useTranslations("composioUi3");
   const { settings } = useSettings();
   const token = settings.user?.token;
   const { label, provider } = TOOLKIT_META[toolkit];
@@ -299,31 +303,18 @@ export function ComposioCard({
   // that uses the full panel width instead of a narrow text column.
   const factRows: Array<[string, React.ReactNode]> = [
     [
-      "sign-in",
-      <>
-        handled by <b className="font-medium text-foreground/80">Composio</b>. the {provider}{" "}
-        sign-in screen will show their name, and your password is never shared with
-        screenpipe.
-      </>,
+      cu("signInLabel"),
+      <>{cu("signInDescription", { provider })}</>,
     ],
     [
-      "your data",
-      <>
-        {TOOLKIT_META[toolkit].data} processed through
-        Composio&apos;s cloud (
-        <b className="font-medium text-foreground/80">SOC 2 certified, encrypted</b>), not
-        stored by screenpipe.
-      </>,
+      cu("yourDataLabel"),
+      <>{cu("yourDataDescription", { data: TOOLKIT_META[toolkit].data })}</>,
     ],
     ...(toolkit === "gmail"
       ? ([
           [
-            "local option",
-            <>
-              prefer fully local? use the{" "}
-              <b className="font-medium text-foreground/80">Email Inbox (IMAP)</b> connection
-              instead.
-            </>,
+            cu("localOptionLabel"),
+            <>{cu("localOptionDescription")}</>,
           ],
         ] as Array<[string, React.ReactNode]>)
       : []),
@@ -332,7 +323,7 @@ export function ComposioCard({
   const privacyNote = (
     <details className="pt-1">
       <summary className="text-[11px] text-muted-foreground cursor-pointer select-none hover:text-foreground">
-        more about privacy
+        {cu("moreAboutPrivacy")}
       </summary>
       <div className="mt-2 space-y-2">
         <div className="grid grid-cols-[130px_1fr] border border-border">
@@ -355,7 +346,7 @@ export function ComposioCard({
           onClick={() => openUrl("https://composio.dev")}
           className="text-[11px] text-muted-foreground underline underline-offset-2 hover:text-foreground cursor-pointer"
         >
-          learn more about Composio →
+          {cu("learnMore")}
         </button>
       </div>
     </details>
@@ -365,7 +356,7 @@ export function ComposioCard({
     return (
       <div className="flex items-center gap-2 text-xs text-muted-foreground">
         <Loader2 className="h-3 w-3 animate-spin" />
-        loading…
+        {cu("loading")}
       </div>
     );
   }
@@ -374,7 +365,7 @@ export function ComposioCard({
     return (
       <div className="space-y-3">
         {valueLine}
-        <p className="text-xs text-muted-foreground">log in to your screenpipe account to connect {label}.</p>
+        <p className="text-xs text-muted-foreground">{cu3("loginToConnect", { label })}</p>
         {privacyNote}
       </div>
     );
@@ -387,8 +378,7 @@ export function ComposioCard({
         <div className="space-y-2">
           <p className="text-xs">
             <Check className="h-3 w-3 inline mr-1" />
-            {label} connected — your AI can now read your{" "}
-            {TOOLKIT_META[toolkit].connectedNoun}.
+            {cu("connectedDescription", { label, noun: TOOLKIT_META[toolkit].connectedNoun })}
           </p>
           {/* Named-instance rows — same pattern as OAuthPanel's multi-account
               list (rounded muted rows, name left, quiet actions right). The
@@ -414,7 +404,7 @@ export function ComposioCard({
                             if (e.key === "Escape") setRenamingId(null);
                           }}
                           maxLength={64}
-                          placeholder="label — e.g. work"
+                          placeholder={t("accountLabelPlaceholder")}
                           autoFocus
                           className="h-6 w-36 rounded px-1.5 text-xs bg-transparent border border-border focus:outline-none focus:border-foreground/40 placeholder:text-muted-foreground/60"
                         />
@@ -442,7 +432,7 @@ export function ComposioCard({
                             disabled={busy}
                             variant="ghost"
                             size="sm"
-                            title="save label"
+                            title={t("saveLabel")}
                             className="h-6 px-2 text-muted-foreground hover:text-foreground"
                           >
                             {pendingAction === `rename:${account.id}` ? (
@@ -456,7 +446,7 @@ export function ComposioCard({
                             disabled={busy}
                             variant="ghost"
                             size="sm"
-                            title="cancel"
+                            title={t("cancel")}
                             className="h-6 px-2 text-muted-foreground"
                           >
                             <X className="h-3 w-3" />
@@ -472,7 +462,7 @@ export function ComposioCard({
                             disabled={busy}
                             variant="ghost"
                             size="sm"
-                            title="edit label"
+                            title={t("editLabel")}
                             className="h-6 px-2 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity"
                           >
                             <Pencil className="h-3 w-3" />
@@ -482,7 +472,7 @@ export function ComposioCard({
                             disabled={busy}
                             variant="ghost"
                             size="sm"
-                            title="disconnect this account"
+                            title={t("disconnectAccount")}
                             className="h-6 px-2 text-muted-foreground hover:text-destructive"
                           >
                             {pendingAction === `disconnect:${account.id}` ? (
@@ -502,8 +492,7 @@ export function ComposioCard({
           {waiting && (
             <p className="text-[11px] text-muted-foreground flex items-center gap-1.5">
               <Loader2 className="h-3 w-3 animate-spin" />
-              finish signing in with {provider} in your browser —
-              this connects automatically
+              {t("finishBrowserSignIn", { provider })}
             </p>
           )}
           {error && <p className="text-xs text-destructive">{error}</p>}
@@ -519,7 +508,7 @@ export function ComposioCard({
                   if (e.key === "Escape") setAddingAccount(false);
                 }}
                 maxLength={64}
-                placeholder="label — e.g. work, personal"
+                placeholder={t("accountLabelMultiplePlaceholder")}
                 autoFocus
                 className="h-7 w-52 rounded-md px-2 text-xs bg-transparent border border-border focus:outline-none focus:border-foreground/40 placeholder:text-muted-foreground/60"
               />
@@ -534,7 +523,7 @@ export function ComposioCard({
                 ) : (
                   <ExternalLink className="h-3 w-3" />
                 )}
-                connect
+                {cu("connect")}
               </Button>
               <Button
                 onClick={() => {
@@ -546,7 +535,7 @@ export function ComposioCard({
                 size="sm"
                 className="h-7 text-xs normal-case font-sans tracking-normal"
               >
-                cancel
+                {cu("cancel")}
               </Button>
             </div>
           )}
@@ -559,7 +548,7 @@ export function ComposioCard({
                 size="sm"
                 className="gap-1.5 h-7 text-xs normal-case font-sans tracking-normal"
               >
-                <Plus className="h-3 w-3" />add another account
+                <Plus className="h-3 w-3" /> {cu3("addAccount")}
               </Button>
             )}
             <Button
@@ -574,7 +563,7 @@ export function ComposioCard({
               ) : (
                 <X className="h-3 w-3" />
               )}
-              {accounts.length > 1 ? "disconnect all" : "disconnect"}
+              {accounts.length > 1 ? cu3("disconnectAll") : cu3("disconnect")}
             </Button>
           </div>
           {privacyNote}
@@ -584,8 +573,7 @@ export function ComposioCard({
           {waiting && (
             <p className="text-[11px] text-muted-foreground flex items-center gap-1.5">
               <Loader2 className="h-3 w-3 animate-spin" />
-              finish signing in with {provider} in your browser —
-              this connects automatically
+              {cu3("finishSignin", { provider })}
             </p>
           )}
           {error && <p className="text-xs text-destructive">{error}</p>}
@@ -597,11 +585,11 @@ export function ComposioCard({
           >
             {busy ? (
               <>
-                <Loader2 className="h-3 w-3 animate-spin" />starting…
+                <Loader2 className="h-3 w-3 animate-spin" />{cu3("starting")}
               </>
             ) : (
               <>
-                <ExternalLink className="h-3 w-3" />connect {label.toLowerCase()}
+                <ExternalLink className="h-3 w-3" />{cu3("connect", { label: label.toLowerCase() })}
               </>
             )}
           </Button>

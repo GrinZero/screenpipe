@@ -4,6 +4,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { AnimatePresence, motion } from "framer-motion";
 import {
 	CalendarDays,
@@ -77,15 +78,12 @@ function cacheSummary(date: Date, summary: string) {
 	}
 }
 
-function friendlyGenerationError(error: unknown): string {
-	if (!(error instanceof Error)) return "Daily summary could not be generated.";
-	if (/401|403/.test(error.message))
-		return "Your session expired. Sign in again to continue.";
-	if (/429/.test(error.message))
-		return "AI is busy right now. Try again in a moment.";
-	if (/timed out/i.test(error.message))
-		return "The AI took too long to read this day. Try again.";
-	return "Daily summary could not be generated. Try again.";
+function friendlyGenerationError(error: unknown, translate: (key: string) => string): string {
+	if (!(error instanceof Error)) return translate("generationFailed");
+	if (/401|403/.test(error.message)) return translate("sessionExpired");
+	if (/429/.test(error.message)) return translate("aiBusy");
+	if (/timed out/i.test(error.message)) return translate("generationTimedOut");
+	return translate("generationFailedRetry");
 }
 
 export function TimelineDailySummary({
@@ -95,6 +93,9 @@ export function TimelineDailySummary({
 	currentDate: Date;
 	embedded?: boolean;
 }) {
+	const t = useTranslations("timeline");
+	const ds = useTranslations("dailySummaryUi");
+	const ds2 = useTranslations("dailySummaryUi2");
 	const { settings, updateSettings } = useSettings();
 	const [summary, setSummary] = useState("");
 	const [status, setStatus] = useState<SummaryStatus>("idle");
@@ -200,7 +201,7 @@ export function TimelineDailySummary({
 				}
 				console.error("daily summary generation failed", generationError);
 				setStatus("error");
-				setError(friendlyGenerationError(generationError));
+				setError(friendlyGenerationError(generationError, (key) => ds2(key)));
 				posthog.capture("timeline_daily_summary_failed", {
 					selected_date: dateId,
 					reason:
@@ -273,7 +274,7 @@ export function TimelineDailySummary({
 			setEnableDialogOpen(false);
 			setPanelOpen(true);
 			setStatus("error");
-			setError("Enhanced AI could not be turned on. Try again from Settings.");
+			setError(ds2("enableFailed"));
 		} finally {
 			setIsEnabling(false);
 		}
@@ -330,7 +331,7 @@ export function TimelineDailySummary({
 	const tooltipText = summary
 		? "Open this day's summary"
 		: !enhancedAI
-			? "Turn on Enhanced AI to generate a summary for this day"
+			? ds2("turnOnToGenerate")
 			: isGenerating
 				? "Generating this day's summary"
 				: "Generate a summary for this day";
@@ -393,12 +394,12 @@ export function TimelineDailySummary({
 								<div>
 									<div className="flex items-center gap-2">
 										<h2 className="font-mono text-sm font-semibold uppercase tracking-wide">
-											Daily summary
+											{ds2("dailySummary")}
 										</h2>
 										{isGenerating && (
 											<span className="flex items-center gap-1 font-mono text-[9px] uppercase tracking-[0.18em] text-foreground">
 												<span className="h-1.5 w-1.5 animate-pulse bg-foreground" />
-												live
+														{ds2("live")}
 											</span>
 										)}
 									</div>
@@ -446,7 +447,7 @@ export function TimelineDailySummary({
 								>
 									<div className="flex items-center gap-2 font-mono text-xs text-muted-foreground">
 										<Loader2 className="h-3.5 w-3.5 animate-spin" />
-										Reading this day’s timeline…
+										{ds2("readingTimeline")}
 									</div>
 									<div className="space-y-2">
 										<div className="h-2 w-full animate-pulse bg-muted" />
@@ -468,8 +469,8 @@ export function TimelineDailySummary({
 								<div className="border border-border bg-muted/40 p-4">
 									<p className="font-mono text-xs font-medium uppercase tracking-wide">
 										{error.startsWith("No recorded")
-											? "No activity found"
-											: "Couldn’t create summary"}
+											? ds2("noActivity")
+											: ds2("couldntCreate")}
 									</p>
 									<p className="mt-2 text-sm text-muted-foreground">{error}</p>
 									<Button
@@ -479,7 +480,7 @@ export function TimelineDailySummary({
 										onClick={retryGeneration}
 									>
 										<RefreshCw className="mr-2 h-3.5 w-3.5" />
-										Try again
+										{ds2("tryAgain")}
 									</Button>
 								</div>
 							)}
@@ -488,14 +489,14 @@ export function TimelineDailySummary({
 						{status === "complete" && summary && (
 							<footer className="flex shrink-0 items-center justify-between gap-3 border-t border-border px-4 py-3">
 								<p className="text-[10px] leading-tight text-muted-foreground">
-									Generated on demand. Saved on this device.
+									{ds2("generatedSaved")}
 								</p>
 								<div className="flex items-center gap-1">
 									<button
 										type="button"
 										onClick={copySummary}
 										className="p-2 text-muted-foreground transition-colors hover:bg-foreground hover:text-background"
-										aria-label="Copy daily summary"
+										aria-label={t("copyDailySummary")}
 									>
 										{copied ? (
 											<Check className="h-3.5 w-3.5" />
@@ -507,7 +508,7 @@ export function TimelineDailySummary({
 										type="button"
 										onClick={() => void generate()}
 										className="p-2 text-muted-foreground transition-colors hover:bg-foreground hover:text-background"
-										aria-label="Regenerate daily summary"
+										aria-label={t("regenerateDailySummary")}
 									>
 										<RefreshCw className="h-3.5 w-3.5" />
 									</button>
@@ -533,13 +534,13 @@ export function TimelineDailySummary({
 						</div>
 						<DialogTitle>
 							{userToken
-								? "turn on enhanced ai?"
-								: "sign in to use daily summaries"}
+								? ds("turnOnEnhancedAi")
+								: ds("signInDailySummaries")}
 						</DialogTitle>
 						<DialogDescription>
 							{userToken
-								? `Generate an AI recap of ${dateLabel.toLowerCase()} directly over your timeline.`
-								: "Daily summaries use your Screenpipe account and the Screenpipe Cloud auto model."}
+								? ds("generateRecap", { date: dateLabel.toLowerCase() })
+								: ds("accountAndCloudModel")}
 						</DialogDescription>
 					</DialogHeader>
 
@@ -548,21 +549,18 @@ export function TimelineDailySummary({
 							<div className="flex items-start gap-3">
 								<CalendarDays className="mt-0.5 h-4 w-4 shrink-0" />
 								<div>
-									<p className="font-medium">Only when you ask</p>
+									<p className="font-medium">{ds("onlyWhenAsk")}</p>
 									<p className="text-xs text-muted-foreground">
-										Daily summaries never run on a timer or generate
-										automatically.
+										{ds("neverAutomatic")}
 									</p>
 								</div>
 							</div>
 							<div className="flex items-start gap-3">
 								<ShieldCheck className="mt-0.5 h-4 w-4 shrink-0" />
 								<div>
-									<p className="font-medium">Bounded, read-only access</p>
+									<p className="font-medium">{ds("boundedReadOnly")}</p>
 									<p className="text-xs text-muted-foreground">
-										The AI agent can read only the selected day through local
-										Screenpipe APIs. Relevant evidence is processed by your
-										configured AI model.
+										{ds("readOnlyDetails")}
 									</p>
 								</div>
 							</div>
@@ -575,7 +573,7 @@ export function TimelineDailySummary({
 							onClick={() => setEnableDialogOpen(false)}
 							disabled={isEnabling}
 						>
-							Not now
+							{ds("notNow")}
 						</Button>
 						<Button
 							onClick={() => void handleEnableAndGenerate()}
@@ -584,7 +582,7 @@ export function TimelineDailySummary({
 							{isEnabling ? (
 								<Loader2 className="mr-2 h-4 w-4 animate-spin" />
 							) : null}
-							{userToken ? "Turn on and summarize" : "Sign in"}
+							{userToken ? ds("turnOnAndSummarize") : ds("signIn")}
 						</Button>
 					</DialogFooter>
 				</DialogContent>

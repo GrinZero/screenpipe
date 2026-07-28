@@ -8,6 +8,7 @@ import { HelpTooltip } from "@/components/ui/help-tooltip";
 import { Card, CardContent } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { useSettings, type Settings } from "@/lib/hooks/use-settings";
+import { useTranslations } from "next-intl";
 import { commands } from "@/lib/utils/tauri";
 import { Lock, MessageSquare, Sparkles } from "lucide-react";
 import { CloudMediaAnalysisPreview } from "./setting-previews";
@@ -34,6 +35,7 @@ export const searchIndex: SettingsField[] = [
 ];
 
 export function AISettings() {
+  const t = useTranslations("aiSettingsUi");
   const { settings, updateSettings } = useSettings();
 
   const handleSettingsChange = useCallback(
@@ -88,7 +90,7 @@ export function AISettings() {
   return (
     <div className="space-y-5" data-testid="section-settings-ai-settings">
       <p className="text-sm text-muted-foreground">
-        Configure AI analysis and chat preferences
+        {t("intro")}
       </p>
 
       <Card className="border-border bg-card">
@@ -97,14 +99,12 @@ export function AISettings() {
             <div className="flex items-center space-x-2.5">
               <Sparkles className="h-4 w-4 text-muted-foreground shrink-0" />
               <div>
-                <h3 className="text-sm font-medium text-foreground">Enhanced AI</h3>
+                <h3 className="text-sm font-medium text-foreground">{t("enhancedAi")}</h3>
                 <p className="text-xs text-muted-foreground">
-                  Use AI for smarter suggestions and on-demand daily summaries
+                  {t("enhancedDescription")}
                 </p>
                 <p className="text-[10px] text-muted-foreground/60 mt-0.5">
-                  daily summaries use your configured AI model; suggestions may
-                  use screenpipe cloud. relevant activity is processed only when
-                  needed.
+                  {t("enhancedNote")}
                 </p>
               </div>
             </div>
@@ -131,11 +131,11 @@ export function AISettings() {
               <Lock className="h-4 w-4 text-muted-foreground shrink-0" />
               <div>
                 <h3 className="text-sm font-medium text-foreground flex items-center gap-1.5">
-                  AI audio &amp; video analysis
-                  <HelpTooltip text="Lets Pi and Claude Code call screenpipe's confidential enclave (Gemma 4 E4B inside a Tinfoil-attested AMD SEV-SNP container, encrypted in flight + at rest, no plaintext at the provider) to transcribe meetings, describe video clips, and analyze image frames from your screenpipe data. When off, the capability is stripped from the agent skill markdown so Pi won't try to use it." />
+                  {t("mediaAnalysis")}
+                  <HelpTooltip text={t("mediaAnalysisHelp")} />
                 </h3>
                 <p className="text-xs text-muted-foreground">
-                  Transcribe audio and understand video &amp; images in a confidential enclave.
+                  {t("mediaAnalysisDescription")}
                 </p>
               </div>
             </div>
@@ -156,9 +156,9 @@ export function AISettings() {
             <div className="flex items-center space-x-2.5">
               <MessageSquare className="h-4 w-4 text-muted-foreground shrink-0" />
               <div>
-                <h3 className="text-sm font-medium text-foreground">Auto-generate chat titles</h3>
+                <h3 className="text-sm font-medium text-foreground">{t("autoTitles")}</h3>
                 <p className="text-xs text-muted-foreground">
-                  Name new chats with the AI after your first message. Turn off to save tokens.
+                  {t("autoTitlesDescription")}
                 </p>
               </div>
             </div>

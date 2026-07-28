@@ -1361,6 +1361,8 @@ Rules:
                 monitor_ids: vec!["default".to_string()],
                 audio_devices: vec!["default".to_string()],
                 use_pii_removal: true,
+                api_auth: false,
+                listen_on_lan: false,
                 analytics_id: uuid::Uuid::new_v4().to_string(),
                 ignored_windows,
                 ..screenpipe_config::RecordingSettings::default()

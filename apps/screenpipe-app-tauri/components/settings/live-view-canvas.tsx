@@ -10,6 +10,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { useTranslations } from "next-intl";
 import { listen } from "@tauri-apps/api/event";
 import {
   Background,
@@ -144,6 +145,7 @@ function strokePath(points: BrainViewCanvasPoint[]): string {
 }
 
 function CanvasConnectionHandles({ tool }: { tool: CanvasTool }) {
+  const t = useTranslations("dashboard");
   const visible = tool === "arrow";
   const style: React.CSSProperties = {
     width: 10,
@@ -161,14 +163,14 @@ function CanvasConnectionHandles({ tool }: { tool: CanvasTool }) {
         position={Position.Left}
         isConnectable={visible}
         style={style}
-        aria-label="connect incoming step"
+        aria-label={t("connectIncomingStep")}
       />
       <Handle
         type="source"
         position={Position.Right}
         isConnectable={visible}
         style={style}
-        aria-label="connect outgoing step"
+        aria-label={t("connectOutgoingStep")}
       />
     </>
   );
@@ -268,6 +270,7 @@ function LiveViewBlockNode({ id, data }: NodeProps<LiveViewFlowNode>) {
 }
 
 function CanvasNoteNode({ id, data }: NodeProps<NoteFlowNode>) {
+  const t = useTranslations("dashboard");
   const { note } = data;
   return (
     <article
@@ -295,7 +298,7 @@ function CanvasNoteNode({ id, data }: NodeProps<NoteFlowNode>) {
       <CanvasConnectionHandles tool={data.tool} />
       <button
         type="button"
-        aria-label={data.tool === "arrow" ? "connect note" : "move note"}
+        aria-label={data.tool === "arrow" ? t("connectNote") : t("moveNote")}
         className="canvas-node-drag-handle flex h-8 w-full cursor-move items-center gap-1.5 border-b border-border bg-muted/30 px-2 text-[10px] uppercase tracking-wide"
         onFocus={() => data.onSelect(id)}
         onPointerDown={(event) => {
@@ -309,14 +312,14 @@ function CanvasNoteNode({ id, data }: NodeProps<NoteFlowNode>) {
         ) : (
           <Move className="h-3 w-3" />
         )}
-        note
+        {t("note")}
       </button>
       <textarea
         data-testid={`canvas-note-text-${note.id}`}
-        aria-label="Canvas note"
+        aria-label={t("canvasNote")}
         value={note.text}
         maxLength={4_000}
-        placeholder="write a note"
+        placeholder={t("writeNote")}
         className="nodrag nowheel nopan h-[calc(100%-2rem)] w-full resize-none bg-transparent p-3 font-serif text-sm outline-none"
         onChange={(event) =>
           data.onTextChange(note.id, event.target.value, false)
@@ -359,6 +362,8 @@ export function LiveViewCanvas({
   onRegenerate: (slot: BrainViewSlot) => void;
   onAiEdit: (slot: BrainViewSlot, prompt: string) => Promise<boolean>;
 }) {
+  const lv2 = useTranslations("liveViewUi2");
+  const t = useTranslations("dashboard");
   const [tool, setTool] = useState<CanvasTool>("select");
   const [selection, setSelection] = useState<string[]>([]);
   const [arrowSource, setArrowSource] = useState<string | null>(null);
@@ -1108,13 +1113,13 @@ export function LiveViewCanvas({
     <section
       data-testid="live-view-canvas"
       className="relative h-[min(70vh,720px)] min-h-[480px] w-full overflow-hidden border border-border bg-background"
-      aria-label="Live View process canvas"
+      aria-label={t("liveViewProcessCanvas")}
     >
       <div
         ref={surfaceRef}
         data-testid="live-view-canvas-surface"
         role="application"
-        aria-label="Whiteboard canvas. Use the toolbar to select, pan, add notes, connect Blocks, or draw."
+        aria-label={t("whiteboardCanvas")}
         tabIndex={0}
         className="live-view-process-canvas absolute inset-0 outline-none focus-visible:ring-1 focus-visible:ring-foreground focus-visible:ring-inset"
         onPointerEnter={(event) => {
@@ -1258,7 +1263,7 @@ export function LiveViewCanvas({
           type="button"
           variant="ghost"
           size="icon"
-          aria-label="zoom out"
+          aria-label={t("zoomOut")}
           className="h-8 w-8 rounded-none"
           onClick={() => zoomCanvas(1 / 1.2)}
         >
@@ -1271,7 +1276,7 @@ export function LiveViewCanvas({
           type="button"
           variant="ghost"
           size="icon"
-          aria-label="zoom in"
+          aria-label={t("zoomIn")}
           className="h-8 w-8 rounded-none"
           onClick={() => zoomCanvas(1.2)}
         >
@@ -1282,7 +1287,7 @@ export function LiveViewCanvas({
           data-testid="canvas-fit"
           variant="ghost"
           size="icon"
-          aria-label="fit canvas"
+          aria-label={t("fitCanvas")}
           className="h-8 w-8 rounded-none border-l border-border"
           onClick={fitCanvas}
         >
@@ -1296,14 +1301,14 @@ export function LiveViewCanvas({
           className="h-8 rounded-none border-l border-border px-2 text-[10px]"
           onClick={arrangeCanvas}
         >
-          arrange
+          {t("arrange")}
         </Button>
         <Button
           type="button"
           data-testid="canvas-delete-selection"
           variant="ghost"
           size="icon"
-          aria-label="delete selected canvas item"
+          aria-label={t("deleteSelectedCanvasItem")}
           className="h-8 w-8 rounded-none border-l border-border"
           disabled={!selectedCanDelete}
           onClick={removeSelection}
@@ -1314,11 +1319,11 @@ export function LiveViewCanvas({
 
       {tool === "arrow" && arrowSource && (
         <div className="absolute bottom-3 left-3 z-30 border border-foreground bg-background px-3 py-2 text-xs">
-          choose another Block or note to connect
+          {lv2("chooseAnotherToConnect")}
         </div>
       )}
       <div className="pointer-events-none absolute bottom-3 right-3 z-20 border border-border bg-background/95 px-2 py-1 font-mono text-[9px] text-muted-foreground">
-        drag nodes · pan tool or middle-drag · pinch or ctrl/⌘ + wheel to zoom
+        {lv2("canvasHelp")}
       </div>
     </section>
   );

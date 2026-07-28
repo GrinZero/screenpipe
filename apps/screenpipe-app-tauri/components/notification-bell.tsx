@@ -27,6 +27,7 @@ import { showChatWithPrefill } from "@/lib/chat-utils";
 import { invoke } from "@tauri-apps/api/core";
 import { emit } from "@tauri-apps/api/event";
 import { notificationAnalyticsProperties } from "@/lib/notification-analytics";
+import { useTranslations } from "next-intl";
 
 interface NotificationEntry {
   id: string;
@@ -165,6 +166,7 @@ export function NotificationInboxPanel({
   fullHeight = false,
   surface = "pipe_store",
 }: NotificationInboxPanelProps) {
+  const t = useTranslations("notifications");
   const [history, setHistory] = useState<NotificationEntry[]>([]);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
@@ -301,7 +303,7 @@ export function NotificationInboxPanel({
       {/* Header */}
       <div className="flex items-center justify-between px-3 py-2 border-b border-border">
         <span className="text-xs font-medium text-foreground">
-          notifications
+          {t("notifications")}
         </span>
         {history.length > 0 && (
           <button
@@ -309,7 +311,7 @@ export function NotificationInboxPanel({
             onClick={clearAll}
             className="text-[10px] text-muted-foreground hover:text-foreground transition-colors"
           >
-            clear all
+            {t("clearAll")}
           </button>
         )}
       </div>
@@ -321,7 +323,7 @@ export function NotificationInboxPanel({
             data-testid="notification-bell-empty"
             className="px-3 py-6 text-center text-xs text-muted-foreground"
           >
-            no notifications yet
+            {t("noNotificationsYet")}
           </div>
         ) : (
           displayed.map((entry, idx) => {
@@ -330,12 +332,12 @@ export function NotificationInboxPanel({
             return (
               <Fragment key={entry.id}>
                 {idx === 0 && needsYou.length > 0 && (
-                  <SectionLabel>needs you</SectionLabel>
+                  <SectionLabel>{t("needsYou")}</SectionLabel>
                 )}
                 {idx === needsYou.length &&
                   needsYou.length > 0 &&
                   earlier.length > 0 && (
-                    <SectionLabel>earlier</SectionLabel>
+                    <SectionLabel>{t("earlier")}</SectionLabel>
                   )}
                 <div
                   data-notification-id={entry.id}
@@ -429,7 +431,7 @@ export function NotificationInboxPanel({
                           dismissOne(entry.id);
                         }}
                         className="p-0.5 rounded hover:bg-muted/60 opacity-0 group-hover/notif:opacity-100 group-focus/notif:opacity-100 group-focus-within/notif:opacity-100 focus:opacity-100 transition-opacity"
-                        title="dismiss"
+                        title={t("dismiss")}
                       >
                         <X className="w-3 h-3 text-muted-foreground/50 hover:text-foreground" />
                       </button>
@@ -530,7 +532,7 @@ export function NotificationInboxPanel({
                           className="flex items-center gap-1 text-[10px] text-muted-foreground hover:text-foreground transition-colors"
                         >
                           <ExternalLink className="w-3 h-3" />
-                          source
+                          {t("source")}
                         </button>
                       )}
                       <button
@@ -553,7 +555,7 @@ export function NotificationInboxPanel({
                         className="flex items-center gap-1 text-[10px] text-muted-foreground hover:text-foreground transition-colors"
                       >
                         <MessageSquare className="w-3 h-3" />
-                        ask ai
+                        {t("askAi")}
                       </button>
                     </div>
                   </div>
@@ -576,7 +578,7 @@ export function NotificationInboxPanel({
             }}
             className="text-[10px] text-muted-foreground hover:text-foreground transition-colors"
           >
-            ⚙ manage notification settings
+            ⚙ {t("manageSettings")}
           </button>
         </div>
       )}

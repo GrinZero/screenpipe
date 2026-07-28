@@ -21,10 +21,13 @@ import {
   promptWithConversationHistory,
 } from "@/components/chat/standalone/hooks/pi-message-preparation";
 import type { ChatSendOptions, Message } from "@/lib/chat/types";
+import { useTranslations } from "next-intl";
 import { chatSendTelemetryContext } from "@/lib/chat/response-feedback";
 import type { PiSendTransportOptions } from "@/components/chat/standalone/hooks/pi-types";
 
 export function usePiSendTransport(options: PiSendTransportOptions) {
+  const u = useTranslations("residualBulk3");
+  const u4 = useTranslations("residualUi4");
   const {
     abortControllerRef,
     activePipeExecution,
@@ -81,6 +84,7 @@ export function usePiSendTransport(options: PiSendTransportOptions) {
   const { enqueuePiMessage } = createPiMessageQueueTransport(
     options,
     (message, displayLabel, imageDataUrls) => sendPiMessage(message, displayLabel, imageDataUrls),
+    (key) => u(key as any),
   );
   const { handleStop: stopLiveSend, openConnectionSetup } = usePiLiveSendControls({
     abortControllerRef,
@@ -175,7 +179,7 @@ export function usePiSendTransport(options: PiSendTransportOptions) {
     if (!piInfo?.running) {
       if (piStartInFlightRef.current) {
         if (!autoSendBypassRef.current) {
-          toast({ title: "Pi starting", description: "Please wait a moment", variant: "destructive" });
+          toast({ title: u("piStarting"), description: u("waitMoment"), variant: "destructive" });
           return;
         }
         // Prefill auto-send: wait for in-flight start to complete
@@ -254,8 +258,8 @@ export function usePiSendTransport(options: PiSendTransportOptions) {
                 if (preset.id !== activeP?.id) {
                   console.log(`[Pi] Fell back to preset "${preset.id}" for this session (not persisted)`);
                   toast({
-                    title: `using "${preset.id}" preset for this session`,
-                    description: `"${activeP?.id ?? "active"}" preset failed to start — using fallback for this session only`,
+                    title: u4("usingPreset", { id: preset.id }),
+                    description: u4("presetFallback", { id: activeP?.id ?? "active" }),
                   });
                 }
                 started = true;
@@ -273,9 +277,9 @@ export function usePiSendTransport(options: PiSendTransportOptions) {
           if (!started) {
             const providerLabel = activeP?.provider || "AI";
             toast({
-              title: `failed to start AI assistant (${providerLabel})`,
+              title: u4("assistantStartFailed", { provider: providerLabel }),
               description: presetsToTry.length > 1
-                ? `all ${presetsToTry.length} presets failed — ${lastError}`
+                ? u4("allPresetsFailed", { count: presetsToTry.length, error: lastError })
                 : lastError,
               variant: "destructive",
             });
@@ -368,7 +372,7 @@ export function usePiSendTransport(options: PiSendTransportOptions) {
       if (!storeState.sessions[sidNow]) {
         storeState.actions.upsert({
           id: sidNow,
-          title: "untitled",
+          title: u("untitled"),
           preview: "",
           status: "streaming",
           messageCount: 0,
@@ -694,14 +698,14 @@ export function usePiSendTransport(options: PiSendTransportOptions) {
       if (prepared.externalized) {
         stagePendingAttachments(attachmentMetadata);
         toast({
-          title: "large context saved as file",
-          description: "Pi will use local chunk files instead of sending the full text inline.",
+          title: u("largeContextSaved"),
+          description: u("largeContextDescription"),
         });
       }
     } catch (e) {
       toast({
-        title: "failed to save large context",
-        description: "The message was not sent because the pasted input is too large to send inline.",
+        title: u("largeContextFailed"),
+        description: u("largeContextNotSent"),
         variant: "destructive",
       });
       restoreDocsOnError(e);

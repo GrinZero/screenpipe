@@ -5,6 +5,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Loader2 } from "lucide-react";
 import { screenpipeWebUrl } from "@/lib/web-url";
 
@@ -16,7 +17,6 @@ interface EnterpriseLicensePromptProps {
 }
 
 const ENTERPRISE_KEY_PATTERN = /^ENT-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
-const ENTERPRISE_KEY_FORMAT_ERROR = "enter an enterprise key like ENT-XXXX-XXXX-XXXX-XXXX";
 const ENTERPRISE_WORKSPACE_URL = screenpipeWebUrl("/account/workspace", "https://screenpipe.com");
 
 function normalizeLicenseKey(value: string): string {
@@ -29,6 +29,7 @@ export function EnterpriseLicensePrompt({
   onActivated,
   embedded = false,
 }: EnterpriseLicensePromptProps) {
+  const tr = useTranslations("enterpriseUi");
   const [key, setKey] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -38,7 +39,7 @@ export function EnterpriseLicensePrompt({
     const normalized = normalizeLicenseKey(key);
     if (!normalized) return;
     if (!ENTERPRISE_KEY_PATTERN.test(normalized)) {
-      setError(ENTERPRISE_KEY_FORMAT_ERROR);
+      setError(tr("keyFormatError"));
       return;
     }
 
@@ -48,13 +49,13 @@ export function EnterpriseLicensePrompt({
     try {
       const result = await onSubmit(normalized);
       if (!result.ok) {
-        setError(result.error || "failed to validate enterprise key");
+        setError(result.error || tr("validationFailed"));
       } else {
         onActivated?.();
       }
     } catch (e) {
       console.error("[enterprise] license activation failed:", e);
-      setError("failed to validate enterprise key");
+      setError(tr("validationFailed"));
     } finally {
       setLoading(false);
     }
@@ -64,9 +65,9 @@ export function EnterpriseLicensePrompt({
     <div className={embedded ? "w-full" : "w-full max-w-sm border border-border bg-background p-6 shadow-lg"}>
       {!embedded && (
         <>
-          <h2 className="mb-1 text-lg font-semibold">enterprise key</h2>
+          <h2 className="mb-1 text-lg font-semibold">{tr("enterpriseKey")}</h2>
           <p className="mb-4 text-sm text-muted-foreground">
-            enter the key provided by your administrator to configure this device
+            {tr("description")}
           </p>
         </>
       )}
@@ -79,7 +80,7 @@ export function EnterpriseLicensePrompt({
               setKey(e.target.value.toUpperCase());
               if (error) setError(null);
             }}
-            placeholder="ENT-XXXX-XXXX-XXXX-XXXX"
+            placeholder={tr("keyPlaceholder")}
             className="h-10 w-full border border-border bg-background px-3 py-2 font-mono text-sm focus:outline-none focus:ring-1 focus:ring-foreground focus:ring-offset-1"
             autoFocus
             spellCheck={false}
@@ -88,14 +89,14 @@ export function EnterpriseLicensePrompt({
           />
 
           <p className="font-mono text-[11px] text-muted-foreground">
-            don&apos;t know your enterprise key?{" "}
+            {tr("dontKnow")}{" "}
             <a
               href={ENTERPRISE_WORKSPACE_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="underline underline-offset-4 transition-colors hover:text-foreground"
             >
-              find it in your workspace
+              {tr("findInWorkspace")}
             </a>
           </p>
 
@@ -111,10 +112,10 @@ export function EnterpriseLicensePrompt({
             {loading ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
-                validating...
+                {tr("validating")}
               </>
             ) : (
-              "activate"
+              tr("activate")
             )}
           </button>
       </form>
@@ -125,11 +126,11 @@ export function EnterpriseLicensePrompt({
           onClick={onSignIn}
           className="mt-4 w-full font-mono text-xs text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
         >
-          sign in instead
+          {tr("signInInstead")}
         </button>
       ) : (
         <p className="mt-3 text-[11px] text-muted-foreground">
-          no employee account is required for managed devices
+          {tr("noEmployeeAccount")}
         </p>
       )}
     </div>

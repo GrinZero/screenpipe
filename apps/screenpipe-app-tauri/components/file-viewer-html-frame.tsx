@@ -8,6 +8,7 @@ import { useMemo, useRef, useState } from "react";
 import { useEventListener } from "@/lib/hooks/use-event-listener";
 import { open as openUrl } from "@tauri-apps/plugin-shell";
 import { wrapHtmlForSandbox } from "@/lib/utils/html-sandbox";
+import { useTranslations } from "next-intl";
 
 interface HtmlPreviewFrameProps {
   /** Raw artifact HTML. Wrapped with our CSP + bridge before rendering. */
@@ -40,6 +41,7 @@ type FrameMessage = {
  *    and `openLink` (host-confirmed). There is no path to invoke app commands.
  */
 export function HtmlPreviewFrame({ html, onOpenExternal }: HtmlPreviewFrameProps) {
+  const t = useTranslations("htmlPreview");
   const ref = useRef<HTMLIFrameElement>(null);
   const [height, setHeight] = useState(200);
 
@@ -80,7 +82,7 @@ export function HtmlPreviewFrame({ html, onOpenExternal }: HtmlPreviewFrameProps
     <div className="space-y-2">
       <iframe
         ref={ref}
-        title="rendered html preview"
+        title={t("rendered")}
         sandbox="allow-scripts"
         // Deny every Permissions-Policy feature (camera, mic, geolocation, …)
         // on top of the sandbox. Belt-and-suspenders for an opaque origin.
@@ -91,7 +93,7 @@ export function HtmlPreviewFrame({ html, onOpenExternal }: HtmlPreviewFrameProps
         style={{ height, background: "#ffffff" }}
       />
       <div className="font-mono text-[10px] tracking-wide uppercase text-foreground/40">
-        sandboxed · no network — external scripts, images &amp; requests are blocked
+        {t("sandboxedNoNetwork")}
       </div>
     </div>
   );

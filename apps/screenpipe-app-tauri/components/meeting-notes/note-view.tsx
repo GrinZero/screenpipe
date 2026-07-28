@@ -4,6 +4,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   AlertTriangle,
   ArrowLeft,
@@ -67,6 +68,14 @@ import type {
   LiveCaptureState,
 } from "@/lib/utils/live-capture-state";
 import { isLiveCaptureDegraded } from "@/lib/utils/live-capture-state";
+
+function localizedCaptureStateText(
+  state: LiveCaptureState,
+  t: (key: string) => string,
+  field: "label" | "description",
+): string {
+  return t(`${state.kind}_${field}`);
+}
 import {
   buildEnrichedSummarizePrompt,
   extractImageDataUrlsFromMarkdown,
@@ -170,6 +179,10 @@ export function NoteView({
   initialTranscriptOpen = false,
   transcriptOpenRequestKey,
 }: NoteViewProps) {
+  const t = useTranslations("meetings");
+  const ct = useTranslations("captureUi");
+  const u = useTranslations("meetingUi");
+  const nv = useTranslations("noteViewUi");
   const { toast } = useToast();
   const [title, setTitle] = useState(meeting.title ?? "");
   const [attendees, setAttendees] = useState(meeting.attendees ?? "");
@@ -237,8 +250,8 @@ export function NoteView({
       if (paths.length === 0) return;
       if (imagePaths.length === 0) {
         toast({
-          title: "couldn't insert image",
-          description: "drop a png, jpg, gif, webp, bmp, or svg file.",
+          title: u("insertImageFailed"),
+          description: u("imageTypes"),
           variant: "destructive",
         });
         return;
@@ -260,7 +273,7 @@ export function NoteView({
       } catch (err) {
         console.error("failed to insert dropped meeting note image", err);
         toast({
-          title: "couldn't insert image",
+          title: u("insertImageFailed"),
           description: String(err),
           variant: "destructive",
         });
@@ -571,7 +584,7 @@ export function NoteView({
     });
     if (!canSummarizeMeeting) {
       toast({
-        title: "stop the meeting first",
+        title: u("stopFirst"),
         description:
           "summaries run on the saved transcript after the meeting ends.",
       });
@@ -652,8 +665,8 @@ export function NoteView({
     } catch (err) {
       console.error("failed to summarize meeting", err);
       toast({
-        title: "couldn't open chat",
-        description: "try again in a moment.",
+        title: u("openChatFailed"),
+        description: u("tryAgain"),
         variant: "destructive",
       });
     } finally {
@@ -665,8 +678,8 @@ export function NoteView({
     if (retranscribing) return;
     if (!meeting.meeting_end) {
       toast({
-        title: "stop the meeting first",
-        description: "batch retranscribe runs on the saved audio after a meeting ends.",
+        title: u("stopFirst"),
+        description: u("retranscribeAfter"),
       });
       return;
     }
@@ -686,7 +699,7 @@ export function NoteView({
       setTranscriptOpen(true);
       setTranscriptRefreshKey((key) => key + 1);
       toast({
-        title: "transcript refreshed",
+        title: u("transcriptRefreshed"),
         description:
           body?.batches_processed > 0
             ? `${body.batches_processed} batch${body.batches_processed === 1 ? "" : "es"} from saved audio`
@@ -695,7 +708,7 @@ export function NoteView({
     } catch (err) {
       console.error("failed to retranscribe meeting", err);
       toast({
-        title: "couldn't retranscribe",
+        title: u("retranscribeFailed"),
         description: String(err),
         variant: "destructive",
       });
@@ -719,8 +732,8 @@ export function NoteView({
         } catch (saveErr) {
           console.error("failed to save meeting note before stop", saveErr);
           toast({
-            title: "couldn't save notes",
-            description: "stopping anyway — your latest edits may not be saved.",
+          title: u("saveNotesFailed"),
+          description: u("stoppingUnsaved"),
             variant: "destructive",
           });
         }
@@ -729,7 +742,7 @@ export function NoteView({
     } catch (err) {
       console.error("failed to stop meeting", err);
       toast({
-        title: "couldn't stop meeting",
+        title: u("stopMeetingFailed"),
         description: String(err),
         variant: "destructive",
       });
@@ -742,8 +755,8 @@ export function NoteView({
     if (exporting) return;
     if (!meeting.meeting_end) {
       toast({
-        title: "stop the meeting first",
-        description: "mp4 export runs on the saved frames and audio after a meeting ends.",
+        title: u("stopFirst"),
+        description: u("exportAfter"),
       });
       return;
     }
@@ -765,7 +778,7 @@ export function NoteView({
     } catch (err) {
       console.error("failed to open save dialog", err);
       toast({
-        title: "couldn't open save dialog",
+        title: u("openSaveFailed"),
         description: String(err),
         variant: "destructive",
       });
@@ -775,8 +788,8 @@ export function NoteView({
 
     setExporting(true);
     toast({
-      title: "exporting mp4…",
-      description: "stitching frames and audio — this can take a minute for long meetings.",
+      title: u("exporting"),
+      description: u("stitching"),
     });
     let jobId: string | null = null;
     let unlisten: (() => void) | null = null;
@@ -798,7 +811,7 @@ export function NoteView({
             ? (summary.file_size_bytes / (1024 * 1024)).toFixed(1)
             : null;
           toast({
-            title: "mp4 exported",
+            title: u("exported"),
             description: [
               `${summary?.frame_count ?? 0} frames`,
               `${summary?.audio_chunk_count ?? 0} audio chunks`,
@@ -822,7 +835,7 @@ export function NoteView({
             stack: event.error,
           });
           toast({
-            title: "couldn't export mp4",
+            title: u("exportFailed"),
             description: event.error,
             variant: "destructive",
           });
@@ -844,7 +857,7 @@ export function NoteView({
         stack: err instanceof Error ? err.stack ?? err.message : String(err),
       });
       toast({
-        title: "couldn't export mp4",
+        title: u("exportFailed"),
         description: String(err),
         variant: "destructive",
       });
@@ -902,11 +915,11 @@ export function NoteView({
       await commands.copyTextToClipboard(md);
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2000);
-      toast({ title: "copied to clipboard" });
+      toast({ title: u("copiedClipboard") });
     } catch (err) {
       console.error("failed to copy meeting", err);
       toast({
-        title: "couldn't copy",
+        title: u("copyFailed"),
         description: String(err),
         variant: "destructive",
       });
@@ -925,7 +938,7 @@ export function NoteView({
       onBack();
     } catch (err) {
       toast({
-        title: "couldn't delete meeting",
+        title: u("deleteMeetingFailed"),
         description: String(err),
         variant: "destructive",
       });
@@ -975,7 +988,7 @@ export function NoteView({
       await updateSettings({ languages });
     } catch (err) {
       toast({
-        title: "couldn't update language",
+        title: u("languageFailed"),
         description: String(err),
         variant: "destructive",
       });
@@ -1043,12 +1056,12 @@ export function NoteView({
         console.warn("meeting notes: failed to refresh capture devices", refreshErr);
       }
       toast({
-        title: "microphone capture resumed",
-        description: "Transcript should start once speech is detected.",
+        title: u("micResumed"),
+        description: u("micResumedDescription"),
       });
     } catch (err) {
       toast({
-        title: "couldn't resume microphone",
+        title: u("micResumeFailed"),
         description: String(err),
         variant: "destructive",
       });
@@ -1063,7 +1076,7 @@ export function NoteView({
       setDismissedJoinUrl(link.url);
     } catch (err) {
       toast({
-        title: "couldn't open meeting",
+        title: u("openMeetingFailed"),
         description: String(err),
         variant: "destructive",
       });
@@ -1076,7 +1089,7 @@ export function NoteView({
         <div className="pointer-events-none absolute inset-0 z-50 flex items-center justify-center bg-background/60">
           <div className="border border-foreground bg-foreground px-12 py-10 text-background">
             <span className="text-sm font-medium tracking-tight">
-              drop image to add to note
+              {nv("dropImage")}
             </span>
           </div>
         </div>
@@ -1094,7 +1107,7 @@ export function NoteView({
             variant="ghost"
             size="sm"
             onClick={onBack}
-            title="back to meetings"
+            title={t("back")}
             className="h-9 w-9 p-0 rounded-none border border-border bg-background hover:bg-muted"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
@@ -1105,7 +1118,7 @@ export function NoteView({
               size="sm"
               onClick={handleCopy}
               disabled={copying}
-              title="copy meeting + transcript to clipboard"
+              title={t("copyMeeting")}
               className="h-8 w-8 p-0 rounded-none"
             >
               {copying ? (
@@ -1146,8 +1159,8 @@ export function NoteView({
                   size="sm"
                   onClick={() => void handleRetranscribe()}
                   disabled={retranscribing}
-                  title="retranscribe from saved audio"
-                  aria-label="retranscribe from saved audio"
+                  title={t("retranscribeSaved")}
+                  aria-label={t("retranscribeSaved")}
                   className="h-8 w-8 rounded-none p-0"
                 >
                   {retranscribing ? (
@@ -1161,8 +1174,8 @@ export function NoteView({
                   size="sm"
                   onClick={() => void handleExport()}
                   disabled={exporting}
-                  title="export meeting to mp4 (video + audio)"
-                  aria-label="export meeting to mp4"
+                  title={t("exportMp4")}
+                  aria-label={t("exportMp4")}
                   className="h-8 w-8 rounded-none p-0"
                 >
                   {exporting ? (
@@ -1180,7 +1193,7 @@ export function NoteView({
           <input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="untitled meeting"
+            placeholder={t("untitled")}
             spellCheck={false}
             className="w-full bg-transparent text-4xl font-medium leading-tight tracking-tight text-foreground focus:outline-none placeholder:text-muted-foreground/40 sm:text-5xl"
           />
@@ -1194,7 +1207,7 @@ export function NoteView({
               {isLive || !meetingEndClock ? (
                 <span className="inline-flex items-center gap-1 border border-foreground/15 bg-foreground/[0.03] px-1.5 py-0.5 text-[10px] font-medium leading-none text-foreground">
                   <span className="h-1.5 w-1.5 rounded-full bg-foreground animate-pulse" />
-                  ongoing
+                  {nv("ongoing")}
                 </span>
               ) : (
                 <>
@@ -1220,7 +1233,7 @@ export function NoteView({
             key={meeting.id}
             value={note}
             onChange={setNote}
-            placeholder={'write notes, or type "/" for blocks'}
+            placeholder={t("writeNotes")}
             className="mt-10 [&_.ProseMirror]:min-h-[50vh] [&_.ProseMirror]:text-[15px] [&_.ProseMirror]:leading-7"
           />
 
@@ -1312,7 +1325,11 @@ export function NoteView({
               <div className="min-w-0">
                 <div className="flex items-center gap-2 text-sm font-medium">
                   <span>
-                    {isLive ? (captureState?.label ?? "Recording") : "Meeting saved"}
+                    {isLive
+                      ? captureState
+                        ? localizedCaptureStateText(captureState, ct, "label")
+                        : ct("recording_label")
+                      : ct("idle_label")}
                   </span>
                 </div>
                 <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-muted-foreground">
@@ -1333,7 +1350,7 @@ export function NoteView({
                 size="sm"
                 onClick={() => setTranscriptOpen((v) => !v)}
                 className="h-9 w-9 rounded-none p-0"
-                title={transcriptOpen ? "hide transcript" : "show transcript"}
+                title={transcriptOpen ? t("hideTranscript") : t("showTranscript")}
                 aria-label={
                   transcriptOpen ? "hide transcript" : "show transcript"
                 }
@@ -1370,8 +1387,8 @@ export function NoteView({
                   onClick={() => void onResume()}
                   disabled={resuming}
                   className="h-9 w-9 rounded-none p-0"
-                  title="resume live transcription"
-                  aria-label="resume live transcription"
+                  title={t("resumeLive")}
+                  aria-label={t("resumeLive")}
                 >
                   {resuming ? (
                     <Loader2 className="h-3.5 w-3.5 animate-spin" />
@@ -1386,7 +1403,7 @@ export function NoteView({
                     <Button
                       variant="ghost"
                       size="sm"
-                      title="delete this meeting"
+                      title={t("deleteThis")}
                       className="h-9 w-9 p-0 rounded-none"
                     >
                       <Trash2 className="h-3.5 w-3.5 text-muted-foreground" />
@@ -1394,18 +1411,18 @@ export function NoteView({
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>
-                      <AlertDialogTitle>delete meeting</AlertDialogTitle>
+                  <AlertDialogTitle>{t("delete")}</AlertDialogTitle>
                       <AlertDialogDescription>
-                        your notes and transcript will be permanently deleted.
+                        {nv("deleteDescription")}
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogCancel>cancel</AlertDialogCancel>
+                  <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
                       <AlertDialogAction
                         variant="destructive"
                         onClick={() => void handleDelete()}
                       >
-                        delete
+                        {nv("delete")}
                       </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
@@ -1425,7 +1442,7 @@ export function NoteView({
                   ) : (
                     <Square className="h-3.5 w-3.5" />
                   )}
-                  stop
+                  {nv("stop")}
                 </Button>
               )}
             </div>
@@ -1433,7 +1450,7 @@ export function NoteView({
         </div>
         {isLive && (
           <div className="px-4 pb-1 text-center text-[10px] leading-none text-muted-foreground/60">
-            Always get consent when transcribing others.
+            {nv("consent")}
           </div>
         )}
       </footer>
@@ -1454,6 +1471,8 @@ function AudioHealthButton({
   englishOnly: boolean;
   onLanguagePreference: (languages: string[]) => void | Promise<void>;
 }) {
+  const t = useTranslations("meetings");
+  const nv = useTranslations("noteViewUi");
   const inputs = devices.filter((device) => device.kind === "input");
   const outputs = devices.filter((device) => device.kind === "output");
   const selectedDevices = (settings.audioDevices ?? []).filter(
@@ -1488,8 +1507,8 @@ function AudioHealthButton({
             "relative h-7 w-7 rounded-none p-0",
             open && "invisible",
           )}
-          title="audio health"
-          aria-label="audio health"
+          title={t("audioHealth")}
+          aria-label={t("audioHealth")}
         >
           <AudioLines className="h-3.5 w-3.5" />
           {anyAudioActive && (
@@ -1513,14 +1532,14 @@ function AudioHealthButton({
                 <span className="absolute bottom-1 right-1 h-1.5 w-1.5 rounded-full bg-foreground" />
               )}
             </span>
-            audio settings
+            {nv("audioSettings")}
           </div>
           <button
             type="button"
             onClick={openRecordingSettings}
             className="flex h-7 w-7 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
-            title="open recording settings"
-            aria-label="open recording settings"
+            title={t("openRecordingSettings")}
+            aria-label={t("openRecordingSettings")}
           >
             <ExternalLink className="h-3.5 w-3.5" />
           </button>
@@ -1529,12 +1548,12 @@ function AudioHealthButton({
         <div className="px-3 py-3">
           <AudioDeviceRow
             icon={<Mic2 className="h-3.5 w-3.5" />}
-            label="audio input"
+            label={t("audioInput")}
             value={audioDeviceLabel({
               devices: inputs,
               selectedDevices,
               useSystemDefault: settings.useSystemDefaultAudio !== false,
-              fallback: "system default microphone",
+              fallback: t("systemDefaultMicrophone"),
             })}
             active={
               isLive && !audioDisabled && (inputActive || inputs.length === 0)
@@ -1543,12 +1562,12 @@ function AudioHealthButton({
           />
           <AudioDeviceRow
             icon={<Volume2 className="h-3.5 w-3.5" />}
-            label="system audio"
+            label={t("systemAudio")}
             value={audioDeviceLabel({
               devices: outputs,
               selectedDevices,
               useSystemDefault: settings.useSystemDefaultAudio !== false,
-              fallback: "system output",
+              fallback: t("systemOutput"),
             })}
             active={
               isLive && !audioDisabled && (outputActive || outputs.length === 0)
@@ -1557,7 +1576,7 @@ function AudioHealthButton({
           />
 
           <div className="mt-3 grid grid-cols-[112px_minmax(0,1fr)] gap-x-3 gap-y-1.5 text-[11px] leading-tight">
-            <span className="text-muted-foreground">transcription engine</span>
+            <span className="text-muted-foreground">{t("transcriptionEngine")}</span>
             <span className="truncate">
               {liveEnabled
                 ? providerLabel(
@@ -1572,7 +1591,7 @@ function AudioHealthButton({
         <div className="flex items-center justify-between gap-3 border-t border-border px-3 py-2.5">
           <div className="flex min-w-0 items-center gap-2 text-xs text-muted-foreground">
             <Languages className="h-3.5 w-3.5 shrink-0" />
-            <span className="truncate">language</span>
+            <span className="truncate">{t("language")}</span>
           </div>
           <div className="inline-flex shrink-0 border border-border">
             <button
@@ -1585,7 +1604,7 @@ function AudioHealthButton({
                   : "text-muted-foreground",
               )}
             >
-              <span>english</span>
+              <span>{t("english")}</span>
               {englishOnly && <Check className="h-3 w-3" />}
             </button>
             <button
@@ -1598,7 +1617,7 @@ function AudioHealthButton({
                   : "text-muted-foreground",
               )}
             >
-              <span>auto</span>
+              <span>{t("auto")}</span>
               {!englishOnly && <Check className="h-3 w-3" />}
             </button>
           </div>
@@ -1620,7 +1639,9 @@ function JoinMeetingSuggestion({
   onJoin: () => void;
   onDismiss: () => void;
 }) {
-  const label = mapped ? link.label : "nearby calendar event — join the call?";
+  const t = useTranslations("meetings");
+  const cu = useTranslations("meetingUi3");
+  const label = mapped ? cu(`join_${link.provider}`) : t("nearbyEventJoin");
   return (
     <div className="mb-3 flex justify-center">
       <div className="inline-flex max-w-full items-center gap-1 rounded-full border border-border bg-muted px-1 py-1 shadow-sm">
@@ -1637,8 +1658,8 @@ function JoinMeetingSuggestion({
           type="button"
           onClick={onDismiss}
           className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-background hover:text-foreground"
-          aria-label="dismiss join suggestion"
-          title="dismiss"
+          aria-label={t("dismiss")}
+          title={t("dismiss")}
         >
           <X className="h-4 w-4" />
         </button>
@@ -1656,12 +1677,13 @@ function InactivityResumeBanner({
   onDismiss: () => void;
   onResume: () => void;
 }) {
+  const t = useTranslations("meetings");
   return (
     <div className="mb-3 flex items-center justify-between gap-3 border border-border bg-background px-3 py-2 shadow-sm">
       <div className="flex min-w-0 items-center gap-3">
         <Info className="h-4 w-4 shrink-0 text-muted-foreground" />
         <span className="text-sm leading-snug text-foreground">
-          Stopped transcribing after 15 minutes of inactivity
+          {t("inactivityStopped")}
         </span>
       </div>
       <div className="flex shrink-0 items-center gap-1">
@@ -1672,7 +1694,7 @@ function InactivityResumeBanner({
           className="h-8 rounded-none px-2 text-muted-foreground hover:text-foreground"
           onClick={onDismiss}
         >
-          dismiss
+          {t("dismiss")}
         </Button>
         <Button
           type="button"
@@ -1682,7 +1704,7 @@ function InactivityResumeBanner({
           onClick={onResume}
           disabled={resuming}
         >
-          {resuming ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : "resume"}
+          {resuming ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : t("resume")}
         </Button>
         <Button
           type="button"
@@ -1690,7 +1712,7 @@ function InactivityResumeBanner({
           size="sm"
           className="h-8 w-8 rounded-none p-0 text-muted-foreground hover:text-foreground sm:hidden"
           onClick={onDismiss}
-          aria-label="dismiss inactivity message"
+          aria-label={t("dismiss")}
         >
           <X className="h-3.5 w-3.5" />
         </Button>
@@ -1710,17 +1732,18 @@ function LiveCaptureIssueBanner({
   resuming: boolean;
   onResumeInput: () => void;
 }) {
+  const ct = useTranslations("captureUi");
   return (
     <div className="mb-3 flex items-center justify-between gap-3 border border-amber-500/30 bg-amber-500/10 px-3 py-2 shadow-sm">
       <div className="flex min-w-0 items-start gap-3">
         <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-amber-600 dark:text-amber-300" />
         <div className="min-w-0">
           <div className="text-sm font-medium leading-snug text-foreground">
-            {state.label}
+            {localizedCaptureStateText(state, ct, "label")}
           </div>
           <div className="mt-0.5 text-xs leading-5 text-muted-foreground">
-            {state.description}
-            {state.recordingContinues ? " Recording continues." : ""}
+            {localizedCaptureStateText(state, ct, "description")}
+            {state.recordingContinues ? ` ${ct("recordingContinues")}` : ""}
           </div>
         </div>
       </div>
@@ -1736,7 +1759,7 @@ function LiveCaptureIssueBanner({
           {resuming ? (
             <Loader2 className="h-3.5 w-3.5 animate-spin" />
           ) : (
-            "resume mic"
+            ct("resumeMic")
           )}
         </Button>
       )}
@@ -1827,11 +1850,12 @@ function Pill({
 }
 
 function SaveIndicator({ state }: { state: SaveState }) {
+  const t = useTranslations("meetings");
   if (state.kind === "saving") {
     return (
       <span className="flex items-center gap-1.5">
         <Loader2 className="h-3 w-3 animate-spin" />
-        saving…
+        {t("saving")}
       </span>
     );
   }
@@ -1839,12 +1863,12 @@ function SaveIndicator({ state }: { state: SaveState }) {
     return (
       <span className="flex items-center gap-1.5">
         <Check className="h-3 w-3" />
-        saved · {formatClock(new Date(state.at).toISOString())}
+        {t("saved")}{t("savedSeparator")}{formatClock(new Date(state.at).toISOString())}
       </span>
     );
   }
   if (state.kind === "error") {
-    return <span className="text-destructive">offline — will retry</span>;
+    return <span className="text-destructive">{t("offlineRetry")}</span>;
   }
   return <span aria-hidden>&nbsp;</span>;
 }

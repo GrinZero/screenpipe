@@ -7,6 +7,7 @@ import { Check, Download, LayoutTemplate } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getLiveViewTimeRangeOption } from "@/lib/live-views/time-range";
 import type { BrainViewTemplateKit } from "@/lib/utils/tauri";
+import { useTranslations } from "next-intl";
 
 export type TemplatePipeReadiness = {
   state: "none" | "partial" | "ready";
@@ -15,6 +16,15 @@ export type TemplatePipeReadiness = {
   missingPipes: BrainViewTemplateKit["pipes"];
   label: string;
   explanation: string;
+};
+
+const KIT_COPY_KEYS: Record<string, string> = {
+  "daily-memory": "dailyMemory",
+  "meeting-follow-through": "meetingFollowThrough",
+  "time-and-focus": "timeAndFocus",
+  "automation-finder": "automationFinder",
+  "ai-work-patterns": "aiWorkPatterns",
+  "standup-ready": "standupReady",
 };
 
 export function getTemplatePipeReadiness(
@@ -69,15 +79,18 @@ export function LiveViewTemplateGallery({
   installedPipeNames: Set<string>;
   onPreview: (kit: BrainViewTemplateKit) => void;
 }) {
+  const t = useTranslations("templateUi");
+  const rt = useTranslations("timeRangeUi");
+  const lv = useTranslations("liveViewUi");
+  const kt = useTranslations("liveViewTemplateUi");
   return (
     <section data-testid="live-view-template-gallery" className="w-full">
       <div className="mb-3 flex items-center gap-2">
         <LayoutTemplate className="h-4 w-4" />
         <div>
-          <h3 className="text-sm font-medium">Starter templates</h3>
+        <h3 className="text-sm font-medium">{t("starter")}</h3>
           <p className="text-[11px] text-muted-foreground">
-            Pick an outcome. Screenpipe sets up the dashboard and any built-in
-            helpers it needs.
+            {t("starterDescription")}
           </p>
         </div>
       </div>
@@ -92,14 +105,16 @@ export function LiveViewTemplateGallery({
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <h4 className="text-sm font-semibold">{kit.title}</h4>
+                  <h4 className="text-sm font-semibold">
+                    {KIT_COPY_KEYS[kit.id] ? kt(`${KIT_COPY_KEYS[kit.id]}.title`) : kit.title}
+                  </h4>
                   <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                    {kit.description}
+                    {KIT_COPY_KEYS[kit.id] ? kt(`${KIT_COPY_KEYS[kit.id]}.description`) : kit.description}
                   </p>
                 </div>
                 <span className="shrink-0 text-[10px] uppercase tracking-wide text-muted-foreground">
-                  {kit.slots.length} sections ·{" "}
-                  {getLiveViewTimeRangeOption(kit.timeRange).label}
+                  {kit.slots.length} {lv("sections")} ·{" "}
+                  {rt(`range_${getLiveViewTimeRangeOption(kit.timeRange).value}`)}
                 </span>
               </div>
               <div
@@ -111,11 +126,11 @@ export function LiveViewTemplateGallery({
                 ) : (
                   <Download className="h-3.5 w-3.5" />
                 )}
-                {readiness.label}
+                {readiness.state === "ready" ? t("ready") : readiness.state === "none" ? t("setsUp", { count: readiness.required, helper: t(readiness.required === 1 ? "helper" : "helpers") }) : t("partial", { installed: readiness.installed, required: readiness.required })}
               </div>
               <details className="mt-2 text-[10px] text-muted-foreground">
                 <summary className="cursor-pointer select-none hover:text-foreground">
-                  what powers this
+                  {t("powers")}
                 </summary>
                 <div className="mt-2 flex flex-wrap gap-1.5">
                   {kit.pipes.map((pipe) => {
@@ -138,7 +153,7 @@ export function LiveViewTemplateGallery({
               </details>
               <div className="mt-auto flex items-end justify-between gap-3 pt-4">
                 <span className="text-[10px] text-muted-foreground">
-                  Preview first, then apply.
+                  {lv("previewFirst")}
                 </span>
                 <Button
                   data-testid={`preview-live-view-template-${kit.id}`}
@@ -147,7 +162,7 @@ export function LiveViewTemplateGallery({
                   className="rounded-none"
                   onClick={() => onPreview(kit)}
                 >
-                  preview
+                  {lv("preview")}
                 </Button>
               </div>
             </article>

@@ -4,6 +4,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { AlertCircle, Loader2, LogOut, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -104,6 +105,8 @@ async function responseError(response: Response, fallback: string): Promise<stri
 }
 
 export function WhatsAppPanel() {
+  const cp = useTranslations("connectionPanelUi4");
+  const wu = useTranslations("whatsappUi");
   const [status, setStatus] = useState<PanelStatus>("idle");
   const [qr, setQr] = useState<string | null>(null);
   const [info, setInfo] = useState<{ name: string; phone: string } | null>(null);
@@ -307,15 +310,15 @@ export function WhatsAppPanel() {
   return (
     <div className="space-y-3">
       <p className="text-xs text-muted-foreground">
-        Connect your personal WhatsApp by scanning a QR code, just like WhatsApp Web.
+        {wu("description")}
       </p>
       <p className="text-xs text-destructive">
-        ⚠️ WhatsApp may ban accounts using unofficial integrations. Use at your own risk.
+        {wu("warning")}
       </p>
 
       {status === "idle" && (
         <Button onClick={() => void beginPairing()} size="sm" className="gap-1.5 h-7 text-xs normal-case font-sans tracking-normal">
-          pair with QR code
+          {wu("pairQr")}
         </Button>
       )}
 
@@ -323,39 +326,39 @@ export function WhatsAppPanel() {
         <div className="space-y-2">
           <div className="flex items-center gap-2 text-xs text-muted-foreground" role="status">
             <Loader2 className="h-3 w-3 animate-spin" />
-            {status === "reconnecting" ? message : "waiting for QR code…"}
+            {status === "reconnecting" ? message : wu("waitingQr")}
           </div>
           <Button onClick={() => void resetAndPair()} variant="ghost" size="sm" className="h-7 text-xs normal-case font-sans tracking-normal">
-            taking too long? reset and try again
+            {wu("resetSlow")}
           </Button>
         </div>
       )}
 
       {status === "pairing" && qr && (
         <div className="space-y-2">
-          <p className="text-xs text-muted-foreground">scan this QR code with your WhatsApp app:</p>
+          <p className="text-xs text-muted-foreground">{cp("scanQr")}</p>
           <div className="bg-white p-3 rounded-lg inline-block border dark:border-border">
             <Image
               src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qr)}`}
-              alt="WhatsApp QR Code"
+              alt={wu("qrAlt")}
               width={200}
               height={200}
               unoptimized
               className="w-[200px] h-[200px]"
             />
           </div>
-          <p className="text-xs text-muted-foreground">open WhatsApp &gt; linked devices &gt; link a device</p>
+          <p className="text-xs text-muted-foreground">{cp("whatsappLinkInstructions")}</p>
         </div>
       )}
 
       {status === "connected" && info && (
         <div className="space-y-2">
           <div className="p-3 bg-muted border border-border rounded-lg">
-            <p className="text-xs font-medium text-foreground">connected</p>
+            <p className="text-xs font-medium text-foreground">{cp("connected")}</p>
             <p className="text-xs text-muted-foreground">{info.name} ({info.phone})</p>
           </div>
           <Button onClick={() => void disconnect()} variant="outline" size="sm" className="gap-1.5 h-7 text-xs normal-case font-sans tracking-normal">
-            <LogOut className="h-3 w-3" /> disconnect
+            <LogOut className="h-3 w-3" /> {wu("disconnect")}
           </Button>
         </div>
       )}
@@ -367,14 +370,14 @@ export function WhatsAppPanel() {
             <p>{message}</p>
           </div>
           <Button onClick={() => void resetAndPair()} size="sm" className="gap-1.5 h-7 text-xs normal-case font-sans tracking-normal">
-            <RotateCcw className="h-3 w-3" /> reset session and pair again
+            <RotateCcw className="h-3 w-3" /> {wu("resetPair")}
           </Button>
         </div>
       )}
 
       {status === "resetting" && (
         <div className="flex items-center gap-2 text-xs text-muted-foreground" role="status">
-          <Loader2 className="h-3 w-3 animate-spin" /> resetting WhatsApp…
+          <Loader2 className="h-3 w-3 animate-spin" /> {wu("resetting")}
         </div>
       )}
 
@@ -383,10 +386,10 @@ export function WhatsAppPanel() {
           <p className="text-xs text-destructive" role="alert">{message}</p>
           <div className="flex flex-wrap gap-2">
             <Button onClick={() => void beginPairing()} variant="outline" size="sm" className="h-7 text-xs normal-case font-sans tracking-normal">
-              retry
+              {wu("retry")}
             </Button>
             <Button onClick={() => void resetAndPair()} variant="ghost" size="sm" className="h-7 text-xs normal-case font-sans tracking-normal">
-              reset session and retry
+              {wu("resetRetry")}
             </Button>
           </div>
         </div>

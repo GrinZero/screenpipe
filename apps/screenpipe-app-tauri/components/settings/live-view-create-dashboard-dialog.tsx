@@ -15,6 +15,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import type { AIPreset } from "@/lib/utils/tauri";
+import { useTranslations } from "next-intl";
 
 type LiveViewCreateDashboardDialogProps = {
   open: boolean;
@@ -35,6 +36,7 @@ export function LiveViewCreateDashboardDialog({
   onGenerate,
   onCreateBlank,
 }: LiveViewCreateDashboardDialogProps) {
+  const l4 = useTranslations("layoutUi4");
   const setOpen = (nextOpen: boolean) => {
     if (busy && !nextOpen) return;
     onOpenChange(nextOpen);
@@ -54,11 +56,10 @@ export function LiveViewCreateDashboardDialog({
       >
         <DialogHeader className="border-b border-border px-5 py-4 text-left">
           <DialogTitle className="flex items-center gap-2 text-base">
-            <LayoutDashboard className="h-4 w-4" /> new dashboard
+            <LayoutDashboard className="h-4 w-4" /> {l4("newDashboard")}
           </DialogTitle>
           <DialogDescription>
-            Describe the outcome you want. AI will design the Blocks and connect
-            the best available Pipes for you.
+            {l4("createDescription")}
           </DialogDescription>
         </DialogHeader>
 
@@ -77,7 +78,7 @@ export function LiveViewCreateDashboardDialog({
 
         <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border px-5 py-3">
           <p className="text-xs text-muted-foreground">
-            Prefer to configure every Block yourself?
+            {l4("configureEveryBlock")}
           </p>
           <Button
             data-testid="live-view-create-blank"
@@ -88,7 +89,7 @@ export function LiveViewCreateDashboardDialog({
             disabled={busy}
             onClick={onCreateBlank}
           >
-            start with a blank dashboard
+            {l4("blankDashboard")}
           </Button>
         </div>
       </DialogContent>

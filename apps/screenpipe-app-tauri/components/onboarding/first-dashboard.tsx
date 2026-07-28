@@ -11,6 +11,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { useTranslations } from "next-intl";
 import posthog from "posthog-js";
 import { useOnboarding } from "@/lib/hooks/use-onboarding";
 import { useSettings } from "@/lib/hooks/use-settings";
@@ -101,6 +102,7 @@ function displayPipeName(slug: string): string {
 }
 
 function ScreenpipeBuildVisual({ currentIndex }: { currentIndex: number }) {
+  const b3 = useTranslations("onboardingBuild3");
   const filledBlocks = Math.min(4, Math.max(0, currentIndex));
 
   return (
@@ -152,15 +154,20 @@ function ScreenpipeBuildVisual({ currentIndex }: { currentIndex: number }) {
         data-testid="onboarding-build-captions"
         className="absolute inset-x-3 bottom-3 grid grid-cols-[72px_minmax(0,1fr)_80px] items-center font-mono text-[8px] lowercase tracking-[0.18em] text-muted-foreground"
       >
-        <span className="text-left">context</span>
+        <span className="text-left">{b3("context")}</span>
         <span className="text-center">screenpipe</span>
-        <span className="text-right">Live View</span>
+        <span className="text-right">{b3("liveView")}</span>
       </div>
     </div>
   );
 }
 
 export default function FirstDashboard() {
+  const t = useTranslations("onboarding");
+  const b = useTranslations("onboardingBuild");
+  const b2 = useTranslations("onboardingBuild2");
+  const b3 = useTranslations("onboardingBuild3");
+  const b4 = useTranslations("onboardingBuild4");
   const { completeOnboarding } = useOnboarding();
   const { settings, updateSettings, isSettingsLoaded } = useSettings();
   const [goal, setGoal] = useState("");
@@ -374,7 +381,7 @@ export default function FirstDashboard() {
       latestStageRef.current = null;
       setIsContinuingWithoutWaiting(false);
       setStage(null);
-      setError("Could not finish setup. Try again.");
+      setError(b2("finishFailed"));
     }
   }, [canContinueWithoutWaiting, completeOnboarding, goalCategory, stage]);
 
@@ -403,10 +410,10 @@ export default function FirstDashboard() {
     return (
       <div className="flex flex-col items-center py-3">
         <h2 className="font-mono text-lg font-semibold lowercase">
-          building your first Live View
+          {b2("building")}
         </h2>
         <p className="mt-2 max-w-sm text-center font-mono text-[11px] leading-relaxed text-muted-foreground">
-          local context in. a useful view out.
+          {b2("tagline")}
         </p>
 
         <div className="mt-7 w-full max-w-sm border border-border p-4">
@@ -416,10 +423,10 @@ export default function FirstDashboard() {
             <div role="status" aria-live="polite" className="min-w-0">
               <div className="flex items-center gap-2 font-mono text-xs text-foreground">
                 <span className="sp-onboarding-cursor inline-block h-3 w-[3px] bg-foreground" />
-                <span>{currentStep.label}</span>
+                <span>{b(currentStep.stage === "planning" ? "planning" : currentStep.stage === "plan_ready" ? "planReady" : currentStep.stage === "installing" ? "installing" : currentStep.stage === "saving" ? "saving" : "refreshing")}</span>
               </div>
               <p className="mt-1.5 font-mono text-[9px] leading-relaxed text-muted-foreground">
-                {currentStep.detail}
+                {b(`${currentStep.stage === "planning" ? "planning" : currentStep.stage === "plan_ready" ? "planReady" : currentStep.stage === "installing" ? "installing" : currentStep.stage === "saving" ? "saving" : "refreshing"}Detail` as any)}
               </p>
             </div>
             <span className="shrink-0 font-mono text-[9px] tabular-nums text-muted-foreground">
@@ -433,7 +440,7 @@ export default function FirstDashboard() {
 
           <div
             className="mt-4 grid grid-cols-5 gap-1"
-            aria-label={`step ${Math.min(currentIndex + 1, BUILD_STEPS.length)} of ${BUILD_STEPS.length}`}
+            aria-label={b2("stepOf", { step: Math.min(currentIndex + 1, BUILD_STEPS.length), total: BUILD_STEPS.length })}
           >
             {BUILD_STEPS.map((step, index) => (
               <span
@@ -447,7 +454,7 @@ export default function FirstDashboard() {
 
           {selectedPipes.length > 0 && (
             <div className="mt-4 border-t border-border pt-3 font-mono text-[10px] text-muted-foreground">
-              <span className="mr-2 lowercase tracking-wide">using</span>
+              <span className="mr-2 lowercase tracking-wide">{b3("using")}</span>
               {selectedPipes.map(displayPipeName).join(" + ")}
             </div>
           )}
@@ -455,7 +462,7 @@ export default function FirstDashboard() {
           {canContinueWithoutWaiting && (
             <div className="mt-4 border-t border-border pt-3">
               <p className="font-mono text-[9px] leading-relaxed text-muted-foreground">
-                your Live View is saved. open it now and finish setup there.
+                {b3("liveViewSaved")}
               </p>
               <button
                 type="button"
@@ -464,8 +471,8 @@ export default function FirstDashboard() {
                 className="mt-2 w-full border border-foreground px-3 py-2 font-mono text-[10px] uppercase tracking-wide text-foreground transition-colors hover:bg-foreground hover:text-background disabled:cursor-not-allowed disabled:opacity-40"
               >
                 {isContinuingWithoutWaiting
-                  ? "opening Brain..."
-                  : "continue to my Live View"}
+                  ? b3("openingBrain")
+                  : b3("continueLiveView")}
               </button>
             </div>
           )}
@@ -478,11 +485,10 @@ export default function FirstDashboard() {
     <div className="flex flex-col items-center py-2">
       <div className="w-full max-w-sm">
         <h2 className="text-center font-mono text-lg font-semibold lowercase">
-          what should screenpipe help you do first?
+          {b3("whatShouldHelpFirst")}
         </h2>
         <p className="mx-auto mt-2 max-w-xs text-center font-mono text-[11px] leading-relaxed text-muted-foreground">
-          choose one useful outcome. screenpipe will set up a Live View that
-          starts with real activity, never sample data.
+          {b3("chooseOutcome")}
         </p>
 
         <div className="mt-5 space-y-2">
@@ -505,14 +511,14 @@ export default function FirstDashboard() {
                 }`}
               >
                 <span className="block font-mono text-xs font-semibold">
-                  {suggestion.title}
+                  {b4(`goal_${suggestion.category}_title`)}
                 </span>
                 <span
                   className={`mt-1 block font-mono text-[10px] ${
                     selected ? "text-background/70" : "text-muted-foreground"
                   }`}
                 >
-                  {suggestion.description}
+                  {b4(`goal_${suggestion.category}_description`)}
                 </span>
               </button>
             );
@@ -520,12 +526,12 @@ export default function FirstDashboard() {
         </div>
 
         <label className="mt-4 block font-mono text-[10px] lowercase text-muted-foreground">
-          or describe your own
+          {t("describeYourOwn")}
           <textarea
             value={goalCategory === "custom" ? goal : ""}
             maxLength={240}
             rows={2}
-            placeholder="e.g. show how I spend time across projects"
+            placeholder={t("goalPlaceholder")}
             onChange={(event) => {
               setGoal(event.target.value);
               setGoalCategory("custom");
@@ -550,14 +556,14 @@ export default function FirstDashboard() {
           disabled={!goal.trim() || !isSettingsLoaded}
           className="mt-4 w-full border border-foreground bg-foreground px-3 py-3 font-mono text-xs font-semibold uppercase tracking-wide text-background transition-colors hover:bg-background hover:text-foreground disabled:cursor-not-allowed disabled:opacity-35"
         >
-          {isSettingsLoaded ? "build my first Live View" : "loading AI"}
+          {isSettingsLoaded ? b3("buildFirstLiveView") : b3("loadingAi")}
         </button>
         <button
           type="button"
           onClick={handleSkip}
           className="mt-3 w-full py-1 font-mono text-[10px] text-muted-foreground transition-colors hover:text-foreground"
         >
-          skip for now
+          {b3("skipForNow")}
         </button>
       </div>
     </div>

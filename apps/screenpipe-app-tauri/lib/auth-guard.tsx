@@ -5,6 +5,7 @@
 "use client";
 
 import React, { useEffect, useRef, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { useSettings } from "@/lib/hooks/use-settings";
 import { toast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
@@ -47,19 +48,24 @@ function openLogin() {
   });
 }
 
-function showSignedOutToast() {
+function showSignedOutToast(messages = {
+  title: "session expired",
+  description: "sign in again before recording can continue.",
+  action: "Sign in to screenpipe",
+  signIn: "sign in",
+}) {
   const now = Date.now();
   if (now - lastToastTime < TOAST_COOLDOWN_MS) return;
   lastToastTime = now;
 
   toast({
-    title: "session expired",
-    description: "sign in again before recording can continue.",
+    title: messages.title,
+    description: messages.description,
     variant: "destructive",
     duration: 30000,
     action: (
-      <ToastAction altText="Sign in to screenpipe" onClick={openLogin}>
-        sign in
+      <ToastAction altText={messages.action} onClick={openLogin}>
+        {messages.signIn}
       </ToastAction>
     ),
   });
@@ -165,6 +171,7 @@ export function isScreenpipeAuthApi(
 }
 
 export function AuthGuard({ children }: { children: React.ReactNode }) {
+  const t = useTranslations("authGuardUi");
   const { settings, updateSettings, loadUser } = useSettings();
   const tokenRef = useRef(settings.user?.token);
   tokenRef.current = settings.user?.token;
@@ -187,9 +194,9 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
       try {
         await commands.setCloudToken(null);
       } catch {}
-      showSignedOutToast();
+      showSignedOutToast({ title: t("sessionExpired"), description: t("description"), action: t("signInAction"), signIn: t("signIn") });
     },
-    [updateSettings],
+    [updateSettings, t],
   );
 
   const lastVerifyAtRef = useRef(0);
@@ -261,7 +268,8 @@ let _patched = false;
 
 export function installAuthInterceptor(
   getToken: () => string | undefined,
-  clearSession: () => Promise<void>
+  clearSession: () => Promise<void>,
+  messages?: Parameters<typeof showSignedOutToast>[0],
 ) {
   if (_patched || typeof window === "undefined") return;
   _patched = true;
@@ -305,7 +313,7 @@ export function installAuthInterceptor(
           api_path: apiPath,
         });
         await clearSession();
-        showSignedOutToast();
+        showSignedOutToast(messages);
       }
     }
 

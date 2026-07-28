@@ -4,6 +4,7 @@
 "use client";
 
 import { X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { getApiBaseUrl, appendAuthToken } from "@/lib/api";
 import type { PrefillComposerProps } from "./composer-types";
 
@@ -12,6 +13,7 @@ export function PrefillContextBanner({
 }: {
   prefill: PrefillComposerProps;
 }) {
+  const t = useTranslations("prefillUi");
   if (!prefill.context && !prefill.frameId) return null;
 
   return (
@@ -23,7 +25,7 @@ export function PrefillContextBanner({
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={appendAuthToken(`${getApiBaseUrl()}/frames/${prefill.frameId}`)}
-                alt="Attached frame"
+                alt={t("attachedFrame")}
                 className="w-16 h-12 object-cover rounded border border-border/50"
               />
               <button
@@ -39,8 +41,10 @@ export function PrefillContextBanner({
         {prefill.context && (
           <div className="flex-1 min-w-0">
             <div className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mb-1">
-              context from{" "}
-              {prefill.source === "timeline" ? "timeline selection" : "search"}
+              {t("contextFrom")}{" "}
+              {prefill.source === "timeline"
+                ? t("timelineSelection")
+                : t("search")}
             </div>
             <p className="text-xs text-foreground font-mono line-clamp-2">
               {prefill.context.slice(0, 150)}

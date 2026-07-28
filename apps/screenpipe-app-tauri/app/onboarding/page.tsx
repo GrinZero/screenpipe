@@ -16,6 +16,7 @@ import { useManagedPolicy } from "@/lib/hooks/use-managed-policy";
 import { EnterpriseLicensePrompt } from "@/components/enterprise-license-prompt";
 import posthog from "posthog-js";
 import { commands } from "@/lib/utils/tauri";
+import { useTranslations } from "next-intl";
 
 type SlideKey =
   | "login"
@@ -54,12 +55,23 @@ const EndowedProgress = ({
   total: number;
   sub?: { done: number; total: number } | null;
 }) => (
-  <div className="w-full max-w-sm mx-auto mb-[22px]">
+  <EndowedProgressContent step={step} total={total} sub={sub} />
+);
+
+const EndowedProgressContent = ({
+  step,
+  total,
+  sub,
+}: {
+  step: number;
+  total: number;
+  sub?: { done: number; total: number } | null;
+}) => {
+  const t = useTranslations("common");
+  return <div className="w-full max-w-sm mx-auto mb-[22px]">
     <div className="flex justify-between font-mono text-[9px] lowercase tracking-[0.04em] text-muted-foreground mb-[5px]">
-      <span>setup</span>
-      <span>
-        {step} of {total}
-      </span>
+      <span>{t("setup")}</span>
+      <span>{t("stepOf", { step, total })}</span>
     </div>
     <div className="flex gap-[3px]">
       {Array.from({ length: total }, (_, i) =>
@@ -92,9 +104,8 @@ const EndowedProgress = ({
         )
       )}
     </div>
-  </div>
-);
-
+  </div>;
+};
 const setWindowSizeForSlide = async (slide: SlideKey) => {
   try {
     const { width, height } = SLIDE_WINDOW_SIZES[slide];
@@ -105,6 +116,7 @@ const setWindowSizeForSlide = async (slide: SlideKey) => {
 };
 
 export default function OnboardingPage() {
+  const t = useTranslations("common");
   const { toast } = useToast();
   const [currentSlide, setCurrentSlide] = useState<SlideKey>("login");
   const [isVisible, setIsVisible] = useState(true);
@@ -312,9 +324,9 @@ export default function OnboardingPage() {
             isManagedDeployment ? (
               authenticationState === "license_key" ? (
                 <div className="mx-auto w-full max-w-sm">
-                  <h2 className="mb-1 text-lg font-semibold">activate this device</h2>
+                  <h2 className="mb-1 text-lg font-semibold">{t("activateDevice")}</h2>
                   <p className="mb-4 text-sm text-muted-foreground">
-                    enter the enterprise key provided by your administrator
+                    {t("enterpriseKeyDesc")}
                   </p>
                   <EnterpriseLicensePrompt
                     embedded
@@ -340,7 +352,7 @@ export default function OnboardingPage() {
                       onClick={() => selectAuthenticationMethod("license_key")}
                       className="mt-3 font-mono text-xs text-muted-foreground/70 underline underline-offset-4 decoration-muted-foreground/40 transition-colors hover:text-foreground hover:decoration-foreground"
                     >
-                      use enterprise key
+                      {t("useEnterpriseKey")}
                     </button>
                   )}
                 </div>

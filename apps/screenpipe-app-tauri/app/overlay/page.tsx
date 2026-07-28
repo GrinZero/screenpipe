@@ -38,6 +38,7 @@ import SplashScreen from "@/components/splash-screen";
 import { useTimelineStore } from "@/lib/hooks/use-timeline-store";
 import { hasCachedData } from "@/lib/hooks/use-timeline-cache";
 import { screenpipeWebBase } from "@/lib/web-url";
+import { useTranslations } from "next-intl";
 
 function TimelineErrorFallback({
   error,
@@ -47,21 +48,22 @@ function TimelineErrorFallback({
   onRetry: () => void;
 }) {
   const openFeedback = useFeedbackStore((s) => s.openFeedback);
+  const t = useTranslations("overlay");
   return (
     <div className="flex items-center justify-center h-screen bg-background">
       <div className="text-center space-y-4 max-w-md">
-        <p className="text-lg font-medium">timeline crashed</p>
+        <p className="text-lg font-medium">{t("timelineCrashed")}</p>
         <p className="text-sm text-muted-foreground">{error?.message}</p>
         <div className="flex gap-2 justify-center">
           <Button onClick={onRetry} variant="outline">
             <RefreshCw className="h-4 w-4 mr-2" />
-            retry
+            {t("retry")}
           </Button>
           <Button
             variant="outline"
             onClick={() => openFeedback(`Timeline crashed: ${error?.message || "unknown error"}`)}
           >
-            report crash
+            {t("reportCrash")}
           </Button>
         </div>
       </div>
@@ -100,6 +102,9 @@ class TimelineErrorBoundary extends React.Component<
 }
 
 export default function OverlayPage() {
+  const t = useTranslations("overlay");
+  const u = useTranslations("residualUi");
+  const o2 = useTranslations("overlayUi2");
   const { settings, updateSettings, loadUser, reloadStore, isSettingsLoaded, loadingError } = useSettings();
   const { toast } = useToast();
   const openFeedback = useFeedbackStore((s) => s.openFeedback);
@@ -311,8 +316,8 @@ export default function OverlayPage() {
     setIsRestarting(true);
     try {
       toast({
-        title: "restarting server",
-        description: "stopping screenpipe server...",
+        title: u("restartingServer"),
+        description: o2("stoppingServer"),
         duration: 3000,
       });
 
@@ -323,8 +328,8 @@ export default function OverlayPage() {
       await new Promise(resolve => setTimeout(resolve, 2000));
       
       toast({
-        title: "restarting server",
-        description: "starting screenpipe server...",
+        title: u("restartingServer"),
+        description: o2("startingServer"),
         duration: 3000,
       });
 
@@ -332,23 +337,23 @@ export default function OverlayPage() {
       await commands.spawnScreenpipe(null);
       
       toast({
-        title: "server restarted",
-        description: "screenpipe server has been restarted successfully.",
+        title: u("serverRestarted"),
+        description: o2("serverRestartedDescription"),
         duration: 3000,
       });
     } catch (error) {
       console.error("failed to restart server:", error);
       toast({
-        title: "restart failed",
+        title: u("restartFailed"),
         description: (
           <span>
-            failed to restart screenpipe server.{" "}
+            {o2("restartFailedDescription")} {" "}
             <button
               type="button"
               className="underline underline-offset-2 text-inherit opacity-80 hover:opacity-100"
               onClick={() => openFeedback(`Server restart failed: ${error instanceof Error ? error.message : String(error)}`)}
             >
-              report issue
+              {o2("reportIssue")}
             </button>
           </span>
         ),
@@ -389,7 +394,7 @@ export default function OverlayPage() {
               {hasAnyData && !isConnected && isServerDown && (
                 <div className="fixed top-10 right-4 z-50 flex items-center gap-2 px-3 py-1.5 bg-muted/90 backdrop-blur-sm rounded-full text-xs text-muted-foreground border">
                   <WifiOff className="h-3 w-3" />
-                  <span>reconnecting...</span>
+                  <span>{t("reconnecting")}</span>
                 </div>
               )}
               
@@ -398,7 +403,7 @@ export default function OverlayPage() {
                 <div className="absolute inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
                   <div className="flex flex-col items-center gap-3">
                     <RefreshCw className="h-6 w-6 animate-spin text-muted-foreground" />
-                    <p className="text-sm text-muted-foreground">connecting to screenpipe...</p>
+                    <p className="text-sm text-muted-foreground">{t("connecting")}</p>
                   </div>
                 </div>
               )}
@@ -416,9 +421,9 @@ export default function OverlayPage() {
                       <AlertTriangle className="w-8 h-8 text-destructive" />
                     </div>
                     <div>
-                      <h2 className="text-2xl font-bold">Server Not Active</h2>
+                      <h2 className="text-2xl font-bold">{t("serverNotActive")}</h2>
                       <p className="text-muted-foreground mt-2">
-                        The screenpipe server is not running. Start the server or check permissions to continue.
+                        {t("serverNotRunning")}
                       </p>
                     </div>
                   </div>
@@ -430,9 +435,9 @@ export default function OverlayPage() {
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="font-semibold">Server Control</h3>
+                        <h3 className="font-semibold">{t("serverControl")}</h3>
                         <p className="text-sm text-muted-foreground">
-                          Start or restart the screenpipe server
+                          {t("startOrRestart")}
                         </p>
                       </div>
                       <Button
@@ -441,7 +446,7 @@ export default function OverlayPage() {
                         className="flex items-center gap-2"
                       >
                         <RefreshCw className={`h-4 w-4 ${isRestarting ? 'animate-spin' : ''}`} />
-                        {isRestarting ? "Starting..." : "Start Server"}
+                        {isRestarting ? t("starting") : t("startServer")}
                       </Button>
                     </div>
                   </div>
@@ -452,18 +457,18 @@ export default function OverlayPage() {
                       <Separator />
                       <div className="space-y-4">
                         <div>
-                          <h3 className="font-semibold">System Permissions</h3>
+                          <h3 className="font-semibold">{t("systemPermissions")}</h3>
                           <p className="text-sm text-muted-foreground">
-                            Ensure screenpipe has the necessary permissions to function properly
+                            {t("permissionsDesc")}
                           </p>
                         </div>
                         <div className="space-y-3">
                           <div className="flex items-center justify-between">
-                            <span className="text-sm font-medium">Screen Recording</span>
+                            <span className="text-sm font-medium">{t("screenRecording")}</span>
                             <PermissionButtons type="screen" hideWindowOnClick />
                           </div>
                           <div className="flex items-center justify-between">
-                            <span className="text-sm font-medium">Audio Recording</span>
+                            <span className="text-sm font-medium">{t("audioRecording")}</span>
                             <PermissionButtons type="audio" hideWindowOnClick />
                           </div>
 
@@ -489,7 +494,7 @@ export default function OverlayPage() {
                     ) : (
                       <Upload className="h-4 w-4 mr-1.5" />
                     )}
-                    {logsSent ? "logs sent" : isSendingLogs ? "sending..." : "send logs"}
+                    {logsSent ? t("logsSent") : isSendingLogs ? t("sending") : t("sendLogs")}
                   </Button>
                   <Button
                     variant="outline"
@@ -498,7 +503,7 @@ export default function OverlayPage() {
                     className="text-muted-foreground"
                   >
                     <Calendar className="h-4 w-4 mr-1.5" />
-                    schedule call
+                    {t("scheduleCall")}
                   </Button>
                   <Button
                     variant="outline"
@@ -507,7 +512,7 @@ export default function OverlayPage() {
                     className="text-muted-foreground"
                   >
                     <X className="h-4 w-4 mr-1.5" />
-                    close
+                    {t("close")}
                   </Button>
                 </div>
               </div>
@@ -517,7 +522,7 @@ export default function OverlayPage() {
             <div className="flex items-center justify-center h-screen">
               <div className="flex flex-col items-center gap-3">
                 <RefreshCw className="h-6 w-6 animate-spin text-muted-foreground" />
-                <p className="text-sm text-muted-foreground">starting up...</p>
+                <p className="text-sm text-muted-foreground">{t("startingUp")}</p>
               </div>
             </div>
           )}

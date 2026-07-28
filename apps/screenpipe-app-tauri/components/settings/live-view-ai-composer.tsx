@@ -4,6 +4,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { ArrowUp, Loader2, Sparkles } from "lucide-react";
 import { AIPresetsSelector } from "@/components/rewind/ai-presets-selector";
 import { Button } from "@/components/ui/button";
@@ -68,6 +69,8 @@ export function LiveViewAiComposer({
   onSelectedPresetIdChange,
   onGenerate,
 }: LiveViewAiComposerProps) {
+  const t = useTranslations("dashboard");
+  const lv = useTranslations("liveViewUi");
   const { settings } = useSettings();
   const presets = useMemo(
     () => (settings.aiPresets ?? []) as AIPreset[],
@@ -123,7 +126,7 @@ export function LiveViewAiComposer({
         <div className="flex items-center gap-2 border-b border-border px-4 py-3">
           <Sparkles className="h-3.5 w-3.5" />
           <p className="text-xs font-medium">
-            What should this Live View show?
+            {lv("whatShouldShow")}
           </p>
         </div>
       )}
@@ -137,8 +140,8 @@ export function LiveViewAiComposer({
         className="min-h-16 resize-none rounded-none border-0 px-4 py-3 text-sm shadow-none focus-visible:ring-0"
         placeholder={
           compact
-            ? "Ask AI to change this Live View..."
-            : "For example: show how I spend my time and what changed this week"
+            ? t("askAiChange")
+            : t("askAiExample")
         }
         onChange={(event) => setPrompt(event.target.value)}
         onKeyDown={(event) => {
@@ -179,7 +182,7 @@ export function LiveViewAiComposer({
           {busy ? (
             <>
               <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />
-              <span>creating</span>
+              <span>{t("creating")}</span>
             </>
           ) : (
             <>

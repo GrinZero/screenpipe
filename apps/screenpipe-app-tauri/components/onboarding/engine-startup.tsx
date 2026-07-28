@@ -24,6 +24,7 @@ import {
 } from "@tauri-apps/plugin-os";
 import { ParticleStream, ProgressSteps } from "./particle-stream";
 import { screenpipeWebBase } from "@/lib/web-url";
+import { useTranslations } from "next-intl";
 
 interface EngineStartupProps {
   handleNextSlide: () => void;
@@ -77,6 +78,8 @@ async function isEngineHealthResponse(response: Response): Promise<boolean> {
 }
 
 export default function EngineStartup({ handleNextSlide }: EngineStartupProps) {
+  const t = useTranslations("engineStartupUi");
+  const eu = useTranslations("onboardingEngineUi");
   const [state, setState] = useState<StartupState>("starting");
   const [serverStarted, setServerStarted] = useState(false);
   const [audioReady, setAudioReady] = useState(false);
@@ -501,14 +504,14 @@ export default function EngineStartup({ handleNextSlide }: EngineStartupProps) {
   };
 
   const progressSteps = [
-    { label: "engine", done: serverStarted, active: !serverStarted },
+    { label: t("engine"), done: serverStarted, active: !serverStarted },
     {
-      label: "audio",
+      label: t("audio"),
       done: audioReady,
       active: serverStarted && !audioReady,
     },
     {
-      label: "vision",
+      label: t("vision"),
       done: visionReady,
       active: serverStarted && !visionReady && audioReady,
     },
@@ -554,7 +557,7 @@ export default function EngineStartup({ handleNextSlide }: EngineStartupProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              {bootPhase?.message ?? "starting engine..."}
+              {bootPhase?.message ?? t("startingEngine")}
             </motion.p>
           )}
         </AnimatePresence>
@@ -573,7 +576,7 @@ export default function EngineStartup({ handleNextSlide }: EngineStartupProps) {
               {spawnErrorKind === "port_conflict" ? (
                 <>
                   <p className="font-mono text-sm text-foreground text-center">
-                    port conflict — cannot start recording.
+                    {t("portConflict")}
                   </p>
                   <p className="font-mono text-[11px] text-muted-foreground text-center leading-relaxed break-words">
                     {spawnError}
@@ -606,7 +609,7 @@ export default function EngineStartup({ handleNextSlide }: EngineStartupProps) {
                       }}
                       className="font-mono text-xs h-8 px-3"
                     >
-                      retry
+                      {t("retry")}
                     </Button>
                     <Button
                       variant="outline"
@@ -614,7 +617,7 @@ export default function EngineStartup({ handleNextSlide }: EngineStartupProps) {
                       onClick={handleContinueWithoutRecording}
                       className="font-mono text-xs h-8 px-3"
                     >
-                      continue without recording
+                      {t("continueWithoutRecording")}
                     </Button>
                   </div>
                   <div className="flex items-center gap-3">
@@ -624,7 +627,7 @@ export default function EngineStartup({ handleNextSlide }: EngineStartupProps) {
                       onClick={openLogsFolder}
                       className="font-mono text-[10px] h-7 px-2"
                     >
-                      logs
+                      {t("logs")}
                     </Button>
                     <Button
                       variant="outline"
@@ -634,24 +637,21 @@ export default function EngineStartup({ handleNextSlide }: EngineStartupProps) {
                       }
                       className="font-mono text-[10px] h-7 px-2"
                     >
-                      <Calendar className="w-3 h-3 mr-1" /> help
+                      <Calendar className="w-3 h-3 mr-1" /> {t("help")}
                     </Button>
                   </div>
                 </>
               ) : spawnErrorKind === "permission" ? (
                 <>
                   <p className="font-mono text-sm text-foreground text-center">
-                    screen recording permission is required.
+                    {t("permissionRequired")}
                   </p>
                   <p className="font-mono text-[11px] text-muted-foreground text-center leading-relaxed">
-                    macOS tracks this permission per app signature. if you
-                    switched between prod / beta / dev builds, your previous
-                    grant doesn&apos;t carry over — each bundle id has its own
-                    record.
+                    {eu("permissionDescription")}
                   </p>
                   {bundleId && (
                     <p className="font-mono text-[10px] text-muted-foreground/60 text-center">
-                      currently running as:{" "}
+                      {eu("runningAs")} {" "}
                       <span className="text-foreground/80">{bundleId}</span>
                     </p>
                   )}
@@ -663,7 +663,7 @@ export default function EngineStartup({ handleNextSlide }: EngineStartupProps) {
                       }
                       className="font-mono text-xs h-8 px-3"
                     >
-                      open system settings →
+                    {t("openSystemSettings")}
                     </Button>
                     <Button
                       variant="outline"
@@ -675,31 +675,31 @@ export default function EngineStartup({ handleNextSlide }: EngineStartupProps) {
                       {isResettingPerm ? (
                         <Loader className="w-3 h-3 animate-spin" />
                       ) : (
-                        "reset & re-request"
+                        t("resetPermission")
                       )}
                     </Button>
                   </div>
                   <button
                     onClick={() =>
-                      openUrl("https://docs.screenpi.pe/permissions")
+                      openUrl("https://screenpipe.com/docs/permissions")
                     }
                     className="font-mono text-[10px] text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4"
                   >
-                    troubleshooting guide ↗
+                    {t("troubleshootingGuide")}
                   </button>
                 </>
               ) : (
                 spawnError && (
                   <>
                     <p className="font-mono text-sm text-foreground text-center">
-                      engine failed to start.
+                      {t("engineFailed")}
                     </p>
                     <p className="font-mono text-[11px] text-muted-foreground text-center leading-relaxed break-words">
                       {spawnError}
                     </p>
                     {bundleId && (
                       <p className="font-mono text-[10px] text-muted-foreground/60 text-center">
-                        running as:{" "}
+                        {t("runningAs")}:{" "}
                         <span className="text-foreground/80">{bundleId}</span>
                       </p>
                     )}
@@ -710,7 +710,7 @@ export default function EngineStartup({ handleNextSlide }: EngineStartupProps) {
                 onClick={handleSkip}
                 className="font-mono text-xs text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4"
               >
-                continue without recording →
+                {t("continueWithoutRecordingArrow")}
               </button>
               <div className="flex items-center gap-3">
                 <Button
@@ -719,7 +719,7 @@ export default function EngineStartup({ handleNextSlide }: EngineStartupProps) {
                   onClick={openLogsFolder}
                   className="font-mono text-[10px] h-7 px-2"
                 >
-                  logs
+                  {t("logs")}
                 </Button>
                 <Button
                   variant="outline"
@@ -732,11 +732,11 @@ export default function EngineStartup({ handleNextSlide }: EngineStartupProps) {
                     <Loader className="w-3 h-3 animate-spin" />
                   ) : logsSent ? (
                     <>
-                      <Check className="w-3 h-3 mr-1" /> sent
+                      <Check className="w-3 h-3 mr-1" /> {t("sent")}
                     </>
                   ) : (
                     <>
-                      <Upload className="w-3 h-3 mr-1" /> send logs
+                      <Upload className="w-3 h-3 mr-1" /> {t("sendLogs")}
                     </>
                   )}
                 </Button>
@@ -748,7 +748,7 @@ export default function EngineStartup({ handleNextSlide }: EngineStartupProps) {
                   }
                   className="font-mono text-[10px] h-7 px-2"
                 >
-                  <Calendar className="w-3 h-3 mr-1" /> help
+                  <Calendar className="w-3 h-3 mr-1" /> {t("help")}
                 </Button>
               </div>
             </motion.div>

@@ -4,6 +4,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { useInterval } from "@/lib/hooks/use-interval";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -44,6 +45,7 @@ export function RecentChatSwitcher({
   onHoverSelect,
 }: RecentChatSwitcherProps) {
   const hasSessions = sessions.length > 0;
+  const t = useTranslations("residualUi5");
   const now = useMinuteTick(open);
   const listRef = useRef<HTMLDivElement | null>(null);
 
@@ -78,11 +80,11 @@ export function RecentChatSwitcher({
           >
             {hasSessions ? (
               <div className="px-4 pb-1.5 pt-3 text-[12px] font-normal text-muted-foreground/70">
-                Recently viewed
+                {t("recentlyViewed")}
               </div>
             ) : (
               <div className="px-4 pb-1.5 pt-3 text-[12px] font-normal text-muted-foreground/70">
-                No recently viewed chats
+                {t("noRecentlyViewedChats")}
               </div>
             )}
             <div

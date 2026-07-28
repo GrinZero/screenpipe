@@ -33,6 +33,7 @@ import { cn } from "@/lib/utils";
 import type { ContentBlock, Message } from "@/lib/chat/types";
 import type { ConnectionListItem } from "@/lib/chat/connection-suggestions";
 import type { InlineConnectStatus } from "@/lib/connections/inline-connect";
+import { useTranslations } from "next-intl";
 import type { MarkdownCitationPlan } from "@/lib/chat/markdown-export";
 
 function messageDate(timestamp: number): Date | null {
@@ -134,6 +135,8 @@ export function ChatMessageList({
   onAskUserReply,
   suppressSourceFooters = false,
 }: ChatMessageListProps) {
+  const t = useTranslations("chat");
+  const su = useTranslations("chatStandaloneUi");
   return (
     <>
       <AnimatePresence mode="popLayout">
@@ -346,7 +349,7 @@ export function ChatMessageList({
                                 onCancelEdit(message);
                               }}
                             >
-                              Cancel
+                              {su("cancel")}
                             </button>
                             <button
                               type="button"
@@ -358,7 +361,7 @@ export function ChatMessageList({
                                 commitEditedMessage(message, editDraft);
                               }}
                             >
-                              Save
+                              {su("save")}
                             </button>
                           </div>
                         </div>
@@ -427,7 +430,7 @@ export function ChatMessageList({
                               }
                             }}
                             className="p-1 rounded-md hover:bg-muted text-muted-foreground hover:text-foreground"
-                            title="Copy message"
+                            title={t("copyMessage")}
                           >
                             {copiedMessageId === message.id ? (
                               <Check className="h-3 w-3" />
@@ -444,7 +447,7 @@ export function ChatMessageList({
                                 enterEditMode(message);
                               }}
                               className="p-1 rounded-md hover:bg-muted text-muted-foreground hover:text-foreground"
-                              title="Edit"
+                              title={t("edit")}
                             >
                               <Pencil className="h-3 w-3" />
                             </button>
@@ -462,7 +465,7 @@ export function ChatMessageList({
                             <button
                               onClick={() => onRetryAssistantMessage(message.id)}
                               className="p-1 rounded-md hover:bg-muted text-muted-foreground hover:text-foreground"
-                              title="Retry"
+                              title={t("retry")}
                             >
                               <RefreshCw className="h-3 w-3" />
                             </button>
@@ -475,7 +478,7 @@ export function ChatMessageList({
                               <PopoverTrigger asChild>
                                 <button
                                   className="p-1 rounded-md hover:bg-muted text-muted-foreground hover:text-foreground"
-                                  title="More options"
+                                  title={t("moreOptions")}
                                 >
                                   <MoreHorizontal className="h-3 w-3" />
                                 </button>
@@ -495,7 +498,7 @@ export function ChatMessageList({
                                     className="w-full flex items-center gap-2 px-2 py-1.5 text-sm rounded-md hover:bg-muted text-left"
                                   >
                                     <Clock className="h-3.5 w-3.5 shrink-0" />
-                                    Run on schedule
+                                    {su("runOnSchedule")}
                                   </button>
                                 )}
                                 <button
@@ -506,7 +509,7 @@ export function ChatMessageList({
                                   className="w-full flex items-center gap-2 px-2 py-1.5 text-sm rounded-md hover:bg-muted text-left"
                                 >
                                   <GitBranch className="h-3.5 w-3.5 shrink-0" />
-                                  Branch in new chat
+                                  {su("branchNewChat")}
                                 </button>
                               </PopoverContent>
                             </Popover>

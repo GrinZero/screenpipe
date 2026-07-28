@@ -10,6 +10,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import posthog from "posthog-js";
 import { qualifiedValue } from "@/lib/analytics/qualified-value";
@@ -112,6 +113,28 @@ export type ViewComponent = BrainViewComponent;
 export type ViewSlot = BrainViewSlot;
 export type ViewDefinition = BrainViewDefinition;
 
+const COMPONENTS: Array<{ value: ViewComponent; label: string; schema: string }> = [
+  { value: "metric.v1", label: "Metric", schema: "one value, unit, and change" },
+  { value: "list.v1", label: "List", schema: "ranked items with status" },
+  { value: "bar-chart.v1", label: "Bar chart", schema: "labels and numeric values" },
+  { value: "line-chart.v1", label: "Line chart", schema: "numeric values changing over time" },
+  { value: "table.v1", label: "Table", schema: "scrollable rows with values and details" },
+  { value: "timeline.v1", label: "Timeline", schema: "timestamped events" },
+  { value: "markdown.v1", label: "Text", schema: "a short formatted brief" },
+];
+
+function LiveViewCanvasLoading() {
+  const t = useTranslations("dashboardUi5");
+  return (
+    <div
+      data-testid="live-view-canvas-loading"
+      className="flex min-h-[480px] items-center justify-center border border-border font-mono text-[10px] uppercase tracking-wide text-muted-foreground"
+    >
+      {t("loadingProcessMap")}
+    </div>
+  );
+}
+
 const LiveViewCanvas = dynamic(
   () =>
     import("@/components/settings/live-view-canvas").then(
@@ -119,14 +142,7 @@ const LiveViewCanvas = dynamic(
     ),
   {
     ssr: false,
-    loading: () => (
-      <div
-        data-testid="live-view-canvas-loading"
-        className="flex min-h-[480px] items-center justify-center border border-border font-mono text-[10px] uppercase tracking-wide text-muted-foreground"
-      >
-        loading process map
-      </div>
-    ),
+    loading: () => <LiveViewCanvasLoading />,
   },
 );
 
@@ -218,36 +234,6 @@ function liveViewResultSignature(targetView: ViewDefinition): string | null {
     .sort();
   return resultVersions.length > 0 ? resultVersions.join("|") : null;
 }
-
-const COMPONENTS: Array<{
-  value: ViewComponent;
-  label: string;
-  schema: string;
-}> = [
-  {
-    value: "metric.v1",
-    label: "Metric",
-    schema: "one value, unit, and change",
-  },
-  { value: "list.v1", label: "List", schema: "ranked items with status" },
-  {
-    value: "bar-chart.v1",
-    label: "Bar chart",
-    schema: "labels and numeric values",
-  },
-  {
-    value: "line-chart.v1",
-    label: "Line chart",
-    schema: "numeric values changing over time",
-  },
-  {
-    value: "table.v1",
-    label: "Table",
-    schema: "scrollable rows with values and details",
-  },
-  { value: "timeline.v1", label: "Timeline", schema: "timestamped events" },
-  { value: "markdown.v1", label: "Text", schema: "a short formatted brief" },
-];
 
 function serializedSlots(slots: ViewSlot[]): BrainViewSlotInput[] {
   return normalizedSlots(slots).map((slot) => ({
@@ -396,6 +382,12 @@ export function BrainOverview({
 }: {
   onViewCountChange?: (count: number) => void;
 } = {}) {
+  const t = useTranslations("dashboard");
+  const d5 = useTranslations("dashboardUi5");
+  const u = useTranslations("dashboardBulk");
+  const bu = useTranslations("brainUi2");
+  const bu3 = useTranslations("brainUi4");
+  const rt = useTranslations("timeRangeUi");
   const { toast } = useToast();
   const { pipes, refetch: refetchPipes } = usePipes();
   const { settings, isSettingsLoaded } = useSettings();
@@ -527,7 +519,7 @@ export function BrainOverview({
         if (result.status === "error") {
           setCanvasError(result.error);
           toast({
-            title: "canvas changes were not saved",
+            title: u("canvasNotSaved"),
             description: result.error,
             variant: "destructive",
           });
@@ -705,7 +697,7 @@ export function BrainOverview({
           setError(
             loadError instanceof Error
               ? loadError.message
-              : "failed to load Live Views",
+              : bu("failedLoadLiveViews"),
           );
         }
       } finally {
@@ -1009,7 +1001,7 @@ export function BrainOverview({
       onboardingRetrying
     ) {
       toast({
-        title: "setup could not resume",
+        title: u("setupResumeFailed"),
         description:
           "Create or customize this Live View directly from Brain instead.",
         variant: "destructive",
@@ -1044,7 +1036,7 @@ export function BrainOverview({
           retryError instanceof Error ? retryError.name : "unknown",
       });
       toast({
-        title: "setup still needs attention",
+        title: u("setupAttention"),
         description:
           retryError instanceof Error
             ? retryError.message
@@ -1182,8 +1174,8 @@ export function BrainOverview({
         dashboard_count: views.length,
       });
       toast({
-        title: "dashboard limit reached",
-        description: `Delete a dashboard before creating another. You can keep up to ${MAX_DASHBOARDS}.`,
+        title: u("dashboardLimit"),
+        description: bu3("deleteBeforeCreate", { max: MAX_DASHBOARDS }),
         variant: "destructive",
       });
       return;
@@ -1206,7 +1198,7 @@ export function BrainOverview({
     setCreateDashboardOpen(false);
     setDraft({
       id: uniqueDashboardId("untitled-dashboard", views),
-      title: "Untitled dashboard",
+      title: u("untitledDashboard"),
       revision: 0,
       timeRange: "today",
       periodPolicy: DEFAULT_LIVE_VIEW_PERIOD_POLICY,
@@ -1364,7 +1356,7 @@ export function BrainOverview({
         failure_type: analyticsErrorType(generateError),
       });
       toast({
-        title: "failed to generate Live View",
+        title: u("liveViewGenerateFailed"),
         description:
           generateError instanceof Error
             ? generateError.message
@@ -1429,7 +1421,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
         });
       } catch (handoffError) {
         toast({
-          title: "could not open the Pipe agent",
+        title: u("pipeAgentOpenFailed"),
           description:
             handoffError instanceof Error
               ? handoffError.message
@@ -1532,7 +1524,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
         failure_type: analyticsErrorType(feedbackError),
       });
       toast({
-        title: "failed to save feedback",
+        title: u("feedbackSaveFailed"),
         description:
           feedbackError instanceof Error
             ? feedbackError.message
@@ -1549,8 +1541,8 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
   ): Promise<boolean> => {
     if (!view || !selectedAiPreset) {
       toast({
-        title: "choose an AI model first",
-        description: "Add an AI preset in Settings, then try again.",
+        title: u("chooseModel"),
+        description: u("addPreset"),
         variant: "destructive",
       });
       return false;
@@ -1637,7 +1629,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
         next_component: replacement.component,
         next_has_pipe: Boolean(replacement.pipeName),
       });
-      toast({ title: `${replacement.title} updated` });
+      toast({ title: bu3("updated", { title: replacement.title }) });
       return true;
     } catch (editError) {
       posthog.capture("live_view_card_ai_edit_failed", {
@@ -1646,7 +1638,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
         failure_type: analyticsErrorType(editError),
       });
       toast({
-        title: "failed to edit this section",
+        title: u("sectionEditFailed"),
         description:
           editError instanceof Error ? editError.message : String(editError),
         variant: "destructive",
@@ -1750,7 +1742,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
         failure_type: analyticsErrorType(saveError),
       });
       toast({
-        title: "failed to save Live View",
+        title: u("liveViewSaveFailed"),
         description:
           saveError instanceof Error ? saveError.message : String(saveError),
         variant: "destructive",
@@ -1840,7 +1832,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
         failure_type: analyticsErrorType(installError),
       });
       toast({
-        title: "template was not installed",
+        title: u("templateNotInstalled"),
         description:
           installError instanceof Error
             ? installError.message
@@ -1874,7 +1866,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
         ...liveViewAnalyticsProperties(result.data, views.length),
         action: "renamed",
       });
-      toast({ title: `renamed to ${result.data.title}` });
+      toast({ title: bu3("renamedTo", { title: result.data.title }) });
     } catch (renameError) {
       posthog.capture("live_view_dashboard_action_failed", {
         analytics_schema_version: LIVE_VIEW_ANALYTICS_SCHEMA_VERSION,
@@ -1882,7 +1874,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
         failure_type: analyticsErrorType(renameError),
       });
       toast({
-        title: "could not rename dashboard",
+        title: u("dashboardRenameFailed"),
         description:
           renameError instanceof Error
             ? renameError.message
@@ -1899,8 +1891,8 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
     if (!view) return;
     if (views.length >= MAX_DASHBOARDS) {
       toast({
-        title: "dashboard limit reached",
-        description: `Delete a dashboard before duplicating another. You can keep up to ${MAX_DASHBOARDS}.`,
+        title: u("dashboardLimit"),
+        description: bu3("deleteBeforeDuplicate", { max: MAX_DASHBOARDS }),
         variant: "destructive",
       });
       return;
@@ -1951,7 +1943,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
         source: "duplicate",
         refresh_requested: true,
       });
-      toast({ title: `${result.data.title} created` });
+      toast({ title: bu3("created", { title: result.data.title }) });
       void refreshConnectedPipes(
         result.data,
         undefined,
@@ -1967,7 +1959,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
         failure_type: analyticsErrorType(duplicateError),
       });
       toast({
-        title: "could not duplicate dashboard",
+        title: u("dashboardDuplicateFailed"),
         description:
           duplicateError instanceof Error
             ? duplicateError.message
@@ -2000,7 +1992,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
         ...liveViewAnalyticsProperties(view, views.length),
         dashboard_count_after: nextViews.length,
       });
-      toast({ title: "dashboard deleted" });
+      toast({ title: u("dashboardDeleted") });
     } catch (deleteError) {
       posthog.capture("live_view_dashboard_action_failed", {
         analytics_schema_version: LIVE_VIEW_ANALYTICS_SCHEMA_VERSION,
@@ -2008,7 +2000,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
         failure_type: analyticsErrorType(deleteError),
       });
       toast({
-        title: "could not delete dashboard",
+        title: u("dashboardDeleteFailed"),
         description:
           deleteError instanceof Error
             ? deleteError.message
@@ -2043,7 +2035,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
         source: "undo",
         refresh_requested: true,
       });
-      toast({ title: "previous dashboard restored" });
+      toast({ title: u("dashboardRestored") });
       void refreshConnectedPipes(result.data, undefined, "undo");
     } catch (restoreError) {
       posthog.capture("live_view_dashboard_action_failed", {
@@ -2052,7 +2044,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
         failure_type: analyticsErrorType(restoreError),
       });
       toast({
-        title: "could not restore the previous dashboard",
+        title: u("dashboardRestoreFailed"),
         description:
           restoreError instanceof Error
             ? restoreError.message
@@ -2073,7 +2065,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
       )
     ) {
       toast({
-        title: "this dashboard uses a fixed period",
+        title: u("fixedPeriod"),
         description:
           "Choose another dashboard or template for a different period.",
         variant: "destructive",
@@ -2100,7 +2092,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
         previous_time_range: previousView.timeRange,
       });
       toast({
-        title: `showing ${getLiveViewTimeRangeOption(timeRange).label.toLowerCase()}`,
+        title: rt("showing", { range: rt(`range_${getLiveViewTimeRangeOption(timeRange).value}`) }),
       });
       void refreshConnectedPipes(result.data, undefined, "time_range");
     } catch (rangeError) {
@@ -2110,7 +2102,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
         failure_type: analyticsErrorType(rangeError),
       });
       toast({
-        title: "could not change the time range",
+        title: u("timeRangeFailed"),
         description:
           rangeError instanceof Error ? rangeError.message : String(rangeError),
         variant: "destructive",
@@ -2124,7 +2116,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
   if (loading) {
     return (
       <div className="flex min-h-64 items-center justify-center text-sm text-muted-foreground">
-        <Loader2 className="mr-2 h-4 w-4 animate-spin" /> loading Live Views
+        <Loader2 className="mr-2 h-4 w-4 animate-spin" /> {t("loadingLiveViews")}
       </div>
     );
   }
@@ -2134,7 +2126,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
       <div className="flex min-h-64 flex-col items-center justify-center gap-3 border border-border text-center">
         <AlertCircle className="h-5 w-5 text-muted-foreground" />
         <div>
-          <p className="text-sm">failed to load Live Views</p>
+          <p className="text-sm">{bu("failedLoadLiveViews")}</p>
           <p className="mt-1 text-xs text-muted-foreground">{error}</p>
         </div>
         <Button
@@ -2143,7 +2135,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
           className="rounded-none"
           onClick={() => void load()}
         >
-          retry
+          {t("retry")}
         </Button>
       </div>
     );
@@ -2176,7 +2168,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
           className="mt-4 text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
           onClick={beginManualCreate}
         >
-          or build it manually
+          {d5("buildManually")}
         </button>
       </div>
     );
@@ -2241,7 +2233,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
                   setAiNote(null);
                 }}
               >
-                discard
+                {d5("discard")}
               </Button>
               {!templatePreview && (
                 <Button
@@ -2255,7 +2247,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
                     setEditing(true);
                   }}
                 >
-                  edit manually
+                  {d5("editManually")}
                 </Button>
               )}
               <Button
@@ -2297,7 +2289,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
                   htmlFor="preview-dashboard-name"
                   className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground"
                 >
-                  Dashboard name
+                  {t("dashboardName")}
                 </label>
                 <Input
                   id="preview-dashboard-name"
@@ -2314,7 +2306,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
                     <p>{templateReadiness?.explanation}</p>
                     <details className="mt-1 text-[11px]">
                       <summary className="cursor-pointer select-none hover:text-foreground">
-                        what powers this dashboard
+                        {d5("whatPowersDashboard")}
                       </summary>
                       <p className="mt-1 font-mono">
                         {templatePreview.pipes
@@ -2322,7 +2314,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
                           .join(", ")}
                       </p>
                       <p className="mt-1">
-                        Existing custom Pipe instructions are kept.
+                        {d5("customPipeInstructionsKept")}
                       </p>
                     </details>
                   </div>
@@ -2346,12 +2338,12 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
                     onClick={() => setPreviewDestination("new")}
                   >
                     <span className="block text-xs font-medium">
-                      create new
+                      {t("createNew")}
                     </span>
                     <span className="mt-1 block text-[11px] text-muted-foreground">
                       {dashboardLimitReached
-                        ? `${MAX_DASHBOARDS} dashboard limit reached`
-                        : `keep “${view?.title}” unchanged`}
+                        ? d5("dashboardLimitReached")
+                        : d5("keepDashboardUnchanged", { title: view?.title ?? "" })}
                     </span>
                   </button>
                   <button
@@ -2366,17 +2358,16 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
                     onClick={() => setPreviewDestination("replace")}
                   >
                     <span className="block text-xs font-medium">
-                      replace current
+                      {t("replaceCurrent")}
                     </span>
                     <span className="mt-1 block text-[11px] text-muted-foreground">
-                      confirmation required
+                      {t("confirmationRequired")}
                     </span>
                   </button>
                 </div>
               ) : (
                 <div className="border border-border bg-muted/30 p-3 text-xs text-muted-foreground">
-                  This creates a new dashboard with {previewSlots.length}{" "}
-                  sections.
+                  {d5("createSections", { count: previewSlots.length })}
                 </div>
               )}
             </div>
@@ -2387,9 +2378,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
               data-testid="overview-replacement-warning"
               className="mb-5 border border-destructive/60 bg-destructive/5 px-4 py-3 text-xs"
             >
-              This will replace {view?.slots.length ?? 0} sections in “
-              {view?.title}” with {previewSlots.length}. The previous layout
-              remains available through Undo.
+              {d5("replaceWarning", { count: view?.slots.length ?? 0, title: view?.title ?? "", newCount: previewSlots.length })}
             </div>
           )}
 
@@ -2398,8 +2387,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
               data-testid="overview-dashboard-limit-warning"
               className="mb-5 border border-border bg-muted/30 px-4 py-3 text-xs text-muted-foreground"
             >
-              You already have {MAX_DASHBOARDS} dashboards. Replace the current
-              dashboard, or delete one before creating another.
+              {t("dashboardLimitWarning", { count: MAX_DASHBOARDS })}
             </div>
           )}
 
@@ -2421,22 +2409,20 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
         >
           <AlertDialogContent className="rounded-none">
             <AlertDialogHeader>
-              <AlertDialogTitle>Replace “{view?.title}”?</AlertDialogTitle>
+              <AlertDialogTitle>{d5("replaceQuestion", { title: view?.title ?? "" })}</AlertDialogTitle>
               <AlertDialogDescription>
-                This replaces {view?.slots.length ?? 0} current sections with{" "}
-                {previewSlots.length}. Your other dashboards are not affected,
-                and this layout can be restored with Undo.
+                {d5("replaceDescription", { count: view?.slots.length ?? 0, newCount: previewSlots.length })}
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel disabled={saving}>cancel</AlertDialogCancel>
+              <AlertDialogCancel disabled={saving}>{t("cancel")}</AlertDialogCancel>
               <AlertDialogAction
                 data-testid="overview-confirm-replace"
                 variant="destructive"
                 disabled={saving}
                 onClick={() => void applyPreview()}
               >
-                replace dashboard
+                {t("replaceDashboard")}
               </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
@@ -2523,11 +2509,13 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
           />
           <p className="mt-2 text-xs text-muted-foreground">
             {onboardingColdStart
-              ? "This view will appear when Screenpipe has enough real activity for your outcome."
-              : `Pipes fill these Blocks for ${selectedPeriod.label.toLowerCase()}. Data changes when you refresh or a connected Pipe runs.`}
+              ? t("liveViewColdStart")
+              : t("pipesFillBlocks", {
+                  period: rt(`range_${selectedPeriod.value}`).toLowerCase(),
+                })}
             {latestDataTimestamp !== null && (
               <span className="ml-1">
-                Last data {new Date(latestDataTimestamp).toLocaleString()}.
+                {t("lastData", { date: new Date(latestDataTimestamp).toLocaleString() })}
               </span>
             )}
           </p>
@@ -2540,7 +2528,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
             <div
               data-testid="overview-display-mode"
               className="inline-flex h-9 flex-1 border border-border sm:flex-none"
-              aria-label="Live View layout"
+                aria-label={t("liveViewLayout")}
             >
               <Button
                 data-testid="overview-mode-dashboard"
@@ -2558,7 +2546,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
                 }`}
                 onClick={() => changeDisplayMode("dashboard")}
               >
-                <LayoutDashboard className="mr-1.5 h-3.5 w-3.5" /> dashboard
+                <LayoutDashboard className="mr-1.5 h-3.5 w-3.5" /> {t("dashboardMode")}
               </Button>
               <Button
                 data-testid="overview-mode-canvas"
@@ -2581,7 +2569,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
                 ) : (
                   <Network className="mr-1.5 h-3.5 w-3.5" />
                 )}
-                canvas
+                {t("canvasMode")}
               </Button>
             </div>
           )}
@@ -2595,7 +2583,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
             >
               <SelectTrigger
                 data-testid="overview-time-range"
-                aria-label="Live View time range"
+                aria-label={t("liveViewTimeRange")}
                 className="h-9 min-w-36 w-auto flex-1 text-xs sm:flex-none"
               >
                 <SelectValue />
@@ -2618,7 +2606,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
               disabled={dashboardBusy}
               onClick={() => setTemplateGalleryOpen((open) => !open)}
             >
-              <LayoutTemplate className="mr-1.5 h-3.5 w-3.5" /> templates
+              <LayoutTemplate className="mr-1.5 h-3.5 w-3.5" /> {t("templates")}
             </Button>
           )}
           {boundSlotCount > 0 && !onboardingColdStart && (
@@ -2627,7 +2615,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
               variant="outline"
               size="sm"
               className="h-9 flex-1 rounded-none px-3 sm:flex-none"
-              aria-label={refreshIsActive ? "loading data" : "refresh data"}
+              aria-label={refreshIsActive ? t("loadingData") : t("refreshData")}
               disabled={dashboardBusy}
               onClick={() => void refreshConnectedPipes(view)}
             >
@@ -2636,7 +2624,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
                   refreshIsActive ? "animate-spin" : ""
                 }`}
               />
-              <span aria-hidden="true">refresh data</span>
+              <span aria-hidden="true">{t("refreshData")}</span>
             </Button>
           )}
           {!onboardingColdStart && (
@@ -2648,7 +2636,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
               disabled={dashboardBusy}
               onClick={beginEdit}
             >
-              <SlidersHorizontal className="mr-1.5 h-3.5 w-3.5" /> customize
+              <SlidersHorizontal className="mr-1.5 h-3.5 w-3.5" /> {t("customize")}
             </Button>
           )}
         </div>
@@ -2660,19 +2648,19 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
         >
           <AlertCircle className="h-3.5 w-3.5 shrink-0" />
           <span>
-            Canvas could not be loaded. Dashboard mode is still available.
+            {t("canvasLoadFailed")}
           </span>
         </div>
       )}
       {canvasSaving && displayMode === "canvas" && (
         <p className="sr-only" role="status">
-          saving canvas
+          {t("savingCanvas")}
         </p>
       )}
       {templateGalleryOpen && !onboardingColdStart && (
         <div className="relative mb-5 border border-border p-4 pr-12">
           <Button
-            aria-label="close templates"
+            aria-label={t("closeTemplates")}
             variant="ghost"
             size="icon"
             className="absolute right-2 top-2 h-8 w-8 rounded-none"
@@ -2705,7 +2693,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
           className="mb-4 flex items-center gap-3 border border-border bg-muted/30 px-3 py-2 text-xs"
         >
           <Undo2 className="h-3.5 w-3.5 shrink-0" />
-          <span>Your previous dashboard layout is available.</span>
+          <span>{t("previousLayoutAvailable")}</span>
           <Button
             data-testid="overview-undo"
             variant="ghost"
@@ -2714,7 +2702,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
             disabled={saving}
             onClick={() => void restorePreviousView()}
           >
-            undo
+            {t("undo")}
           </Button>
         </div>
       )}
@@ -2766,7 +2754,7 @@ Use the screenpipe-cli skill for Pipe creation or editing and the screenpipe_liv
           className="flex min-h-48 w-full items-center justify-center border border-dashed border-border text-xs text-muted-foreground hover:text-foreground"
           onClick={beginEdit}
         >
-          add your first Block
+          {t("addFirstBlock")}
         </button>
       ) : displayMode === "canvas" && canvasReady && canvasDocument ? (
         <LiveViewCanvas

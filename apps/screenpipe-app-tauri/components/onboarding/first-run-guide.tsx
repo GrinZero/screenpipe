@@ -5,6 +5,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { Zap, ArrowRight, Play } from "lucide-react";
 import { emit } from "@tauri-apps/api/event";
@@ -93,6 +94,8 @@ export default function FirstRunGuide({
   onGoToAutomations,
   onEnsureChatVisible,
 }: FirstRunGuideProps) {
+  const t = useTranslations("onboarding");
+  const g = useTranslations("onboardingGuide");
   const [phase, setPhase] = useState<Phase>("invite");
   const phaseRef = useRef<Phase>("invite");
   phaseRef.current = phase;
@@ -470,29 +473,28 @@ export default function FirstRunGuide({
             <div className="flex items-center gap-2 mb-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-foreground" />
               <span className="font-mono text-[10px] tracking-wider lowercase text-muted-foreground/70">
-                you&apos;re all set
+                {t("guideReady")}
               </span>
             </div>
             <p className="font-sans text-sm text-foreground/90 leading-snug">
-              want to see how screenpipe works? one prompt, one automation —
-              about 30 seconds.
+              {t("guideIntro")}
             </p>
             <button
               onClick={acceptInvite}
               data-testid="firstrun-accept"
               className="mt-4 w-full flex items-center justify-center gap-1.5 border border-foreground bg-foreground py-2.5 font-mono text-xs uppercase tracking-widest text-background hover:bg-background hover:text-foreground transition-colors"
             >
-              show me · 30 sec
+              {t("showMe30Seconds")}
             </button>
             <button
               onClick={() => dismiss("declined")}
               data-testid="firstrun-decline"
               className={SKIP_BUTTON_CLASS}
             >
-              i&apos;ll explore
+              {t("illExplore")}
             </button>
             <p className="mt-2 text-center font-mono text-[9px] lowercase tracking-wider text-muted-foreground/60">
-              rerun anytime from help
+              {t("rerunFromHelp")}
             </p>
           </motion.div>
         </div>
@@ -506,14 +508,14 @@ export default function FirstRunGuide({
           className="fixed top-4 left-1/2 z-50 flex -translate-x-1/2 items-center gap-3 border border-foreground/30 bg-background px-3 py-1.5 shadow-lg"
         >
           <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-            2 of 3 · building your automation
+            {t("stepTwoOfThree")} · {t("buildingAutomation")}
           </span>
           <button
             onClick={skip}
-            aria-label="skip intro"
+            aria-label={t("skipIntro")}
             className="font-mono text-[10px] uppercase tracking-widest text-foreground transition-opacity hover:opacity-60"
           >
-            skip ✕
+            {t("skipIntro")} ✕
           </button>
         </div>
       )}
@@ -535,31 +537,30 @@ export default function FirstRunGuide({
                 <div className="flex items-center gap-2 mb-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-foreground" />
                   <span className="font-mono text-[10px] tracking-wider lowercase text-muted-foreground/70">
-                    let&apos;s try one thing
+                    {t("tryOneThing")}
                   </span>
                   <span className="ml-auto font-mono text-[10px] tracking-wider text-muted-foreground/70">
-                    1 of 3
+                    {t("stepOneOfThree")}
                   </span>
                 </div>
                 <p className="font-sans text-sm text-foreground/90 leading-snug">
-                  i filled the prompt below. send it to create your first
-                  automation.
+                  {t("firstAutomationDescription")}
                 </p>
                 <button
                   type="button"
                   onClick={submitPrefilledPrompt}
                   className="mt-4 flex w-full items-center justify-center border border-foreground bg-foreground py-2.5 font-mono text-xs uppercase tracking-widest text-background transition-colors hover:bg-background hover:text-foreground"
                 >
-                  send prompt ↵
+                  {t("sendPrompt")}
                 </button>
                 <button
                   onClick={skip}
                   className={SKIP_BUTTON_CLASS}
                 >
-                  skip intro
+                  {t("skipIntro")}
                 </button>
                 <p className="mt-2 text-center font-mono text-[9px] lowercase tracking-wider text-muted-foreground/60">
-                  esc to exit anytime
+                  {t("escapeAnytime")}
                 </p>
               </div>
               {/* Speech-bubble tail pointing down at the composer */}
@@ -592,30 +593,30 @@ export default function FirstRunGuide({
                 <Zap className="w-4 h-4 text-foreground mt-0.5 shrink-0" strokeWidth={2} />
                 <div>
                   <p className="font-mono text-xs font-semibold lowercase text-foreground">
-                    your automation is being set up
+                    {t("automationReadyDescription")}
                   </p>
                   <p className="font-mono text-[11px] text-muted-foreground mt-0.5 leading-snug">
-                    head over to the pipes tab to see it running and explore more automations
+                    {t("goToPipesDescription")}
                   </p>
                 </div>
                 <span className="ml-auto shrink-0 font-mono text-[10px] tracking-wider text-muted-foreground/70">
-                  2 of 3
+                  {t("stepTwoOfThree")}
                 </span>
               </div>
               <button
                 onClick={goToPipes}
                 className="w-full flex items-center justify-center gap-1.5 border border-foreground bg-foreground py-2.5 font-mono text-xs uppercase tracking-widest text-background hover:bg-background hover:text-foreground transition-colors"
               >
-                go to pipes <ArrowRight className="w-3 h-3" strokeWidth={2} />
+                {t("goToPipes")} <ArrowRight className="w-3 h-3" strokeWidth={2} />
               </button>
               <button
                 onClick={skip}
                 className={SKIP_BUTTON_CLASS}
               >
-                skip intro
+                {t("skipIntro")}
               </button>
               <p className="mt-2 text-center font-mono text-[9px] lowercase tracking-wider text-muted-foreground/60">
-                esc to exit anytime
+                {t("escapeAnytime")}
               </p>
             </motion.div>
           )}
@@ -678,32 +679,32 @@ export default function FirstRunGuide({
           <div className="flex items-start gap-2.5 mb-3">
             <div>
               <p className="font-mono text-xs font-semibold lowercase text-foreground">
-                one last thing — run your pipe
+                    {t("oneLastThing")}
               </p>
               <p className="font-mono text-[11px] text-muted-foreground mt-0.5 leading-snug">
-                hit the{" "}
+                {g("runPipeBeforeButton")} {" "}
                 <Play className="inline w-3 h-3 -mt-0.5" strokeWidth={2} />{" "}
-                button on your pipe to start it
+                {g("runPipeAfterButton")}
               </p>
             </div>
             <span className="ml-auto shrink-0 font-mono text-[10px] tracking-wider text-muted-foreground/70">
-              3 of 3
+              {t("stepThreeOfThree")}
             </span>
           </div>
           <button
             onClick={finishGuide}
             className="w-full flex items-center justify-center gap-1.5 border border-foreground bg-foreground py-2.5 font-mono text-xs uppercase tracking-widest text-background hover:bg-background hover:text-foreground transition-colors"
           >
-            got it <ArrowRight className="w-3 h-3" strokeWidth={2} />
+            {t("gotIt")} <ArrowRight className="w-3 h-3" strokeWidth={2} />
           </button>
           <button
             onClick={skip}
             className={SKIP_BUTTON_CLASS}
           >
-            skip intro
+            {t("skipIntro")}
           </button>
           <p className="mt-2 text-center font-mono text-[9px] lowercase tracking-wider text-muted-foreground/60">
-            esc to exit anytime
+            {t("escapeAnytime")}
           </p>
         </motion.div>
         );

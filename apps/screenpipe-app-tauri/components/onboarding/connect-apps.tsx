@@ -5,6 +5,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { Check, Loader } from "lucide-react";
 import { motion } from "framer-motion";
 import { commands } from "@/lib/utils/tauri";
@@ -315,6 +316,7 @@ function IntegrationCard({
   errorMessage: string | null;
   onConnect: () => void;
 }) {
+  const t = useTranslations("onboardingConnectUi");
   const isConnected = state === "connected";
   const isConnecting = state === "connecting";
   const isError = state === "error";
@@ -357,7 +359,7 @@ function IntegrationCard({
             >
               <span className="flex items-center gap-1 font-mono text-[10px] text-foreground/70">
                 <Check className="w-3 h-3 shrink-0" strokeWidth={2.5} />
-                <span className="truncate">{displayName ?? "connected"}</span>
+                <span className="truncate">{displayName ?? t("connected")}</span>
               </span>
               {integration.ahaCopy && (
                 <motion.span
@@ -373,7 +375,7 @@ function IntegrationCard({
           ) : isConnecting ? (
             <span className="flex items-center gap-1 font-mono text-[10px] text-muted-foreground/50">
               <Loader className="w-3 h-3 animate-spin shrink-0" />
-              connecting...
+              {t("connecting")}
             </span>
           ) : isError ? (
             (() => {
@@ -390,13 +392,13 @@ function IntegrationCard({
                       <span className="inline-flex h-3 w-3 items-center justify-center rounded-full bg-red-500/15 text-[8px] font-bold shrink-0">
                         !
                       </span>
-                      couldn&apos;t connect
+                      {t("couldntConnect")}
                     </span>
                     <button
                       onClick={onConnect}
                       className="block text-[10px] text-muted-foreground underline hover:text-foreground transition-colors mt-0.5"
                     >
-                      retry →
+                      {t("retry")}
                     </button>
                   </div>
                 );
@@ -421,7 +423,7 @@ function IntegrationCard({
               onClick={onConnect}
               className="font-mono text-[10px] text-muted-foreground/60 hover:text-foreground transition-colors"
             >
-              connect →
+              {t("connect")}
             </button>
           )}
         </div>
@@ -453,6 +455,8 @@ async function waitForGmailConnection(
 }
 
 export default function ConnectApps({ handleNextSlide }: ConnectAppsProps) {
+  const t = useTranslations("onboarding");
+  const tc = useTranslations("onboardingConnectUi");
   const { settings } = useSettings();
   const composioToken = settings.user?.token;
   const [cardStates, setCardStates] = useState<Record<string, CardState>>({});
@@ -825,7 +829,7 @@ export default function ConnectApps({ handleNextSlide }: ConnectAppsProps) {
           transition={{ duration: 1.5, repeat: Infinity }}
         />
         <span className="font-mono text-xs text-muted-foreground">
-          recording · {seconds}s
+          {t("recording")} · {seconds}s
         </span>
       </motion.div>
 
@@ -836,9 +840,9 @@ export default function ConnectApps({ handleNextSlide }: ConnectAppsProps) {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.15 }}
       >
-        <h2 className="font-mono text-base font-bold lowercase">connect detected tools</h2>
+        <h2 className="font-mono text-base font-bold lowercase">{t("connectDetectedTools")}</h2>
         <p className="font-mono text-[10px] text-muted-foreground/60 mt-1 max-w-[300px]">
-          one click for the local AI tools already on this computer
+          {t("localToolsDescription")}
         </p>
       </motion.div>
 
@@ -862,21 +866,26 @@ export default function ConnectApps({ handleNextSlide }: ConnectAppsProps) {
         // Deferral framing: honest, but never a fix-it-now demand. The only
         // "try again" wording is engine-not-ready, where retrying really works.
         const deferralLine = engineStarting
-          ? "screenpipe isn't responding — give it a few seconds and try again."
+          ? tc("engineNotResponding")
           : failedIds.length === 1
-          ? `${failedList} couldn't connect — its config file has an error. ${
-              okCount > 0 ? "everything else is set; " : ""
-            }fix it anytime in settings → ai tools.`
-          : `${failedList} couldn't connect — ${okCount} of ${detectedAiTools.length} are set. fix the rest anytime in settings → ai tools.`;
+          ? tc("oneToolFailed", {
+              name: failedList,
+              rest: okCount > 0 ? tc("failedRest") : "",
+            })
+          : tc("manyToolsFailed", {
+              names: failedList,
+              ok: okCount,
+              total: detectedAiTools.length,
+            });
         const buttonLabel = connectAllRunning
-          ? "connecting..."
+          ? tc("connecting")
           : engineStarting
-          ? "try again"
+          ? tc("tryAgain")
           : failedIds.length === 1
-          ? `retry ${failedNames[0]}`
+          ? `${tc("retry")} ${failedNames[0]}`
           : failedIds.length > 1
-          ? "retry failed"
-          : "connect detected";
+          ? tc("retryFailed")
+          : tc("connectDetected");
         return (
           <motion.div
             className="w-full mb-3 p-4 border border-border bg-card/40"
@@ -887,7 +896,7 @@ export default function ConnectApps({ handleNextSlide }: ConnectAppsProps) {
             <div className="flex items-center justify-between gap-3">
               <div className="flex flex-col min-w-0">
                 <span className="font-mono text-xs font-semibold lowercase">
-                  {detectedAiTools.length} local {detectedAiTools.length === 1 ? "tool" : "tools"} found
+                  {t("toolFound", { count: detectedAiTools.length, label: detectedAiTools.length === 1 ? t("tool") : t("tools") })}
                 </span>
                 {/* Status list, not chips: passive text indicators, never
                     clickable pills. Monochrome like the cards below — state
@@ -915,7 +924,7 @@ export default function ConnectApps({ handleNextSlide }: ConnectAppsProps) {
                           <span className="h-1 w-1 bg-muted-foreground/30" />
                         )}
                         {CONNECT_ALL_TOOL_NAMES[id].toLowerCase()}
-                        {state === "error" && " · failed"}
+                        {state === "error" && ` · ${t("failed")}`}
                       </span>
                     );
                   })}
@@ -934,7 +943,7 @@ export default function ConnectApps({ handleNextSlide }: ConnectAppsProps) {
               {allConnected ? (
                 <span className="font-mono text-[11px] text-muted-foreground inline-flex items-center gap-1.5 shrink-0">
                   <Check className="h-3 w-3" />
-                  {detectedAiTools.length} connected
+                  {t("connectedCount", { count: detectedAiTools.length })}
                 </span>
               ) : (
                 <button
@@ -956,9 +965,9 @@ export default function ConnectApps({ handleNextSlide }: ConnectAppsProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          <p className="font-mono text-xs">no local AI tools found</p>
+          <p className="font-mono text-xs">{t("noLocalAiTools")}</p>
           <p className="mt-1 font-mono text-[10px] text-muted-foreground">
-            nothing is required here. connect services later if you need them.
+            {t("noToolsRequired")}
           </p>
         </motion.div>
       )}
@@ -974,11 +983,11 @@ export default function ConnectApps({ handleNextSlide }: ConnectAppsProps) {
           }}
           className="flex w-full items-center justify-between font-mono text-[10px] text-muted-foreground transition-colors hover:text-foreground"
         >
-          <span>connect more tools (optional)</span>
+          <span>{t("connectMoreOptional")}</span>
           <span>
             {showOptionalConnections
-              ? "hide ↑"
-              : "google calendar · obsidian · gmail ↓"}
+              ? t("hideOptional")
+              : t("optionalExamples")}
           </span>
         </button>
 
@@ -989,7 +998,7 @@ export default function ConnectApps({ handleNextSlide }: ConnectAppsProps) {
             animate={{ opacity: 1, y: 0 }}
           >
             <p className="mb-2 font-mono text-[9px] text-muted-foreground/60">
-              skip these now and connect them anytime in settings
+              {t("skipOptional")}
             </p>
             <div className="grid grid-cols-3 gap-2 w-full auto-rows-fr">
               {OPTIONAL_INTEGRATIONS.map((integration, i) => (
@@ -1020,7 +1029,7 @@ export default function ConnectApps({ handleNextSlide }: ConnectAppsProps) {
           onClick={handleContinue}
           className="w-full border border-foreground bg-foreground text-background py-3 font-mono text-sm uppercase tracking-widest hover:bg-background hover:text-foreground transition-colors duration-150"
         >
-          continue →
+          {t("continue")}
         </button>
       </div>
     </motion.div>

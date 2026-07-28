@@ -4,6 +4,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 // Inline "show, don't tell" previews for otherwise-abstract settings. Each is
@@ -16,6 +17,8 @@ import { cn } from "@/lib/utils";
 // A filmstrip whose density tracks the chosen interval, plus an honest
 // floor readout. `seconds === 0` means "auto / follow the power profile".
 export function CaptureFrequencyPreview({ seconds }: { seconds: number }) {
+  const p = useTranslations("previewUi2");
+  const p3 = useTranslations("previewUi3");
   const auto = seconds === 0;
   // More frames in a fixed window = denser strip. Honest *floor*: this is the
   // guaranteed minimum cadence on a still screen, not total capture volume.
@@ -36,15 +39,15 @@ export function CaptureFrequencyPreview({ seconds }: { seconds: number }) {
       </div>
       <p className="mt-1.5 text-[11px] text-muted-foreground">
         {auto ? (
-          "follows your power profile — roughly one frame every 30s when the screen is idle"
+          p("powerProfile")
         ) : (
           <>
-            at least one frame every{" "}
-            <span className="font-mono text-foreground">{seconds}s</span> — about{" "}
+            {p("atLeastOneFrameEvery")} {" "}
+            <span className="font-mono text-foreground">{seconds}s</span> — {p3("about")} {" "}
             <span className="font-mono text-foreground">
               {perHour?.toLocaleString()}
             </span>{" "}
-            an hour on a still screen
+            {" "}{p("perHourOnStillScreen")}
           </>
         )}
       </p>
@@ -64,11 +67,12 @@ function DayStripRow({
   active: boolean;
   children: React.ReactNode;
 }) {
+  const p = useTranslations("previewUi2");
   return (
     <div className={cn("flex items-center gap-2", !active && "opacity-40")}>
       <span className="w-16 shrink-0 text-[10px] text-muted-foreground">
         {label}
-        {active && " · now"}
+        {active && ` · ${p("now")}`}
       </span>
       <span className="min-w-0 flex-1">{children}</span>
     </div>
@@ -76,13 +80,14 @@ function DayStripRow({
 }
 
 export function AudioCaptureModePreview({ mode }: { mode: string }) {
+  const p = useTranslations("previewUi2");
   const meetings = mode === "meetings-only";
   return (
     <div className="mt-2.5 space-y-1.5 rounded-md border border-border bg-muted/40 px-2.5 py-2">
-      <DayStripRow label="always" active={!meetings}>
+      <DayStripRow label={p("always")} active={!meetings}>
         <span className="block h-2.5 rounded-[2px] bg-foreground" />
       </DayStripRow>
-      <DayStripRow label="meetings" active={meetings}>
+      <DayStripRow label={p("meetings")} active={meetings}>
         <span className="relative block h-2.5 rounded-[2px] bg-foreground/15">
           <span className="absolute inset-y-0 left-[16%] w-[12%] rounded-[2px] bg-foreground" />
           <span className="absolute inset-y-0 left-[46%] w-[8%] rounded-[2px] bg-foreground" />
@@ -91,8 +96,8 @@ export function AudioCaptureModePreview({ mode }: { mode: string }) {
       </DayStripRow>
       <p className="text-[10px] text-muted-foreground">
         {meetings
-          ? "records only during detected meetings — saves battery, disk & transcription cost"
-          : "records continuously, 24/7"}
+          ? p("meetingsOnly")
+          : p("continuous")}
       </p>
     </div>
   );
@@ -101,7 +106,7 @@ export function AudioCaptureModePreview({ mode }: { mode: string }) {
 // ── Retention / storage saver ────────────────────────────────────────
 // One past timeline entry, shown as the pieces it's made of, with the
 // pieces each cleanup mode drops struck through.
-const RETENTION_CHIPS = ["Screenshot", "Text", "App structure", "Memories"];
+const RETENTION_CHIPS = ["screenshot", "text", "appStructure", "memories"] as const;
 const RETENTION_KEPT: Record<"media" | "lean" | "all", boolean[]> = {
   media: [false, true, true, true],
   lean: [false, true, false, true],
@@ -118,11 +123,12 @@ export function RetentionModePreview({
 }: {
   mode: "media" | "lean" | "all";
 }) {
+  const p = useTranslations("previewUi2");
   const kept = RETENTION_KEPT[mode];
   return (
     <div className="mt-2.5 ml-6 rounded-md border border-border bg-muted/40 px-2.5 py-2">
       <p className="mb-1.5 text-[10px] uppercase tracking-wider text-muted-foreground">
-        a past entry, after cleanup
+        {p("pastEntryAfterCleanup")}
       </p>
       <div className="flex flex-wrap gap-1.5">
         {RETENTION_CHIPS.map((chip, i) => (
@@ -135,12 +141,12 @@ export function RetentionModePreview({
                 : "text-muted-foreground/50 line-through",
             )}
           >
-            {chip}
+            {p(`retentionChip_${chip}` as "retentionChip_screenshot" | "retentionChip_text" | "retentionChip_appStructure" | "retentionChip_memories")}
           </span>
         ))}
       </div>
       <p className="mt-1.5 text-[10px] text-muted-foreground">
-        {RETENTION_CAPTION[mode]}
+        {p(`retention_${mode}` as "retention_media" | "retention_lean" | "retention_all")}
       </p>
     </div>
   );
@@ -195,13 +201,14 @@ export function PowerModePreview({
 }: {
   mode: "auto" | "performance" | "battery_saver";
 }) {
-  const p = POWER_PROFILE[mode] ?? POWER_PROFILE.auto;
+  const tx = useTranslations("previewUi2");
+  const profile = POWER_PROFILE[mode] ?? POWER_PROFILE.auto;
   return (
     <div className="mt-3 space-y-1.5 rounded-md border border-border bg-muted/40 px-2.5 py-2">
-      <SegMeter label="capture cadence" level={p.meters[0]} />
-      <SegMeter label="capture quality" level={p.meters[1]} />
-      <SegMeter label="battery life" level={p.meters[2]} />
-      <p className="pt-0.5 text-[10px] text-muted-foreground">{p.caption}</p>
+      <SegMeter label={tx("captureCadence")} level={profile.meters[0]} />
+      <SegMeter label={tx("captureQuality")} level={profile.meters[1]} />
+      <SegMeter label={tx("batteryLife")} level={profile.meters[2]} />
+      <p className="pt-0.5 text-[10px] text-muted-foreground">{tx(`power_${mode}` as "power_auto" | "power_performance" | "power_battery_saver")}</p>
     </div>
   );
 }
@@ -261,6 +268,7 @@ function ResultLine({ text, tag }: { text: string; tag: string }) {
 }
 
 export function CloudMediaAnalysisPreview() {
+  const p = useTranslations("previewUi2");
   // Waveform sticks: each gets its own duration + negative delay so the wave
   // never synchronizes (same trick as the meeting "listening" bars).
   const bars = [0.5, 0.9, 0.35, 0.8, 0.55, 1, 0.45];
@@ -272,7 +280,7 @@ export function CloudMediaAnalysisPreview() {
       <div className="grid grid-cols-[auto_auto_1fr] items-center gap-x-1 gap-y-2.5">
         {/* lane 1 — audio → transcript */}
         <span className="flex items-center">
-          <SourceTile label="audio">
+          <SourceTile label={p("audio")}>
             <span className="flex h-4 items-end gap-[2px]">
               {bars.map((h, i) => (
                 <span
@@ -300,15 +308,15 @@ export function CloudMediaAnalysisPreview() {
             <span className="absolute inset-0 animate-pulse rounded-[3px] border border-foreground/30" />
           </span>
           <span className="text-[9px] uppercase tracking-wider text-muted-foreground">
-            enclave
+            {p("enclave")}
           </span>
         </span>
 
-        <ResultLine text={"“…then we shipped the fix.”"} tag="transcript" />
+        <ResultLine text={p("sampleTranscript")} tag={p("transcript")} />
 
         {/* lane 2 — video & images → description */}
         <span className="flex items-center">
-          <SourceTile label="video · images">
+          <SourceTile label={p("videoImages")}>
             <span className="grid grid-cols-3 gap-[2px]">
               {[0.9, 0.4, 0.7, 0.5, 0.85, 0.35].map((o, i) => (
                 <span
@@ -322,13 +330,11 @@ export function CloudMediaAnalysisPreview() {
           <FlowTrack />
         </span>
 
-        <ResultLine text="dashboard open, chart trending up" tag="from video" />
+        <ResultLine text={p("dashboardOpen")} tag={p("fromVideo")} />
       </div>
 
       <p className="mt-2 text-[10px] text-muted-foreground">
-        speech becomes searchable text and video &amp; images become
-        descriptions — processed in a confidential enclave, then available to
-        Pi &amp; Claude Code.
+        {p("cloudDescription")}
       </p>
     </div>
   );
@@ -337,10 +343,11 @@ export function CloudMediaAnalysisPreview() {
 // ── Notifications ────────────────────────────────────────────────────
 // A sample of the actual notification, so the toggles aren't abstract.
 export function NotificationSamplePreview() {
+  const p = useTranslations("previewUi2");
   return (
     <div className="mb-4 rounded-lg border border-border bg-card px-3 py-2.5">
       <p className="mb-2 text-[10px] uppercase tracking-wider text-muted-foreground">
-        what these look like
+        {p("whatTheseLookLike")}
       </p>
       <div className="flex items-start gap-2.5 rounded-md border border-border bg-background px-2.5 py-2">
         <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-[6px] bg-foreground">
@@ -349,10 +356,10 @@ export function NotificationSamplePreview() {
         <div className="min-w-0 flex-1">
           <div className="flex items-center justify-between gap-2">
             <span className="text-xs font-medium text-foreground">screenpipe</span>
-            <span className="text-[10px] text-muted-foreground">now</span>
+            <span className="text-[10px] text-muted-foreground">{p("now")}</span>
           </div>
           <p className="truncate text-xs text-muted-foreground">
-            Audio capture recovered — recording is healthy again.
+            {p("audioRecovered")}
           </p>
         </div>
       </div>

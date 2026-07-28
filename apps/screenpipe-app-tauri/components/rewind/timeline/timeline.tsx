@@ -21,6 +21,7 @@ import { TimelineTagToolbar } from "./timeline-tag-toolbar";
 import { extractDomain, FaviconImg } from "./favicon-utils";
 import { localFetch } from "@/lib/api";
 import { getFrameThumbnailSources } from "@/lib/frame-thumbnails";
+import { useTranslations } from "next-intl";
 
 // Global cache: preloads app-icon images so they render instantly on scroll.
 // Maps app name → "loaded" | "error" | Promise (in-flight).
@@ -85,21 +86,21 @@ interface UiEventSummary {
 	timestamp: string;
 }
 
-function formatUiEvent(ev: UiEventSummary): { icon: string; label: string; context: string | null } | null {
+function formatUiEvent(ev: UiEventSummary, t: (key: string, values?: Record<string, string>) => string): { icon: string; label: string; context: string | null } | null {
 	const truncate = (s: string, max = 30) => s.length > max ? s.slice(0, max) + "\u2026" : s;
 	switch (ev.event_type) {
 		case "text":
 			return ev.text_content
-				? { icon: "\u2328", label: `typed "${truncate(ev.text_content)}"`, context: ev.app_name }
+				? { icon: "\u2328", label: t("typed", { text: truncate(ev.text_content) }), context: ev.app_name }
 				: null;
 		case "clipboard":
 			return ev.text_content
-				? { icon: "\ud83d\udccb", label: `copied "${truncate(ev.text_content)}"`, context: ev.app_name }
+				? { icon: "\ud83d\udccb", label: t("copied", { text: truncate(ev.text_content) }), context: ev.app_name }
 				: null;
 		case "click":
-			return { icon: "\ud83d\uddb1", label: `clicked "${truncate(ev.text_content || "element")}"`, context: ev.app_name };
+			return { icon: "\ud83d\uddb1", label: t("clicked", { text: truncate(ev.text_content || "element") }), context: ev.app_name };
 		case "app_switch":
-			return { icon: "\u21d4", label: `switched to ${ev.app_name || "app"}`, context: null };
+			return { icon: "\u21d4", label: t("switchedTo", { app: ev.app_name || "app" }), context: null };
 		default:
 			return null; // skip key, scroll, window_focus, move etc.
 	}
@@ -406,6 +407,9 @@ export const TimelineSlider = ({
 	scrubberRef,
 	isWheelNavigating = false,
 }: TimelineSliderProps) => {
+	const t = useTranslations("timeline");
+	const t2 = useTranslations("timelineUi2");
+	const t3 = useTranslations("timelineUi3");
 	const containerRef = useRef<HTMLDivElement>(null);
 	// The inner flex content (motion.div) that lays out frame bars and is the
 	// positioning context for the memory-marker layer. Memory diamonds are placed
@@ -1196,7 +1200,7 @@ export const TimelineSlider = ({
 							"bg-background/80 backdrop-blur-sm border border-border",
 						)}
 						onClick={onRefresh}
-						title="Refresh timeline"
+						title={t("refresh")}
 					>
 						<RotateCcw className="w-3.5 h-3.5 text-foreground/70" />
 					</button>
@@ -1214,7 +1218,7 @@ export const TimelineSlider = ({
 								expandedFilterSection === "monitor" && "bg-foreground/10",
 								selectedDeviceId !== "all" && "ring-1 ring-primary/50",
 							)}
-							title="Monitors"
+							title={t("monitors")}
 						>
 							<Monitor className="w-3.5 h-3.5 text-foreground/70" />
 						</button>
@@ -1262,7 +1266,7 @@ export const TimelineSlider = ({
 								expandedFilterSection === "app" && "bg-foreground/10",
 								selectedAppName !== "all" && "ring-1 ring-primary/50",
 							)}
-							title="Apps"
+							title={t("apps")}
 						>
 							<AppWindow className="w-3.5 h-3.5 text-foreground/70" />
 						</button>
@@ -1310,7 +1314,7 @@ export const TimelineSlider = ({
 								expandedFilterSection === "domain" && "bg-foreground/10",
 								selectedDomain !== "all" && "ring-1 ring-primary/50",
 							)}
-							title="Domains"
+							title={t("domains")}
 						>
 							<Globe className="w-3.5 h-3.5 text-foreground/70" />
 						</button>
@@ -1358,7 +1362,7 @@ export const TimelineSlider = ({
 								expandedFilterSection === "speaker" && "bg-foreground/10",
 								selectedSpeaker !== "all" && "ring-1 ring-primary/50",
 							)}
-							title="Speakers"
+							title={t("speakers")}
 						>
 							<Mic className="w-3.5 h-3.5 text-foreground/70" />
 						</button>
@@ -1406,7 +1410,7 @@ export const TimelineSlider = ({
 								expandedFilterSection === "calls" && "bg-foreground/10",
 								selectedMeeting !== "all" && "ring-1 ring-primary/50",
 							)}
-							title="Calls"
+							title={t("calls")}
 						>
 							<Phone className="w-3.5 h-3.5 text-foreground/70" />
 						</button>
@@ -1461,7 +1465,7 @@ export const TimelineSlider = ({
 								expandedFilterSection === "tag" && "bg-foreground/10",
 								selectedTag !== "all" && "ring-1 ring-primary/50",
 							)}
-							title="Tags"
+							title={t("tags")}
 						>
 							<Hash className="w-3.5 h-3.5 text-foreground/70" />
 						</button>
@@ -1508,7 +1512,7 @@ export const TimelineSlider = ({
 							expandedFilterSection === "zoom" && "bg-foreground/10",
 						)}
 						onClick={() => setTargetZoom((prev) => Math.min(MAX_ZOOM, prev * 1.5))}
-						title="Zoom in (or pinch/Cmd+scroll)"
+						title={t("zoomIn")}
 					>
 						<ZoomIn className="w-3.5 h-3.5 text-foreground/70" />
 					</button>
@@ -1522,7 +1526,7 @@ export const TimelineSlider = ({
 						<button
 							onClick={() => setTargetZoom((prev) => Math.max(MIN_ZOOM, prev / 1.5))}
 							className="p-0.5 hover:bg-foreground/10 rounded transition-colors shrink-0"
-							title="Zoom out"
+							title={t("zoomOut")}
 						>
 							<ZoomOut className="w-3.5 h-3.5 text-foreground" />
 						</button>
@@ -1538,7 +1542,7 @@ export const TimelineSlider = ({
 						"bg-background/80 backdrop-blur-sm border border-border hover:bg-accent",
 					)}
 					onClick={() => setFiltersCollapsed((prev) => !prev)}
-					title={filtersCollapsed ? "Show filters" : "Hide filters"}
+					title={filtersCollapsed ? t("showFilters") : t("hideFilters")}
 				>
 					{filtersCollapsed ? (
 						<PanelBottomOpen className="w-3.5 h-3.5 text-foreground/70" />
@@ -1969,7 +1973,7 @@ export const TimelineSlider = ({
 																src={getFrameThumbnailSources(frameId).src}
 																srcSet={getFrameThumbnailSources(frameId).srcSet}
 																sizes="256px"
-																alt="frame preview"
+										alt={t2("framePreview")}
 																className="w-full h-full object-cover select-none"
 																loading="lazy"
 																decoding="async"
@@ -2003,7 +2007,7 @@ export const TimelineSlider = ({
 													{hasAudio && (
 														<p className="text-muted-foreground flex items-center gap-1 mt-1">
 															<Mic className="w-3 h-3" />
-															<span>audio recorded</span>
+															<span>{t("audioRecorded")}</span>
 														</p>
 													)}
 													{hasTags && (
@@ -2018,7 +2022,7 @@ export const TimelineSlider = ({
 														const events = uiEventsCache[frame.timestamp];
 														if (!events || events.length === 0) return null;
 														const formatted = events
-															.map(formatUiEvent)
+										.map((ev) => formatUiEvent(ev, t2))
 															.filter((e): e is NonNullable<typeof e> => e !== null);
 														if (formatted.length === 0) return null;
 														const shown = formatted.slice(0, 5);
@@ -2031,13 +2035,13 @@ export const TimelineSlider = ({
 																		<p key={i} className="text-muted-foreground text-[11px] leading-tight">
 																			<span>{ev.icon} {ev.label}</span>
 																			{ev.context && (
-																				<span className="opacity-60"> (in {ev.context})</span>
+																				<span className="opacity-60">{t("inContext", { context: ev.context })}</span>
 																			)}
 																		</p>
 																	))}
 																	{remaining > 0 && (
 																		<p className="text-muted-foreground/60 text-[10px]">
-																			{remaining} more...
+									{t3("moreCount", { count: remaining })}
 																		</p>
 																	)}
 																</div>
@@ -2102,7 +2106,7 @@ export const TimelineSlider = ({
 					<p className="text-muted-foreground text-[10px] mt-0.5">
 						{format(new Date(hoveredChatConv.conv.createdAt), 'h:mm a')}
 						{" · "}
-						{hoveredChatConv.conv.messages.length} messages
+							{t3("messageCount", { count: hoveredChatConv.conv.messages.length })}
 					</p>
 				</div>,
 				document.body

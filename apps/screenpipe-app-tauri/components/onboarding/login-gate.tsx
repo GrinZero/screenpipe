@@ -9,6 +9,7 @@ import { commands } from "@/lib/utils/tauri";
 import { motion, AnimatePresence } from "framer-motion";
 import posthog from "posthog-js";
 import { isDevBillingBypassEnabled } from "@/lib/app-entitlement";
+import { useTranslations } from "next-intl";
 
 interface OnboardingLoginProps {
   handleNextSlide: () => void;
@@ -230,6 +231,7 @@ const OnboardingLogin: React.FC<OnboardingLoginProps> = ({
   handleNextSlide,
   suppressAutoAdvance = false,
 }) => {
+  const t = useTranslations("onboardingLoginUi");
   const { settings, isSettingsLoaded } = useSettings();
   const hasAdvanced = useRef(false);
   const [showSkip, setShowSkip] = useState(false);
@@ -318,7 +320,7 @@ const OnboardingLogin: React.FC<OnboardingLoginProps> = ({
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
         >
-          ai finally knows what you&apos;re doing
+          {t("tagline")}
         </motion.p>
 
         {isLoggedIn ? (
@@ -328,7 +330,7 @@ const OnboardingLogin: React.FC<OnboardingLoginProps> = ({
             animate={{ opacity: 1, scale: 1 }}
           >
             <span className="font-mono text-xs text-foreground/80">
-              ✓ signed in as {settings.user?.email || "user"}
+              {t("signedInAs", { email: settings.user?.email || t("user") })}
             </span>
           </motion.div>
         ) : (
@@ -354,7 +356,7 @@ const OnboardingLogin: React.FC<OnboardingLoginProps> = ({
 
               {/* Text */}
               <span className="relative z-10 font-mono text-sm tracking-[0.25em] uppercase font-medium text-foreground group-hover:text-background transition-colors duration-150">
-                sign in
+                {t("signIn")}
               </span>
 
               {/* Corner marks */}
@@ -372,8 +374,8 @@ const OnboardingLogin: React.FC<OnboardingLoginProps> = ({
               transition={{ duration: 0.5, delay: 1.0 }}
             >
               {suppressAutoAdvance
-                ? "sign in with your enterprise account"
-                : "sign in to start free"}
+                ? t("enterpriseSignIn")
+                : t("freeSignIn")}
             </motion.p>
           </>
         )}
@@ -387,7 +389,7 @@ const OnboardingLogin: React.FC<OnboardingLoginProps> = ({
               onClick={handleSkip}
               className="font-mono text-xs text-muted-foreground/70 hover:text-foreground underline underline-offset-4 decoration-muted-foreground/40 hover:decoration-foreground transition-colors mt-8 tracking-wide"
             >
-              skip for dev — continue without an account
+              {t("skipDev")}
             </motion.button>
           )}
         </AnimatePresence>

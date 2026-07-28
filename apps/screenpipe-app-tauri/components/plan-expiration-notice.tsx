@@ -4,6 +4,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { ArrowRight, Clock } from "lucide-react";
 import posthog from "posthog-js";
 import {
@@ -53,6 +54,7 @@ export function PlanExpirationNotice({
   onClick,
   variant = "sidebar",
 }: PlanExpirationNoticeProps) {
+  const t = useTranslations("planExpirationUi");
   const expiration = getUserPlanExpiration(user);
   const plan = user?.subscription_plan;
   const planName = planDisplayName(plan);
@@ -72,9 +74,7 @@ export function PlanExpirationNotice({
 
   if (!expiration) return null;
 
-  const dayLabel = `${expiration.daysRemaining} ${
-    expiration.daysRemaining === 1 ? "day" : "days"
-  }`;
+  const dayLabel = t("days", { count: expiration.daysRemaining });
   const handleClick = () => {
     posthog.capture("plan_expiration_notice_clicked", {
       surface: variant,
@@ -96,10 +96,10 @@ export function PlanExpirationNotice({
           <Clock className="mt-0.5 h-4 w-4 shrink-0" />
           <div className="min-w-0 flex-1">
             <p className="text-sm font-medium">
-              {planName} plan ends in {dayLabel}
+              {t("planEnds", { plan: planName, days: dayLabel })}
             </p>
             <p className="mt-1 text-xs text-muted-foreground">
-              manage your plan and billing on screenpipe.com
+              {t("manageBilling")}
             </p>
           </div>
         </div>
@@ -108,7 +108,7 @@ export function PlanExpirationNotice({
           onClick={handleClick}
           className="mt-4 flex w-full items-center justify-center gap-1.5 border border-foreground px-3 py-2 text-xs font-medium uppercase tracking-wide transition-colors duration-150 hover:bg-foreground hover:text-background"
         >
-          manage subscription
+          {t("manageSubscription")}
           <ArrowRight className="h-3.5 w-3.5" />
         </button>
       </div>
@@ -126,10 +126,10 @@ export function PlanExpirationNotice({
         <Clock className="mt-0.5 h-3.5 w-3.5 shrink-0" />
         <span className="min-w-0 flex-1">
           <span className="block text-xs font-medium">
-            Plan ending soon
+            {t("planEndingSoon")}
           </span>
           <span className="mt-0.5 block text-[11px] opacity-70">
-            {planName} access ends in {dayLabel}
+            {t("accessEnds", { plan: planName, days: dayLabel })}
           </span>
         </span>
         <ArrowRight className="mt-0.5 h-3.5 w-3.5 shrink-0" />

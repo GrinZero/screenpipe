@@ -4,6 +4,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Loader2, RefreshCw, LogOut, ExternalLink, FileText, Plus } from "lucide-react";
@@ -26,6 +27,7 @@ interface DocsAccount {
 }
 
 export function GoogleDocsCard() {
+  const cp = useTranslations("connectionPanelUi3");
   const [accounts, setAccounts] = useState<DocsAccount[]>([]);
   const [isConnecting, setIsConnecting] = useState(false);
   const [disconnecting, setDisconnecting] = useState<string | null>(null);
@@ -156,14 +158,13 @@ export function GoogleDocsCard() {
               <h3 className="text-sm font-semibold text-foreground">Google Docs</h3>
               {connected && (
                 <span className="px-2 py-0.5 text-xs font-medium bg-foreground text-background rounded-full">
-                  {accounts.length} account{accounts.length > 1 ? "s" : ""}
+              {cp("accountsCount", { count: accounts.length })}
                 </span>
               )}
             </div>
 
             <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
-              Read and write access to Google Docs. Lets AI search, read, create, and edit documents.
-              Only docs you open with screenpipe or that screenpipe creates are visible — not your whole Drive.
+              {cp("googleDocsDescription")}
             </p>
 
             {accounts.length > 0 && (
@@ -174,7 +175,7 @@ export function GoogleDocsCard() {
                   return (
                     <div key={key} className="flex items-center justify-between gap-2 text-xs">
                       <span className="text-muted-foreground truncate">
-                        {account.displayName || account.instance || "default account"}
+                        {account.displayName || account.instance || cp("defaultAccount")}
                       </span>
                       <Button
                         variant="ghost"
@@ -211,10 +212,10 @@ export function GoogleDocsCard() {
                     <img src="/images/google-docs.svg" alt="" className="h-3 w-3 mr-1.5" />
                   )}
                   {isConnecting
-                    ? "Waiting for Google..."
+                    ? cp("waitingForGoogle")
                     : connected
-                    ? "Add another account"
-                    : "Connect Google Docs"}
+                    ? cp("addAnotherAccount")
+                    : cp("connectGoogleDocs")}
                 </Button>
                 {!connected && <GoogleOAuthUnverifiedAppHint />}
             </div>
@@ -225,7 +226,7 @@ export function GoogleDocsCard() {
         {connected && (
           <div className="px-4 pb-3 pt-1 border-t border-border">
             <div className="flex items-center justify-between mt-2 mb-2">
-              <span className="text-xs font-medium text-muted-foreground">recently modified docs</span>
+              <span className="text-xs font-medium text-muted-foreground">{cp("recentlyModifiedDocs")}</span>
               <Button
                 variant="ghost"
                 size="sm"
@@ -238,9 +239,9 @@ export function GoogleDocsCard() {
             </div>
 
             {isLoadingDocs && recentDocs.length === 0 ? (
-              <p className="text-xs text-muted-foreground">loading...</p>
+              <p className="text-xs text-muted-foreground">{cp("loading")}</p>
             ) : recentDocs.length === 0 ? (
-              <p className="text-xs text-muted-foreground">no recent documents found</p>
+              <p className="text-xs text-muted-foreground">{cp("noRecentDocuments")}</p>
             ) : (
               <div className="space-y-1.5">
                 {recentDocs.map((doc) => (

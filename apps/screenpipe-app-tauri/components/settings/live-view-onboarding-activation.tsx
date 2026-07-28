@@ -7,6 +7,7 @@
 import React from "react";
 import { AlertCircle, Check, Circle, Loader2, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 import type { OnboardingGoalCategory } from "@/lib/live-views/onboarding-goals";
 import type { OnboardingLiveViewActivation } from "@/lib/live-views/onboarding-activation";
 
@@ -14,39 +15,42 @@ type CaptureReadiness = "checking" | "ready" | "blocked";
 
 const PATH_COPY: Record<
   OnboardingGoalCategory,
-  { firstAction: string; reviewAction: string }
+  { firstAction: keyof typeof LIVE_VIEW_COPY; reviewAction: keyof typeof LIVE_VIEW_COPY }
 > = {
   work_memory: {
-    firstAction:
-      "Work normally for a few minutes. A useful resume point appears only after Screenpipe observes real work and a loose end.",
-    reviewAction:
-      "Open one result and check whether it helps you resume the right task.",
+    firstAction: "workMemoryFirst",
+    reviewAction: "workMemoryReview",
   },
   meeting_follow_through: {
-    firstAction:
-      "Finish a real call with microphone and system audio enabled. Decisions and next steps appear only after a meeting is captured.",
-    reviewAction:
-      "Review one decision or action item and correct it if the owner or next step is wrong.",
+    firstAction: "meetingFirst",
+    reviewAction: "meetingReview",
   },
   work_patterns: {
-    firstAction:
-      "Use a few work apps for 10–15 minutes. A useful pattern needs enough captured activity to compare.",
-    reviewAction:
-      "Check one pattern against what you remember doing, then mark the result useful or not useful.",
+    firstAction: "patternsFirst",
+    reviewAction: "patternsReview",
   },
   process_automation: {
-    firstAction:
-      "Complete one repeated workflow from start to finish. A process map needs an observed run before it can suggest steps.",
-    reviewAction:
-      "Confirm or correct one observed process step before acting on an automation suggestion.",
+    firstAction: "automationFirst",
+    reviewAction: "automationReview",
   },
   custom: {
-    firstAction:
-      "Use Screenpipe normally. Your first result appears when it has enough activity to answer your request.",
-    reviewAction:
-      "Review one result and mark it useful or not useful so future updates can improve.",
+    firstAction: "customFirst",
+    reviewAction: "customReview",
   },
 };
+
+const LIVE_VIEW_COPY = {
+  workMemoryFirst: "",
+  workMemoryReview: "",
+  meetingFirst: "",
+  meetingReview: "",
+  patternsFirst: "",
+  patternsReview: "",
+  automationFirst: "",
+  automationReview: "",
+  customFirst: "",
+  customReview: "",
+} as const;
 
 function StatusRow({
   state,
@@ -103,6 +107,8 @@ export function LiveViewOnboardingActivation({
   onFixCapture: () => void;
   onComplete: () => void;
 }) {
+  const t = useTranslations("liveViewOnboardingUi");
+  const t2 = useTranslations("liveViewOnboardingUi2");
   const copy = PATH_COPY[goalCategory];
 
   if (hasResult) {
@@ -117,11 +123,10 @@ export function LiveViewOnboardingActivation({
         </span>
         <div>
           <p className="text-xs font-semibold">
-            your first real result is ready
+            {t("firstResultReady")}
           </p>
           <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
-            {copy.reviewAction} You can also use the thumbs controls on any card
-            to help future updates improve.
+            {t(copy.reviewAction)} {t("reviewHint")}
           </p>
         </div>
         <Button
@@ -131,7 +136,7 @@ export function LiveViewOnboardingActivation({
           className="rounded-none"
           onClick={onComplete}
         >
-          I reviewed it
+          {t("reviewed")}
         </Button>
       </div>
     );
@@ -139,15 +144,15 @@ export function LiveViewOnboardingActivation({
 
   const captureStatus =
     captureReadiness === "ready"
-      ? { state: "ready" as const, detail: "Screenpipe capture is on." }
+      ? { state: "ready" as const, detail: t("captureOn") }
       : captureReadiness === "blocked"
         ? {
             state: "blocked" as const,
-            detail: "Capture needs attention before this view can learn.",
+            detail: t("captureBlocked"),
           }
         : {
             state: "working" as const,
-            detail: "Checking local capture health.",
+            detail: t("captureChecking"),
           };
 
   return (
@@ -159,21 +164,20 @@ export function LiveViewOnboardingActivation({
       <div className="grid gap-4 border-b border-border p-5 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <div>
           <p className="text-[10px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
-            first result
+            {t2("firstResult")}
           </p>
           <h3 className="mt-2 text-lg font-semibold tracking-tight">
-            this Live View starts with your real work
+            {t2("startsWithRealWork")}
           </h3>
           <p className="mt-2 max-w-2xl text-xs leading-relaxed text-muted-foreground">
-            There is no sample data to pretend the setup worked.{" "}
-            {copy.firstAction}
+            {t2("noSampleData")} {" "}
+            {t(copy.firstAction)}
           </p>
         </div>
         <div className="flex items-center border border-border bg-muted/20 p-4">
           <Circle className="mr-3 h-3 w-3 fill-foreground" />
           <p className="text-[11px] leading-relaxed">
-            Keep Screenpipe running. This page will reveal the dashboard as soon
-            as soon as one real result is ready.
+            {t2("keepRunning")}
           </p>
         </div>
       </div>
@@ -181,7 +185,7 @@ export function LiveViewOnboardingActivation({
       <div className="px-5">
         <StatusRow
           state={captureStatus.state}
-          label="capture"
+          label={t("capture")}
           detail={captureStatus.detail}
         />
         <StatusRow
@@ -192,22 +196,22 @@ export function LiveViewOnboardingActivation({
                 ? "ready"
                 : "working"
           }
-          label="setup"
+          label={t("setup")}
           detail={
             setupStatus === "needs_retry"
-              ? (setupError ?? "Setup paused before it finished.")
+              ? (setupError ?? t("setupPaused"))
               : pipesReady
-                ? "Screenpipe is ready to update this view."
-                : "Finishing setup for this view."
+                ? t("setupReady")
+                : t("setupFinishing")
           }
         />
         <StatusRow
           state="working"
-          label="first result"
+          label={t("firstResult")}
           detail={
             refreshing
-              ? "Reading recent activity now."
-              : "Waiting for enough real activity."
+              ? t("readingNow")
+              : t("waitingActivity")
           }
         />
       </div>
@@ -224,7 +228,7 @@ export function LiveViewOnboardingActivation({
             <RefreshCw
               className={`mr-1.5 h-3.5 w-3.5 ${retrying ? "animate-spin" : ""}`}
             />
-            {retrying ? "finishing setup" : "finish setup"}
+            {retrying ? t("finishingSetup") : t("finishSetup")}
           </Button>
         ) : captureReadiness === "blocked" ? (
           <Button
@@ -233,7 +237,7 @@ export function LiveViewOnboardingActivation({
             className="rounded-none"
             onClick={onFixCapture}
           >
-            fix capture
+            {t("fixCapture")}
           </Button>
         ) : (
           <Button
@@ -247,11 +251,11 @@ export function LiveViewOnboardingActivation({
             <RefreshCw
               className={`mr-1.5 h-3.5 w-3.5 ${refreshing ? "animate-spin" : ""}`}
             />
-            {refreshing ? "checking" : "check now"}
+            {refreshing ? t("checking") : t("checkNow")}
           </Button>
         )}
         <span className="text-[11px] text-muted-foreground">
-          You can leave this page. Screenpipe keeps working.
+          {t("leavePage")}
         </span>
       </div>
     </div>

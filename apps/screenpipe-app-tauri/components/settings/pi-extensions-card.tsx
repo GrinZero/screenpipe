@@ -4,6 +4,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   AlertCircle,
   CheckCircle2,
@@ -70,6 +71,7 @@ function PiExtensionRow({
   disabled: boolean;
   onToggle: (checked: boolean) => void;
 }) {
+  const su4 = useTranslations("skillsUi4");
   const published = relativeDate(item.publishedAt);
 
   return (
@@ -83,17 +85,17 @@ function PiExtensionRow({
             {enabled && (
               <span className="inline-flex items-center gap-1 border border-border px-1.5 py-0.5 text-[10px] text-muted-foreground">
                 <CheckCircle2 className="h-3 w-3" />
-                on
+                {su4("on")}
               </span>
             )}
             {item.required && (
               <span className="border border-border px-1.5 py-0.5 text-[10px] text-muted-foreground">
-                required
+                {su4("required")}
               </span>
             )}
             {stale && (
               <span className="border border-amber-500/40 bg-amber-500/10 px-1.5 py-0.5 text-[10px] text-amber-800 dark:text-amber-300">
-                repair needed
+                {su4("repairNeeded")}
               </span>
             )}
           </div>
@@ -107,7 +109,7 @@ function PiExtensionRow({
           <Switch
             checked
             disabled
-            aria-label={`${item.name} always enabled`}
+            aria-label={su4("alwaysEnabled", { name: item.name })}
             className="shrink-0"
           />
         ) : (
@@ -115,7 +117,7 @@ function PiExtensionRow({
             checked={enabled}
             disabled={disabled || busy}
             onCheckedChange={onToggle}
-            aria-label={`${enabled ? "Disable" : "Enable"} ${item.name}`}
+            aria-label={su4(enabled ? "disable" : "enable", { name: item.name })}
             className="shrink-0"
           />
         )}
@@ -139,7 +141,7 @@ function PiExtensionRow({
           onClick={() => openUrl(item.npmUrl)}
           className="ml-auto inline-flex items-center gap-1 underline-offset-4 hover:underline"
         >
-          npm <ExternalLink className="h-3 w-3" />
+          {su4("npm")} <ExternalLink className="h-3 w-3" />
         </button>
         {item.sourceUrl && (
           <button
@@ -147,7 +149,7 @@ function PiExtensionRow({
             onClick={() => openUrl(item.sourceUrl!)}
             className="inline-flex items-center gap-1 underline-offset-4 hover:underline"
           >
-            source <ExternalLink className="h-3 w-3" />
+            {su4("source")} <ExternalLink className="h-3 w-3" />
           </button>
         )}
       </div>
@@ -219,6 +221,10 @@ function PiExtensionRecentCard({
 }
 
 export function PiExtensionsCard({ onChanged }: { onChanged?: () => void }) {
+  const t = useTranslations("skills");
+  const u = useTranslations("residualBulk3");
+  const su = useTranslations("skillsUi2");
+  const pi = useTranslations("piUi5");
   const [packages, setPackages] = useState<PiExtensionPackage[]>([]);
   const [loaded, setLoaded] = useState(false);
   const [query, setQuery] = useState("");
@@ -334,7 +340,7 @@ export function PiExtensionsCard({ onChanged }: { onChanged?: () => void }) {
         if (res.status === "error") {
           setError(res.error);
           toast({
-            title: "Pi extension failed",
+            title: u("extensionFailed"),
             description: res.error,
             variant: "destructive",
           });
@@ -345,13 +351,13 @@ export function PiExtensionsCard({ onChanged }: { onChanged?: () => void }) {
         onChanged?.();
         toast({
           title: checked ? `${item.name} enabled` : `${item.name} disabled`,
-          description: "Pi reloads idle sessions so the next turn uses the new package list.",
+          description: u("extensionReload"),
         });
       } catch (err) {
         const message = packageErrorMessage(err);
         setError(message);
         toast({
-          title: "Pi extension failed",
+          title: u("extensionFailed"),
           description: message,
           variant: "destructive",
         });
@@ -371,7 +377,7 @@ export function PiExtensionsCard({ onChanged }: { onChanged?: () => void }) {
         if (res.status === "error") {
           setError(res.error);
           toast({
-            title: "Pi extension failed",
+            title: u("extensionFailed"),
             description: res.error,
             variant: "destructive",
           });
@@ -381,14 +387,14 @@ export function PiExtensionsCard({ onChanged }: { onChanged?: () => void }) {
         setPackages(res.data);
         onChanged?.();
         toast({
-          title: "Pi extension disabled",
-          description: "Pi reloads idle sessions so the next turn uses the new package list.",
+          title: u("extensionDisabled"),
+          description: u("extensionReload"),
         });
       } catch (err) {
         const message = packageErrorMessage(err);
         setError(message);
         toast({
-          title: "Pi extension failed",
+          title: u("extensionFailed"),
           description: message,
           variant: "destructive",
         });
@@ -404,9 +410,9 @@ export function PiExtensionsCard({ onChanged }: { onChanged?: () => void }) {
       <div className="space-y-2">
         <div className="flex items-center justify-between gap-3">
           <div>
-            <h3 className="text-sm font-medium text-foreground">Pi extensions</h3>
+            <h3 className="text-sm font-medium text-foreground">{su("piExtensions")}</h3>
             <p className="text-xs leading-relaxed text-muted-foreground">
-              Install Pi packages into screenpipe&apos;s isolated Pi agent.
+              {pi("installDescription")}
             </p>
           </div>
           <Button
@@ -425,10 +431,10 @@ export function PiExtensionsCard({ onChanged }: { onChanged?: () => void }) {
             <ShieldAlert className="mt-0.5 h-4 w-4 text-muted-foreground" />
             <div className="space-y-1 text-xs leading-relaxed text-muted-foreground">
               <p>
-                Third-party Pi packages can execute local code and influence agent behavior.
+                {pi("thirdPartyWarning")}
               </p>
               <p>
-                Subagents and web automation are best with strong cloud models. For Ollama or other small local models, start with Ask user or Package search.
+                {pi("modelRecommendation")}
               </p>
             </div>
           </div>
@@ -440,7 +446,7 @@ export function PiExtensionsCard({ onChanged }: { onChanged?: () => void }) {
         <Input
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search Pi extensions..."
+            placeholder={t("searchPiExtensions")}
           className="h-8 pl-8 text-xs"
         />
       </div>
@@ -455,14 +461,14 @@ export function PiExtensionsCard({ onChanged }: { onChanged?: () => void }) {
       {!loaded ? (
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <Loader2 className="h-3.5 w-3.5 animate-spin" />
-          loading Pi extensions...
+          {su("loadingPiExtensions")}
         </div>
       ) : (
         <div className="space-y-4">
           <div className="space-y-2">
             <div className="flex items-center justify-between gap-3">
               <h4 className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
-                Curated
+                {pi("curated")}
               </h4>
               <span className="text-[11px] tabular-nums text-muted-foreground">
                 {visibleItems.length}
@@ -486,7 +492,7 @@ export function PiExtensionsCard({ onChanged }: { onChanged?: () => void }) {
             </div>
             {visibleItems.length === 0 && (
               <div className="rounded-md border border-border bg-muted/25 p-3 text-xs text-muted-foreground">
-                No matching curated Pi extensions.
+                {su("noMatchingCurated")}
               </div>
             )}
           </div>
@@ -495,10 +501,10 @@ export function PiExtensionsCard({ onChanged }: { onChanged?: () => void }) {
             <div className="space-y-2">
               <div className="flex items-center justify-between gap-3">
                 <h4 className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
-                  Recently published
+                  {pi("recentlyPublished")}
                 </h4>
                 <span className="text-[11px] text-muted-foreground">
-                  from npm
+                  {pi("fromNpm")}
                 </span>
               </div>
               <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-4">
@@ -523,11 +529,11 @@ export function PiExtensionsCard({ onChanged }: { onChanged?: () => void }) {
           <div className="space-y-2">
             <div className="flex items-center justify-between gap-3">
               <h4 className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
-                All packages
+                {pi("allPackages")}
               </h4>
               <span className="text-[11px] text-muted-foreground">
                 {registryLoading
-                  ? "searching..."
+                  ? pi("searching")
                   : registryTotal === null
                     ? "registry"
                     : `${visibleRegistryItems.length} shown / ${registryTotal.toLocaleString()} matches`}
@@ -535,7 +541,7 @@ export function PiExtensionsCard({ onChanged }: { onChanged?: () => void }) {
             </div>
             {registryError && (
               <div className="rounded-md border border-border bg-muted/25 p-3 text-xs text-muted-foreground">
-                Could not search npm right now. Curated packages are still available.
+                {pi("searchError")}
               </div>
             )}
             <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
@@ -556,20 +562,20 @@ export function PiExtensionsCard({ onChanged }: { onChanged?: () => void }) {
             </div>
             {!registryLoading && !registryError && visibleRegistryItems.length === 0 && (
               <div className="rounded-md border border-border bg-muted/25 p-3 text-xs text-muted-foreground">
-                No npm Pi packages matched this search.
+                {pi("noMatches")}
               </div>
             )}
             {registryLoading && visibleRegistryItems.length === 0 && (
               <div className="flex items-center gap-2 rounded-md border border-border bg-muted/25 p-3 text-xs text-muted-foreground">
                 <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                searching npm packages...
+                {pi("searchingPackages")}
               </div>
             )}
           </div>
 
           {visibleItems.length === 0 && visibleRegistryItems.length === 0 && registryError && (
             <div className="rounded-md border border-border bg-muted/25 p-3 text-xs text-muted-foreground">
-              Try another search or refresh the catalog.
+              {pi("tryAnother")}
             </div>
           )}
         </div>
@@ -577,7 +583,7 @@ export function PiExtensionsCard({ onChanged }: { onChanged?: () => void }) {
 
       {unknownPackages.length > 0 && (
         <div className="space-y-2">
-          <h4 className="text-xs font-medium text-muted-foreground">Installed outside this list</h4>
+          <h4 className="text-xs font-medium text-muted-foreground">{su("installedOutsideList")}</h4>
           <div className="space-y-1.5">
             {unknownPackages.map((pkg) => (
               <div

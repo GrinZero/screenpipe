@@ -4,6 +4,7 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { listen } from "@tauri-apps/api/event";
 import { writeActiveAiPresetId } from "@/lib/active-ai-preset";
@@ -92,13 +93,13 @@ const TAG_SUGGESTION_LIMIT = 10;
 const STREAM_RENDER_THROTTLE_MS = 80;
 
 const STATIC_MENTION_SUGGESTIONS: MentionSuggestion[] = [
-  { tag: "@today", description: "today's activity", category: "time" },
+  { tag: "@today", description: "todayActivity", category: "time" },
   { tag: "@yesterday", description: "yesterday", category: "time" },
-  { tag: "@last-week", description: "past 7 days", category: "time" },
-  { tag: "@last-hour", description: "past hour", category: "time" },
-  { tag: "@audio", description: "audio/meetings only", category: "content" },
-  { tag: "@screen", description: "screen text only", category: "content" },
-  { tag: "@input", description: "UI events (clicks, keys)", category: "content" },
+  { tag: "@last-week", description: "pastWeek", category: "time" },
+  { tag: "@last-hour", description: "pastHour", category: "time" },
+  { tag: "@audio", description: "audioMeetingsOnly", category: "content" },
+  { tag: "@screen", description: "screenTextOnly", category: "content" },
+  { tag: "@input", description: "uiEvents", category: "content" },
 ];
 
 /**
@@ -123,6 +124,9 @@ export function StandaloneChat({
    *  padding on the chat header since the sidebar no longer covers them. */
   sidebarCollapsed?: boolean;
 } = {}) {
+  const t = useTranslations("common");
+  const u = useTranslations("residualUi");
+  const tagText = useTranslations("residualUi3");
   const { settings, updateSettings, isSettingsLoaded, reloadStore } = useSettings();
   const { isMac, isWindows, isLoading: isPlatformLoading } = usePlatform();
   const hardcodedConnectionTiles = useHardcodedTiles();
@@ -267,11 +271,11 @@ export function StandaloneChat({
     };
 
     return [
-      { label: "memory tags", suggestions: pick("memory_count") },
-      { label: "audio tags", suggestions: pick("audio_count") },
-      { label: "screen tags", suggestions: pick("frame_count") },
+      { label: t("memoryTags"), suggestions: pick("memory_count") },
+      { label: t("audioTags"), suggestions: pick("audio_count") },
+      { label: t("screenTags"), suggestions: pick("frame_count") },
     ].filter((section) => section.suggestions.length > 0);
-  }, [tagItems]);
+  }, [tagItems, t]);
 
   const appTagMap = React.useMemo(() => {
     const map: Record<string, string> = {};
@@ -284,8 +288,11 @@ export function StandaloneChat({
   }, [appMentionSuggestions]);
 
   const atMentionSuggestions = React.useMemo(
-    () => [...STATIC_MENTION_SUGGESTIONS, ...appMentionSuggestions],
-    [appMentionSuggestions]
+    () => [
+      ...STATIC_MENTION_SUGGESTIONS.map((item) => ({ ...item, description: tagText(item.description) })),
+      ...appMentionSuggestions,
+    ],
+    [appMentionSuggestions, tagText]
   );
   const {
     showMentionDropdown,
@@ -467,7 +474,7 @@ export function StandaloneChat({
     }
 
     toast({
-      title: "sign in required",
+          title: u("signInRequired"),
       description: buildInvalidatedAuthTokenMessage(),
       variant: "destructive",
     });
@@ -995,7 +1002,7 @@ export function StandaloneChat({
     );
     if (result.status === "error") {
       toast({
-        title: "failed to answer connection request",
+        title: u("connectionRequestFailed"),
         description: result.error,
         variant: "destructive",
       });
@@ -1315,7 +1322,7 @@ export function StandaloneChat({
                   toggleInspector();
                 }}
                 className={cn("h-7 w-7", activeSideView === "inspector" && "bg-muted")}
-                title="Inspector"
+                title={t("inspector")}
               >
                 <Settings2 size={14} />
               </Button>
@@ -1500,7 +1507,7 @@ export function StandaloneChat({
           onSelectNextFilterResult: selectNextFilterResult,
           onSelectPreviousFilterResult: selectPreviousFilterResult,
           onApplySelectedFilterResult: applySelectedFilterResult,
-          staticMentionSuggestions: STATIC_MENTION_SUGGESTIONS,
+          staticMentionSuggestions: atMentionSuggestions.filter((item) => item.tag.startsWith("@")),
           appMentionSuggestions,
           allTagMentionSuggestions,
           tagMentionSections,

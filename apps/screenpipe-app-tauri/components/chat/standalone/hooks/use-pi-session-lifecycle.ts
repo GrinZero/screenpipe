@@ -7,7 +7,13 @@ import type * as React from "react";
 import { homeDir, join } from "@tauri-apps/api/path";
 import { readActiveAiPresetId } from "@/lib/active-ai-preset";
 import { toast } from "@/components/ui/use-toast";
-import { buildAppAwarenessContext, buildConnectionsContext, buildSystemPrompt } from "@/lib/chat/system-prompt";
+import { useTranslations } from "next-intl";
+import {
+  buildAppAwarenessContext,
+  buildChatSystemPrompt,
+  buildConnectionsContext,
+} from "@/lib/chat/system-prompt";
+import { getStoredLocale } from "@/lib/hooks/use-locale";
 import { commands, type AIPreset, type PiInfo, type PiProviderConfig } from "@/lib/utils/tauri";
 import type { ActivityAppItem, ConnectedIntegration, ConnectionListItem } from "@/lib/chat/connection-suggestions";
 
@@ -73,6 +79,7 @@ export function usePiSessionLifecycle({
   piStoppedIntentionallyRef,
   piPresetSwitchPromiseRef,
 }: UsePiSessionLifecycleOptions) {
+  const u = useTranslations("residualBulk3");
   const pendingPresetRef = useRef<AIPreset | null>(null);
 
   useEffect(() => {
@@ -134,7 +141,13 @@ export function usePiSessionLifecycle({
       apps: appItems,
       connections: allConnectionItems,
     });
-    const systemPrompt = `${buildSystemPrompt()}\n\n${presetPrompt}${connectionsCtx}${appAwarenessCtx}`.trim() || null;
+    const systemPrompt =
+      buildChatSystemPrompt({
+        locale: getStoredLocale(),
+        presetPrompt,
+        connectionsContext: connectionsCtx,
+        appAwarenessContext: appAwarenessCtx,
+      }) || null;
     return {
       provider: p.provider,
       url: p.url || "",
@@ -269,7 +282,7 @@ export function usePiSessionLifecycle({
   const handlePiRestart = useCallback((preset: AIPreset) => {
     if (isStreamingRef.current) {
       pendingPresetRef.current = preset;
-      toast({ title: "model will switch after this response finishes" });
+      toast({ title: u("modelSwitch") });
       return;
     }
 
@@ -341,6 +354,7 @@ export function usePiSessionLifecycle({
     piSessionIdRef,
     restartCurrentPiSession,
     setRunningConfigFromProviderConfig,
+    u,
     userToken,
   ]);
 

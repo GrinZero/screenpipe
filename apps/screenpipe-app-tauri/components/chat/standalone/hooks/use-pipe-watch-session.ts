@@ -13,6 +13,7 @@ import { isTerminalPipeExecutionStatus } from "@/lib/pipe-execution-status";
 import { sessionRecordFromMeta, useChatStore } from "@/lib/stores/chat-store";
 import type { ChatConversation } from "@/lib/hooks/use-settings";
 import type { AIPreset } from "@/lib/utils/tauri";
+import { useTranslations } from "next-intl";
 
 interface WatchedPipeExecution {
   id: number;
@@ -45,6 +46,7 @@ export function usePipeWatchSession({
   setIsLoading,
   piSessionIdRef,
 }: UsePipeWatchSessionOptions) {
+  const u4 = useTranslations("residualUi4");
   const aiPresetsRef = useRef(aiPresets);
   useEffect(() => {
     aiPresetsRef.current = aiPresets;
@@ -169,7 +171,7 @@ export function usePipeWatchSession({
       if (!storeNow.sessions[pipeSid]) {
         storeNow.actions.upsert({
           id: pipeSid,
-          title: `${pipeName} #${executionId}`,
+          title: u4("pipeExecutionTitle", { name: pipeName, id: executionId }),
           preview: "",
           status: "streaming",
           messageCount: 0,
@@ -186,7 +188,7 @@ export function usePipeWatchSession({
 
       const pipeConversation: ChatConversation = {
         id: pipeSid,
-        title: `${pipeName} #${executionId}`,
+        title: u4("pipeExecutionTitle", { name: pipeName, id: executionId }),
         messages: [],
         createdAt: Date.now(),
         updatedAt: Date.now(),

@@ -5,6 +5,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { ThumbsDown, ThumbsUp } from "lucide-react";
 import posthog from "posthog-js";
 import {
@@ -21,6 +22,7 @@ interface ChatResponseFeedbackProps {
 }
 
 export function ChatResponseFeedback({ message, telemetryContext }: ChatResponseFeedbackProps) {
+  const t = useTranslations("chat");
   const [rating, setRating] = useState<ChatResponseFeedbackRating | null>(null);
 
   const submitFeedback = (nextRating: ChatResponseFeedbackRating) => {
@@ -52,8 +54,8 @@ export function ChatResponseFeedback({ message, telemetryContext }: ChatResponse
         type="button"
         onClick={() => submitFeedback("positive")}
         className={buttonClass("positive")}
-        title="Good response"
-        aria-label="Good response"
+        title={t("goodResponse")}
+        aria-label={t("goodResponse")}
         aria-pressed={rating === "positive"}
       >
         <ThumbsUp className="h-3 w-3" />
@@ -62,8 +64,8 @@ export function ChatResponseFeedback({ message, telemetryContext }: ChatResponse
         type="button"
         onClick={() => submitFeedback("negative")}
         className={buttonClass("negative")}
-        title="Bad response"
-        aria-label="Bad response"
+        title={t("badResponse")}
+        aria-label={t("badResponse")}
         aria-pressed={rating === "negative"}
       >
         <ThumbsDown className="h-3 w-3" />

@@ -20,6 +20,7 @@
 "use client";
 
 import { Activity } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 export interface PipeContextBannerProps {
@@ -40,6 +41,7 @@ export function PipeContextBanner({
   done = false,
   className,
 }: PipeContextBannerProps) {
+  const t = useTranslations("residualUi5");
   return (
     <div
       className={cn(
@@ -48,7 +50,7 @@ export function PipeContextBanner({
         className,
       )}
       role="status"
-      aria-label={done ? `pipe run: ${pipeName}` : `watching pipe: ${pipeName}`}
+      aria-label={done ? t("pipeRun", { name: pipeName }) : t("watchingPipe", { name: pipeName })}
     >
       <span
         className={cn(
@@ -59,7 +61,7 @@ export function PipeContextBanner({
       <Activity className="h-3 w-3 shrink-0 opacity-60" />
       <span className="truncate">
         <span className="font-medium text-foreground/80">{pipeName}</span>
-        <span className="opacity-60"> · execution #{executionId}</span>
+        <span className="opacity-60"> · {t("execution", { id: executionId })}</span>
         {startedAt ? <span className="opacity-50"> · {formatStarted(startedAt)}</span> : null}
       </span>
     </div>

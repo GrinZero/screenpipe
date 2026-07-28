@@ -5,8 +5,69 @@
     "reset": "重置",
     "open": "打开",
     "enabled": "已启用",
-    "disabled": "已禁用"
+    "disabled": "已禁用",
+    "chat": "聊天",
+    "pipes": "Pipes",
+    "timeline": "时间线",
+    "meetings": "会议",
+    "brain": "大脑",
+    "connections": "连接",
+    "settings": "设置",
+    "help": "帮助",
+    "inviteTeam": "邀请团队成员",
+    "yourTeam": "您的团队（{count} 人）",
+    "getFreeMonth": "免费领取一个月",
+    "search": "搜索", "searchAppsWindows": "搜索应用或窗口……", "inspector": "检查器",
+    "expandSidebar": "展开侧边栏",
+    "collapseSidebar": "收起侧边栏",
+    "resizeSidebar": "调整侧边栏大小",
+    "loading": "加载中...",
+    "somethingWentWrong": "出现错误",
+    "unexpectedError": "发生了意外错误",
+    "tryAgain": "重试",
+    "reload": "重新加载",
+    "reportCrash": "报告崩溃",
+    "notFound": "未找到",
+    "requestedResourceMissing": "找不到请求的资源",
+    "setup": "设置",
+    "stepOf": "第 {step} 步，共 {total} 步",
+    "activateDevice": "激活此设备",
+    "enterpriseKeyDesc": "输入管理员提供的企业密钥",
+    "useEnterpriseKey": "使用企业密钥",
+    "allFixedResuming": "全部修复，正在恢复",
+    "recordingPaused": "录制已暂停",
+    "permissionsRevoked": "部分权限已被撤销",
+    "closesWhenFixed": "修复后将自动关闭"
+    ,"restartRecording": "重新开始录制",
+    "dismiss": "关闭",
+    "openTimeline": "打开时间线",
+    "openChat": "打开聊天",
+    "openSearch": "打开搜索",
+    "notifications": "通知",
+    "hideShortcutReminder": "隐藏快捷键提示"
+    ,"backToApp": "返回应用"
+    ,"close": "关闭"
+    ,"download": "下载"
+    ,"copyCode": "复制代码"
+    ,"searchPlaceholder": "搜索……"
+    ,"noResults": "未找到结果。"
+    ,"searchSettings": "搜索设置"
+    ,"noSettingsFound": "未找到设置"
+    ,"tryDifferentKeywords": "请尝试其他关键词"
+    ,"lookedIn": "查找位置"
+    ,"clearSearch": "清除搜索"
+    ,"pressKeys": "按下按键……"
+    ,"chooseAnswer": "请选择答案……"
+    ,"selectOptions": "请选择"
+    ,"copiedToClipboard": "已复制到剪贴板", "recordingNeedsHelp": "录制需要处理", "restart": "重启", "fixing": "正在修复", "fixingRecording": "正在修复录制……", "recordingAgain": "录制已恢复", "noTranscription": "（没有转写内容）", "showLess": "显示更少", "showMore": "显示更多", "mic": "麦克风", "output": "输出", "minutesLater": "{count} 分钟后", "hoursLater": "{count} 小时后", "moreCount": "再显示 {count} 项", "unidentifiedSpeakers": "{count} 位说话人未识别——点击其标签以分配名称", "couldntOpenFile": "无法打开文件", "clickTo": "点击以", "zoom": "缩放", "fit": "适应窗口", "binaryFile": "二进制文件", "unsafeTextFile": "此文件不适合以文本显示。请在系统默认应用中打开以正确查看。", "openDefaultApp": "在默认应用中打开", "showingFirst": "显示前", "fileIs": "文件大小", "openFullFile": "打开完整文件 ↗", "emptyFile": "（空文件）", "custom": "自定义", "clear": "清除", "close": "关闭"
   },
+  "settingsNav": {
+    "captureAi": "采集与 AI", "recording": "录制", "aiPresets": "AI 预设", "aiSettings": "AI 设置",
+    "privacySecurity": "隐私与安全", "privacy": "隐私", "data": "数据", "storage": "存储", "usage": "用量",
+    "app": "应用", "general": "通用", "appearance": "外观", "notifications": "通知", "shortcuts": "快捷键",
+    "audio": "音频", "speakers": "说话人", "account": "账户", "team": "团队", "getFreeMonth": "获取免费月份"
+  },
+  "settingsSearchUi": { "aiAudioVideoAnalysis": "AI 音频与视频分析", "aiPresets": "AI 预设", "apiKey": "API 密钥", "appendTypedText": "将输入文字追加到笔记", "audioRecording": "音频录制", "autoUpdatePipes": "自动更新 Pipe", "autoGenerateChatTitles": "自动生成聊天标题", "autoSelectAudioDevices": "自动选择音频设备", "autoStart": "开机启动", "autoUpdate": "自动更新", "batchTranscription": "批量转写", "blocklist": "阻止列表", "bluetoothMicrophones": "蓝牙麦克风", "captureFrequency": "采集频率", "chatAlwaysOnTop": "聊天窗口置顶", "checkForUpdates": "检查更新", "chineseMirror": "中国镜像", "clearCache": "清除缓存", "coreAudioSystemAudioCapture": "CoreAudio 系统音频采集", "customVocabulary": "自定义词汇", "diskUsage": "磁盘用量", "echoCancellationMode": "回声消除模式", "embedding": "嵌入模型", "enhancedAi": "增强 AI", "filterMusic": "过滤音乐", "fontSize": "字体大小", "hdRecordingForMeetings": "会议高清录制", "headless": "无界面模式", "ignoreIncognitoWindows": "忽略无痕窗口", "keepComputerAwake": "保持电脑唤醒", "languages": "语言", "liveMeetingNotes": "会议实时笔记", "logout": "退出登录", "model": "模型", "monitors": "显示器", "notifications": "通知", "overlaySize": "悬浮窗大小", "piiMasking": "PII 脱敏", "perPipeNotifications": "按 Pipe 通知", "powerBattery": "电源与电池", "quietHours": "免打扰时段", "recordOnly": "仅录制", "recordingQuality": "录制质量", "referFriend": "推荐朋友", "remoteSupportLogs": "远程支持日志", "resetOnboarding": "重置引导", "resetDefaults": "恢复默认设置", "retention": "保留策略", "screenContextCapture": "屏幕上下文采集", "screenpipeBusiness": "Screenpipe Business", "screenshotImages": "截图", "shortcuts": "快捷键", "showShortcutReminder": "显示快捷键提醒", "sidebarTranslucency": "侧边栏透明度", "signInToScreenpipe": "登录 Screenpipe", "smartRecording": "智能录制", "speakers": "说话人", "team": "团队", "telemetry": "遥测", "theme": "主题", "timelineRewind": "时间线 / 回放", "transcriptionEngine": "转写引擎", "usageStats": "用量统计", "useAllMonitors": "使用所有显示器", "yourGoal": "你的目标", "connectionSync": "跨设备同步连接", "memoriesSync": "跨设备同步记忆", "pipeSync": "跨设备同步 Pipe" },
   "settings": {
     "general": {
       "title": "通用",
@@ -43,5 +104,800 @@
       "language": "语言",
       "languageDesc": "选择您偏好的显示语言"
     }
-  }
+  },
+  "meetings": {
+    "startManual": "开始手动会议",
+    "loadFailed": "无法加载会议",
+    "search": "搜索会议",
+    "searchPlaceholder": "按标题、邮箱或备注搜索…",
+    "closeSearch": "关闭搜索",
+    "openNotes": "打开笔记",
+    "empty": "暂无会议",
+    "comingUp": "即将开始",
+    "merge": "合并会议",
+    "delete": "删除会议",
+    "cancel": "取消",
+    "recording": "录制中", "newMeeting": "新建会议", "retry": "重试", "searching": "搜索中……", "noMatchingMeetings": "没有匹配“{query}”的会议", "noPastMeetings": "暂无历史会议。点击上方的即将开始事件来创建会议。", "showMore": "显示更多", "end": "结束", "addAttendeePrefix": "添加", "noAttendeesYet": "暂无参会人——输入姓名以添加", "icsSubscriptionHint": "粘贴私有或公开的 ICS/webcal 订阅网址。ScreenPipe 会以只读方式轮询近期会议。", "relatedDuringMeeting": "会议期间相关内容", "filesEdited": "编辑过的文件"
+    ,"resizeTranscript": "调整转写面板大小",
+    "resizeHint": "拖动调整大小 · 双击重置",
+    "searchTranscript": "搜索转写内容...",
+    "matchingSegments": "匹配片段",
+    "hideSearch": "隐藏搜索",
+    "searchTranscriptShortcut": "搜索转写内容（⌘F）",
+    "copied": "已复制",
+    "copyTranscript": "复制转写内容",
+    "closeTranscript": "关闭转写面板",
+    "followLiveTranscript": "跟随实时转写",
+    "loadingTranscript": "正在加载转写内容…",
+    "assignSpeakerHint": "点击指定说话人",
+    "hideAudio": "隐藏音频",
+    "playSegmentAudio": "播放此片段音频",
+    "open": "打开",
+    "stop": "停止",
+    "emptyDesc": "加入 Zoom、Meet 或 Teams 通话，screenpipe 会自动检测。也可以手动开始，对任意对话做笔记。",
+    "openTimelineMoment": "在完整时间线中打开此刻",
+    "renameSpeaker": "点击重命名或合并此说话人",
+    "back": "返回会议",
+    "copyMeeting": "复制会议和转写内容",
+    "retranscribeSaved": "从已保存的音频重新转写",
+    "exportMp4": "将会议导出为 MP4（视频和音频）",
+    "untitled": "未命名会议",
+    "writeNotes": "写下笔记，或输入“/”插入块",
+    "addAttendees": "添加参会人",
+    "attendeeCount": "{count, plural, one {# 位参会人} other {# 位参会人}}",
+    "searchOrAddAttendee": "搜索或添加参会人……",
+    "calendarUrlPlaceholder": "https:// 或 webcal:// URL",
+    "calendarNamePlaceholder": "名称，可选",
+    "merging": "合并中",
+    "hideTranscript": "隐藏转写",
+    "showTranscript": "显示转写",
+    "resumeLive": "恢复实时转写",
+    "deleteThis": "删除此会议",
+    "audioHealth": "音频状态",
+    "openRecordingSettings": "打开录制设置",
+    "transcriptionEngine": "转写引擎",
+    "language": "语言",
+    "english": "英语",
+    "auto": "自动",
+    "dismiss": "关闭", "restarting": "正在重启……", "restartedSuccessfully": "重启成功", "restartFailed": "重启失败", "copied": "已复制", "action": "操作",
+    "resume": "恢复",
+    "offlineRetry": "离线，稍后重试"
+    ,"audioInput": "音频输入",
+    "systemDefaultMicrophone": "系统默认麦克风",
+    "systemAudio": "系统音频",
+    "systemOutput": "系统输出",
+    "nearbyEventJoin": "附近的日历事件，加入通话？",
+    "inactivityStopped": "闲置 15 分钟后已停止转写",
+    "saving": "保存中…",
+    "saved": "已保存",
+    "savedSeparator": " · ",
+    "assignSpeaker": "指定说话人",
+    "speakerPlaceholder": "输入说话人姓名...",
+    "assigning": "指定中..."
+  },
+  "dailySummaryUi": { "turnOnEnhancedAi": "开启增强 AI？", "signInDailySummaries": "登录后使用每日摘要", "generateRecap": "直接在时间线中生成 {date} 的 AI 回顾。", "accountAndCloudModel": "每日摘要使用你的 Screenpipe 账户和 Screenpipe Cloud 自动模型。", "onlyWhenAsk": "仅在你请求时运行", "neverAutomatic": "每日摘要不会按计时器运行，也不会自动生成。", "boundedReadOnly": "受限的只读访问", "readOnlyDetails": "AI 智能体只能通过本地 Screenpipe API 读取所选日期。相关证据会由你配置的 AI 模型处理。", "notNow": "暂时不要", "turnOnAndSummarize": "开启并生成摘要", "signIn": "登录" },
+  "timeline": {
+    "framePreview": "画面预览",
+    "jumpNow": "跳转到现在",
+    "pause": "暂停（空格键）",
+    "play": "播放（空格键）",
+    "playbackSpeed": "播放速度",
+    "unmute": "取消静音",
+    "mute": "静音",
+    "search": "搜索",
+    "chat": "聊天",
+    "refresh": "刷新时间线",
+    "monitors": "显示器",
+    "apps": "应用",
+    "domains": "域名",
+    "speakers": "说话人",
+    "calls": "通话",
+    "tags": "标签",
+    "zoomIn": "放大（或双指捏合/⌘+滚动）",
+    "zoomOut": "缩小",
+    "showFilters": "显示筛选器",
+    "hideFilters": "隐藏筛选器",
+    "audioRecorded": "已录制音频",
+    "inContext": "（{context} 中）",
+    "closeEsc": "关闭（Esc）",
+    "loadingTimeline": "正在加载时间线",
+    "connectionError": "连接错误",
+    "reloadTimeline": "重新加载时间线",
+    "olderMatch": "较早匹配（←）",
+    "exitSearchReview": "退出搜索查看（Esc）",
+    "loadingTimelineDots": "正在加载时间线...",
+    "failedLoadData": "时间线数据加载失败",
+    "askAi": "询问 AI",
+    "copiedExclaim": "已复制！",
+    "copy": "复制",
+    "more": "更多",
+    "close": "关闭",
+    "clickBubbles": "点击气泡进行选择", "showCaptions": "显示字幕", "captions": "字幕", "hideCaptions": "隐藏字幕", "hide": "隐藏", "clickFullTranscript": "点击查看完整转写", "copyDailySummary": "复制每日摘要", "regenerateDailySummary": "重新生成每日摘要",
+    "deleteSelectedRange": "删除选中范围",
+    "retranscribe": "使用 AI 重新转写此范围的音频",
+    "customTag": "自定义标签...", "topSites": "常用网站", "copied": "已复制",
+    "morePipes": "另外 {count} 个 Pipe"
+  },
+  "overlay": {
+    "timelineCrashed": "时间线崩溃",
+    "retry": "重试",
+    "reportCrash": "报告崩溃",
+    "reconnecting": "正在重新连接...",
+    "connecting": "正在连接 screenpipe...",
+    "serverNotActive": "服务器未运行",
+    "serverNotRunning": "screenpipe 服务器未运行。请启动服务器或检查权限后继续。",
+    "serverControl": "服务器控制",
+    "startOrRestart": "启动或重启 screenpipe 服务器",
+    "starting": "正在启动...",
+    "startServer": "启动服务器",
+    "systemPermissions": "系统权限",
+    "permissionsDesc": "请确保 screenpipe 拥有所需权限，以正常运行",
+    "screenRecording": "屏幕录制",
+    "audioRecording": "音频录制",
+    "logsSent": "日志已发送",
+    "sending": "发送中...",
+    "sendLogs": "发送日志",
+    "scheduleCall": "预约通话",
+    "close": "关闭",
+    "startingUp": "正在启动..."
+  },
+  "notifications": {
+    "openDefaultApp": "在默认应用中打开",
+    "copy": "复制通知",
+    "openSourceChat": "打开来源聊天",
+    "source": "来源", "askAi": "询问 AI", "announcement": "公告",
+    "manageSettings": "管理通知设置", "notifications": "通知", "clearAll": "全部清除", "noNotificationsYet": "暂无通知",
+    "needsYou": "需要您的处理",
+    "loadingPipes": "正在加载 Pipe……",
+    "noPipesInstalled": "尚未安装 Pipe。请从 Pipe 商店安装，安装后会显示在这里。",
+    "pipesCanNotify": "{count} 个 Pipe 可以通知您",
+    "alwaysNotifies": "{count} 个始终通知",
+    "unmuteAll": "全部取消静音",
+    "vipHint": "★ = 即使暂停或处于免打扰时段也始终通知",
+    "filterPipes": "筛选 Pipe",
+    "noPipesMatch": "没有匹配“{query}”的 Pipe",
+    "alwaysNotifyPaused": "暂停时也始终通知",
+    "resetDefaults": "恢复默认设置", "searchNotifications": "搜索通知",
+    "earlier": "更早之前",
+    "dismiss": "关闭",
+    "news": "新闻",
+    "tip": "提示",
+    "reminder": "提醒"
+  },
+  "referral": {
+    "description": "为 screenpipe 提供 10% 折扣，每成功推荐一位用户即可获得一个月免费使用期。",
+    "howItWorks": "使用方式",
+    "shareLink": "1. 分享您的邀请链接",
+    "theySignUp": "2. 对方注册后可享受 screenpipe 9 折优惠",
+    "youGetMonth": "3. 对方开始使用后，您将获得一个月免费使用期",
+    "yourInviteLink": "您的邀请链接",
+    "copied": "已复制",
+    "copy": "复制",
+    "rewards": "奖励会自动应用到下一次订阅付款。",
+    "inviteByEmail": "通过邮箱邀请",
+    "emailPlaceholder": "friend@email.com",
+    "sending": "发送中...",
+    "invite": "邀请",
+    "signInDescription": "登录后获取您的邀请链接",
+    "signIn": "登录"
+  },
+  "chat": {
+    "copyMessage": "复制消息",
+    "edit": "编辑",
+    "retry": "重试",
+    "moreOptions": "更多选项",
+    "deselectChat": "取消选择聊天",
+    "selectChat": "选择聊天",
+    "conversationActions": "对话操作",
+    "chatFilter": "聊天筛选",
+    "clearSearch": "清除搜索",
+    "newChat": "新建聊天",
+    "loadingMore": "加载更多…",
+    "deleteChats": "删除聊天",
+    "deleteChat": "删除聊天",
+    "newGroup": "新建分组",
+    "groupDescription": "输入侧边栏分组名称。",
+    "groupName": "分组名称",
+    "deleteChatDescription": "删除此聊天？此操作无法撤销。",
+    "renameChat": "重命名聊天",
+    "renameChatDescription": "为此聊天输入新标题。",
+    "chatTitle": "聊天标题",
+    "delete": "删除",
+    "showMorePipes": "显示更多 Pipe",
+    "quickTemplates": "快速模板",
+    "selectTimePeriod": "请选择时间范围",
+    "summarizing": "正在总结",
+    "updateTemplate": "更新模板",
+    "templateName": "模板名称……",
+    "saveTemplate": "保存",
+    "suggestedPrompts": "建议提示", "suggestions": "建议", "extracting": "提取中……", "showInTextField": "显示到文本框", "tooLongForTextField": "内容过长，无法显示到文本框",
+    "pinned": "已置顶", "recents": "最近使用", "pipesSection": "Pipe", "recentChats": "最近聊天", "unread": "未读", "error": "错误", "chatOptions": "聊天选项", "rename": "重命名", "pin": "置顶", "unpin": "取消置顶", "cancel": "取消", "close": "关闭", "attachedImage": "附件图片", "previousImage": "上一张图片", "nextImage": "下一张图片", "goodResponse": "满意的回复", "badResponse": "不满意的回复", "attachmentsAndFilters": "添加附件和筛选条件", "queued": "排队中", "imageFollowUp": "图片追问", "steer": "引导", "steerTooltip": "使用此消息引导当前回复（{shortcut}）", "removeQueued": "移除排队消息", "searchingSpeakers": "正在搜索说话人……", "searchingTags": "正在搜索标签……",
+    "history": "聊天记录", "chatHistory": "聊天记录", "searchConversations": "搜索对话……", "noMatchingConversations": "没有匹配的对话", "noChatHistory": "暂无聊天记录", "messageCount": "{count} 条消息", "save": "保存", "refreshSuggestions": "刷新建议", "hideSuggestionsTitle": "隐藏聊天建议——可在设置 > 显示中重新启用", "hideSuggestions": "隐藏聊天建议", "selected": "已选择", "addPhotosFiles": "添加照片和文件", "filters": "筛选条件", "searchTagsSpeakers": "搜索标签或说话人", "clearFilterSearch": "清除筛选搜索", "matchingFilters": "匹配的筛选条件", "noMatchingTagsSpeakers": "没有匹配的标签或说话人", "dismiss": "关闭",
+    "new": "新建", "tags": "标签", "loadingTags": "正在加载标签……", "noTagsYet": "暂无标签", "memoryTags": "记忆标签", "audioTags": "音频标签", "screenTags": "屏幕标签", "failed": "失败", "time": "时间", "contentType": "内容类型", "apps": "应用", "loadingApps": "正在加载应用……", "noAppsDetected": "尚未检测到应用", "connections": "连接", "speakers": "说话人", "speaker": "说话人", "chars": "字符", "truncated": "已截断", "askUser": "询问用户", "answerSent": "答案已发送", "piWaitingInput": "Pi 正在等待你的输入", "piNeedsChatReply": "Pi 需要你通过聊天回复", "readyToAnswer": "可以回答", "sent": "已发送"
+  },
+  "chatUi2": { "tryAgain": "重试", "editMessageAbove": "或编辑上面的消息", "reportIssue": "报告问题", "stillHappening": "仍然发生？", "dropImageHere": "将图片拖到这里", "premiumAiExhausted": "你今天的高级 AI 额度已用完。", "freeModelsWork": "免费模型仍可使用{resets}。", "goUnlimited": "升级为不限量", "signIn": "登录" },
+  "schedule": {
+    "runOnSchedule": "按计划运行", "repeat": "重复", "every": "每 {value}", "everyLabel": "每", "interval": "间隔", "on": "在", "pickDay": "至少选择一天", "onThe": "在每月第", "at": "时间", "time": "时间", "timezone": "时区", "starting": "开始", "ending": "结束", "never": "从不", "onDate": "指定日期", "afterRuns": "运行 N 次后", "endingDate": "结束日期", "maxOccurrences": "最大次数", "runs": "次", "manualSummary": "切换为手动运行——仅在你触发时运行", "runsSummary": "运行", "nextOccurrence": "下次运行", "to": "至", "all": "全部", "audioOnly": "仅音频", "screenOnly": "仅屏幕", "removeTimeRange": "移除时间范围", "pipeName": "Pipe 名称", "pipeNamePlaceholder": "例如：每日摘要、站会记录", "scheduleLabel": "计划", "customCron": "自定义 Cron……", "cronPlaceholder": "例如：0 */2 * * *（每 2 小时）", "everyMorning": "每天早上（9 点）", "everyEvening": "每天晚上（6 点）", "everyHour": "每小时", "everyMonday": "每周一（9 点）", "addTrigger": "添加触发器", "searchTriggers": "搜索触发器……", "scheduleAsPipe": "安排为 Pipe", "schedulePromptDescription": "按计划自动运行此提示词", "promptPreview": "提示词预览"
+  },
+  "dashboard": {
+    "dashboards": "仪表盘", "dashboard": "仪表盘", "createWithAi": "使用 AI 创建仪表盘", "actions": "仪表盘操作", "rename": "重命名", "duplicate": "复制", "renameDashboard": "重命名仪表盘", "renameDescription": "请输入便于识别此仪表盘的名称。", "deleteQuestion": "删除“{title}”？", "deleteDescription": "这会删除仪表盘及其布局，其他仪表盘和 Pipe 产物仍会保留。", "deleteDashboard": "删除仪表盘", "cancel": "取消", "replaceDashboard": "替换仪表盘", "liveViewLayout": "Live View 布局", "liveViewTimeRange": "Live View 时间范围", "loadingData": "正在加载数据", "refreshData": "刷新数据", "closeTemplates": "关闭模板", "previousLayoutAvailable": "之前的仪表盘布局仍可用。", "whatShouldImprove": "需要改进什么？", "improvePlaceholder": "例如：排除会议", "regenerateSection": "重新生成此部分", "editSectionWithAi": "使用 AI 编辑此部分", "editThisSection": "编辑此部分", "editPlaceholder": "例如：改为按项目分组", "creating": "创建中", "liveViewName": "Live View 名称", "timeWindow": "时间范围", "templateTimeRange": "模板时间范围", "blockSettings": "区块设置", "closeBlockSettings": "关闭区块设置", "dragToMove": "拖动移动", "makeNarrower": "变窄", "makeWider": "变宽", "editBlock": "编辑区块", "deleteBlock": "删除区块", "dragToResize": "拖动调整大小", "connectIncomingStep": "连接输入步骤", "connectOutgoingStep": "连接输出步骤", "connectNote": "连接笔记", "moveNote": "移动笔记", "note": "笔记", "canvasNote": "画布笔记", "writeNote": "写下笔记", "liveViewProcessCanvas": "Live View 流程画布", "whiteboardCanvas": "白板画布。使用工具栏选择、平移、添加笔记、连接区块或绘制。", "zoomOut": "缩小", "zoomIn": "放大", "fitCanvas": "适应画布", "arrange": "排列", "deleteSelectedCanvasItem": "删除选中的画布项目", "loadingLiveViews": "正在加载 Live View", "retry": "重试", "dashboardName": "仪表盘名称", "createNew": "创建新的", "replaceCurrent": "替换当前", "confirmationRequired": "需要确认", "createSections": "这会创建一个包含 {count} 个分区的新仪表盘。", "replaceWarning": "这会替换“{title}”中的 {count} 个分区。之前的布局仍可通过“撤销”恢复。", "dashboardLimitWarning": "你已有 {count} 个仪表盘。请替换当前仪表盘，或删除一个后再创建。", "addFirstBlock": "添加你的第一个区块", "dashboardMode": "仪表盘", "canvasMode": "画布", "templates": "模板", "customize": "自定义", "liveViewColdStart": "当 Screenpipe 采集到足够与你目标相关的真实活动后，此视图会显示。", "pipesFillBlocks": "Pipe 会填充这些区块（{period}）的数据。刷新或连接的 Pipe 运行后，数据会变化。", "lastData": "最后数据时间：{date}。", "askAiChange": "让 AI 修改此 Live View……", "askAiExample": "例如：展示我如何分配时间，以及本周发生了哪些变化", "canvasLoadFailed": "无法加载画布，仍可使用仪表盘模式。"
+  },
+  "entitlement": {
+    "devLogin": "开发者登录", "devTokenPlaceholder": "粘贴令牌或 screenpipe://…api_key=…", "signingIn": "登录中……", "devSignIn": "开发者登录", "loading": "加载中", "checkingLocalSettings": "正在检查本地设置，然后启动 screenpipe。", "checkingAccess": "正在检查访问权限", "checkingBuild": "正在检查此设备安装的 screenpipe 版本。", "checkingEnterprise": "正在检查企业访问权限", "checkingAccountKey": "正在检查此设备是否已有账户或企业密钥。", "enterpriseAccess": "企业访问", "enterpriseAccessDescription": "使用组织账户或管理员提供的企业密钥。", "signInEnterprise": "使用企业账户登录", "useEnterpriseKey": "使用企业密钥", "enterpriseKey": "企业密钥", "enterEnterpriseKey": "请输入管理员提供的密钥。", "accountNotAuthorized": "账户未获授权", "signInRequired": "需要登录", "signInEnterpriseDescription": "请使用与企业组织关联的账户登录。", "useDifferentAccount": "使用其他账户", "signIn": "登录", "enterpriseAppRequired": "需要企业版应用", "enterpriseAppDescription": "{email} 属于 {org}。请下载 screenpipe 企业版应用，使此设备遵循工作区策略并将数据上传到组织存储。", "downloadEnterpriseApp": "下载企业版应用", "openEnterpriseBuilds": "打开企业版构建", "freePlanDescription": "创建或登录 screenpipe 账户以开始使用免费计划。", "refreshAccess": "刷新访问权限", "subscriptionRequired": "需要订阅", "choosePlan": "选择方案", "refreshFailed": "刷新失败"
+  },
+  "aiPresets": {
+    "name": "名称", "presetName": "输入预设名称", "screenpipeCloud": "screenpipe 云端", "chatgpt": "ChatGPT", "ollama": "Ollama", "custom": "自定义", "claudeApi": "Claude API", "apiKey": "API 密钥", "model": "模型", "apiKeyPlaceholder": "sk-...", "baseUrl": "基础 URL", "ollamaUrlPlaceholder": "http://localhost:11434", "customUrlPlaceholder": "https://api.example.com/v1", "yourApiKeyPlaceholder": "你的 API 密钥", "chatgptAccount": "ChatGPT 账户", "chatgptModelPlaceholder": "gpt-5.6-terra", "anthropicKeyPlaceholder": "sk-ant-...", "selectModel": "选择模型", "advanced": "高级", "maxOutputTokens": "最大输出令牌数", "prompt": "提示词", "promptPlaceholder": "输入自定义提示词"
+    ,"selectPreset": "选择 AI 预设……", "loginRequired": "需要登录才能使用此预设", "press": "按下", "cyclePresets": "切换预设", "searchPresets": "搜索预设……", "noPresets": "未找到预设。"
+  },
+  "retention": {
+    "eraseRecent": "清除最近活动", "storagePolicy": "存储策略", "reclaimDisk": "释放磁盘空间", "compactDatabase": "压缩数据库", "compactQuestion": "压缩数据库？", "cancel": "取消", "compactNow": "立即压缩", "deleteMinutes": "删除最近 {minutes} 分钟的数据", "enableEviction": "启用媒体清理", "enableCleanup": "启用精简清理", "enableDeletion": "启用删除", "recommended": "推荐", "freePlanTitle": "免费方案：保留 7 天采集活动", "freePlanDescription": "screenpipe 会在 7 天后永久删除录音、转写、OCR 和采集的界面活动。升级后可选择更长的保留时间，或永久保留活动。", "keepEverything": "全部保留", "keepEverythingBody": "磁盘占用会持续增长，需要自行监控空间。", "dropMediaKeepText": "删除视频和音频，保留文本", "dropMediaKeepTextBody": "释放 mp4/wav/jpeg 文件空间。转写、OCR 和应用历史仍可搜索，但无法回放截止时间之前的片段。", "trimUiKeepMemories": "精简界面数据，保留文本和记忆", "trimUiKeepMemoriesBody": "在媒体模式基础上，删除截止时间之前占用较大的逐元素 OCR 和辅助功能详情。文本搜索、转写、时间线和记忆仍可用。"
+  },
+  "storage": {
+    "clearing": "清理中……", "clear": "清理", "clearCacheQuestion": "清理缓存？", "filesDeleted": "以下文件将被删除（共 {size}）：", "reinstallHint": "AI Agent 下次使用时会自动重新安装。", "cancel": "取消", "calculating": "计算中……", "monitorDescription": "监控 Screenpipe 数据的存储用量", "retry": "重试", "usageAt": "~/.screenpipe 中的存储用量", "refresh": "刷新", "spaceRemaining": "约剩余 {months} 个月空间", "data": "数据", "cache": "缓存", "free": "可用空间", "mediaFiles": "媒体文件", "audio": "音频", "total": "总计", "otherFiles": "其他文件", "database": "数据库", "logs": "日志", "logsLarge": "⚠️ 日志较大，请在 ~/.screenpipe/*.log 删除旧日志", "pipes": "Pipe", "other": "其他"
+  },
+  "skills": {
+    "browseSkills": "浏览技能", "description": "精选 SKILL.md 技能 · 来自 Anthropic、OpenAI 和社区", "close": "关闭", "searchPlaceholder": "搜索技能——pdf、转写、安全……", "loading": "正在加载目录……", "noMatch": "没有匹配“{query}”的技能。", "empty": "目录中还没有技能。", "recommendedForYou": "为您推荐", "recommended": "推荐", "searchPiExtensions": "搜索 Pi 扩展……", "rescan": "重新扫描"
+  },
+  "registry": {
+    "browse": "浏览 MCP 注册表", "description": "官方注册表 · registry.modelcontextprotocol.io", "close": "关闭", "searchPlaceholder": "搜索服务器——Notion、GitHub、Postgres……", "searching": "正在搜索注册表……"
+  },
+  "frame": {
+    "copySelectedText": "复制选中的文本", "copyImageTitle": "复制帧图片到剪贴板", "copyImage": "复制图片", "copyText": "复制文本", "copyLinkTitle": "复制 screenpipe://frame/N 链接", "copyDeeplink": "复制深层链接", "copiedText": "已复制文本", "allFrameTextCopied": "已将当前帧的全部文本复制到剪贴板", "noFrameSelected": "未选择帧", "selectFrameHint": "在时间线中选择一个时间点以查看录制帧。", "previous": "上一个", "next": "下一个", "screenshotPaused": "截图已暂停", "screenshotPausedDescription": "screenpipe 保存了此刻的活动，但没有保存图片。这通常发生在低电量或隐私暂停模式下。", "frameTextCopied": "已将帧文本复制到剪贴板", "copiedSelection": "已复制选区", "selectedTextCopied": "已将选中的文本复制到剪贴板", "askAboutFrame": "询问此帧", "runPipe": "运行 Pipe", "currentFrame": "当前画面"
+  },
+  "onboarding": {
+    "connectDetectedTools": "连接检测到的工具", "localToolsDescription": "一键连接此电脑上已有的本地 AI 工具", "noLocalAiTools": "未找到本地 AI 工具", "noToolsRequired": "这里无需进行任何设置。需要时可稍后连接服务。", "connectMoreOptional": "连接更多工具（可选）", "hideOptional": "隐藏 ↑", "optionalExamples": "Google 日历 · Obsidian · Gmail ↓", "describeYourOwn": "或描述你自己的需求", "goalPlaceholder": "例如：展示我在各个项目上的时间分配", "skipIntro": "跳过介绍", "firstLiveView": "你的第一个 Live View", "stepOf3": "第 {step} 步，共 3 步", "dashboardMadeForGoal": "这个仪表盘为你的目标创建", "dashboardGoalDescription": "Screenpipe 根据你选择的目标创建了这个 Live View，它会填充你的真实活动。", "showHowItFills": "看看它如何填充", "howItUpdates": "它如何更新", "finishInterruptedSetup": "完成中断的设置", "waitForRealWork": "等待真实活动", "setupPausedDescription": "设置尚未完成就已暂停。你的仪表盘安全无虞，请在这里完成设置，无需重新开始。", "firstResultReadyDescription": "第一个结果已准备好。打开它，检查是否符合你的实际活动。", "workingDescription": "这里会显示已准备好的内容，以及 Screenpipe 在第一个结果出现前仍需要完成的事项。处理期间你可以离开此页面。", "finishingSetup": "正在完成设置……", "finishSetup": "完成设置", "showFirstResult": "查看我的第一个结果", "letMeWork": "知道了，让它继续运行", "firstResult": "你的第一个结果", "checkAndImprove": "检查结果并帮助改进", "checkAndImproveDescription": "打开结果，与实际工作进行核对，并使用赞或踩。你的反馈会帮助后续更新变得更好。", "foundFirstResult": "我找到了第一个结果", "yourGoal": "你的目标", "goalDescription": "你希望 screenpipe 帮助完成的事情", "noSpecificGoal": "没有特定目标", "guideReady": "你已准备就绪", "guideIntro": "想看看 screenpipe 如何工作吗？一个提示词，一个自动化，大约 30 秒。", "showMe30Seconds": "带我看看 · 30 秒", "illExplore": "我先探索", "rerunFromHelp": "随时可从帮助中重新运行", "stepOneOfThree": "第 1 步，共 3 步", "tryOneThing": "让我们试一件事", "firstAutomationDescription": "我已填好下面的提示词。发送它来创建你的第一个自动化。", "sendPrompt": "发送提示词 ↵", "escapeAnytime": "按 Esc 可随时退出", "buildingAutomation": "正在构建自动化", "automationReadyDescription": "正在设置你的自动化", "goToPipesDescription": "前往 Pipe 标签页查看运行情况，并探索更多自动化", "goToPipes": "前往 Pipe", "stepTwoOfThree": "第 2 步，共 3 步", "oneLastThing": "最后一件事——运行你的 Pipe", "runPipeDescription": "点击 Pipe 上的运行按钮来启动它", "stepThreeOfThree": "第 3 步，共 3 步", "gotIt": "知道了"
+  },
+  "connections": { "connectInSettings": "请在设置 > 连接中连接 {name}，然后返回此处。", "connectionUnavailable": "连接“{id}”不可用，可能需要在设置 > 连接中手动配置。", "addMcpServer": "添加 MCP 服务器", "editMcpServer": "编辑 MCP 服务器", "close": "关闭", "waitingForBrowser": "等待浏览器", "enabledMcpTools": "已启用——让 Pipe 和聊天使用这些工具", "accountLabelPlaceholder": "标签——例如：工作", "saveLabel": "保存标签", "cancel": "取消", "editLabel": "编辑标签", "disconnectAccount": "断开此账户", "finishBrowserSignIn": "请在浏览器中完成 {provider} 登录——连接会自动完成", "accountLabelMultiplePlaceholder": "标签——例如：工作、个人", "tryInChat": "在聊天中试用", "connectEverydayApps": "连接你每天使用的应用", "searchConnectionsPlaceholder": "搜索……", "email": "邮箱", "emailPlaceholder": "you@gmail.com", "advancedImapSettings": "高级：IMAP 服务器设置", "connecting": "连接中……", "retry": "重试", "connect": "连接", "apiHeaderPlaceholder": "lin_api_…… 或 Bearer ……", "customHeaderNamePlaceholder": "X-Custom-Header", "customHeaderValuePlaceholder": "值", "removeHeader": "移除请求头", "installMcpSkills": "一键为 {name} 安装 screenpipe MCP、API 和 CLI 技能。", "disconnect": "断开连接", "connectingDots": "连接中……", "getDesktop": "获取 {name} 桌面版", "openApp": "打开 {name}", "connected": "已连接！", "mcpSkillsInstalled": "MCP 和两个技能已安装。请重启 {name}，然后询问最近 5 分钟做了什么。", "grokConnectedDescription": "启动新的 Grok 会话，询问最近 5 分钟做了什么。", "chatgptSubscriptionDescription": "使用 ChatGPT Plus/Pro 订阅作为 AI 提供商，无需 API 密钥。", "chatgptExpiredDescription": "ChatGPT 会话已过期。点击重新连接以再次登录。", "subdomainPlaceholder": "你的公司" },
+  "connectionGuides": { "memorySyncBeta": "记忆同步（测试版）", "memorySyncDescription": "将 screenpipe 的记忆写入此 vault 中的笔记，以便在图谱和搜索中显示。每 5 分钟自动更新。", "note": "笔记", "lastSync": "上次同步", "syncing": "同步中……", "syncNow": "立即同步", "stopSyncing": "停止同步", "vaultFolder": "vault 文件夹", "browseVault": "浏览 vault 文件夹", "selectVault": "选择 Obsidian Vault 文件夹", "folderInsideVault": "vault 内的文件夹（可选）", "enabling": "启用中……", "enableMemorySync": "启用记忆同步", "pickVaultFirst": "请先选择 vault 文件夹", "anythingDescription": "通过 MCP 让 AnythingLLM 访问你的屏幕和音频历史记录。", "anythingStep1": "1. 在 AnythingLLM 中前往", "anythingStep2": "2. 将此配置添加到", "anythingStep3": "3. 点击", "refresh": "刷新", "mstyDescription": "通过 MCP 让 Msty 访问你的屏幕和音频历史记录。", "mstyStep1": "1. 打开 Msty，前往", "mstyStep2": "2. 点击", "mstyStep3": "3. 为工具命名（例如 screenpipe），然后点击添加", "openMsty": "打开 Msty", "warpDescription": "通过 MCP 让 Warp 的 Agent 模式访问你的屏幕和音频历史记录。", "warpStep1": "1. 在 Warp 中打开", "warpStep2": "2. 选择", "warpStep3": "3. 点击保存。服务器应显示为运行中，然后向 Warp Agent 询问：“我最近 5 分钟做了什么？”", "openWarp": "打开 Warp", "connectedVault": "已连接 {count, plural, one {个 vault} other {个 vault}}", "addAnotherVault": "添加另一个 vault", "detectedVaults": "检测到的 vault", "manualVault": "或手动输入 vault 路径", "selectVaultFolder": "选择你的 vault 文件夹", "addVault": "添加 vault", "instancePlaceholder": "实例名称（例如：工作、个人）", "add": "添加", "oauthConnected": "已连接", "disconnect": "断开连接", "waitingSignIn": "等待登录……", "cancel": "取消", "connectNamed": "连接 {name}", "apiDescriptionExcalidraw": "连接 Excalidraw+，让 AI 搜索、读取和编辑工作区中的白板场景。Excalidraw 在这里不提供 OAuth，请从 Excalidraw+ 工作区设置中粘贴 API 密钥。密钥会安全存储在此设备上，只会发送给 Excalidraw。", "close": "关闭" },
+  "agentExtra": { "syncRemote": "远程同步", "remoteMachine": "如果 {name} 在远程电脑上运行", "remoteInstructions": "复制上方的 SKILL.md 内容并粘贴到", "remoteHost": "远程主机上。若要让 {name} 访问此电脑上的 screenpipe 数据，请使用", "pushIt": "选项将其推送过去，或将任何", "callsAt": "调用指向此电脑的 IP/Tailscale 名称。" },
+  "aiExtra": { "shareToTeam": "分享给团队（端到端加密）" },
+  "connectionGuideText": { "oauth": { "linear": "连接 Linear，让 AI 搜索和管理你的问题、项目与周期。使用 Linear OAuth 登录，无需 API 密钥，screenpipe 也不会看到你的密码。", "stripe": "连接 Stripe，让 AI 查询客户、付款、发票和订阅。使用 Stripe OAuth 登录，无需 API 密钥，screenpipe 也不会看到你的密码。", "sentry": "连接 Sentry，让 AI 搜索问题、事件和发布记录。使用 Sentry OAuth 登录，无需 API 密钥，screenpipe 也不会看到你的密码。", "intercom": "连接 Intercom，让 AI 搜索会话、联系人和帮助内容。使用 Intercom OAuth 登录，无需 API 密钥，screenpipe 也不会看到你的密码。", "asana": "连接 Asana，让 AI 搜索和管理任务、项目与组合。使用 Asana OAuth 登录，无需 API 密钥，screenpipe 也不会看到你的密码。", "monday": "连接 monday.com，让 AI 处理看板、项目项和更新。使用 monday OAuth 登录，无需 API 密钥，screenpipe 也不会看到你的密码。", "clickup": "连接 ClickUp，让 AI 搜索和管理任务、文档与空间。使用 ClickUp OAuth 登录，无需 API 密钥，screenpipe 也不会看到你的密码。", "airtable": "连接 Airtable，让 AI 读取和更新数据库、表格与记录。使用 Airtable OAuth 登录，无需 API 密钥，screenpipe 也不会看到你的密码。", "confluence": "连接 Atlassian，让 AI 搜索和编辑 Confluence 页面及 Jira 问题。使用 Atlassian OAuth 登录，无需 API 密钥，screenpipe 也不会看到你的密码。", "jira": "连接 Atlassian，让 AI 搜索和管理 Jira 问题及 Confluence 页面。使用 Atlassian OAuth 登录，无需 API 密钥，screenpipe 也不会看到你的密码。", "notion": "连接 Notion，让 AI 搜索、读取和编辑页面及数据库。使用 Notion OAuth 登录，无需 API 密钥，screenpipe 也不会看到你的密码。" } },
+  "connectionGuideTextFull": { "anythingStep1Full": "1. 在 AnythingLLM 中前往 Agent Skills > MCP Servers", "anythingStep2Full": "2. 将此配置添加到 anythingllm_mcp_servers.json 文件：", "anythingStep3Full": "3. 在 Agent Skills 中点击刷新以加载服务器。", "mstyStep1Full": "1. 打开 Msty，前往设置 > Toolbox", "mstyStep2Full": "2. 点击添加新工具，选择 STDIO / JSON，然后粘贴此配置：", "warpStep1Full": "1. 在 Warp 中打开设置 > AI > 管理 MCP 服务器 > 添加（或从命令面板运行“打开 MCP 服务器”）", "warpStep2Full": "2. 选择 CLI 服务器（命令），然后粘贴此配置：", "warpStep3Full": "3. 点击保存。服务器应显示为运行中，然后向 Warp Agent 询问：“我最近 5 分钟做了什么？”" },
+  "agentUi": { "savedDownloads": "已保存到下载文件夹", "saveFailed": "保存失败", "openFinderFailed": "无法打开访达", "saving": "保存中……", "saved": "已保存", "saveSkill": "将 SKILL.md 保存到下载文件夹", "showFinder": "在访达中显示", "copyContents": "复制文件内容", "syncDescription": "通过 SFTP 将 ~/.screenpipe 推送到 {name} 所在的主机。当 {name} 运行在 VPS、家庭服务器或其他电脑上时使用。", "connected": "已连接", "test": "测试", "cancel": "取消", "syncNow": "立即同步", "auto": "自动", "lastSync": "上次同步：{time}", "notSynced": "尚未同步", "everyMinutes": "每 {minutes} 分钟", "connecting": "连接中……", "connect": "连接", "disconnect": "断开连接", "secondBrainTitle": "构建第二大脑", "secondBrainDescription": "将一个提示词粘贴到 {name} 中，它会在后台持续工作——拆分你的工作流、总结流程，并构建关于你的长期记忆。就像数字克隆 Pipe，但运行在 {name} 内。", "copied": "已复制", "copyPrompt": "复制提示词", "saveMd": "保存 .md", "learnMore": "了解更多", "copiedPrompt": "第二大脑提示词已复制", "pasteInto": "粘贴到 {name}", "copiedPromptFailed": "复制失败" },
+  "agentUi5": { "mcpIntro": "在 {name} 中注册 screenpipe MCP 服务器。两者运行在同一台电脑上时效果最佳。", "mcpStepOpen": "1. 打开", "mcpStepMerge": "2. 合并此 {format} 配置块（保留缩进）：", "mcpStepRestart": "3. 重启 {name}。试试问：‘我过去 5 分钟做了什么？’", "savedToMoveTo": "已保存到", "moveTo": "移动到", "restartAgent": "并重启 {name}。", "connectIntro": "让 screenpipe Pipe 回调此 Agent。输入网关凭据后，Pipe 就能直接向它发送事件和消息。" },
+  "agentTabs": { "mcp": "MCP", "skill": "技能", "sync": "远程同步", "connect": "连接" },
+  "aiUi": { "managedTitle": "由组织管理", "managedDescription": "管理员控制可用的 AI 预设", "validationTitle": "校验错误", "validationDescription": "保存前请修复所有校验错误", "enterName": "请输入名称", "nameRequired": "名称不能为空", "presetCreated": "预设已创建", "defaultCreated": "默认预设已成功创建", "presetUpdated": "预设已更新", "savedSuccessfully": "更改已成功保存", "presetDuplicated": "预设已复制", "duplicateSaved": "副本已成功保存", "newPresetAdded": "新预设已添加", "saveError": "保存预设失败", "saveErrorDescription": "保存预设时发生错误", "skipped": "已跳过", "connecting": "连接中……", "verifyWithChat": "将在聊天测试中验证", "knownModels": "使用已知模型", "sendingTest": "正在发送测试消息……", "checking": "检查中……", "oauthPresent": "OAuth 令牌有效", "knownModelsLimited": "使用已知模型（API 权限受限）", "apiAccepted": "API 密钥已接受", "loading": "加载中……", "fetchModelsError": "获取模型失败", "checkApiKey": "请检查 API 密钥", "connected": "已连接", "free": "免费", "moreModels": "更多模型", "included": "Screenpipe 已包含", "availableModels": "可用模型", "fast": "快速", "recommended": "推荐：", "diagnostics": "诊断", "duplicate": "复制", "shared": "已分享给团队", "sharedDescription": "{name} 现已对所有团队成员可用（端到端加密）", "shareFailed": "分享给团队失败", "cannotDeleteCloud": "无法删除云端预设", "businessIncluded": "此预设包含在你的 Business 订阅中", "cannotDeleteDefault": "无法删除默认预设", "setAnotherDefault": "请先将其他预设设为默认", "presetNotFound": "未找到预设", "presetMissing": "要删除的预设不存在", "presetDeleted": "预设已删除", "removedSuccessfully": "预设已成功移除", "deleteError": "删除预设失败", "defaultLocked": "默认预设已锁定", "defaultLockedDescription": "管理员控制默认 AI 预设", "defaultUpdated": "默认预设已更新", "setAsDefault": "预设已设为默认", "defaultUpdateError": "更新默认预设失败", "updateErrorDescription": "更新默认预设时发生错误" },
+  "aiUi2": { "modelsLoaded": "已加载 {count} 个模型", "chatgptConnected": "ChatGPT 已连接", "createPresetHint": "点击下方“创建预设”以保存并开始使用。", "chatgptSignInFailed": "ChatGPT 登录失败", "authExpired": "认证会话已过期，请重新登录。", "signInTimedOut": "登录超时或已取消，请重试。", "unexpectedError": "发生意外错误，请重试。", "signOut": "退出登录", "signInChatgpt": "使用 ChatGPT 登录", "free": "免费", "moreModels": "更多模型", "includedModels": "Screenpipe 已包含", "availableModels": "可用模型", "loadingModels": "模型加载中……", "business": "Business", "fast": "快速", "checkConnection": "正在检查连接……" },
+  "aiForm": { "cancel": "取消", "update": "更新预设", "create": "创建预设", "enterNameContinue": "请输入预设名称后继续", "selectModelContinue": "请选择模型后继续", "fixValidation": "请修复校验错误后继续" },
+  "aiCard": { "default": "默认", "managed": "已管理", "sessionExpired": "ChatGPT 会话已过期——请打开连接设置重新连接", "notSet": "未设置", "duplicate": "复制", "setDefault": "设为默认" },
+  "aiMain": { "configure": "配置 AI 模型和偏好", "noPresets": "还没有 AI 预设", "firstPresetDescription": "创建你的第一个 AI 预设，开始使用智能功能。预设让你可以快速切换不同的 AI 配置。", "orgNoPresets": "你的组织尚未在此设备上提供任何 AI 预设。", "createFirst": "创建第一个预设", "presetCount": "{count} 个预设", "defaultConfigured": "默认预设已配置", "createPreset": "创建预设", "delete": "删除", "deleteWarning": "此操作无法撤销，预设将被永久删除", "continue": "继续", "changeDefaultWarning": "这会将所选预设设为默认并应用其设置。当前默认预设仍会保留，但不再是默认预设。" },
+  "aiLabels": { "baseUrlHelper": "填写 /models 和 /chat/completions 之前的基础 URL（通常以 /v1 结尾）。可参考 NVIDIA NIM、Ollama 或 Groq 的端点。", "apiKeyRequired": "获取模型需要 API 密钥", "selectModel": "选择模型……", "customPrompt": "自定义提示词", "promptHelper": "此提示词将用于指导 AI 的回答", "promptMin": "提示词至少需要 10 个字符", "allPassed": "全部检查通过", "connectionFailed": "连接失败", "authFailed": "认证失败", "modelsFailed": "模型检查失败", "chatFailed": "聊天检查失败", "testing": "测试中……", "runDiagnostics": "运行诊断", "endpointReachable": "端点可访问", "authValid": "认证有效", "modelsLoaded": "模型已加载", "testMessage": "测试消息", "recommendedTools": "（均支持工具调用）" },
+  "connectionsExtra": { "memorySync": "记忆同步", "memorySyncFailed": "记忆同步失败", "chatgptSignInFailed": "ChatGPT 登录失败", "unexpectedError": "发生意外错误，请重试。", "sendRead": "发送 + 读取", "sendReadDescription": "同时搜索和读取你的消息、私信与频道。", "learnField": "了解如何为此集成查找 {field}。", "hideKey": "隐藏密钥", "showKey": "显示密钥", "selectVault": "选择 Obsidian Vault 文件夹", "apiKeyCopied": "API 密钥已复制到剪贴板", "apiKeyRegenerated": "API 密钥已重新生成" },
+  "connectionsExtra2": { "signInTimedOut": "登录超时或已取消，请重试。" },
+  "uiStatus": { "inviteSent": "邀请已发送！", "failedInvite": "发送邀请失败", "encryptionEnabled": "加密已启用", "encryptionEnabledDescription": "凭据和设置现在会静态加密。", "keychainDenied": "钥匙串访问被拒绝", "enableEncryptionFailed": "无法启用加密，请稍后重试。", "encryptionDisabled": "加密已停用", "encryptionDisabledDescription": "凭据和设置现在不会使用钥匙串加密存储。", "disableEncryptionFailed": "无法停用加密", "decryptFailed": "无法解密加密凭据，请检查钥匙串访问权限后重试。", "validationErrors": "校验错误", "fixValidationApply": "应用更改前请修复所有校验错误", "updatingSettings": "正在更新设置", "waitMoments": "这可能需要一些时间……", "settingsUpdated": "设置已成功更新", "restartedSettings": "Screenpipe 已使用新设置重启", "updateSettingsError": "更新设置失败", "tryAgainLogs": "请重试，或检查日志获取更多信息", "autoDeleteDisabled": "自动删除已停用", "failedDisableAutoDelete": "停用自动删除失败", "failedUpdateRetention": "更新保留策略失败", "failedDeleteRecent": "删除近期数据失败", "databaseCompacted": "数据库已压缩", "failedCompact": "压缩数据库失败", "cleanupTriggered": "清理已触发", "failedCleanup": "触发清理失败", "lastCleanup": "上次清理：{time}", "referralCopied": "推荐链接已复制！", "copyFailed": "复制失败", "cloudRunner": "云端运行器", "noCloudRunner": "还没有云端运行器", "failedLoadPipe": "加载 Pipe 详情失败", "failedUpdatePipe": "更新 Pipe 失败", "switchMyPipes": "切换到我的 Pipe 以配置和运行", "failedInstallPipe": "安装 Pipe 失败", "reviewSubmitted": "评价已提交", "failedReview": "提交评价失败", "failedUnpublish": "取消发布失败", "pipePublished": "Pipe 已发布到商店", "noChanges": "没有可发布的更改", "pipeUpdated": "Pipe 已更新并发布", "failedPublish": "发布失败", "couldNotReadPipe": "无法读取 Pipe 内容" },
+  "referralUi": { "title": "邀请好友", "loading": "正在加载推荐信息……", "unlock": "购买任意套餐以解锁推荐码", "used": "已使用", "howItWorks": "使用方式", "shareLink": "分享你的邀请链接", "theySignUp": "好友注册并获得", "youGet": "你将获得", "monthFree": "1 个月免费使用", "sending": "发送中……", "invite": "邀请" },
+  "referralUi2": { "whenSubscribe": "当好友订阅时" },
+  "cloudUi": { "orgRunner": "{org} 尚无云端运行器", "noRunner": "还没有云端运行器", "adminBody": "为整个组织运行一个托管 VM：它会同步所有托管 Pipe，并根据计划使用组织集中数据运行，即使电脑已关机也能工作。", "memberBody": "组织管理员可以在这里启动云端运行器，托管 Pipe 会按计划在云端运行。", "provisioning": "正在配置云端运行器——首次启动约需 3 分钟" },
+  "storageUi": { "invalidDirectory": "目录无效", "error": "错误", "changeDirFailed": "更改数据目录失败", "restarted": "已重启", "restartedDescription": "screenpipe 已使用新数据目录重启", "restartFailed": "重启失败", "restartManually": "请手动重启 screenpipe 以应用更改", "nothingCleanup": "没有需要清理的内容", "scanCacheFailed": "扫描缓存失败", "cacheCleared": "缓存已清除", "freed": "已释放 {size}", "clearCacheFailed": "清除缓存失败", "deleteAll": "全部删除", "clearCache": "清除缓存", "clearCacheDescription": "删除 AI Agent 缓存、旧日志和恢复文件" },
+  "generalUi": { "intro": "启动、更新和通知", "autoStart": "开机启动", "autoStartDescription": "登录时在后台启动", "autoUpdate": "自动更新", "autoUpdateDescription": "下载更新后自动重启。关闭后会显示“重启以更新”横幅。", "checkUpdates": "检查更新", "runningVersion": "当前版本 v{version}", "lookForVersion": "立即查找新版本", "checking": "检查中……", "checkNow": "立即检查", "appUpdates": "应用更新", "managedDevice": "检测到受管理设备", "autoUpdatePipes": "自动更新 Pipe", "autoUpdatePipesDescription": "更新你未修改过的商店 Pipe", "version": "版本", "managedBuilds": "打开由组织管理的构建版本", "stableVersions": "打开 screenpipe.com 上最新的稳定版本", "open": "打开", "resetOnboarding": "重置引导", "resetOnboardingDescription": "再次运行设置向导", "resetting": "重置中……", "reset": "重置", "headless": "无界面模式", "headlessDescription": "完全关闭应用界面，同时继续在系统托盘录制", "headlessNote": "打开系统托盘中的 screenpipe 前，应用快捷键和界面不可用。", "recordOnly": "仅录制", "recordOnlyDescription": "无界面时跳过计划的 Pipe 运行" },
+  "privacyUi": { "encryptionEnabled": "加密已启用", "encryptionEnabledDescription": "凭据和设置现在会静态加密。", "keychainDenied": "钥匙串访问被拒绝", "enableFailed": "无法启用加密，请稍后重试。", "encryptionDisabled": "加密已停用", "encryptionDisabledDescription": "凭据和设置现在不会使用钥匙串加密存储。", "disableFailed": "无法停用加密", "decryptFailed": "无法解密加密凭据，请检查钥匙串访问权限后重试。", "validation": "校验错误", "fixValidation": "应用更改前请修复所有校验错误", "updating": "正在更新隐私设置", "wait": "这可能需要一些时间……", "updated": "设置已成功更新", "restarted": "Screenpipe 已使用新设置重启", "updateError": "更新设置失败", "tryLogs": "请重试，或检查日志获取更多信息", "basicDetection": "基础检测已足够", "arcDescription": "无需额外权限即可检测 Arc 私密窗口", "openBrowser": "请先打开支持的浏览器", "openBrowserDescription": "打开 Chrome、Edge、Brave 或其他 Chromium 浏览器后重试", "browserAccess": "需要浏览器访问权限", "detectionReady": "增强检测已准备好", "detectionReadyDescription": "应用更改以使用浏览器原生隐身检测", "automationDescription": "请检查 macOS 自动化设置后重试", "apiKeyCopied": "API 密钥已复制到剪贴板", "apiKeyRegenerated": "API 密钥已重新生成", "hideKey": "隐藏密钥", "revealKey": "显示密钥" },
+  "privacyUi2": { "browserAccessDescription": "请在 macOS 自动化设置中允许 screenpipe 控制浏览器", "enhancedFailed": "无法启用增强检测" },
+  "privacyPiiUi": { "mode": "模式", "basic": "基础", "basicDescription": "— 采集时使用正则检测，免费、即时且确定。识别邮箱、电话、SSN、卡号、JWT、API 密钥、私钥和连接字符串。", "smart": "智能", "experimental": "实验性", "smartDescription": "— 包含基础模式，并增加 AI 后台任务来识别语义 PII（姓名、地址、敏感上下文）和屏幕帧图像脱敏。首次运行会下载约 100 MB 模型。", "applyTo": "应用于", "text": "文本", "textDescription": "— 清理采集到的文本（OCR、辅助功能、转写、键盘输入和剪贴板输入）", "images": "图像", "imagesDescription": "— 将截图帧中的 PII 涂黑（设备端视觉模型）", "whereRuns": "运行位置", "local": "本地", "cloudEnclave": "云端（机密环境）", "backendDescription": "本地模式数据留在设备上，隐私最强但弱设备运行较慢。云端模式使用 screenpipe 的可信机密计算环境，速度更快；设备会在发送数据前验证开源构建版本。" },
+  "legacyUi": { "downloadingUpdate": "正在下载更新……", "downloadWait": "请稍候，更新正在下载", "updateComplete": "更新完成", "relaunching": "正在重新启动应用", "installingUpdate": "正在安装更新……", "updateFailed": "更新失败", "downloadManual": "请重试，或手动下载", "signInLatest": "登录以获取最新更新", "propagating": "正在传播到相似声音……", "clickUndo": "如果不正确，请点击撤销", "undone": "已撤销", "undoFailed": "撤销失败", "noSimilar": "未找到更多相似声音", "error": "错误", "assignFailed": "分配说话人失败，请重试。", "markedNoise": "已标记为噪声", "noiseDescription": "今后处理时会忽略此音频。", "noiseFailed": "标记噪声失败，请重试。", "captureFailed": "无法捕获录音", "attachScreenshotFailed": "无法附加截图", "imageUnreadable": "无法读取图片，请换一个文件。", "unsupportedFile": "不支持的文件", "acceptedFiles": "支持 png、jpg、mov、mp4。", "attachFailed": "无法附加文件", "fileUnreadable": "无法读取文件，请换一个文件。", "videoNotAttached": "未附加视频", "feedbackSent": "反馈已发送", "sharingFailed": "分享失败", "signInRequired": "需要登录", "connectionRequestFailed": "无法响应连接请求", "calendarConnectFailed": "Google 日历连接失败", "unknownError": "未知错误" },
+  "updateUi": { "stillStarting": "screenpipe 仍在启动", "startupError": "启动错误——请打开设置查看详情后再重启", "finishStartup": "请先完成启动，然后再次点击更新", "installingDescription": "screenpipe 将自动重启", "restarting": "正在重启……", "available": "可用", "signInToUpdate": "登录以更新", "availableSignIn": "screenpipe v{version} 可用——登录后下载", "signIn": "登录", "restartToUpdate": "重启以更新", "ready": "v{version} 已准备好", "readyLong": "screenpipe v{version} 已准备好" },
+  "recordingUi": { "off": "关闭", "aecScreenpipe": "Screenpipe 软件回声消除", "aecScreenpipeDescription": "使用软件 AEC3 消除麦克风转写中的扬声器串音", "aecMac": "Apple VoiceProcessingIO", "aecMacDescription": "使用默认 macOS 输入设备的 Apple 麦克风回声消除", "aecWindows": "Windows WASAPI 回声消除", "aecWindowsDescription": "当输入端点支持时使用 Windows 麦克风回声消除", "loadBacklogFailed": "无法加载待处理音频", "loadAudioFailed": "无法加载音频", "playAudioFailed": "无法播放音频", "audioPreviewFailed": "无法打开音频文件进行预览", "chunkTranscribed": "音频片段已转写", "nothingProcessed": "没有处理任何内容", "transcriptionFailed": "无法运行转写", "chunkDropped": "音频片段已丢弃", "dropChunkFailed": "无法丢弃音频片段", "noNewTerms": "没有新词条", "termsExist": "所有词条已存在于词典中", "addedTerms": "已添加 {count} 个词条", "skippedTerms": "跳过 {count} 个（上限：{limit}）", "limitReached": "已达到上限", "maxTerms": "最多允许 {limit} 个词条", "loadExclusionsFailed": "无法加载音频排除项", "readApplicationFailed": "无法读取应用", "dataDirectoryUnavailable": "自定义数据目录不可用", "validation": "校验错误", "fixValidation": "应用更改前请修复所有校验错误", "updating": "正在更新录音设置", "wait": "这可能需要一些时间……", "updated": "设置已成功更新", "serverRestarted": "Screenpipe 服务器已使用新设置重启", "recordingRestarted": "录音已使用新设置重启", "updateError": "更新设置失败", "tryLogs": "请重试，或检查日志获取更多信息", "unsavedRestart": "有未保存更改——需要重启", "allValid": "所有设置有效", "loadingModels": "正在加载模型……", "modelPlaceholder": "模型名称（例如：whisper-large-v3-turbo）" },
+  "recordingUi2": { "validationFound": "发现 {count} 个校验错误" },
+  "recordingUi3": { "echoCancellation": "回声消除", "echoHelp": "减少通话和屏幕录制期间扬声器声音串入麦克风转写。" },
+  "meetingUi": { "mergeFailed": "合并会议失败", "deleteFailed": "删除会议失败", "insertImageFailed": "无法插入图片", "imageTypes": "请拖入 png、jpg、gif、webp、bmp 或 svg 文件。", "stopFirst": "请先停止会议", "openChatFailed": "无法打开聊天", "tryAgain": "请稍后重试。", "retranscribeAfter": "批量重新转写会在会议结束后使用已保存的音频运行。", "transcriptRefreshed": "转写已刷新", "retranscribeFailed": "重新转写失败", "saveNotesFailed": "无法保存笔记", "stoppingUnsaved": "仍将停止会议——最新编辑可能尚未保存。", "stopMeetingFailed": "无法停止会议", "exportAfter": "MP4 导出会在会议结束后使用已保存的画面和音频运行。", "openSaveFailed": "无法打开保存对话框", "exporting": "正在导出 MP4……", "stitching": "正在拼接画面和音频——长会议可能需要一分钟。", "exported": "MP4 已导出", "exportFailed": "MP4 导出失败", "copiedClipboard": "已复制到剪贴板", "copyFailed": "复制失败", "deleteMeetingFailed": "删除会议失败", "languageFailed": "无法更新语言", "micResumed": "麦克风采集已恢复", "micResumedDescription": "检测到语音后将开始转写。", "micResumeFailed": "无法恢复麦克风", "openMeetingFailed": "无法打开会议", "calendarGoogle": "通过 Google OAuth 直接连接。", "calendarIcs": "粘贴只读 webcal 或 ICS 订阅地址。", "merge": "合并", "bold": "粗体", "italic": "斜体", "strikethrough": "删除线", "inlineCode": "行内代码", "heading1": "标题 1", "heading2": "标题 2", "bulletList": "项目符号列表", "quote": "引用" },
+  "meetingUi2": { "calendarNativeMac": "使用通过 macOS 互联网账户同步的日历。", "calendarNativeWindows": "使用 Windows 日历中的可用日历。", "calendarNativeOs": "使用操作系统中的可用日历。", "calendarGoogle": "通过 Google OAuth 直接连接。", "calendarIcs": "粘贴只读 webcal 或 ICS 订阅地址。", "nativeDescription": "ScreenPipe 会读取事件标题、时间和参会人，以便会议笔记在正确时刻开始，不会写入你的日历。", "macAccountHint": "通过 Apple 日历使用 Google、Outlook 或 Exchange 时，请先在 macOS“互联网账户”中添加账户。", "windowsAccountHint": "通过 Windows 日历使用 Google、Outlook 或 Exchange 时，请先在 Windows“电子邮件和账户”中添加账户。", "osAccountHint": "请在操作系统的日历账户设置中选择可用日历。", "connected": "已连接", "notConnected": "未连接", "connect": "连接", "googleDescription": "直接连接 Google 日历。ScreenPipe 使用只读权限进行会议检测并读取笔记元数据。", "connectGoogle": "连接 Google 日历", "addFeed": "添加订阅" },
+  "permissionUi": { "restartRequired": "需要重启", "restartDescription": "请重启应用以应用屏幕录制权限", "error": "错误", "requestFailed": "请求 {type} 权限失败", "openSettingsFailed": "打开 {type} 权限设置失败" },
+  "rewindUi": { "loginRequired": "需要登录", "regionOcrLogin": "区域 OCR 需要登录", "readingText": "正在读取文字……", "analyzingRegion": "正在分析所选区域", "noText": "未找到文字", "noTextDescription": "所选区域中未检测到文字", "textCopied": "文字已复制到剪贴板", "ocrFailed": "OCR 失败", "tagged": "已标记", "taggingFailed": "标记失败", "someFramesFailed": "部分画面无法标记", "removeFailed": "移除失败", "deleted": "已删除", "deletionFailed": "删除失败", "noTranscript": "没有可发送的转写数据" },
+  "audioTranscriptUi2": { "meetingSegments": "{count} 个会议片段", "audio": "音频", "retranscribe": "重新转写", "selectReassign": "选择后重新分配", "noMeetingTranscriptions": "没有会议转写", "loadEarlier": "加载更早的 {count} 条", "noAudioWindow": "此时间窗口没有音频", "selected": "已选择 {count} 条", "assignTo": "分配给", "cancel": "取消" },
+  "residualUi": { "restartingServer": "正在重启服务器", "serverRestarted": "服务器已重启", "restartFailed": "重启失败", "inviteSent": "邀请已发送！", "failedInvite": "邀请发送失败", "downloadingModel": "正在下载模型", "installingFfmpeg": "正在安装 ffmpeg", "ffmpegInstalled": "ffmpeg 已安装", "ffmpegReady": "ffmpeg 已准备就绪", "modelDownloaded": "模型已下载", "browserPairingFailed": "浏览器配对失败", "untitled": "未命名", "hdRecordingStarted": "高清录制已开始", "transcribeAudio": "转录音频", "readText": "读取应用中的文字", "captureDisplay": "捕获屏幕", "encryptCredentials": "加密 API 密钥和凭据", "failedInstallPipe": "管道安装失败", "signInRequired": "需要登录", "connectionRequestFailed": "连接请求处理失败", "invalidGroupName": "分组名称无效", "invalidFrameId": "帧 ID 无效", "jumpedToFrame": "已跳转到帧", "openedFrame": "已打开帧 {id}", "frameNotFound": "未找到帧", "navigationFailed": "导航失败", "runningPipe": "正在使用选择内容运行管道", "googleCalendarFailed": "Google 日历连接失败", "loggedIn": "已登录！", "loggedInDescription": "你已成功登录", "failedLoadUser": "用户信息加载失败", "subscriptionActive": "订阅已激活", "activationFailed": "激活失败", "navigatingTimestamp": "正在跳转到时间点", "invalidTimestamp": "时间戳无效", "timelineLinkFailed": "无法解析时间线链接", "couldntOpenFile": "无法打开文件", "navigatingFrame": "正在跳转到帧", "recordingStarted": "录制已开始", "recordingStartedDescription": "屏幕录制已启动", "recordingPaused": "录制已暂停", "recordingPausedDescription": "采集已暂停，管道和搜索仍可用", "audioRecordingStarted": "音频录制已开始", "audioRecordingStartedDescription": "音频采集已启用", "audioRecordingStopped": "音频录制已停止", "audioRecordingStoppedDescription": "音频采集已禁用" },
+  "residualUi2": { "adminPresets": "AI 预设可用范围由管理员控制", "nameRequired": "名称为必填项", "settingsNotInitialized": "设置尚未初始化", "differentName": "请选择其他名称", "copiedPreset": "已从副本创建新预设", "changesSaved": "更改已保存", "presetAdded": "已添加新预设", "adminDefault": "默认 AI 预设由管理员控制", "setAnotherDefault": "请先将其他预设设为默认", "templateSaved": "模板已保存", "templateUpdated": "模板已更新", "updateFailed": "更新失败", "chatUpdateFailed": "无法更新此聊天，请重试。", "archiveFailed": "部分聊天无法归档", "restoreFailed": "部分聊天无法恢复", "deleteFailed": "部分聊天无法删除", "removeConnection": "移除连接上下文", "aecDisabled": "回声消除已禁用", "aecSoftware": "使用软件 AEC3 消除麦克风转录中的扬声器串音", "aecApple": "使用 macOS 默认输入设备的 Apple 麦克风 AEC", "aecWindows": "输入端点支持时使用 Windows 麦克风 AEC" },
+  "residualUi3": { "todayActivity": "今天的活动", "yesterday": "昨天", "pastWeek": "过去 7 天", "pastHour": "过去 1 小时", "audioMeetingsOnly": "仅音频/会议", "screenTextOnly": "仅屏幕文字", "uiEvents": "界面事件（点击、按键）" },
+  "residualBulk": { "pipePublished": "管道已发布到商店", "noChangesPublish": "没有可发布的更改", "pipeUpdatedPublished": "管道已更新并发布", "failedPublish": "发布失败", "couldNotReadPipe": "无法读取管道内容", "adminPresets": "AI 预设可用范围由管理员控制", "nameRequired": "名称为必填项", "settingsNotInitialized": "设置尚未初始化", "differentName": "请选择其他名称", "copiedPreset": "已从副本创建新预设", "changesSaved": "更改已保存", "presetAdded": "已添加新预设", "adminDefault": "默认 AI 预设由管理员控制", "setAnotherDefault": "请先将其他预设设为默认", "saveGoalFailed": "目标保存失败", "tryAgain": "请重试", "resetOnboardingFailed": "无法重置引导", "updateAvailable": "有可用更新", "updateReady": "更新已就绪", "updateFound": "发现更新", "updateCheckFailed": "检查更新失败", "autoStartFailed": "自动启动设置更新失败", "openedBrowser": "已在浏览器中打开", "sampleFailed": "示例播放失败", "speakerDeleted": "说话人已删除", "falseDetection": "已标记为误检测", "speakersMerged": "说话人已合并", "fullCapture": "完整采集质量和频率", "reducedCapture": "降低采集频率和编码质量", "minimalCapture": "最小化采集，积极节能", "battery20": "电量 ≤20%——继续视觉采集，关闭音频和 Whisper", "battery10": "电量 ≤10% 或系统低电量——采集已暂停", "unknownBattery": "后端报告了此状态，但当前应用版本无法识别", "keepAwakeFailed": "保持唤醒设置更新失败", "batteryAdjust": "根据电池状态调整", "ignoreBattery": "完整质量，不考虑电池", "maxPowerSaving": "最大程度节能", "stripeConnected": "Stripe 已连接！", "stripeConnectedDesc": "你的账户已完成支付设置", "stripeIncomplete": "Stripe 设置未完成", "stripeIncompleteDesc": "请完成 Stripe 引导流程", "subscriptionActivated": "订阅已激活", "checkoutFailed": "结账启动失败", "loggedOut": "已退出登录", "pipesSynced": "管道已同步", "memoriesSynced": "记忆已同步", "connectionsSynced": "连接已同步", "syncFailed": "同步失败", "copiedImage": "图片已复制", "frameCopied": "帧已复制到剪贴板", "copyFailed": "复制失败", "noText": "没有文字", "noTextFrame": "此帧没有可用文字", "copiedText": "文字已复制", "textCopied": "文字已复制到剪贴板", "copiedDeeplink": "深链已复制", "frameLinkCopied": "帧链接已复制到剪贴板", "askFrame": "询问此帧", "frameChatOpened": "已打开带有帧上下文的聊天", "runningFramePipe": "正在使用帧上下文运行管道", "skillFolder": "选择技能文件夹（必须包含 SKILL.md）", "nameOptional": "名称（可选）", "removeConnectionContext": "移除连接上下文", "newBlock": "新建区块", "browserOpenFailed": "无法打开浏览器", "memoryLoadFailed": "记忆加载失败", "memoryDeleted": "记忆已删除", "memoryDeleteFailed": "记忆删除失败", "memoryUpdated": "记忆已更新", "memoryUpdateFailed": "记忆更新失败", "memoryCreated": "记忆已创建", "memoryCreateFailed": "记忆创建失败", "artifactDeleted": "构件已删除", "itemsDeleteFailed": "部分项目删除失败", "installedNotCaptured": "已安装·尚未采集", "copyApiFailed": "API 密钥复制失败", "regenerateApiFailed": "API 密钥重新生成失败", "adminTokenInvalid": "这看起来不像管理员令牌", "adminTokenFormat": "预期格式：sk_ent_…", "adminTokenSaved": "管理员令牌已保存", "adminTokenUse": "打开新的 Pi 聊天即可使用，无需重启应用", "saveFailed": "保存失败", "adminTokenCleared": "管理员令牌已清除", "clearFailed": "清除失败", "adminTokenCopied": "管理员令牌已复制到剪贴板", "copyAdminFailed": "管理员令牌复制失败" },
+  "dashboardBulk": { "canvasNotSaved": "画布更改未保存", "setupResumeFailed": "设置无法继续", "setupAttention": "设置仍需处理", "dashboardLimit": "已达到仪表板数量上限", "untitledDashboard": "未命名仪表板", "liveViewGenerateFailed": "Live View 生成失败", "pipeAgentOpenFailed": "无法打开 Pipe 智能体", "feedbackSaveFailed": "反馈保存失败", "chooseModel": "请先选择 AI 模型", "addPreset": "请在设置中添加 AI 预设后重试。", "sectionEditFailed": "此部分编辑失败", "liveViewSaveFailed": "Live View 保存失败", "templateNotInstalled": "模板未安装", "dashboardRenameFailed": "仪表板重命名失败", "dashboardDuplicateFailed": "仪表板复制失败", "dashboardDeleted": "仪表板已删除", "dashboardDeleteFailed": "仪表板删除失败", "dashboardRestored": "已恢复上一个仪表板", "dashboardRestoreFailed": "上一个仪表板恢复失败", "fixedPeriod": "此仪表板使用固定时间段", "timeRangeFailed": "时间范围更改失败" },
+  "residualBulk2": { "voiceClipFailed": "Screenpipe 无法加载此语音片段", "businessWelcome": "欢迎使用 Screenpipe Business！" },
+  "residualBulk3": { "steerFailed": "引导消息发送失败", "steerQueuedFailed": "队列中的引导消息发送失败", "messageStarted": "消息已开始处理", "followupMoved": "后续消息已移出队列。", "piAgentError": "Pi 智能体错误", "cancelQueueFailed": "取消队列消息失败", "interruptHint": "如需中断当前回复，请使用停止。", "queueFailed": "消息加入队列失败", "modelSwitch": "模型将在本次回复结束后切换", "pipeStopFailed": "管道停止失败", "stoppingPipe": "正在停止管道", "piStarting": "Pi 正在启动", "waitMoment": "请稍候", "untitled": "未命名", "largeContextSaved": "大段上下文已保存为文件", "largeContextDescription": "Pi 将使用本地分块文件，而不是直接发送完整文本。", "largeContextFailed": "大段上下文保存失败", "largeContextNotSent": "消息未发送，因为粘贴内容过大，无法直接发送。", "unsupportedFile": "不支持的文件", "noTextFound": "未找到文字", "readFileFailed": "文件读取失败", "overlayUpdated": "悬浮层模式已更新", "overlayShortcutHint": "按下快捷键即可用新设置打开悬浮层。", "nameFirst": "请先输入姓名", "voiceTrainingFailed": "语音训练启动失败", "skillFolder": "选择技能文件夹（必须包含 SKILL.md）", "extensionFailed": "Pi 扩展失败", "extensionReload": "Pi 会重新加载空闲会话，使下一轮使用新的软件包列表。", "extensionDisabled": "Pi 扩展已禁用", "shortcutConflict": "快捷键冲突", "shortcutEnabled": "快捷键已启用", "shortcutUpdateFailed": "快捷键更新失败", "shortcutDisabled": "快捷键已禁用", "browserOpenFailed": "无法打开浏览器", "blockNew": "新建区块", "vaultFolder": "选择 Obsidian 库文件夹", "watchFolder": "选择要监控的文件夹", "nameOptional": "名称（可选）" },
+  "notificationUi": { "recordingHealth": "录制健康", "recordingHealthDesc": "及时知道采集何时停止工作", "meetings": "会议", "meetingsDesc": "通话期间的实时笔记和音频/转录状态", "system": "系统", "systemDesc": "显示器、扩展坞和电源变化", "automation": "管道和自动化", "automationDesc": "自动化产生的建议和提醒", "app": "应用", "appDesc": "Screenpipe 本身的更新", "experimental": "实验性", "captureStalls": "录制健康提醒", "captureStallsDesc": "显示录制需要处理并在采集停止时提醒（可能误报）", "meetingLiveNotes": "会议实时笔记", "meetingLiveNotesDesc": "检测到会议时提示打开实时笔记", "audioCaptureStalled": "会议音频未采集", "audioCaptureStalledDesc": "检测到会议但 60 秒内没有音频进入录音器时发送系统通知", "liveTranscriptStalled": "实时转录未流动", "liveTranscriptStalledDesc": "采集到音频但 60 秒内没有实时转录时发送应用内提醒", "displayChanges": "显示变化", "displayChangesDesc": "显示器插拔、切换或合盖扩展坞变化提醒", "powerModeChanges": "电源模式变化", "powerModeChangesDesc": "电池节能模式开启时提醒", "pipeNotifications": "管道通知", "pipeNotificationsDesc": "已安装管道的提醒", "appUpdates": "应用更新", "appUpdatesDesc": "有新版本可用" },
+  "notificationPauseUi": { "vipStillNotify": "仍有 {count} 个 Pipe 会发送通知", "off": "已关闭，直到你重新开启", "paused": "已暂停", "quietActive": "安静时段已生效", "on": "已开启", "notifications": "通知", "resume": "恢复通知", "pauseFor": "暂停时长", "thirtyMinutes": "30 分钟", "oneHour": "1 小时", "twoHours": "2 小时", "untilTomorrow": "直到明天", "turnOff": "关闭通知", "quietHours": "安静时段", "activeNow": "当前生效", "quietDescription": "按每晚计划静默非关键提醒" },
+  "connectionScopeUi": { "sendOnly": "仅发送", "sendOnlyDescription": "以你的身份发送消息，Screenpipe 无法读取你的 Slack。", "sendRead": "发送并读取", "sendReadDescription": "还可以搜索和读取你的消息、私信及频道。", "claudeMcpSetup": "Claude MCP 设置" },
+  "miscUi": { "resetTryAgain": "重置并重试", "inputPromptHint": "如果没有出现提示，请在系统设置 → 隐私与安全性 → 输入监控中打开 screenpipe。启用后重新启动 screenpipe——macOS 只会在下次进程启动时应用 TCC 更改。", "permissionNotActivated": "请求后仍无法激活权限。请在系统设置 → 隐私与安全性 → 输入监控中打开 screenpipe。如果开关已打开但采集仍失败，请点击“重置并重试”以清除旧的 TCC 记录并重新请求。", "restartInputHint": "请重启 screenpipe 以开始采集按键和点击。当前录制器启动时没有输入监控权限，必须下次启动才会应用更改。", "retentionMedia": "每天删除超过 {days} 天的视频和音频文件。转录、OCR 文本以及应用/窗口时间线仍可搜索。", "retentionLean": "每天回收视频和音频文件，并删除超过 {days} 天的逐元素 OCR 和辅助功能详情。文本搜索、转录、时间线和记忆仍会保留，截止时间之前的片段将无法回放。", "retentionAll": "每天永久删除超过 {days} 天的所有数据——录音、转录、OCR 和界面事件。截止时间之前将无法搜索，且无法撤销。" },
+  "browserUi": { "useLogin": "使用浏览器登录", "retryPage": "重试页面", "clearData": "清除浏览器数据" },
+  "onboardingBuild": { "planning": "正在读取你的目标", "planningDetail": "将你选择的结果转化为简洁实用的设置", "planReady": "正在选择此视图所需内容", "planReadyDetail": "让设置专注于你的目标", "installing": "正在连接你的活动", "installingDetail": "准备让此视图持续更新", "saving": "正在编排 Live View", "savingDetail": "围绕你的目标安排此视图", "refreshing": "正在加载第一个信号", "refreshingDetail": "正在加载第一个结果" },
+  "onboardingBuild2": { "building": "正在构建你的第一个 Live View", "tagline": "输入本地上下文，输出实用视图。", "stepOf": "第 {step} 步，共 {total} 步", "finishFailed": "设置未完成，请重试。" },
+  "layoutUi": { "noPipe": "无管道", "quarter": "四分之一", "half": "一半", "full": "完整", "blockShow": "此区块应显示的内容" },
+  "meetingEditorUi": { "blocks": "区块", "text": "正文", "textHint": "普通段落", "h1": "标题 1", "h1Hint": "大标题", "h2": "标题 2", "h2Hint": "中标题", "h3": "标题 3", "h3Hint": "小标题", "bullet": "项目符号列表", "bulletHint": "无序列表", "numbered": "编号列表", "numberedHint": "有序列表", "task": "任务列表", "taskHint": "复选框", "quote": "引用", "quoteHint": "引用块", "code": "代码块", "codeHint": "预格式化", "divider": "分隔线", "dividerHint": "水平线" },
+  "remoteSupportUi": { "ready": "同意状态已同步。支持人员可在设备在线时请求上传一次日志。", "uploading": "正在上传请求的过滤诊断信息……", "error": "无法连接支持服务。在连接恢复前不会执行请求，系统会自动重试。", "signedOut": "已登录会话尚未就绪，因此无法执行远程请求。", "checking": "远程同意已在本地启用，正在检查支持连接。", "syncing": "正在向支持服务确认同意状态……", "disabled": "远程支持日志收集已禁用。", "title": "支持访问", "cardTitle": "远程支持日志", "managed": "由组织管理", "managedCheckFailed": "无法确认此设备是否受管理。远程日志控制已锁定，系统会自动重试。", "managedChecking": "正在检查远程日志收集是否由组织管理……", "managedDescription": "你的组织可以从此受管理设备请求诊断日志。除非管理员发出请求，否则不会上传任何内容。日志会在本地过滤常见密钥和个人数据，但自动过滤可能遗漏密钥，日志仍可能包含姓名、文件路径、URL 和错误信息。不会包含截图、录音、音频文件、聊天记录、设置或时间线数据库。", "consumerDescription": "允许 Screenpipe 支持从此设备请求近期诊断日志。上传前会在本地过滤常见密钥和个人数据，但自动过滤可能遗漏密钥，日志仍可能包含姓名、文件路径、URL 和错误信息。不会包含截图、录音、音频文件、聊天记录、设置或时间线数据库。除非支持服务发送短期请求，否则不会上传任何内容。你可以随时关闭此功能；已共享的诊断信息会在 30 天后删除。", "signInSuffix": " 登录后即可启用。" },
+  "summaryUi": { "last5": "最近 5 分钟", "last30": "最近 30 分钟", "last2h": "最近 2 小时", "today": "今天", "past24": "过去 24 小时", "yesterday": "昨天", "thisWeek": "本周", "lastWeek": "上周", "statusUpdate": "状态更新", "statusPrompt": "生成我完成事项的简短状态更新", "decisions": "关键决策", "decisionsPrompt": "我做出或遇到过哪些关键决策？", "actions": "行动项", "actionsPrompt": "从我的活动中提取所有行动项和待办事项", "meetingPrep": "会议准备", "meetingPrepPrompt": "总结即将参加会议所需的上下文", "blockers": "阻碍事项", "blockersPrompt": "我遇到了哪些问题、错误或阻碍？" },
+  "recordingUi4": { "meetingStarts": "会议开始时", "askMe": "询问我", "askMeHint": "在会议开始通知中添加“打开笔记 + 高清录制”操作，点击一次即可打开笔记并开始高清录制（推荐）", "alwaysHd": "始终使用高清录制", "alwaysHdHint": "每次检测到会议都自动开始，单次通话会占用更多磁盘和 CPU", "never": "从不", "neverHint": "不显示提示，只有托盘计时器可以启动会话" },
+  "recordingUi5": { "customVocabulary": "自定义词汇", "customVocabularyHelp": "添加姓名、品牌和术语，以提高转写准确度。也可以添加替换词，自动纠正常见的错误转写。", "customVocabularyDescription": "为转写添加姓名、品牌和术语", "quality": "质量", "captureFrequency": "捕获频率", "captureFrequencyDescription": "即使屏幕没有变化，也至少每隔此时间截取一次屏幕。间隔越短，遗漏越少，但占用的磁盘空间越多。", "captureModeHelp": "仅会议模式只在检测到会议时录制和转写音频，可节省电量和磁盘空间；始终模式会持续采集。必须启用会议检测。", "engineHelp": "云端引擎将音频发送到服务器以快速转写；离线引擎在设备上运行，但会占用更多 CPU 和内存。", "batchHelp": "将音频分成更长的片段后再转写。更多上下文有助于提高准确度和区分说话人。", "batchSizeHelp": "转写前合并的最大音频时长，设为 0 表示自动决定。", "musicHelp": "跳过以音乐为主的音频，避免对其进行转写。", "liveNotesHelp": "只将当前会议流式传输到实时笔记，与后台录制分开。", "appendTypedHelp": "会议结束时，将你在会议期间输入和编辑的内容追加到会议笔记。", "meetingDetectionHelp": "检测会议应用，并自动开始和结束会议及实时笔记。", "voiceTrainingHelp": "转写中显示的姓名。训练 30 秒后，screenpipe 可以在不同设备上识别你的声音。", "vocabWordPlaceholder": "例如：screenpipe", "vocabReplacementPlaceholder": "替换词（可选）", "experimental": "实验性", "bluetoothMicsDescription": "连接蓝牙麦克风会降低耳机的音质，这是操作系统的限制。默认情况下，仅在检测到会议时录制蓝牙麦克风。", "excludeSystemAudio": "从系统音频中排除应用", "excludeSystemAudioDescription": "这些应用的音频不会被纳入系统音频采集。", "windowsOneExcludedApp": "Windows 一次只能排除一个应用。", "previewAudioChunk": "预览音频片段 {id}", "closeAudioControls": "关闭音频控制", "openAudioControls": "打开音频控制", "transcribeAudioChunk": "转写音频片段 {id}", "dropAudioChunk": "丢弃音频片段 {id}", "offlineLimit": "离线：{used}/{limit} 个字符", "cloudLimit": "云端：{used}/{limit} 个关键词", "bulkVocabularyPlaceholder": "输入词汇，用逗号、换行、分号或制表符分隔\n\n例如：kubernetes、posthog、screenpipe、terraform", "removeAudioExclusion": "从音频排除列表移除 {name}" },
+  "mentionUi": { "speaker": "说话人" },
+  "permissionUi2": { "microphone": "麦克风", "accessibility": "辅助功能", "screen": "屏幕", "secureStorage": "安全存储", "granted": "已授权", "grant": "授权 →", "ok": "正常" },
+  "powerUi2": { "auto": "自动", "performance": "性能", "balanced": "均衡", "batterySaver": "省电", "audioPaused": "音频已暂停", "fullPause": "完全暂停", "unknown": "未知" },
+  "remoteAgentUi": { "agent": "智能体", "setupWhere": "在 {name} 运行的机器上设置 screenpipe", "setupWhereDetail": "可以是你的 VPS、云主机或 Mac mini。这里有两种简单方式：", "runOnBox": "1. 在该机器上运行以下命令（SSH 连接后粘贴）：", "pasteIntoAi": "2. 或将以下内容粘贴到你的 AI（Claude、Cursor、Codex……），让它设置服务器：", "copied": "已复制", "copy": "复制", "pushData": "然后通过下方的“远程同步”选项卡将 screenpipe 数据推送到该机器。", "apiDescription": "通过本地 REST API 读取屏幕历史、会议和记忆（只读查询）。", "cliDescription": "在终端管理管道（定时自动化）和连接（Telegram、Slack 等）。", "openclawDescription": "在 VPS 上全天候运行任意 AI 智能体。将其连接到 screenpipe，注册 MCP 服务、安装技能或同步数据。", "hermesDescription": "具备消息网关（Telegram、Discord、Slack、WhatsApp）的自我改进智能体。将其连接到 screenpipe。", "claudeCodeDescription": "Anthropic 的终端/IDE 智能体。通过 MCP 和技能在本地或远程机器上接入 screenpipe。", "claudeDesktopDescription": "Claude 桌面应用。仅支持 MCP——将 screenpipe 注册为 MCP 服务。", "codexDescription": "OpenAI 的编程智能体。通过 MCP 和技能在本地或远程机器上接入 screenpipe。", "gatewayUrl": "网关 URL", "gatewayToken": "网关令牌", "apiServerUrl": "API 服务器 URL", "apiServerKey": "API 服务器密钥" },
+  "templateUi": { "starter": "起始模板", "starterDescription": "选择一个结果。Screenpipe 会设置仪表板及所需的内置辅助管道。", "ready": "已就绪", "readyDescription": "此设备所需的一切都已设置。", "setsUp": "设置 {count} 个内置{helper}", "setsUpDescription": "应用此模板时将在本地设置 {count} 个内置{helper}。", "partial": "{installed}/{required} 个辅助管道已就绪", "partialDescription": "应用此模板时将在本地设置 {missing} 个缺失的内置{helper}。", "helper": "辅助管道", "helpers": "辅助管道", "powers": "所需管道" },
+  "power": { "keepComputerAwake": "保持电脑唤醒" },
+  "brain": { "addMemory": "添加记忆", "addMemoryDescription": "保存 AI 应长期记住的事实、偏好或决定。", "memoryPlaceholder": "你希望 AI 记住什么？", "addTagPlaceholder": "添加标签……", "openViewer": "打开查看器", "edit": "编辑", "copy": "复制", "delete": "删除", "deleteMemory": "删除记忆", "closeDetail": "关闭详情", "closeArtifact": "关闭产物" },
+  "privacy": { "apiKeyPlaceholder": "例如：sp-abc12345", "copyKey": "复制密钥", "regenerateKey": "重新生成密钥", "browserNativeDetection": "使用浏览器原生检测；需要 macOS 自动化权限", "ignoreAppsPlaceholder": "选择要忽略的应用……", "domainsPlaceholder": "例如：wellsfargo.com、chase.com……", "pasteTokenFirst": "请先粘贴令牌", "teamTokenPlaceholder": "sk_ent_…", "copyToken": "复制令牌", "allowRemoteSupportLogs": "允许远程支持日志" },
+  "speakers": { "notRealSpeaker": "不是真实说话人（噪声）", "enterName": "输入姓名……", "rename": "重命名", "delete": "删除", "differentPerson": "不是同一个人", "searchSpeakers": "搜索说话人……" },
+  "agent": { "copy": "复制", "pickServer": "选择服务器：", "enterManually": "或手动输入", "userHostPlaceholder": "用户@主机", "disconnect": "断开连接", "advancedSettings": "高级设置", "host": "主机", "port": "端口", "user": "用户", "sshKeyPath": "SSH 密钥路径", "remotePath": "远程路径", "minutes": "分钟", "syncInterval": "同步间隔（分钟）", "dropSkillDescription": "将 screenpipe SKILL.md 放入 {name} 的技能目录，{name} 会将其加载为新技能。", "installEither": "可以安装其中一个，也可以全部安装。", "copiedSkill": "已将 SKILL.md 复制到剪贴板", "copyFailed": "复制失败", "copiedInstallCommand": "已复制安装命令", "runsOnThisMachine": "如果 {name} 在此电脑上运行", "oneLinerInstall": "一键安装命令：" },
+  "shortcuts": {
+    "restored": "快捷键已恢复", "restoredDescription": "所有快捷键已恢复为默认值", "restoreError": "恢复快捷键失败", "restoreErrorDescription": "无法恢复默认快捷键，请重试。", "description": "键盘快捷键", "restoreDefaults": "恢复默认设置", "toggleOverlay": "切换 screenpipe 覆盖层", "showHideInterface": "显示/隐藏主界面", "toggleChat": "切换 AI 聊天", "showHideChat": "显示/隐藏 AI 聊天窗口", "openSearch": "打开搜索", "openSearchOverlay": "覆盖层可见时打开搜索", "startRecording": "开始录制", "startScreenRecording": "开始屏幕录制", "stopRecording": "停止录制", "stopScreenRecording": "停止屏幕录制", "startAudio": "开始录音", "stopAudio": "停止录音"
+  },
+  "aiSettings": {
+    "back": "返回", "updatePreset": "更新预设", "createPreset": "创建预设", "provider": "AI 提供商", "chatgpt": "ChatGPT", "chatgptDescription": "使用 ChatGPT Plus/Pro 订阅登录", "claudeApi": "Claude API", "claudeDescription": "使用 Anthropic API 密钥", "custom": "自定义", "customDescription": "连接你自己的 AI 提供商或自托管模型", "ollama": "Ollama", "ollamaDescription": "使用现有 Ollama 安装在本地运行 AI 模型", "screenpipeCloud": "Screenpipe 云端", "cloudDescription": "由 Screenpipe 云端提供支持的 AI 编程 Agent，需要登录。", "loginRequired": "需要登录", "presetName": "预设名称", "presetNamePlaceholder": "输入预设名称", "presetNameHelp": "仅允许字母、数字、空格、连字符和下划线", "customUrl": "自定义 URL", "customUrlPlaceholder": "例如 https://integrate.api.nvidia.com/v1 或 http://localhost:11434/v1", "apiKey": "API 密钥", "apiKeyPlaceholder": "输入 AI API 密钥", "modelNamePlaceholder": "选择或输入模型名称", "approachingDailyLimit": "每日额度即将用尽{reset}", "customPromptPlaceholder": "在此输入自定义提示词", "connectionTest": "连接测试", "areYouSure": "确定吗？", "cancel": "取消", "changeDefaultPreset": "更改默认预设？"
+  },
+  "aiSettingsUi": { "intro": "配置 AI 分析和聊天偏好", "enhancedAi": "增强 AI", "enhancedDescription": "使用 AI 提供更智能的建议和按需每日摘要", "enhancedNote": "每日摘要使用你配置的 AI 模型；建议可能使用 screenpipe 云端。仅在需要时处理相关活动。", "mediaAnalysis": "AI 音频与视频分析", "mediaAnalysisHelp": "允许 Pi 和 Claude Code 调用 screenpipe 的机密环境，转录会议、描述视频片段并分析屏幕数据中的图像帧。", "mediaAnalysisDescription": "在机密环境中转录音频并理解视频和图像。", "autoTitles": "自动生成聊天标题", "autoTitlesDescription": "首条消息后使用 AI 为新聊天命名。关闭后可节省 token。" },
+  "feedback": {
+    "screenshotPreview": "截图预览",
+    "reportIssue": "报告问题",
+    "placeholder": "描述您的反馈或问题...",
+    "addFiles": "添加文件",
+    "lastFiveMinutes": "最近 5 分钟",
+    "sending": "发送中…",
+    "sent": "已发送",
+    "sendLogsFeedback": "发送日志和反馈",
+    "releaseToAttach": "松开以添加附件",
+    "reportSentWithAttachment": "报告已发送，包含附件",
+    "reportSent": "报告已发送",
+    "preparingAttachment": "正在准备附件…", "attachLastFiveMinutes": "附加最近 5 分钟的屏幕录制", "debugDataHint": "日志、设置和 Pi 聊天记录会一并包含，以便我们排查问题。API 密钥、机密和个人信息会自动移除。", "fileTypesHint": "png、jpg、mov、mp4 · 最大 50 MB"
+  },
+  "feedbackUi": { "intro": "获取支持、发送日志或提出功能建议", "sendLogs": "发送日志", "logsIncluded": "日志会自动包含在内", "gettingStarted": "入门指南", "tutorialDescription": "完整的 screenpipe 教程，从设置到 Pipe", "watch": "观看", "replayIntro": "重播介绍", "replayDescription": "30 秒引导式首次运行", "replay": "重播", "shapeScreenpipe": "塑造 screenpipe", "surveyDescription": "90 秒问卷，告诉我们哪些体验有效、哪些需要改进", "takeSurvey": "填写问卷", "documentation": "文档", "documentationDescription": "指南、API 参考和集成", "videoTutorials": "视频教程", "videoDescription": "观看演示和操作讲解", "featureIdeas": "功能建议", "featureDescription": "投票或提交请求", "githubIssues": "GitHub 问题", "githubDescription": "错误与技术问题", "discord": "Discord", "discordDescription": "社区支持与讨论", "changelog": "更新日志", "changelogDescription": "每个版本的新内容" },
+  "displayUi": { "intro": "主题、窗口与覆盖层外观", "system": "系统", "light": "浅色", "dark": "深色", "theme": "主题", "fontSize": "字体大小", "font_14px": "小", "font_16px": "中", "font_18px": "大", "font_20px": "超大", "timelineRewind": "时间线 / 回放", "timelineHelp": "关闭时间线 / 回放功能及其后台缓存工作。重启 screenpipe 后生效。", "timelineDescription": "显示回放并保持后台缓存运行", "timelineDisabled": "时间线已禁用", "timelineEnabled": "时间线已启用", "restartApplied": "screenpipe 已重启以应用更改。", "restartFailed": "重启 screenpipe 失败", "restartManually": "请手动重启 screenpipe 以应用更改。", "timelineMode": "时间线模式", "timelineModeHelp": "控制时间线覆盖层的显示方式。Native 使用系统覆盖层，Tauri 使用应用窗口。", "reopenTimeline": "重新打开时间线以应用", "overlay": "覆盖层", "floatingPanel": "浮动面板", "window": "窗口", "resizableWindow": "可调整大小的窗口", "pressShortcutMode": "按快捷键以 {mode} 模式打开时间线。", "chatAlwaysOnTop": "聊天窗口置顶", "chatAlwaysOnTopDescription": "让聊天窗口显示在其他窗口上方", "chatSuggestions": "显示聊天建议", "chatSuggestionsHelp": "在聊天输入框上方显示后续问题和建议提示。", "chatSuggestionsDescription": "输入框上方的后续问题和建议提示", "overlayInRecording": "在屏幕录制中显示覆盖层", "overlayInRecordingHelp": "启用后，其他应用制作的录屏和截图中会显示 screenpipe 覆盖层。", "overlayInRecordingDescription": "允许 OBS、Screen Studio 捕获覆盖层", "overlayVisible": "覆盖层对录屏应用可见", "overlayHidden": "覆盖层对录屏应用隐藏", "translucentSidebar": "半透明侧边栏", "translucentSidebarHelp": "为侧边栏应用 macOS 毛玻璃效果。", "translucentSidebarDescription": "毛玻璃侧边栏效果", "sidebarEnabled": "半透明侧边栏已启用", "sidebarDisabled": "半透明侧边栏已禁用", "shortcutReminder": "显示快捷键提醒", "shortcutReminderDescription": "显示 screenpipe 快捷键的覆盖层", "overlaySize": "覆盖层大小", "overlaySizeDescription": "快捷键提醒覆盖层的大小", "small": "小", "medium": "中", "large": "大" },
+  "usageUi": { "updating": "更新中……", "conversations": "对话", "chatResponses": "聊天回复", "pipeRuns": "Pipe 运行次数", "noModelData": "暂无模型数据，下一次对话后将开始记录", "noUsage": "最近 {range} 没有用量", "untracked": "{count} 条较早的聊天回复没有模型信息。", "requestsPerModel": "按模型统计请求", "tracked": "已记录 {count} 条", "untrackedTracking": "+ {count} 条较早的聊天回复未记录模型。" },
+  "accountUi": { "pipeSync": "跨设备同步 Pipe", "pipeSyncDescription": "将 Pipe 和配置同步到与你账户关联的所有设备", "pipeSyncEnabled": "Pipe 同步已启用", "pipeSyncDisabled": "Pipe 同步已停用", "pipesWillSync": "Pipe 将在设备间同步", "pipesWillNotSync": "Pipe 将不再同步", "memoriesSync": "跨设备同步记忆", "memoriesSyncDescription": "在设备间同步记忆（事实、偏好和决策）", "memoriesSyncEnabled": "记忆同步已启用", "memoriesSyncDisabled": "记忆同步已停用", "memoriesWillSync": "记忆将跨设备同步", "memoriesWillNotSync": "记忆将不再同步", "connectionsSync": "跨设备同步连接", "connectionsSyncDescription": "将已连接账户（Slack、Notion……）同步到设备，凭据经过端到端加密", "connectionsSyncEnabled": "连接同步已启用", "connectionsSyncDisabled": "连接同步已停用", "connectionsWillSync": "已连接账户将跨设备同步", "connectionsWillNotSync": "已连接账户将不再同步", "syncNow": "立即同步", "login": "登录", "active": "已启用", "signIn": "登录 Screenpipe", "freeAccount": "免费账户，无需信用卡", "logIn": "登录", "optionalUpgrade": "可选：升级到 Screenpipe Business", "showDetails": "显示详情", "business": "Business", "perMonth": "/月", "billedAnnually": "按年计费·节省 100 美元·按月支付", "switchAnnual": "切换为按年计费·节省 100 美元", "encryptedCloudSync": "加密云端同步·50GB、3 台设备", "cloudTranscriptionRam": "云端转写·更高质量并节省 2-3GB 内存", "moreAiQueries": "多 100 倍 AI 查询次数", "prioritySupport": "优先支持", "encryptedPipeSync": "加密的跨设备 Pipe 同步", "loginUpgrade": "登录并升级到 Business" },
+  "pipeTriggerUi": { "onSchedule": "按计划运行", "scheduleSub": "每 N 分钟、每天或 cron", "meetingStarts": "会议开始", "meetingDetected": "检测到通话", "meetingEnds": "会议结束", "meetingWraps": "通话结束", "newMessage": "新消息", "channelPick": "在指定频道中", "pageEdited": "页面创建或编辑", "workspaceDatabase": "工作区或数据库", "newNote": "新笔记", "vaultFolder": "在 vault 文件夹中", "pipeFinished": "Pipe 完成后", "chainPipe": "串联另一个 Pipe", "group_recurring": "周期任务", "group_meetings": "会议", "group_slack": "Slack", "group_notion": "Notion", "group_obsidian": "Obsidian", "group_pipes": "Pipe", "noTriggers": "没有匹配的触发器。", "noOtherPipes": "暂无其他已启用的 Pipe，请先创建一个。", "pipeDetail": "在另一个 Pipe 完成后立即运行此 Pipe（链式运行）。", "choosePipe": "选择 Pipe……", "account": "账户", "connectApp": "连接 {name}", "chooseVault": "选择 vault 文件夹", "accessAnytime": "你可以随时更改此 Pipe 的访问范围。", "selectChannel": "选择频道", "searchChannels": "搜索频道……", "noMatch": "没有匹配项。", "selectDataSource": "选择数据源", "searchDatabases": "搜索数据库……", "anyWorkspacePage": "工作区中的任意页面", "obsidianDescription": "监控文件夹中新出现的笔记。", "folderToWatch": "要监控的文件夹", "browse": "浏览", "obsidianTip": "提示：选择子文件夹（例如 meetings/）可以减少干扰。", "loadingChannels": "正在加载频道……", "loadingDatabases": "正在加载数据库……", "untitledDatabase": "未命名数据库" },
+  "accountUi2": { "upgradeBusiness": "升级到 Business", "freeTier": "免费方案：", "localWhisper": "本地 Whisper 转写（约占用 2GB 内存）" },
+  "pipeTriggerUi2": { "whenToRun": "运行时机", "whenToRunDescription": "按计划、会议结束后或收到新消息时……" },
+  "connectionsUi": { "noServers": "暂无服务器", "enabledCount": "已启用 {enabled}/{total}", "mcpServers": "MCP 服务器", "add": "添加", "manage": "管理", "noSkills": "暂无技能", "skillsImported": "已导入 {count} 个技能", "skills": "技能", "connectSkills": "连接技能", "noExtensions": "暂无扩展", "extensionsEnabled": "已启用 {count} 个扩展", "piExtensions": "Pi 扩展", "browse": "浏览", "suggestedForDevice": "为此设备推荐", "connected": "已连接", "categoryDesktop": "桌面应用", "categoryAi": "AI", "categoryAgent": "智能体", "categoryAutomation": "自动化", "categoryMeetings": "会议", "categoryCalendar": "日历", "categoryCommunication": "通信", "categoryNotes": "笔记", "categoryDocuments": "文档", "categoryProjectManagement": "项目管理", "categoryCrm": "客户管理", "categorySupport": "支持", "categoryFinance": "财务", "categoryDeveloper": "开发工具", "categoryWearables": "可穿戴设备", "categoryNotifications": "通知", "categorySystem": "系统", "categoryOther": "其他" },
+  "connectionPanelUi": { "cursorDescription": "通过 MCP 让 Cursor 访问你的屏幕和音频历史记录。", "getCursor": "获取 Cursor", "openCursor": "打开 Cursor", "manualConfig": "手动配置", "grokDescription": "通过 MCP 让 Grok CLI 访问你的屏幕和音频历史记录。", "grokCli": "Grok CLI", "claudeCodeDescription": "让 Claude Code 访问你的屏幕和音频历史记录。请在终端中运行：" },
+  "connectionPanelUi2": { "memorySyncBeta": "记忆同步（测试版）", "memorySyncDescription": "将 screenpipe 记忆写入 {file}，让 {assistant} 在每次新会话中都能看到。每 5 分钟自动更新。", "file": "文件", "lastSync": "上次同步", "homeDirectory": "主目录（可选）", "enabling": "启用中……", "enableMemorySync": "启用记忆同步", "ollamaDescription": "将 Ollama 用作 screenpipe 的本地 AI 提供商。", "checking": "检查中……", "checkConnection": "检查连接", "ollamaDetected": "已检测到 Ollama", "ollamaNoModels": "未找到模型。请运行“ollama pull <model>”开始使用。", "ollamaNotDetected": "未检测到 Ollama，请确认它正在 localhost:11434 运行。", "lmStudioDescription": "将 LM Studio 连接到 screenpipe 的屏幕和音频数据，或将其用作本地 AI 提供商。", "addMcpLmStudio": "将 screenpipe MCP 添加到 LM Studio", "lmStudioDetected": "已检测到 LM Studio", "lmStudioNoModels": "未加载模型，请在 LM Studio 中加载模型开始使用。", "lmStudioNotDetected": "未检测到 LM Studio，请确认它正在 localhost:1234 运行。", "oauthDescription": "连接 {name} 账户。连接后，AI 可以代表你执行操作。", "defaultAccount": "默认账户", "zendeskSubdomain": "Zendesk 子域名", "accessLevel": "访问级别", "addAnotherAccount": "添加其他账户", "reconnect": "重新连接 {name}", "connectWith": "连接 {name}", "default": "默认", "krispDescription": "连接 Krisp，让 AI 搜索你的会议转写、笔记和行动项。登录由 Krisp OAuth 处理，因此 screenpipe 不会看到你的密码。", "plaudDescription": "连接 Plaud，让 AI 搜索你的 Plaud 录音、转写、摘要和笔记。登录由 Plaud OAuth 处理，因此 screenpipe 不会看到你的密码。", "waitingApproval": "等待批准……", "connectBee": "连接 Bee" },
+  "connectionPanelUi3": { "accountsCount": "{count} 个账户", "googleDocsDescription": "可读写 Google Docs，让 AI 搜索、读取、创建和编辑文档。只有你通过 screenpipe 打开或由 screenpipe 创建的文档可见，不会访问整个云端硬盘。", "defaultAccount": "默认账户", "waitingForGoogle": "等待 Google……", "addAnotherAccount": "添加其他账户", "connectGoogleDocs": "连接 Google Docs", "recentlyModifiedDocs": "最近修改的文档", "loading": "加载中……", "noRecentDocuments": "未找到最近文档" },
+  "enterpriseUi": { "validationFailed": "企业密钥验证失败", "enterpriseKey": "企业密钥", "description": "输入管理员提供的密钥以配置此设备", "dontKnow": "不知道企业密钥？", "findInWorkspace": "在工作区中查找", "keyFormatError": "请输入类似 ENT-XXXX-XXXX-XXXX-XXXX 的企业密钥", "keyPlaceholder": "ENT-XXXX-XXXX-XXXX-XXXX", "validating": "验证中……", "activate": "激活", "signInInstead": "改为登录", "noEmployeeAccount": "受管理设备无需员工账户" },
+  "chatUi3": { "requiredByPi": "Pi 要求" },
+  "pipesUi2": { "deviceOffline": "{name} 已离线", "checkRemoteDevice": "请确认远程设备上的 screenpipe 正在运行", "backToThisDevice": "返回此设备", "neverRun": "从未运行", "managedByOrganization": "由组织管理", "organizationPolicyDescription": "计划、提示词、AI 预设、连接和启用状态会自动从组织策略恢复。", "schedule": "计划", "aiPreset": "AI 预设", "organizationDefault": "组织默认值", "createYourOwnPipe": "创建你自己的 Pipe", "createPipeDescription": "用自然语言描述你的需求，screenpipe 会为你构建、安装并安排运行。", "updateQuestion": "更新 {name}？", "localEditsDescription": "你对这个 Pipe 有本地修改。更新会覆盖提示词修改，并保存备份文件", "localEditsPreserved": "计划、模型和启用状态会保留。", "skip": "跳过", "updateDiscardEdits": "更新并丢弃我的修改" },
+  "pipesUi3": { "connections": "连接", "connectionsHelp": "允许智能体访问你的应用（Slack、Obsidian、CRM 等），凭据会在运行时获取", "notificationApi": "允许通知 API", "notificationApiHelp": "允许此 Pipe 调用 POST /notify", "timeout": "超时时间", "timeoutHelp": "Pipe 被终止前的最长执行时间，复杂任务或较慢的 LLM 可适当增加", "history": "历史记录", "historyHelp": "启用后，Pipe 会记住之前运行的上下文", "unsaved": "未保存" },
+  "connectionPanelUi4": { "scanQr": "使用 WhatsApp 应用扫描此二维码：", "whatsappLinkInstructions": "打开 WhatsApp > 已关联设备 > 关联设备", "connected": "已连接", "loading": "加载中……", "inboxConnected": "— 收件箱已连接（只读）", "imapHost": "IMAP 主机", "port": "端口" },
+  "skillsUi2": { "addFromFolder": "从文件夹添加……", "addFromFolderHint": "使用“从文件夹添加……”从任意位置导入。", "piExtensions": "Pi 扩展", "loadingPiExtensions": "正在加载 Pi 扩展……", "noMatchingCurated": "没有匹配的精选 Pi 扩展。", "installedOutsideList": "在此列表之外安装" },
+  "teamUi": { "title": "让你的团队使用 Screenpipe", "subtitle": "团队管理在网页端进行。", "description": "在 Screenpipe 网站管理成员、查看团队工作流和 SOP，并运行组织级查询。桌面应用专注于捕获和你的个人活动。", "openOnWeb": "在网页端打开团队" },
+  "powerUi3": { "powerBattery": "电源和电池", "description": "控制捕获频率、质量和转写，以节省电量", "ac": "交流电", "charging": "充电中", "keepAwake": "保持电脑唤醒", "keepAwakeDescription": "离开电脑时仍保持录制和计划中的 Pipe 运行；否则空闲休眠会暂停捕获。" },
+  "visualUi": { "diagramError": "图表错误：" },
+  "artifactUi": { "loadingArtifact": "正在加载工件……" },
+  "calendarUi2": { "upcomingEvents": "即将发生的事件（未来 8 小时）", "loading": "加载中……", "noUpcomingEvents": "未来 8 小时没有即将发生的事件" },
+  "speakersUi2": { "soundsSimilar": "声音相似——是同一个人吗？", "searching": "搜索中……", "noSimilarSpeakers": "未找到相似说话人" },
+  "aiPresetUi2": { "overloaded": "过载", "degraded": "性能下降", "business": "Business", "pipes": "Pipe", "nonePipeDefaults": "无（使用 Pipe 默认值）" },
+  "onboardingBuild3": { "context": "上下文", "liveView": "实时视图", "whatShouldHelpFirst": "你希望 screenpipe 首先帮你做什么？", "chooseOutcome": "选择一个有用的目标。screenpipe 会创建一个基于真实活动的实时视图，不使用示例数据。", "buildFirstLiveView": "创建我的第一个实时视图", "loadingAi": "正在加载 AI", "skipForNow": "暂时跳过", "using": "使用中", "liveViewSaved": "你的实时视图已保存。现在打开它并在那里完成设置。", "openingBrain": "正在打开 Brain……", "continueLiveView": "继续进入我的实时视图" },
+  "notificationUi2": { "quickSet": "快速设置：" },
+  "scheduleUi2": { "presets": "预设：" },
+  "brainUi2": { "editMemory": "编辑记忆", "failedLoadArtifacts": "加载工件失败", "loading": "加载中……", "failedLoadLiveViews": "加载实时视图失败" },
+  "aiToolsUi2": { "aiTools": "AI 工具", "manage": "管理", "configDescription": "screenpipe 会将 MCP 服务器和技能添加到每个工具自己的配置中，随时可以移除。", "openFile": "打开文件", "connecting": "连接中……", "removing": "移除中……", "connected": "已连接", "remove": "移除", "foundTools": "在此 Mac 上找到 {count} 个工具，可一键将 screenpipe 添加到{target}", "it": "其中", "all": "全部工具", "allConnected": "已连接全部 {count} 个工具", "connectedCount": "已连接 {connected}/{total}", "connectAll": "全部连接", "mcpSkills": "MCP + 技能", "mcp": "MCP", "retry": "重试", "connect": "连接", "connectAllHint": "尚未连接任何工具；点击顶部“全部连接”即可完成设置。" },
+  "cloudUi2": { "teamShare": "团队共享", "dashboard": "仪表盘", "running": "运行中", "disabled": "已停用" },
+  "browserUi2": { "title": "浏览器 URL 捕获", "allEnabled": "全部已启用", "description": "screenpipe 需要自动化权限来捕获基于 Chromium 的浏览器 URL。Safari 使用辅助功能权限（已启用）。", "notRunning": "未运行", "enabled": "已启用", "openSettings": "打开设置", "enable": "启用", "openBrowserFirst": "请先打开浏览器", "statusFailed": "无法读取浏览器自动化状态。请尝试请求权限，然后刷新。", "noBrowser": "未检测到受支持的 Chromium 浏览器。请打开 Chrome、Arc、Brave、Edge 或其他 Chromium 浏览器，然后刷新。", "requestPermission": "请求自动化权限" },
+  "miscUi2": { "googleBlockedWarning": "Google 可能会显示应用被阻止的警告。点击", "advanced": "高级", "goToScreenpipe": "前往 Screenpipe", "seeScreenshot": "查看截图", "oauthWarningWalkthrough": "Google OAuth 警告操作说明", "oauthWarningAlt": "Google OAuth 警告操作说明：先点击“高级”，再点击不安全的“前往 Screenpipe”", "windowPickerDescription": "过去 7 天 · {apps} 个应用 · {windows} 个窗口。点击应用可展开其常用窗口。", "windowPickerAppHint": "添加 App 会屏蔽整个应用；添加窗口会将其作为", "scoped": "（限定范围）。" },
+  "composioUi2": { "signInLabel": "登录", "signInDescription": "由 Composio 处理。{provider} 登录页面会显示其名称，你的密码不会与 screenpipe 共享。", "yourDataLabel": "你的数据", "yourDataDescription": "{data} 会通过 Composio 云端处理（符合 SOC 2 标准并加密），不会由 screenpipe 存储。", "localOptionLabel": "本地选项", "localOptionDescription": "想要完全本地运行？请改用 Email Inbox (IMAP) 连接。", "moreAboutPrivacy":"更多隐私信息","learnMore":"了解更多 Composio 信息 →","loading":"加载中……","connectedDescription":"{label} 已连接，AI 现在可以读取你的 {noun}。","connect":"连接","cancel":"取消" },
+  "skillsUi3": { "allSkills": "全部技能" },
+  "layoutUi2": { "addFirstBlock": "添加你的第一个 Block", "addFirstBlockDescription": "现在将它连接到 Pipe，或稍后使用 AI 填充。" },
+  "privacyUi3": { "dashboard": "仪表盘", "settings": "设置", "email": "邮箱", "emailPrivacy": "我们绝不会分享你的邮箱", "resetPassword": "重置密码", "recommended": "推荐" },
+  "permissionUi3": { "allow": "允许", "access": "访问", "openSettings": "打开 {type} 设置", "openPermissionSettings": "打开 {type} 权限设置" },
+  "layoutUi3": { "blockIntentPlaceholder": "例如：计算所选时间段内花在 GTM 上的时间占全部活跃时间的百分比。没有 GTM 活动时使用 0。" },
+  "timelineUi2": { "removeTag": "移除标签 {tag}", "typed": "输入了“{text}”", "typedPlain": "输入", "copied": "复制了“{text}”", "copiedPlain": "复制", "clicked": "点击了“{text}”", "switchedTo": "切换到 {app}", "pressed": "按下了 {key}", "keyPress": "按键", "scrolledIn": "在 {window} 中滚动", "scrolled": "滚动", "focused": "聚焦于 {target}" },
+  "cloudUi3": { "deleteRunner": "删除运行器" },
+  "cloudUi4": { "stopping": "正在停止云端运行器", "starting": "正在启动云端运行器", "deleted": "云端运行器已删除", "keySaved": "AI 密钥已保存——一分钟内生效", "keyRemoved": "AI 密钥已移除", "stop": "停止", "start": "启动", "organization": "组织", "orgRunner": "{org} 云端运行器", "heartbeat": "心跳 {time}", "status_running": "运行中", "status_provisioning": "配置中", "status_stopping": "停止中", "status_stopped": "已停止", "status_error": "错误", "status_deleted": "已删除", "deleteRunnerDescription":"虚拟机会被删除，数据访问令牌也会撤销。受管理的 Pipe 会继续在设备上运行，你可以随时创建新的运行器。","save":"保存","cancel":"取消","aiKeySet":"运行器已设置 AI 密钥","aiOrgPreset":"AI：来自仪表盘的组织预设“{id}”（{model}）","orgPresetNeedsKey":"组织预设“{id}”使用 {provider}，运行器需要对应密钥","noAiConfigured":"尚未配置 AI。请在企业仪表盘中设置组织预设，或在此添加密钥","replace":"替换","addKey":"添加密钥","remove":"移除" },
+  "layoutUi4": { "dragHelp": "拖动区块即可移动。使用宽度控件或侧边把手调整大小。", "addBlock": "添加区块", "cancel": "取消", "done": "完成", "newDashboard": "新建仪表盘", "createDescription": "描述你想要的结果，AI 会设计区块并为你连接最合适的 Pipe。", "configureEveryBlock": "想自己配置每个区块？", "blankDashboard": "从空白仪表盘开始" },
+  "meetingAppsUi": { "reEnable": "{label} 已被忽略——点击重新启用", "ignore": "忽略 {label}", "ignored": "已忽略", "ignoreAction": "忽略", "ignoreTitle": "忽略会议检测中的应用", "ignoreDescription": "已选应用不会自动开始会议或实时笔记，其他应用仍会继续检测。与录音设置中的“忽略窗口”列表分开。" },
+  "composioUi3": { "loginToConnect": "登录 screenpipe 账户以连接 {label}。", "addAccount": "添加其他账户", "disconnectAll": "断开全部连接", "disconnect": "断开连接", "finishSignin": "请在浏览器中完成 {provider} 登录——登录后会自动连接", "starting": "启动中……", "connect": "连接 {label}" },
+  "skillsUi4": { "alwaysEnabled": "{name} 始终启用", "disable": "停用 {name}", "enable": "启用 {name}" },
+  "chatUi4": { "removeQueued": "移除排队消息 {index}" },
+  "pipeTriggerUi3": { "remove": "移除" },
+  "brainUi3": { "deleteItemsQuestion": "删除 {count} 个项目？", "deleteItemsDescription": "选中的项目将被永久删除，且无法撤销。", "deleteMemoryDescription": "此记忆将被永久删除，且无法撤销。", "liveViews": "实时视图", "memories": "记忆", "artifacts": "工件", "failedLoadArtifacts": "加载工件失败" },
+  "speakersUi3": { "mergeInto": "是，合并到 {name}", "thisSpeaker": "此说话人" },
+  "previewUi2": { "now": "现在", "powerProfile": "遵循电源配置——屏幕闲置时大约每 30 秒采集一帧", "atLeastOneFrameEvery": "至少每隔", "perHourOnStillScreen": "静止屏幕每小时采集约", "always": "始终", "meetings": "会议期间", "meetingsOnly": "仅在检测到会议时采集——节省电量、磁盘空间和转录成本", "continuous": "持续采集，全天候运行", "pastEntryAfterCleanup": "清理后的历史记录", "retention_media": "删除截图和视频；其他内容仍可搜索", "retention_lean": "保留文字和记忆；删除截图及应用结构", "retention_all": "超过保留期限后删除整条记录", "retentionChip_screenshot": "截图", "retentionChip_text": "文字", "retentionChip_appStructure": "应用结构", "retentionChip_memories": "记忆", "captureCadence": "采集频率", "captureQuality": "采集质量", "batteryLife": "电池续航", "power_auto": "根据是否接入电源自动调整", "power_performance": "最高频率和质量——忽略电池消耗", "power_battery_saver": "降低采集频率和质量以延长续航", "audio": "音频", "videoImages": "视频 · 图片", "dashboardOpen": "仪表板已打开，图表呈上升趋势", "fromVideo": "来自视频", "transcript": "转写", "sampleTranscript": "“……然后我们完成了修复。”", "enclave": "机密环境", "cloudDescription": "语音会变成可搜索文字，视频和图片会变成描述——在机密计算环境中处理后提供给 Pi 和 Claude Code。", "whatTheseLookLike": "通知示例", "audioRecovered": "音频采集已恢复——录制状态正常" },
+  "pipesUi4": { "openInChat": "在聊天中打开", "organizationManaged": "组织管理 v{version}——配置由管理员强制执行", "managed": "已管理", "sharedWithTeam": "已与团队共享（v{version}）", "shared": "已共享", "teamPipe": "团队 Pipe v{version}——只读，作者再次共享后会自动更新", "teamVersionWithSharer": "团队 v{version} · {name}", "teamVersion": "团队 v{version}" },
+  "authGuardUi": { "sessionExpired": "登录会话已过期", "description": "请重新登录后才能继续录制。", "signInAction": "登录 screenpipe", "signIn": "登录" },
+  "overlayUi2": { "stoppingServer": "正在停止 screenpipe 服务器……", "startingServer": "正在启动 screenpipe 服务器……", "serverRestartedDescription": "screenpipe 服务器已成功重启。", "restartFailedDescription": "screenpipe 服务器重启失败。", "reportIssue": "报告问题" },
+  "citationUi": { "source": "{count} 个来源", "sources": "{count} 个来源", "screenpipe": "屏幕", "database": "数据库", "connector": "应用", "web": "网页", "file": "文件", "memory": "记忆", "pipe": "管道", "command": "命令", "webSearch": "网页搜索", "screenpipeSearch": "Screenpipe 搜索", "commandRequest": "命令请求", "toolResult": "工具结果", "commandOutput": "命令输出" },
+  "toolUi": { "runningTool": "正在运行工具……", "writing": "正在生成……", "analyzing": "正在分析……", "preparing": "正在准备回答", "working": "正在处理你的请求", "analyzed": "已完成分析", "findingInformation": "正在查找相关信息", "foundInformation": "已找到相关信息", "updatingFiles": "正在更新文件", "updatedFiles": "已更新文件", "reviewingInstructions": "正在阅读说明", "reviewedInstructions": "已阅读说明", "reviewingFile": "正在查看文件", "reviewedFile": "已查看文件", "usingBrowser": "正在使用浏览器", "usedBrowser": "已使用浏览器", "searchingWeb": "正在搜索网页", "searchedWeb": "已搜索网页", "waitingForInput": "正在等待你的输入", "askedForInput": "已请求你的输入", "done": "完成" },
+  "modelDownloadUi2": { "modelReady": "模型已准备好使用" },
+  "onboardingBuild4": { "goal_work_memory_title": "记住并继续我的工作", "goal_work_memory_description": "带着之前留下的上下文回到正确的任务", "goal_meeting_follow_through_title": "跟进会议之后的工作", "goal_meeting_follow_through_description": "避免决策、负责人和下一步行动被遗漏", "goal_work_patterns_title": "了解我的工作方式", "goal_work_patterns_description": "查看时间花在哪里，以及哪些模式塑造了这一天", "goal_process_automation_title": "把重复工作变成流程", "goal_process_automation_description": "观察工作流、检查步骤，然后持续改进" },
+  "auth": {
+    "loginRequired": "需要登录",
+    "loginDescription": "请登录后继续，您将被重定向到 screenpipe.com",
+    "login": "登录"
+  },
+  "media": {
+    "loading": "正在加载媒体……", "audioUnsupported": "你的浏览器不支持音频播放。", "videoUnsupported": "你的浏览器不支持视频播放。"
+  },
+  "filePreview": {
+    "reveal": "显示",
+    "revealTitle": "显示文件",
+    "copyContent": "复制",
+    "copyContentTitle": "复制文件内容",
+    "copyPath": "路径",
+    "copyPathTitle": "复制文件路径",
+    "copied": "已复制"
+  },
+  "htmlPreview": {
+    "rendered": "渲染后的 HTML 预览", "sandboxed": "沙盒运行", "source": "源代码", "viewSource": "查看源代码", "previewRendered": "预览渲染结果 ↗", "sandboxedNoNetwork": "沙盒运行 · 无网络——外部脚本、图片和请求均已阻止"
+  },
+  "thinking": {
+    "tooltip": "思考级别：控制模型的推理深度",
+    "title": "思考级别",
+    "description": "控制推理深度",
+    "low": "低",
+    "medium": "中",
+    "high": "高"
+  },
+  "changelog": {
+    "title": "更新日志",
+    "viewAll": "查看全部",
+    "loading": "加载中…",
+    "new": "新增",
+    "improved": "改进",
+    "fixed": "修复", "unavailable": "无法连接更新日志，请稍后重试或访问", "changelogUrl": "screenpipe.com/changelog"
+  },
+  "pipes": {
+    "myPipes": "我的 Pipes",
+    "discover": "发现",
+    "dismiss": "关闭",
+    "introTitle": "Pipes 是基于屏幕数据运行的 AI 自动化",
+    "introDescription": "它们可以总结一天、追踪时间、构建数字记忆、同步笔记到 Obsidian、自动更新 CRM 等。安装下方的 Pipe 即可开始，然后在「我的 Pipes」中启用。",
+    "browse": "浏览、安装并查看社区 Pipes",
+    "publish": "发布",
+    "search": "搜索 Pipes...",
+    "noPipes": "未找到 Pipes",
+    "tryDifferentSearch": "请尝试其他搜索词",
+    "installQuestion": "安装 Pipe？",
+    "unverifiedPublisher": "发布者未验证，可能访问你的全部屏幕数据。",
+    "reviewAccess": "安装前请检查请求的访问权限。",
+    "externalInstallDescription": "外部链接请求安装一个 Pipe。Pipe 是运行在屏幕数据上的 AI Agent，请在安装前检查下方提示。",
+    "loadingDetails": "正在加载 Pipe 详情……",
+    "loadingContent": "正在加载 Pipe 内容……",
+    "previewUnavailable": "无法预览 Pipe 内容，但仍可继续安装。",
+    "notNow": "暂不安装",
+    "installing": "安装中……",
+    "install": "安装 Pipe",
+    "reviewAccessTitle": "检查 Pipe 访问权限", "localEditsWarning": "你对该 Pipe 有本地修改，更新会覆盖提示词更改。备份已保存为", "localEditsSuffix": "，计划、模型和启用状态会保留。", "verifiedPublisher": "已验证发布者", "readmePlaceholder": "用 Markdown 编写 README……", "noDescription": "暂无描述", "sourcePlaceholder": "pipe.md 源码……", "publishShortcut": "按 cmd+s 发布", "officialPublisher": "官方 Screenpipe 发布者", "builtBy": "构建者：", "by": "作者：",
+    "update": "更新 {name}？",
+    "publishToStore": "Pipe 已发布到商店",
+    "skip": "跳过",
+    "publishYourPipe": "发布您的 Pipe",
+    "shareWithCommunity": "与社区分享您的 Pipe",
+    "signInToPublish": "登录后即可将 Pipe 发布到商店",
+    "helpPublish": "帮助我发布",
+    "helpPublishDescription": "AI 会将您的 Pipe 通用化、编写 README 并代您发布",
+    "orManual": "或手动发布",
+    "pipe": "Pipe",
+    "selectPipe": "选择 Pipe",
+    "title": "标题",
+    "titlePlaceholder": "我的 Pipe",
+    "description": "描述",
+    "descriptionPlaceholder": "这个 Pipe 做什么？",
+    "icon": "图标（表情）",
+    "category": "分类", "add": "添加", "primaryAiPreset": "主要 AI 预设", "fallbackAiPreset": "备用 AI 预设", "searchConnections": "搜索连接……", "searchPipes": "搜索 Pipe……", "showAllPipes": "显示全部 Pipe", "showOnlyStarred": "仅显示已收藏的 Pipe", "noPipesMatch": "没有匹配的 Pipe", "noPipesInstalled": "尚未安装 Pipe", "noEnterpriseLicense": "此设备没有企业许可证", "cloudLicenseDescription": "云端 Pipe 会在 screenpipe 基础设施上运行组织管理的 Pipe。请先激活企业许可证，然后返回此处。", "cloudPipesUnreachable": "无法连接云端 Pipe", "deleteCloudRunner": "删除云端运行器？", "cancel": "取消", "delete": "删除", "cloudApiKeyPlaceholder": "AI Pipe 的 API 密钥（虚拟机上的 SCREENPIPE_API_KEY）", "noLongerShared": "不再与团队共享——自动运行已禁用；可复制后继续使用，或删除它", "requiredConnectionsMissing": "尚未配置所需连接", "stopPipe": "停止 Pipe", "optimizePipe": "使用 AI 优化此 Pipe——读取最近运行记录并改进提示词", "forkPipe": "复制——基于此 Pipe 创建并自定义新 Pipe", "copy": "复制", "viewInChat": "在聊天中查看", "pipePromptPlaceholder": "例如：每天早上列出我仍需回复的人", "createPipe": "创建 Pipe", "noPipesForRunner": "此运行器尚未有 Pipe", "permissions": "权限", "permissionScreenText": "屏幕文本（OCR）", "permissionAudio": "音频转写", "permissionKeyboard": "键盘输入", "permissionRawSql": "原始 SQL", "permissionScreenshots": "屏幕截图", "permissionConnections": "连接", "permissionAccessibility": "辅助功能", "permissionGeneric": "权限", "timeRange": "时间范围", "days": "天数", "unrestrictedAccess": "不受限制的数据访问", "unrestrictedDescription": "此 Pipe 没有数据访问限制，可以访问所有屏幕文本、音频、键盘输入和原始数据库查询。", "dataAccess": "数据访问", "unrestrictedShort": "不受限制的数据访问——此 Pipe 可以读取你的全部数据", "canAccessAllData": "可以访问你的全部屏幕数据", "requestedAccess": "请求的访问权限", "allAccessDescription": "屏幕文本、音频、键盘输入、屏幕截图和原始查询。", "reviewSource": "查看源码", "acknowledgeAllAccess": "我了解此 Pipe 可以访问我的全部数据。", "updateAction": "更新", "installed": "已安装", "get": "获取"
+  },
+  "browser": {
+    "dragToResize": "拖动调整大小", "sessionCookies": "浏览器会话 Cookie", "reload": "重新加载", "pageLoading": "页面加载中",
+    "connect": "连接浏览器",
+    "pendingDescription": "{browser} 请求连接到 Screenpipe。这可以让智能体在需要浏览器上下文时使用您打开的标签页。",
+    "genericDescription": "浏览器请求连接到 Screenpipe。",
+    "verifyRequest": "验证请求",
+    "matchCode": "请将此代码与浏览器扩展中的代码匹配",
+    "extensionId": "扩展 ID", "macAskAccess": "macOS 可能会请求访问权限", "useBrowserLogin": "使用浏览器登录状态？", "copyingCookies": "screenpipe 即将复制浏览器会话 Cookie。macOS 接下来可能会请求访问浏览器安全存储。", "useBrowserSessions": "screenpipe 可以使用浏览器会话，让智能体打开已登录的网站。此设置适用于所有网站，不会读取已保存的密码。", "safeStorageNext": "如果允许，macOS 可能会请求访问浏览器安全存储。", "waitingMac": "等待 macOS……", "applying": "应用中……", "continue": "继续", "useBrowserSession": "使用浏览器会话", "continueLoggedOut": "退出登录并继续", "browserLoginProtected": "浏览器登录受到保护", "yourBrowser": "你的浏览器", "browserCookieLocked": "正在运行并独占锁定 Cookie 数据库。浏览器打开时，screenpipe 无法读取它。", "bridgeShareLogin": "连接 Screenpipe Browser Bridge 扩展，直接共享此登录状态——无需密码，也无需关闭浏览器。", "windowsCookieBlocked": "Chrome 或 Edge 有匹配的会话 Cookie，但 Windows 应用绑定加密阻止 screenpipe 直接复用它们。", "bridgeReuseLogin": "连接 Screenpipe Browser Bridge 扩展，在不共享密码的情况下复用此登录状态。", "foundProtectedCookies": "找到 {count} 个受保护的 Cookie", "extensionRetrying": "扩展已连接，正在重试……", "connectExtension": "连接扩展", "continueWithoutSigningIn": "不登录并继续", "deny": "拒绝", "allow": "允许"
+  },
+  "search": {
+    "loadingFrame": "正在加载画面",
+    "unavailable": "不可用",
+    "goToTimestamp": "跳转到时间戳",
+    "scrollMore": "滚动查看更多",
+    "filterAll": "全部",
+    "filterScreen": "屏幕",
+    "filterInput": "键盘与剪贴板",
+    "filterChats": "聊天", "allDates": "全部日期", "rangeToday": "今天", "rangeYesterday": "昨天", "rangeLastWeek": "上周", "rangeThisMorning": "今天上午", "rangeLastHour": "最近一小时",
+    "recentActivity": "来自您的近期活动",
+    "placeholder": "搜索记忆和聊天...（# 标签，@ 人员）",
+    "navigate": "↑↓ 导航",
+    "goTimeline": "⏎ 跳转到时间线",
+    "openChat": "⏎ 打开聊天",
+    "back": "Esc 返回",
+    "backOnly": "返回",
+    "close": "Esc 关闭", "resultPosition": "搜索结果位置", "noTranscriptionsFor": "没有找到 {name} 的转写内容", "allCount": "全部（{count}）", "noResultsFor": "没有找到“{query}”的结果", "tags": "标签", "noTagsMatching": "没有匹配“{query}”的标签", "noTagsFound": "没有找到标签", "noPeopleMatching": "没有匹配“{query}”的人员", "noSpeakersFound": "没有找到说话人", "people": "人员", "chats": "聊天", "seeAllChats": "查看全部 {count} 个聊天", "noChatsMatching": "没有匹配“{query}”的聊天", "noChatsYet": "暂无聊天", "keyboardClipboard": "键盘和剪贴板", "showAllResults": "显示全部 {count} 条结果", "screen": "屏幕", "recentChats": "最近聊天", "typeToSearch": "输入以搜索屏幕历史", "askAiShortcut": "⌘⏎ 询问 AI"
+  },
+  "recording": {
+    "backlogOpen": "打开后台转写队列",
+    "backlogTitle": "后台转写队列",
+    "backlogDescription": "等待后台转写处理的音频片段。",
+    "worker": "工作进程 {state}",
+    "readyLoaded": "已加载就绪项",
+    "quietLoaded": "已加载静默项",
+    "totalCandidates": "候选总数",
+    "oldestCandidate": "最早候选项",
+    "searchBacklog": "搜索片段、时间或文件...",
+    "quietShown": "显示静默项",
+    "quietHidden": "隐藏静默项",
+    "shown": "已显示",
+    "refresh": "刷新",
+    "chunk": "片段",
+    "age": "时长",
+    "captured": "采集时间",
+    "file": "文件",
+    "status": "状态",
+    "actions": "操作",
+    "audio": "音频",
+    "audioRecording": "音频录制",
+    "audioDescription": "从麦克风和系统采集音频",
+    "captureAudio": "采集音频",
+    "selectMode": "选择模式",
+    "alwaysContinuous": "始终录制（连续）",
+    "meetingsOnly": "仅在会议期间",
+    "transcription": "转写",
+    "transcriptionEngine": "转写引擎",
+    "selectEngine": "选择引擎",
+    "cloud": "云端",
+    "offline": "离线",
+    "other": "其他",
+    "openAiCompatible": "兼容 OpenAI",
+    "disabledCaptureOnly": "已禁用（仅采集）"
+    ,"modelListError": "无法从 API 获取模型列表，请手动输入模型名称。",
+    "noModels": "API 未返回模型，请手动输入模型名称。",
+    "sendRawWav": "发送原始 WAV 音频（而非 MP3）",
+    "customHeaders": "自定义请求头（JSON）",
+    "connectionTest": "连接测试",
+    "languages": "语言",
+    "fast": "快速",
+    "searchLanguages": "搜索语言...",
+    "noLanguages": "未找到语言。",
+    "autoDetect": "自动检测",
+    "batchDescription": "将音频合并为更长片段，以获得更准确的转写",
+    "filterMusicDescription": "从转写中移除背景音乐",
+    "meetingsSection": "会议",
+    "liveCaptionDescription": "仅会议实时字幕，与后台转写分开",
+    "currentEngine": "当前转写引擎",
+    "cloudLive": "screenpipe 云端实时",
+    "deepgramLive": "Deepgram 直接实时",
+    "typedTextDescription": "在笔记末尾自动添加您输入的文字和编辑过的文件",
+    "autoStartMeetingsDescription": "检测到通话应用时自动开始会议",
+    "devicesCapture": "设备与采集",
+    "autoSelectDevices": "自动选择音频设备",
+    "autoSelectDescription": "录制所有默认设备。关闭后可排除蓝牙耳机或选择特定设备。",
+    "default": "默认",
+    "microphones": "麦克风（您说的话）",
+    "systemAudioWhatYouHear": "系统音频（您听到的声音）",
+    "beta": "测试版",
+    "bluetoothMics": "蓝牙麦克风",
+    "voiceVocabulary": "声音与词汇", "hdRecordingForMeetings": "会议高清录制", "hdRecordingDescription": "通话期间以更高帧率录制屏幕，方便回看演示文稿、演示和共享文档。{status}。", "hdRecordingStartHint": "可以从会议开始通知、托盘菜单或", "hdRecordingNaturalEnd": "每次会话都会自然结束，不会无限运行。", "stopNow": "立即停止", "yourName": "你的姓名", "namePlaceholder": "例如：小明",
+    "screen": "屏幕",
+    "screenContext": "屏幕上下文采集",
+    "screenContextDescription": "采集应用/窗口上下文、辅助功能文本、截图和 OCR 备用内容",
+    "screenshotImages": "屏幕截图",
+    "screenshotDescription": "采集屏幕像素并保存 JPEG 截图，用于视觉证据和 OCR 备用内容",
+    "allMonitors": "使用所有显示器",
+    "allMonitorsDescription": "从所有可用显示器采集截图",
+    "monitors": "显示器",
+    "recordingQuality": "录制质量",
+    "minimum": "最小间隔",
+    "system": "系统",
+    "chineseMirror": "中国镜像",
+    "chinaUsers": "面向中国用户",
+    "powerBattery": "电源与电池",
+    "batteryDescription": "根据电量调整采集并保持设备唤醒",
+    "readAloud": "朗读此内容"
+    ,"transcribeChunk": "立即转写此片段"
+    ,"dropChunk": "丢弃此等待中的片段"
+    ,"back10Seconds": "后退 10 秒"
+    ,"audioPreviewPosition": "音频预览位置"
+    ,"forward10Seconds": "前进 10 秒"
+    ,"filterTerms": "筛选词汇……"
+    ,"deepgramApiKey": "Deepgram API 密钥"
+    ,"apiEndpointPlaceholder": "API 端点（例如 http://127.0.0.1:8080）"
+    ,"apiKeyOptional": "API 密钥（可选）"
+    ,"ignoreMeetingApps": "选择不应自动开始会议的应用"
+    ,"meetingsOnlyHint": "仅在检测到会议时录制——开启“始终录制蓝牙麦克风”可更改此设置"
+    ,"qualityLow": "低 — 1280px，最小尺寸"
+    ,"qualityBalanced": "均衡 — 1920px（默认）"
+    ,"qualityHigh": "高 — 3840px，适合超宽屏"
+    ,"qualityMax": "最大 — 原生尺寸，不缩放"
+    ,"every10Seconds": "每 10 秒"
+    ,"searchMeetingApps": "搜索应用，或输入服务名称（例如 meet.google.com）……"
+    ,"stopIgnoringApp": "停止忽略 {app}"
+    ,"recordingFpsMeeting": "正在以约 {fps} fps 录制——通话结束时停止"
+    ,"recordingFpsRemaining": "正在以约 {fps} fps 录制——剩余 {remaining}"
+    ,"idle": "空闲"
+  },
+  "engineStartupUi": {
+    "engine": "引擎",
+    "audio": "音频",
+    "vision": "视觉",
+    "startingEngine": "正在启动引擎……",
+    "portConflict": "端口冲突，无法开始录制。",
+    "retry": "重试",
+    "continueWithoutRecording": "不录制并继续",
+    "continueWithoutRecordingArrow": "不录制并继续 →",
+    "logs": "日志",
+    "help": "帮助",
+    "permissionRequired": "需要屏幕录制权限。",
+    "openSystemSettings": "打开系统设置 →",
+    "resetPermission": "重置并重新请求",
+    "troubleshootingGuide": "故障排查指南 ↗",
+    "engineFailed": "引擎启动失败。",
+    "runningAs": "当前运行身份",
+    "sent": "已发送",
+    "sendLogs": "发送日志"
+  },
+  "chatUi5": {
+    "today": "今天",
+    "yesterday": "昨天",
+    "last7Days": "最近 7 天",
+    "older": "更早"
+  },
+  "pipeAdvisoryUi": {
+    "pipeIssue": "管道“{name}”可能存在问题",
+    "upgrade": "升级"
+  },
+  "pipesUi5": {
+    "permissions": "权限", "permissionScreenText": "屏幕文本（OCR）", "permissionAudio": "音频转写", "permissionKeyboard": "键盘输入", "permissionRawSql": "原始 SQL", "permissionScreenshots": "屏幕截图", "permissionConnections": "连接", "permissionAccessibility": "辅助功能", "permissionGeneric": "权限", "timeRange": "时间范围", "days": "天数", "unrestrictedAccess": "不受限制的数据访问", "unrestrictedDescription": "此 Pipe 没有数据访问限制，可以访问所有屏幕文本、音频、键盘输入和原始数据库查询。", "dataAccess": "数据访问", "unrestrictedShort": "不受限制的数据访问——此 Pipe 可以读取你的全部数据", "canAccessAllData": "可以访问你的全部屏幕数据", "requestedAccess": "请求的访问权限", "allAccessDescription": "屏幕文本、音频、键盘输入、屏幕截图和原始查询。", "reviewSource": "查看源码", "acknowledgeAllAccess": "我了解此 Pipe 可以访问我的全部数据。", "updateAction": "更新", "installed": "已安装", "get": "获取", "edit": "编辑", "publishing": "发布中……", "publishUpdate": "发布更新", "unpublishing": "取消发布中……", "unpublish": "取消发布", "updating": "更新中……", "readme": "README", "editing": "编辑中", "updated": "{name} 已更新", "installedNamed": "“{name}”已安装", "unpublished": "“{slug}”已从商店取消发布", "redactedSecrets": "发布前已从 Pipe 中移除 {count} 个密钥", "forkedTo": "已派生为“{name}”", "autoUpdated": "{name} 已自动更新", "versionChanged": "v{from} → v{to}", "enableFailed": "无法启用“{name}”", "disableFailed": "无法禁用“{name}”", "deleteFailedCount": "{failed}/{total} 个 Pipe 无法删除"
+  },
+  "brainUi4": {
+    "deleteBeforeCreate": "请先删除一个仪表盘才能创建新的，最多可保留 {max} 个。", "updated": "{title} 已更新", "renamedTo": "已重命名为 {title}", "deleteBeforeDuplicate": "请先删除一个仪表盘才能复制新的，最多可保留 {max} 个。", "created": "{title} 已创建"
+  },
+  "timeRangeUi": {
+    "range_today": "今天", "range_24h": "最近 24 小时", "range_7d": "最近 7 天", "range_30d": "最近 30 天", "showing": "当前显示：{range}"
+  },
+  "summaryCardsUi": {
+    "greeting": "今天我能为你做什么？", "greetingNamed": "{name}，今天我能为你做什么？", "subtitle": "基于你看过、说过或听过的一切", "automate-my-work_title": "自动化我的工作", "automate-my-work_description": "找出一个重复工作流，并提出可测试的自动化方案", "day-recap_title": "每日回顾", "day-recap_description": "今天完成的事项、关键时刻和未完成的工作", "time-breakdown_title": "时间分布", "time-breakdown_description": "你的时间花在哪里——按应用、项目和类别划分", "missed-todos_title": "遗漏待办", "missed-todos_description": "找出过去几天可能遗漏的行动事项"
+  },
+  "captureUi": {
+    "idle_label": "会议已保存", "idle_description": "会议已结束。", "idle_short": "已保存", "idle_transcriptEmpty": "此会议没有采集到转写内容", "recording_label": "正在录制", "recording_description": "正在为此会议采集音频。", "recording_short": "录制中", "recording_transcriptEmpty": "正在聆听——第一段音频到达后会显示转写", "audio-disabled_label": "音频已禁用", "audio-disabled_description": "会议笔记已打开，但音频采集已禁用。", "audio-disabled_short": "音频关闭", "audio-disabled_transcriptEmpty": "音频采集已禁用——恢复音频后才能转写", "no-input-device_label": "未检测到麦克风", "no-input-device_description": "未检测到麦克风，无法为此会议采集音频。屏幕录制仍会继续。", "no-input-device_short": "无麦克风", "no-input-device_transcriptEmpty": "未检测到麦克风——连接麦克风后才能转写", "input-paused_label": "麦克风已暂停", "input-paused_description": "会议笔记已打开，但麦克风输入已暂停。", "input-paused_short": "麦克风暂停", "input-paused_transcriptEmpty": "麦克风已暂停——恢复采集后才能转写", "audio-not-started_label": "麦克风尚未采集", "audio-not-started_description": "会议正在进行，但音频采集尚未产生数据。", "audio-not-started_short": "麦克风未就绪", "audio-not-started_transcriptEmpty": "麦克风尚未采集——检查权限或恢复音频采集", "audio-stalled_label": "音频已停滞", "audio-stalled_description": "会议正在进行，但音频已停止传入录制器。", "audio-stalled_short": "音频停滞", "audio-stalled_transcriptEmpty": "音频没有传入 screenpipe——检查麦克风或恢复采集", "waiting-for-voice_label": "正在聆听", "waiting-for-voice_description": "采集已准备就绪，正在等待语音。", "waiting-for-voice_short": "聆听中", "waiting-for-voice_transcriptEmpty": "正在聆听——检测到语音后会显示转写", "transcript-paused_label": "仅录音", "transcript-paused_description": "音频采集可以继续，但实时转写已暂停。", "transcript-paused_short": "仅录音", "transcript-paused_transcriptEmpty": "录制仍在继续，但实时转写已暂停", "transcript-pending_label": "正在转写", "transcript-pending_description": "音频已采集，正在等待转写。", "transcript-pending_short": "转写中", "transcript-pending_transcriptEmpty": "音频已采集——后台转写完成后会显示结果", "default_transcriptEmpty": "尚无转写——音频可能需要一分钟才会出现，请保持会议打开", "recordingContinues": "录制仍在继续。"
+  },
+  "meetingUi3": {
+    "join_google-meet": "加入 Google Meet", "join_zoom": "加入 Zoom", "join_teams": "加入 Teams", "join_meeting": "加入会议"
+  },
+  "customSummaryUi": {
+    "title": "自定义摘要", "editDescription": "编辑时间范围或说明，然后运行或保存更改", "description": "选择时间范围，并告诉我们摘要应关注什么", "timePeriod": "时间范围", "customRange": "自定义范围", "focusLabel": "摘要应关注什么？", "instructionsFor": "输入针对 {range} 的自定义说明……", "instructionsPlaceholder": "输入自定义说明……", "summaryFor": "{range} 摘要", "addedDescription": "“{title}”已添加到你的模板", "updatedDescription": "“{title}”已更新", "cancel": "取消", "saveAsTemplate": "另存为模板", "run": "运行", "generate": "生成"
+  },
+  "compactUi": {
+    "renderingDiagram": "正在渲染图表……", "checked": "已检查", "lastHour": "最近一小时"
+  },
+  "notificationUi3": {
+    "description": "控制 screenpipe 向你发送哪些通知。你可以随时暂停、设置免打扰时段、关闭整组通知，或单独调整某个 Pipe。",
+    "preset_recommended": "推荐", "preset_all": "全部", "preset_none": "无",
+    "customizePerPipe": "按 Pipe 自定义", "noMatch": "没有通知匹配“{query}”", "muted": "已静音"
+  },
+  "timelineUi3": {
+    "tagApplied": "已将“{tag}”应用到 {count} 个画面", "removeTagFailed": "无法移除“{tag}”",
+    "rangeDeleted": "已移除 {frames} 个画面、{audio} 个音频片段"
+  },
+  "timelineUi4": {
+    "transcriptionPaused": "转写已暂停", "transcribing": "正在转写……"
+  },
+  "chatHistoryUi": {
+    "tabChats": "聊天", "tabPipes": "Pipes", "tabArchived": "已归档", "tabAll": "全部",
+    "archive": "归档", "restore": "恢复", "unarchive": "取消归档", "failedCount": "{count} 个操作失败。", "pin": "置顶", "unpin": "取消置顶", "moveToGroup": "移动到分组", "removeFromGroup": "移出分组", "newGroup": "新建分组……", "delete": "删除", "clearSelection": "清除选择", "selectAllVisible": "选择所有可见聊天", "selectedCount": "已选择 {count} 项", "archiving": "归档中……", "restoring": "恢复中……", "deleting": "删除中……", "close": "关闭", "newChat": "新聊天", "deselect": "取消选择", "select": "选择", "searchChats": "搜索聊天", "searchPipes": "搜索 Pipe", "searchArchived": "搜索已归档", "searchAll": "搜索全部", "loadingChats": "正在加载聊天……", "loadingPipes": "正在加载 Pipe……", "loadingPipeRuns": "正在加载 Pipe 运行记录……", "loadingArchived": "正在加载已归档聊天……", "loadingHistory": "正在加载历史记录……", "loading": "加载中……", "endOfList": "列表结束", "deleteChatsQuestion": "确定删除 {count} 个聊天吗？此操作无法撤销。", "deleteChatQuestion": "确定删除此聊天吗？此操作无法撤销。", "cancel": "取消", "create": "创建"
+  },
+  "aiPresetUi3": {
+    "presetChanged": "预设已更改", "switchedTo": "已切换到 {id}（{model}）", "defaultUpdated": "默认预设已更新", "isDefault": "{id} 现在是默认预设", "presetRemoved": "预设已移除", "removed": "已移除 {id}", "presetSelected": "已选择预设", "isActive": "{id} 现在处于启用状态"
+  },
+  "generalUi2": {
+    "versionAvailable": "v{version} 可用——登录后下载", "versionReady": "v{version} 已准备好——重启以更新", "versionDownloading": "v{version} 仍在后台下载", "updateFound": "发现更新", "upToDate": "已是最新版本", "downloading": "正在后台下载——准备好后会显示横幅", "runningLatest": "当前运行最新版本{version}"
+  },
+  "retentionUi2": {
+    "deletedRecent": "已删除最近 {minutes} 分钟的数据", "removedRecent": "已从磁盘移除 {records} 条记录和 {files} 个文件", "estimating": "正在估算磁盘空间……", "wouldFree": "当前设备预计可释放 {bytes}，涉及 {files} 个文件。", "nothingPastCutoff": "当前没有超过截止时间的数据——数据达到期限后才会进行首次清理。"
+  },
+  "speakersUi4": {
+    "renamed": "说话人已重命名为“{name}”"
+  },
+  "speakersUi5": {
+    "similarVoices": "{count} 个相似声音", "cluster": "分组", "nameAllAs": "将这 {count} 人命名为……", "whoIsThis": "这是谁？", "voiceSamples": "声音样本（{count}）", "noAudioSamples": "暂无已保存的音频样本", "samePerson": "是同一个人吗？（{current}/{total}）", "previous": "上一个", "next": "下一个", "differentPeople": "是不同的人", "identifiedProgress": "已识别 {named}/{total} 位说话人", "unidentifiedSpeakers": "{count} 位未识别的说话人", "similarVoiceClusters": "（{count} 个相似声音分组）", "unidentifiedDescription": "未识别的说话人会在会议记录和 Pipe 中显示为“Speaker #N”。请在下方为其命名，以改善后续输出。", "organizeWithAi": "使用 AI 整理", "pendingIdentification": "待识别（{speakers} 位说话人，分为 {groups} 组）", "identified": "已识别（{count}）", "noSearchMatches": "没有匹配搜索条件的说话人", "noSpeakersYet": "尚未检测到说话人"
+  },
+  "speakerUi": {
+    "assigned": "已分配给“{name}”", "similarVoices": "发现 {count} 个相似声音", "restored": "已恢复 {count} 条转写", "undoAssignment": "撤销说话人分配", "undo": "撤销", "createNamed": "创建“{name}”", "hideAudioPreview": "隐藏音频预览", "playAudioConfirm": "播放音频进行确认", "noiseLabel": "这只是噪声（没有人在说话）"
+  },
+  "residualBulk4": {
+    "shortcutConflictDescription": "此快捷键已被“{shortcut}”使用，请选择其他组合。", "shortcutStateEnabled": "{shortcut} 已启用", "shortcutStateDisabled": "{shortcut} 已禁用", "voiceTrainingStarted": "声音训练已开始", "voiceTrainingDescription": "screenpipe 将在后台匹配你的声音，可能需要几分钟"
+  },
+  "residualUi4": {
+    "invalidFrame": "“{raw}”不是有效的帧 ID。请输入正整数。", "frameNavigationFailed": "无法跳转到帧 {id}——帧可能不存在，或服务器尚未就绪", "cantReadFile": "无法读取 .{ext} 文件", "emptyFile": "{name} 似乎为空或不包含可提取的文本", "businessWelcome": "欢迎使用 screenpipe Business！", "jumpingTo": "正在跳转到 {date}", "jumpingToFrame": "正在跳转到帧 {id}", "welcomeTitle": "欢迎使用 screenpipe", "welcomeBody": "感谢你使用 screenpipe！我们致力于帮助你充分发挥它的价值。", "linkCopiedChrome": "链接已复制——请粘贴到 Chrome：{url}", "usingPreset": "本次会话使用“{id}”预设", "presetFallback": "“{id}”预设启动失败，本次会话将使用备用预设", "assistantStartFailed": "AI 助手启动失败（{provider}）", "allPresetsFailed": "全部 {count} 个预设均失败——{error}", "deletedItems": "已删除 {count} 个项目", "pipeExecutionTitle": "{name} #{id}"
+  },
+  "pipesUi6": {
+    "saving": "保存中……", "saved": "已保存", "saveFailed": "保存失败", "unknownError": "未知错误", "deleteQuestion": "确定删除 {count} 个 Pipe 吗？", "deleteDescription": "这将永久删除所选 Pipe 及其配置，且无法撤销。"
+  },
+  "privacyUi4": {
+    "captures": "{count} 次采集", "scoped": "仅限 {app} 中的此窗口", "visits": "本周访问 {count} 次"
+  },
+  "privacyUi5": {
+    "recommended": "推荐",
+    "incognitoHelp": "无需额外权限即可自动识别并跳过 20 多种语言的隐私/无痕浏览器窗口。在 macOS 上，增强模式会为支持的 Chromium 浏览器启用原生检测。", "drmHelp": "当 DRM 保护的流媒体应用或远程桌面客户端处于焦点时暂停屏幕采集，切换离开后会自动恢复。", "clipboardHelp": "开启后，screenpipe 会记录剪贴板复制/粘贴事件及内容。如果你要分享数据，请关闭此项——密码和 API 密钥可能经过剪贴板。", "keyboardHelp": "开启后，screenpipe 会记录你的键盘输入，默认关闭；无论是否开启，无障碍树和 OCR 仍会采集屏幕文字。", "clickHelp": "开启后，screenpipe 会记录鼠标点击事件。点击不包含文字内容，可用于工作流分析。", "accessibilityHelp": "允许 screenpipe 采集键盘输入和鼠标点击的 macOS 权限。没有此权限时，键盘和点击记录会被跳过。", "lockedAudioHelp": "开启后，即使屏幕锁定，音频录制也会继续。", "piiHelp": "从采集中删除邮箱、电话号码、密钥等敏感信息。智能模式还会处理姓名、地址和图片。", "ignoredAppsHelp": "跳过匹配这些模式的采集。纯文本会匹配应用或窗口标题；使用 App::Title 可限定到单个窗口。", "includedAppsHelp": "只采集匹配的窗口。纯文本是全局包含规则；App::Title 可创建按应用限定的白名单。", "ignoredUrlsHelp": "匹配这些模式的浏览器 URL 不会被采集，可用于隐私保护。", "browseApps": "浏览应用和窗口", "encryptTitle": "静态数据加密", "keychainUnavailable": "此系统无法使用 OS 密钥链。", "keychainDescription": "使用 OS 密钥链加密凭据和设置。", "managed": "由你的组织管理。", "keyboardDescription": "默认关闭。记录原始键盘输入流；屏幕文字仍会被采集。", "clickDescription": "默认开启。点击事件可用于工作流分析，不会记录文字。", "piiOff": "关闭——采集会保存原始文字和像素。", "piiBasic": "基础——采集时使用正则检测邮箱、电话、SSN、卡号和 API 密钥。", "piiSmart": "智能——后台 AI 任务会额外处理姓名、地址和图片。", "hideToken": "隐藏令牌", "revealToken": "显示令牌", "apiKeyEmpty": "API 密钥不能为空", "hideKey": "隐藏密钥", "revealKey": "显示密钥", "captureKeyboard": "采集键盘输入", "captureClicks": "采集点击", "piiRemoval": "PII 清理"
+  },
+  "privacyPiiUi2": {
+    "secretLabel": "密码和密钥", "secretDesc": "密码、API 密钥、令牌", "idLabel": "身份编号", "idDesc": "SSN、信用卡、账户和许可证编号", "personLabel": "姓名", "personDesc": "人员姓名", "emailLabel": "邮箱地址", "emailDesc": "邮箱地址", "phoneLabel": "电话号码", "phoneDesc": "电话号码", "addressLabel": "邮寄地址", "addressDesc": "邮政地址", "urlLabel": "带令牌的链接", "urlDesc": "包含令牌或会话 ID 的链接", "dateLabel": "日期", "dateDesc": "出生日期、时间戳", "sensitiveLabel": "健康和财务详情", "sensitiveDesc": "健康、财务和身份上下文", "formLabel": "表单字段值", "formDesc": "你在表单中输入的内容，可捕获屏幕文字中遗漏的密码和字段内容", "webLabel": "网页地址", "webDesc": "地址栏内容，通常不敏感，隐藏后可能导致链接失效", "buttonLabel": "按钮和菜单标签", "buttonDesc": "例如“提交”或“搜索”等名称，通常不敏感", "helpLabel": "控件帮助文本", "helpDesc": "部分按钮和菜单提供的详细说明", "linksLabel": "应用数据中的链接", "linksDesc": "嵌入应用底层结构中的 URL", "whatToHide": "要隐藏的内容", "alwaysOn": "始终开启", "unselectedHelp": "未选中的类型会保持可见，以便时间线仍可搜索。两种模式都会始终移除密钥。", "whereWeLook": "扫描位置", "advanced": "高级", "whereHelp": "我们始终扫描你输入的内容、剪贴板、转写、窗口标题和屏幕文字。开启其他可能包含相同信息的位置，并将鼠标悬停在行上查看范围。", "consistentPseudonyms": "一致的化名"
+  },
+  "displayUi2": {
+    "menuBarOnlyHelp": "让 screenpipe 仅作为菜单栏应用运行，不在 Dock 中显示图标。点击托盘图标即可打开 screenpipe。", "hideHomeHelp": "开启后，关闭 Home 窗口会将其隐藏并从任务栏移除。screenpipe 仍会在系统托盘中运行。"
+  },
+  "scheduleUi3": {
+    "scheduleHelp": "为每天设置屏幕和音频录制的具体时间段。超出这些时段后，录制会自动暂停。", "day_0": "周一", "day_1": "周二", "day_2": "周三", "day_3": "周四", "day_4": "周五", "day_5": "周六", "day_6": "周日", "dayFull_0": "星期一", "dayFull_1": "星期二", "dayFull_2": "星期三", "dayFull_3": "星期四", "dayFull_4": "星期五", "dayFull_5": "星期六", "dayFull_6": "星期日"
+  },
+  "connectionTileUi": { "claude": "通过 MCP 从 Claude Desktop 搜索你的屏幕和音频", "cursor": "通过 MCP 让 Cursor AI 访问你的屏幕历史", "codex": "通过 MCP 让 Codex 访问你的屏幕和音频", "grok": "通过 MCP 让 Grok CLI 访问你的屏幕和音频", "claudeCode": "将屏幕记忆添加到 Claude Code CLI", "warp": "通过 MCP 从 Warp 终端搜索屏幕历史", "chatgpt": "从 ChatGPT 搜索你的屏幕历史", "browserUrl": "实时捕获浏览器访问过的网址", "voiceMemos": "同步 Apple 语音备忘录以便 AI 搜索", "appleCalendar": "使用 AI 搜索 Apple 日历事件", "googleCalendar": "使用 AI 搜索 Google 日历事件", "googleDocs": "读取并搜索你的 Google 文档", "gmail": "通过托管认证读取 Gmail 收件箱", "googleDrive": "通过托管认证搜索并读取 Google Drive 文件", "googleSheets": "通过托管认证读取、创建和编辑 Google Sheets", "outlookEmail": "读取和发送 Outlook 邮件", "icsCalendar": "订阅任意 ICS 日历源", "remoteAgent": "在 VPS 上运行全天候智能体，并接入 screenpipe", "whatsapp": "搜索 WhatsApp 对话", "anythingllm": "让 AnythingLLM 访问你的屏幕", "ollama": "将本地 Ollama 模型连接到 screenpipe", "lmstudio": "将 LM Studio 模型连接到 screenpipe", "msty": "将 Msty 模型连接到 screenpipe", "obsidian": "将屏幕记忆同步到 Obsidian 知识库", "notion": "结合屏幕上下文搜索 Notion 页面", "linear": "结合屏幕上下文搜索 Linear 问题", "perplexity": "使用 Perplexity AI 搜索网页", "krisp": "搜索 Krisp 会议转写和笔记", "plaud": "搜索 Plaud 录音和转写", "excalidraw": "搜索和编辑 Excalidraw+ 画板", "customMcp": "连接任意兼容 MCP 的服务器", "skills": "导入 Claude Code 技能以实现 AI 自动化", "piExtensions": "安装子智能体和网页工具等 Pi 软件包" },
+  "residualUi5": { "outputs": "输出", "noOutputs": "暂无输出", "sources": "来源", "noSources": "暂无来源", "recentlyViewed": "最近查看", "noRecentlyViewedChats": "暂无最近查看的聊天", "pipeRun": "Pipe 运行：{name}", "watchingPipe": "正在观察 Pipe：{name}", "execution": "执行 #{id}", "resumeAllRecording": "恢复全部录制", "pauseAllRecording": "暂停所有屏幕和音频录制——可随时恢复", "resuming": "恢复中……", "pausing": "暂停中……", "noDevicesEnabled": "没有启用的设备", "openSettings": "打开设置", "noCaptureDevices": "未报告采集设备", "connectAppsNudge": "连接你的应用以获得更好的回答" }
+  ,"connectionAdvancedUi": { "advanced": "高级", "manageExisting": "管理现有连接", "connectApiKey": "改用 API 密钥连接", "manageLegacyGoogleDocs": "管理旧版 Google Docs 连接", "manageLegacyZoom": "管理旧版 Zoom 连接", "connectToken": "改用令牌连接", "loading": "正在加载连接……", "metadataError": "无法加载连接元数据，本地 screenpipe 服务可能正在启动。", "retry": "重试", "viaComposio": "通过 Composio" }
+  ,"onboardingGuide": { "runPipeBeforeButton": "点击 Pipe 上的", "runPipeAfterButton": "按钮来启动它" }
+  ,"onboardingLoginUi": { "tagline": "AI 终于知道你正在做什么", "signedInAs": "✓ 登录账户：{email}", "user": "用户", "signIn": "登录", "enterpriseSignIn": "使用企业账户登录", "freeSignIn": "登录后开始免费使用", "skipDev": "开发环境跳过——无需账户继续" }
+  ,"onboardingPermissionsUi": { "unlockTitle": "解锁完整体验", "unlockDescription": "三个权限即可启用录制。其他可选权限可以稍后授予。", "granted": "已授予", "grant": "授予 →", "screenDescription": "允许 Screenpipe 索引屏幕上的窗口、文档、聊天和代码。", "restartAfterGrant": "授予此权限后需要重启。", "continueWithoutAll": "不授予全部权限，继续 →" }
+  ,"onboardingConnectUi": { "connected": "已连接", "connecting": "连接中……", "couldntConnect": "连接失败", "retry": "重试 →", "connect": "连接 →", "recording": "正在录制", "toolFound": "发现 {count} 个本地{label}", "tool": "工具", "tools": "工具", "failed": "失败", "connectedCount": "已连接 {count} 个", "engineNotResponding": "screenpipe 尚未响应——请等待几秒后重试。", "oneToolFailed": "{name} 连接失败——其配置文件有错误。{rest}可随时前往设置 → AI 工具修复。", "manyToolsFailed": "{names} 连接失败——{total} 个中已有 {ok} 个完成设置。可随时前往设置 → AI 工具修复剩余项目。", "allSet": "全部完成", "connectDetected": "连接检测到的工具", "tryAgain": "重试", "retryFailed": "重试失败项", "failedRest": "其他项目已完成设置；", "skipOptional": "现在可以跳过，之后随时在设置中连接", "continue": "继续 →" }
+  ,"onboardingEngineUi": { "permissionDescription": "macOS 会按应用签名记录此权限。如果你在正式版、测试版或开发版之间切换，之前授予的权限不会沿用——每个 bundle ID 都有独立记录。", "runningAs": "当前运行身份：" }
+  ,"chatStandaloneUi": { "noAiPresets": "暂无 AI 预设", "noModelSelected": "未选择模型", "loginToContinue": "登录后继续", "setupRequired": "需要设置", "signInAssistant": "登录后使用 AI 助手", "signIn": "登录", "goToSettings": "前往设置", "newContent": "有新内容", "cancel": "取消", "save": "保存", "runOnSchedule": "按计划运行", "branchNewChat": "在新聊天中创建分支", "stop": "停止", "waitingAttachment": "正在等待附件提取完成", "send": "发送", "stopReply": "停止回复", "sendDisabledAttachment": "附件提取期间无法发送", "sendMessage": "发送消息", "queued": "消息将排队等待……", "askScreen": "询问你的屏幕……（输入 @ 可筛选，粘贴图片）" }
+  ,"messageContentUi": { "renderingDiagram": "正在渲染图表……", "technicalDetails": "技术详情", "tokenStore": "令牌会保存在本地密钥存储中，不会展示给模型。", "continuing": "继续处理中……", "connected": "已连接", "connectedName": "{name} 已连接", "connectName": "连接 {name}", "continueName": "继续使用 {name}", "openingAuthorization": "正在浏览器中打开授权页面……", "waiting": "等待中", "retry": "重试", "connect": "连接", "dismiss": "关闭", "notNow": "暂时不要", "attachmentChars": "字符", "truncated": "已截断", "collapsePrompt": "收起提示词", "showPrompt": "显示完整提示词", "connectionsIcon": "连接", "windowsCalendarIcon": "Windows 日历", "microsoft365Icon": "Microsoft 365", "calcomIcon": "Cal.com", "commandLabel": "命令", "responseLabel": "响应" }
+  ,"toolPresentationUi": { "bash": "bash", "get": "GET", "post": "POST", "patch": "PATCH", "put": "PUT", "delete": "DELETE", "search": "搜索", "query": "查询", "content": "内容", "app": "应用", "window": "窗口", "limit": "上限", "tables": "表", "connection": "连接", "activitySummary": "活动摘要", "savedMemory": "已保存记忆", "listedMemories": "已列出记忆", "updatedMemory": "已更新记忆", "deletedMemory": "已删除记忆", "gotMemory": "已获取记忆", "listedMeetings": "已列出会议", "summarizedMeeting": "已总结会议", "renamedMeeting": "已重命名会议", "updatedMeeting": "已更新会议", "deletedMeeting": "已删除会议", "mergedSpeakers": "已合并说话人", "listedUnnamedSpeakers": "已列出未命名说话人", "installedPipe": "已安装 Pipe", "listedPipes": "已列出 Pipe", "exportedVideo": "已导出视频", "healthCheck": "健康检查", "listedMonitors": "已列出显示器", "listedAudioDevices": "已列出音频设备", "listedTags": "已列出标签", "ranSql": "已运行 SQL", "agentBrowserAction": "代理浏览器操作", "navigatedAgentBrowser": "已导航代理浏览器", "ranJsInAgentBrowser": "已在代理浏览器中运行 JS", "checkedCalendarConnection": "已检查日历连接", "listedConnections": "已列出连接", "listedCalendarEvents": "已列出日历事件", "createdGoogleDoc": "已创建 Google 文档", "editedGoogleDoc": "已编辑 Google 文档", "readGoogleDoc": "已读取 Google 文档", "createdDriveFile": "已创建云端硬盘文件", "exportedDriveFile": "已导出云端硬盘文件", "listedDriveFiles": "已列出云端硬盘文件", "uploadedFileToDrive": "已上传文件到云端硬盘", "searchedTarget": "已搜索 {target}", "openedInAgentBrowser": "已在代理浏览器中打开 {target}", "ranJsOn": "已在 {target} 上运行 JS", "postedTo": "已发布到 {target}", "updatedVia": "已通过 {target} 更新", "readFrom": "已从 {target} 读取", "removedConnection": "已移除 {target} 连接", "configuredConnection": "已配置 {target} 连接", "ranPipe": "已运行 Pipe {target}", "pipe": "Pipe {target}", "updatedMemoryId": "已更新记忆 #{id}", "deletedMemoryId": "已删除记忆 #{id}", "gotMemoryId": "已获取记忆 #{id}", "renamedMeetingId": "已重命名会议 #{id}", "summarizedMeetingId": "已总结会议 #{id}", "deletedMeetingId": "已删除会议 #{id}" }
+  ,"chatSidebarUi": { "viewAll": "查看全部", "noPipeRuns": "暂无 Pipe 运行记录", "cancel": "取消", "create": "创建", "pinned": "已置顶", "recents": "最近会话", "archived": "已归档", "noVisibleRuns": "暂无可见运行记录", "loading": "加载中……", "showOlderRuns": "显示更早的运行记录", "pin": "置顶", "unpin": "取消置顶", "rename": "重命名", "moveToGroup": "移动到分组", "removeFromGroup": "从分组移除", "newGroup": "新建分组……", "archive": "归档", "unarchive": "取消归档", "delete": "删除", "untitled": "未命名", "error": "错误", "thinking": "思考中", "usingTool": "使用工具", "streaming": "生成中" }
+  ,"accountExtra": { "notLoggedIn": "未登录", "referFriend": "邀请好友", "manage": "管理", "logout": "退出登录", "encryptedCloudArchive": "加密云端归档", "cloudTranscriptionHighQuality": "高质量云端转写", "localCaptureDescription": "本地采集、搜索和时间线；下方 Business 方案提供云同步、云端 AI 和 50 多种集成。" }
+  ,"appleCalendarUi": { "description": "读取通过 macOS Internet 账户同步的日历，用于会议检测和笔记。", "permission": "权限", "calendars": "日历", "refresh": "刷新", "connect": "连接", "revoke": "撤销权限", "upcoming": "即将到来的事件", "loadingEvents": "正在加载事件……", "untitledEvent": "未命名事件", "now": "正在进行", "attendees": "位参与者", "noMeetings": "未来 24 小时内没有会议。", "unavailable": "此系统无法使用 Apple 日历。", "waitingApproval": "等待 macOS 批准……", "promptMissing": "如果没有出现提示，请撤销权限后重新连接。", "approvePrompt": "点击“连接”并批准 macOS 日历提示。" }
+  ,"recordingExtraUi": { "loadingAudio": "正在加载音频", "audioUnavailable": "音频不可用", "showing": "显示", "loadedChunks": "已加载片段", "readyLoadedChunks": "已准备的片段", "quietHidden": "已隐藏静音片段", "bulkImport": "批量导入", "termsDetected": "个术语已检测", "exceedsLimitBy": "（超出限制 {count} 个）", "pasteTerms": "在上方粘贴或输入术语", "cancel": "取消", "addTerms": "添加 {count} 个术语", "recordingPreferences": "屏幕和音频录制偏好", "applyRestart": "应用并重启", "savedChoice": "已保存的选择：", "activeNow": "当前启用：", "notActive": "未启用", "logIn": "登录", "useWhisper": "使用 Whisper 设置", "availableModels": "可用模型", "batchTranscription": "批量转写", "maxBatchDuration": "批量最长时长", "filterMusic": "过滤音乐", "liveMeetingNotes": "实时会议笔记", "cloudProviderLogin": "登录 screenpipe 云端以使用云端实时提供商。", "chooseLiveProvider": "选择上方的音频转写引擎，或选择云端/直连实时提供商。", "appendTypedText": "将输入文字追加到笔记", "meetingDetection": "自动会议检测", "ignoreApps": "忽略应用", "meetingsOnly": "仅会议", "coreAudio": "CoreAudio 系统音频采集", "coreAudioDescription": "macOS 14.4+ 的新系统音频 API，可能修复部分采集问题。更改后请重启录制。", "smartRecording": "智能录制", "beta": "测试版", "smartRecordingDescription": "会议期间录制会议音频以及你在会议应用中选择的麦克风，并优先于其他音频设置。如果不可用，会自动回退到已配置的采集方式。", "requiresMeetingDetection": "需要启用自动会议检测——请在上方重新开启。", "addApp": "+ 添加应用", "noAppsExcluded": "没有排除的应用，系统音频全部会被采集。", "train": "训练", "default": "默认", "qualityDescription": "如果 4K 或超宽屏上的文字看起来模糊，请选择“高”或“最高”。质量越高，画面越清晰，文件也越大。", "voiceTrainingPrompt": "以正常语速自然说话——这有助于 screenpipe 学习你的声音" }
+  ,"recordingExtraUi2": { "showing": "显示", "add": "添加", "highFpsDescription": "间隔越短，回放越流畅，占用磁盘越多。≥ 33 毫秒（30 fps）。", "light": "轻量", "defaultLabel": "默认", "max": "最高", "availableModels": "可用模型", "meetingsOnly": "仅会议", "train": "训练" }
+  ,"privacyExtraUi": { "intro": "内容过滤、PII 脱敏和遥测", "applyRestart": "应用并重启", "security": "安全", "requireApiAuth": "要求 API 鉴权", "apiAuthDescription": "启用后所有 API 请求都必须提供有效令牌，包括本地请求。大多数应用会自动配对；仅在手动 API 客户端和故障排查时使用此密钥。", "apiAuthRestart": "点击上方“应用并重启”使鉴权更改生效；现有浏览器连接会继续使用旧密钥，直到重启。", "allowLan": "允许局域网访问", "lanDescription": "将 API 绑定到 0.0.0.0，让局域网中的其他设备可以查询。启用后会强制开启 API 鉴权。重启应用以应用更改。", "captureRules": "采集规则", "ignoreIncognito": "忽略无痕窗口", "skipPrivate": "跳过隐私浏览会话", "enhanced": "已增强", "enhance": "增强", "drmRemote": "为 DRM 和远程桌面暂停", "drmDescription": "避免 DRM 黑屏（Netflix、Disney+）和灰色 Horizon 窗口。", "captureClipboard": "采集剪贴板", "clipboardDescription": "如果数据会离开设备则跳过（密码、密钥经常会通过复制粘贴传递）。", "inputMonitoring": "输入监控权限", "recordLocked": "锁屏时录制音频", "lockedDescription": "屏幕锁定时继续采集音频", "dataProtection": "数据保护", "pseudonymDescription": "——将每个值替换为稳定令牌，例如 [PERSON_1a2b3c4d5e6f]，而不是通用的 [PERSON]，这样同一个人或值可以在时间线中保持可关联，同时不会暴露。单向且仅在设备上处理——无法恢复原文。仅对之后录制的活动生效。", "agentLogs": "智能体日志", "redactSecrets": "从智能体日志中脱敏密钥", "redactDescription": "——编码智能体（Pi）会将完整会话（包括接触到的密码、API 密钥或令牌）以明文保存到磁盘。启用后，后台工作线程会从空闲智能体会话日志中清除密钥。仅处理密钥且仅在设备上进行；不会改写仍在使用中的会话。", "contentFilters": "内容过滤器", "ignoredApps": "忽略的应用", "includedApps": "包含的应用", "ignoredUrls": "忽略的网址", "specificDomains": "短模式可能匹配过多，请使用具体域名。", "telemetry": "遥测", "analytics": "分析", "anonymousUsage": "匿名使用数据", "adminToken": "管理员团队 API 令牌", "adminDescription": "允许 Pi 智能体查询组织范围的团队数据（设备、搜索、记录）。令牌生成位置：", "save": "保存", "clear": "清除" }
+  ,"privacyExtraUi2": { "preview": "预览", "password": "密码", "typedHidden": "输入文字、转写内容和屏幕文字——始终隐藏" }
+  ,"pipesUi7": {"mcpServer":"MCP 服务器","connection":"连接","ready":"就绪","setup":"设置","manageConnections":"管理连接","remove":"移除","fallbackDescription":"主预设触发限流时使用","addFallbackPreset":"添加备用预设","selected":"已选择 {count} 个","delete":"删除","remoteLoadFailed":"无法从此设备加载 Pipe","backendUnavailable":"screenpipe 后端不可用","remoteLoadDescription":"远程 API {api} 没有响应，请确认该设备上的 screenpipe 正在运行。","localLoadDescription":"你的 Pipe 文件可能仍已安装，但本地 API {api} 没有响应。","retry":"重试","starAnyPipe":"收藏任意 Pipe 后，它会显示在这里","noStarredMatch":"当前筛选条件下没有符合的收藏 Pipe","emptyDescription":"Pipe 是按计划处理屏幕数据的 AI 智能体——可以总结一天、追踪时间、同步笔记等。","createDescription":"几秒钟即可创建一个——选择示例开始，或在下方描述你自己的 Pipe。","browseStore":"或浏览 Pipe 商店 →","manual":"手动","collapse":"收起","openDetails":"展开——运行记录、配置和日志","unstar":"取消收藏","starThisPipe":"收藏此 Pipe","configureConnections":"先配置必需的连接","runPipe":"运行 Pipe","optimizeWithAi":"使用 AI 优化","fork":"创建副本","pushUpdateToTeam":"推送更新到团队","unshareFromTeam":"取消团队共享","shareWithTeam":"与团队共享","forkToEdit":"创建副本后编辑","managedByOrganization":"由组织管理","copyShareLink":"复制共享链接","checkForUpdates":"检查更新","publishToStore":"发布到商店","deselect":"取消选择","select":"选择","configureBeforeEnable":"配置必需的连接后才能启用自动运行","autoRunning":"正在按计划自动运行——点击禁用","autoRunDisabled":"自动运行已禁用——仍可手动运行","config":"配置","runs":"运行记录","advanced":"高级","noRunsYet":"暂无运行记录——点击 ▶ 手动运行","queued":"排队中","copy":"复制","loadOlderRuns":"加载更早的运行记录","cancel":"取消"}
+  ,"pipesUi8": {"noConnections":"暂无可用连接","allConnectionsAdded":"已添加全部连接","noMatches":"没有匹配项","cloud":"云端","local":"本地","noLongerShared":"已不再共享","starting":"启动中","now":"现在","failed":"失败","lastRunFailed":"上次运行失败","managedReadOnly":"由组织管理（只读，会自动恢复）","teamReadOnly":"团队共享（只读，会自动更新）——创建副本后即可编辑"}
+  ,"scheduleUi4":{"cancel":"取消","createPipe":"创建 Pipe","creatingPipe":"正在创建 Pipe：{name}"}
+  ,"settingsCommonUi":{"unsavedRestart":"有未保存的更改，请重启后应用。","applyRestart":"应用并重启"}
+  ,"pipeTriggerUi4":{"addTrigger":"添加触发条件"}
+  ,"storageUi2":{"description":"本地磁盘占用和存储控制","dataDirectory":"数据目录","changeDirectoryHint":"更改目录后会从头开始录制","reset":"重置","change":"更改","dataDirectoryChanged":"数据目录已更改，请重启后应用。"}
+  ,"scheduleUi5":{"recordingSchedule":"录制计划","beta":"测试版","defineActive":"定义录制启用的时间","weekdays":"工作日 9:00–17:00","alwaysOn":"始终开启","clearAll":"全部清除","noRecording":"未录制"}
+  ,"pipeStoreUi":{"updateDiscardEdits":"更新并放弃我的编辑","fork":"创建副本","nothingToPreview":"暂无可预览内容","redactSecrets":"发布前脱敏 API 密钥和机密","cancel":"取消","publishing":"发布中……","publish":"发布","source":"源代码","editing":"编辑中","sortPopular":"热门","sortNewest":"最新","allCategories":"全部","categoryProductivity":"效率","categoryDev":"开发","categoryHealth":"健康","categorySocial":"社交","categoryOther":"其他"}
+  ,"retentionUi3":{"eraseRecentDescription":"如果误采集了内容，可以清除最近几分钟的数据，包括片段、音频、转写和 OCR；操作前会先确认。","storagePolicyDescription":"录制内容随时间推移会发生什么","keepingForever":"当前：永久保留全部内容。","droppingMedia":"当前：删除超过 {days} 天的视频和音频，文字仍可搜索。","droppingLean":"当前：删除超过 {days} 天的视频、音频以及较大的 OCR/辅助功能详情，文字和记忆仍可搜索。","deletingCaptured":"当前：永久删除超过 {days} 天的采集活动。","deletingEverything":"当前：删除超过 {days} 天的全部内容。","deleteCaptured":"删除采集活动","deleteEverything":"删除全部内容","deleteCapturedBody":"永久删除截止时间之前的录制、转写、OCR 和界面活动；搜索将无法找到该时间段的采集活动。","deleteEverythingBody":"永久删除截止时间之前的全部数据；搜索将无法找到该时间段的任何内容。","cutoff":"截止时间（启用策略后生效）","evictMediaOlder":"清除早于此时间的媒体","cleanDataOlder":"清理早于此时间的数据","deleteDataOlder":"删除早于此时间的数据","cleanUpNow":"立即清理","filesEvicted":"个文件已清除","itemsCleaned":"项内容已清理","recordsDeleted":"条记录已删除","reclaimDescription":"重建数据库文件，让释放的空间返还磁盘。清理会阻止数据库继续增长，而压缩才会真正缩小文件。","needsFree":"运行期间约需 {required} 可用空间；当前有 {available}。","compactDescription":"screenpipe 将重建 db.sqlite 以释放磁盘空间。运行期间会短暂暂停录制，数据大小可能暂时增加，压缩完成后才会下降。","deleteRecentQuestion":"删除最近 {minutes} 分钟的内容？","deleteRecentDescription":"这将永久删除最近 {minutes} 分钟内的屏幕录制、音频片段、转写和 OCR 采集；文件也会从磁盘删除，且无法撤销。","enableMediaQuestion":"启用媒体清除？","enableLeanQuestion":"启用精简清理？","deletePastCutoffQuestion":"删除截止时间之前的全部内容？"}
+  ,"displayUi3":{"hideDockIcon":"隐藏 Dock 图标","menuBarOnly":"仅菜单栏运行——不在 Dock 中显示 screenpipe","dockHidden":"Dock 图标已隐藏——仅菜单栏运行","dockVisible":"Dock 图标已显示","openFromMenuBar":"从菜单栏图标打开 screenpipe。","minimizeToTray":"关闭时最小化到系统托盘","keepInTray":"关闭窗口后继续在托盘中运行","closeHidesTray":"关闭按钮会隐藏到系统托盘","closeMinimizesTaskbar":"关闭按钮会最小化到任务栏","clickTrayToRestore":"点击托盘图标即可恢复 screenpipe。"}
+  ,"userBrowserUi":{"checking":"检查中","connected":"已连接","notInstalled":"扩展未安装或未运行","unreachable":"无法访问","title":"你的浏览器（扩展）","description":"让智能体在需要浏览器上下文时使用真实的 Chrome / Arc / Edge。安装扩展后，在 Screenpipe 中批准连接。无需复制粘贴 API 令牌。","install":"安装或重新连接扩展","connectedDescription":"扩展已连接。你让智能体操作浏览器时，Screenpipe 可以使用当前打开的标签页。"}
+  ,"browserUi3":{"checking":"正在检查浏览器权限……","requestPermission":"请求自动化权限","openAutomationSettings":"打开自动化设置","openSettings":"打开设置","refreshStatus":"刷新状态","deniedHelp":"如果浏览器权限被拒绝，请在系统设置 → 隐私与安全性 → 自动化 → screenpipe 中手动开启"}
+  ,"pipeStoreUi2":{"reportIssue":"报告问题","notNow":"暂不","installing":"安装中……","installPipe":"安装 Pipe","backToDiscover":"返回发现页","installs":"次安装","updated":"更新于","unverifiedPublisher":"此发布者尚未验证。如果想在安装前检查 Pipe，请查看下方的源代码部分。"}
+  ,"timelineUi5":{"disabledTitle":"时间线已禁用","disabledDescription":"时间线已在设置中关闭。请在显示设置中重新启用，以浏览已录制的历史记录。","recordingOff":"屏幕录制已关闭","recordingOffDescription":"请在设置中启用屏幕录制，开始采集时间线。","openSettings":"打开设置","buildingMemory":"正在构建你的记忆","buildingDescription":"Screenpipe 正在录制屏幕活动。采集到画面后，时间线会显示在这里。","recordingInProgress":"正在录制","checkBack":"几分钟后再回来查看","fetchingFrames":"正在获取已录制的画面……","pressEscClose":"按 Esc 或点击 X 关闭","dataUnavailable":"无法访问你的 screenpipe 数据，请确认 screenpipe 已开启。"}
+  ,"meetingUi4":{"replayMoment":"回放这一刻","openInTimeline":"在时间线中打开","noScreenImages":"本次会议期间没有可用的屏幕画面","calendars":"日历"}
+  ,"meetingUi5":{"checkingCalendars":"正在检查日历","calendarNeedsAttention":"日历需要处理","noUpcomingMeetings":"暂无即将开始的会议","reviewConnections":"请检查你的日历连接。","connectedNothingNext":"已连接 {sources}，未来 8 小时没有安排。","nothingNext":"未来 8 小时没有安排。","calendars":"日历"}
+  ,"dailySummaryUi2":{"generationFailed":"无法生成每日摘要。","sessionExpired":"会话已过期，请重新登录后继续。","aiBusy":"AI 当前繁忙，请稍后重试。","generationTimedOut":"AI 读取当天内容超时，请重试。","generationFailedRetry":"无法生成每日摘要，请重试。","enableFailed":"无法启用增强 AI，请从设置中重试。","turnOnToGenerate":"启用增强 AI 以生成当天摘要","dailySummary":"每日摘要","live":"实时","readingTimeline":"正在读取当天的时间线……","noActivity":"未找到活动","couldntCreate":"无法创建摘要","tryAgain":"重试","generatedSaved":"按需生成，已保存在此设备上。"}
+  ,"postInstallUi":{"title":"为“{name}”设置连接","description":"此 Pipe 需要以下连接才能正常工作。现在配置，或跳过后稍后在设置中完成。","loading":"正在加载连接……","configured":"已配置","deleted":"已删除","disabled":"已禁用","unknown":"未知","notConfigured":"未配置","deletedMcpDescription":"此 MCP 服务器已删除或不再可用。请从此 Pipe 中移除，或从下拉菜单添加新的 MCP 服务器。","serverId":"ID：{id}","disabledMcpDescription":"此 MCP 服务器已禁用。请在自定义 MCP 设置中启用，或从此 Pipe 中移除。","unknownMcpDescription":"无法加载 MCP 服务器状态。请重试，或在设置中管理自定义 MCP 服务器。","customMcpDescription":"自定义 MCP 服务器只需配置一次，之后即可由 Pipe 选择使用。","removing":"正在移除……","removeFromPipe":"从 Pipe 中移除","manageMcpServers":"管理 MCP 服务器","skip":"跳过","done":"完成"}
+  ,"pipeInstallUi":{"reportIssue":"报告问题","preview":"Pipe.md 预览","moreLines":"更多行"}
+  ,"planExpirationUi":{"days":"{count, plural, one {# 天} other {# 天}}","planEnds":"{plan}方案将在 {days} 后到期","manageBilling":"在 screenpipe.com 管理方案和账单","manageSubscription":"管理订阅","planEndingSoon":"方案即将到期","accessEnds":"{plan}访问权限将在 {days} 后结束"}
+  ,"googleCalendarUi":{"title":"Google 日历","connected":"已连接","description":"读取 Google 日历以检测会议。仅只读，不会写入你的日历。","reconnectWarning":"此设备上存在之前的连接，但无法读取其令牌（通常是密钥链不匹配）。请重新连接以修复。","waiting":"正在等待 Google……","connect":"连接 Google 日历","defaultAccount":"默认账户","addAccount":"添加其他账户","upcoming":"未来 8 小时的事件","noUpcoming":"未来 8 小时没有事件","now":"正在进行"}
+  ,"icsCalendarUi":{"title":"ICS 日历","subscription":"订阅","connected":"已连接","description":"粘贴 ICS/webcal 地址即可订阅任意日历源。支持 Outlook、Google、Apple 和 Exchange，仅只读。","urlPlaceholder":"https:// 或 webcal:// 地址","add":"添加","now":"正在进行"}
+  ,"noteViewUi":{"dropImage":"拖放图片以添加到笔记","ongoing":"进行中","deleteDescription":"你的笔记和转写内容将被永久删除。","delete":"删除","stop":"停止","consent":"转写他人内容时，请始终先征得同意。","audioSettings":"音频设置"}
+  ,"meetingListUi":{"mergeDescription":"将这两场会议合并为一场。标题、参会人、笔记和转写内容会按时间顺序合并，且无法撤销。"}
+  ,"aiPresetUi4":{"loading":"加载中……","ollamaNotDetected":"未检测到 Ollama——请手动输入模型名称","recommendedModels":"推荐：qwen3.5:9b、glm-4.7:9b、qwen3.5:4b（支持工具调用），需要 GPU。","loginRequiredCloud":"需要登录才能使用 Screenpipe Cloud","login":"登录","businessOnly":"仅限 Business 方案","default":"默认","createNew":"创建新预设"}
+  ,"liveViewUi":{"whatShouldShow":"这个 Live View 要展示什么？","sections":"个分区","previewFirst":"请先预览，再应用。","preview":"预览","editing":"编辑中","arrangeLiveView":"排列 Live View","blockTitle":"区块标题","blockType":"区块类型","connectedPipe":"已连接的 Pipe","width":"宽度"}
+  ,"whatsappUi":{"description":"扫描二维码连接你的个人 WhatsApp，就像使用 WhatsApp Web 一样。","warning":"⚠️ WhatsApp 可能会封禁使用非官方集成的账户，请自行承担风险。","pairQr":"使用二维码配对","waitingQr":"正在等待二维码……","resetSlow":"等待时间过长？重置后重试","qrAlt":"WhatsApp 二维码","disconnect":"断开连接","resetPair":"重置会话并重新配对","resetting":"正在重置 WhatsApp……","retry":"重试","resetRetry":"重置会话并重试"}
+  ,"voiceMemosUi":{"title":"语音备忘录","description":"索引 Apple 语音备忘录，以便搜索和引用。读取语音备忘录数据库需要“完全磁盘访问”权限。","openAccess":"打开“完全磁盘访问”","enableHelp":"在隐私与安全性 → 完全磁盘访问中开启 screenpipe，以启用语音备忘录索引"}
+  ,"mcpUi":{"title":"自定义 MCP 服务器","serverCount":"{count} 个服务器","description":"注册 MCP（模型上下文协议）服务器——浏览官方注册表，或添加 HTTP 端点或本地 stdio 进程，让 Pipe 和聊天调用其工具。","emptyDescription":"暂无服务器。浏览注册表发现服务器，或通过网址添加，例如：","browseRegistry":"浏览注册表","addManually":"手动添加","addAnother":"添加其他服务器","supportsTransports":"支持 HTTP 和 stdio MCP 服务器","noneEnabled":"已注册 {count} 个服务器，但没有启用","available":"有 {count} 个服务器可供智能体使用","enabledCount":"已启用 {total} 个服务器中的 {enabled} 个","enabled":"● 已启用","disabled":"○ 已禁用","name":"名称","savedAs":"将保存为 {name}。","server":"服务器","remoteUrl":"远程网址","localCommand":"本地命令","cancel":"取消","connected":"已连接","disconnect":"断开连接","connect":"连接","completeSignIn":"请在浏览器窗口中完成登录，然后返回此处。","duplicateUrl":"此网址已存在。OAuth 会更新现有服务器，而不会重复添加。","manualAuth":"手动鉴权","manualAuthDescription":"需要 API 密钥而不是浏览器登录的 MCP 服务器可使用此方式。","bearerToken":"Bearer 令牌","willUpdate":"将更新 {name}","addHeader":"添加请求头","executableDescription":"可执行文件和参数（以空格分隔）。Screenpipe 会在本地启动此进程，并通过 stdin/stdout 使用 JSON-RPC 2.0 通信。","toolsDiscovered":"已连接——发现 {count} 个工具","toolsWarning":"注意：Pipe 调用这些工具时会使用 screenpipe 的权限。启用前请检查每个工具的能力。","testConnection":"测试连接"}
+  ,"registryUi2":{"recommended":"推荐","browseFull":"在上方搜索以浏览完整注册表。","noMatches":"没有服务器匹配“{query}”。","loadMore":"加载更多","safetyHelp":"添加服务器后会打开编辑器，请在启用前检查其工具和鉴权方式。","remote":"远程","local":"本地","catalog":"目录","repository":"代码仓库","added":"已添加","notInstallable":"没有可安装的远程地址或软件包","add":"添加"}
+  ,"registryUi3":{"notion":"搜索、读取和写入 Notion 页面与数据库，支持 OAuth 登录。","atlassian":"跨 Atlassian 站点管理 Jira 问题和 Confluence 页面，支持 OAuth 登录。","linear":"创建和管理 Linear 问题、项目与周期，支持 OAuth 登录，无需 API 密钥。","monday":"管理 monday.com 工作空间中的看板、项目和更新，支持 OAuth 登录。","airtable":"读取和更新 Airtable 基地、表格与记录，支持 OAuth 登录。","stripe":"查询和管理 Stripe 客户、付款、发票与订阅。","figma":"读取 Figma 文件、画框和设计上下文。"}
+  ,"liveViewTemplateUi":{"dailyMemory":{"title":"每日记忆","description":"记住发生的变化，找回未完成事项，准确知道明天从哪里继续。"},"meetingFollowThrough":{"title":"会议跟进","description":"将最近的会议整理为决策、负责人行动、未闭环事项和清晰的下一步。"},"timeAndFocus":{"title":"时间与专注","description":"查看活跃时间、专注状态、应用使用情况以及一天的整体节奏。"},"automationFinder":{"title":"自动化发现","description":"找到一个值得自动化的重复流程，并将其变成安全、可测试的第一步。"},"aiWorkPatterns":{"title":"AI 工作模式","description":"查看哪些 AI 工具帮助了你、你用它们完成了什么，以及工作流程可以如何改进。"},"standupReady":{"title":"站会准备","description":"带着明确的进展、今日重点、阻塞事项和相关上下文参加站会。"}}
+  ,"toolPresentationUi2":{"fetchedTarget":"已获取 {target}","checkedTarget":"已检查 {target}","countedTarget":"已统计 {target}","queriedTarget":"已查询 {target}","insertedInto":"已插入 {target}","updatedTarget":"已更新 {target}","deletedFrom":"已从 {target} 删除","ranSqlOn":"已在 {target} 上运行 SQL"}
+  ,"imapUi":{"connectedDescription":"你的 AI 现在可以读取此收件箱中的近期邮件。应用专用密码会加密存储在此设备上，绝不会离开设备。","disconnect":"断开连接","description":"通过 IMAP 以只读方式访问收件箱。Gmail 使用应用专用密码，无需 Google 登录页面，也无需验证。Google 不允许应用自动创建应用专用密码，因此只需复制粘贴一次，我们会自动检测剪贴板内容，你甚至无需手动粘贴。","getPassword":"获取应用专用密码","copyHelp":"在 Google 页面创建应用专用密码并复制，screenpipe 会自动连接","twoStepHelp":"你的 Google 账户需要启用两步验证；Workspace 账户可能还需要管理员允许。","pastePassword":"或粘贴应用专用密码","password":"密码 / 应用专用密码"}
+  ,"meetingAppsUi2":{"ignore":"忽略","meetingApps":"会议应用","yourApps":"你的应用 · 最近 7 天","loadingApps":"正在加载你的应用……","noMatches":"没有最近使用的应用匹配“{query}”——请使用上方添加选项添加自定义服务。","noOtherApps":"暂无其他最近使用的应用。"}
+  ,"viewerUi":{"reveal":"在文件管理器中显示","copy":"复制","copied":"已复制","copyPath":"复制路径","canvasLoadFailed":"无法加载画布，仍可使用仪表盘模式。"}
+  ,"splashUi":{"tagline":"你的 AI 数字记忆"}
+  ,"prefillUi":{"attachedFrame":"已附加画面","contextFrom":"上下文来源：","timelineSelection":"时间线选择","search":"搜索"}
+  ,"multiSelectUi":{"selectAll":"全选","add":"添加“{value}”"}
+  ,"previewUi3":{"powerProfile":"遵循你的电源配置——屏幕空闲时大约每 30 秒采集一帧","always":"始终","meetings":"会议","continuous":"持续录制，全天候","captureCadence":"采集频率","captureQuality":"采集质量","batteryLife":"电池续航","audio":"音频","videoImages":"视频 · 图片","transcript":"转写","fromVideo":"来自视频"}
+  ,"liveViewOnboardingUi":{"workMemoryFirst":"正常工作几分钟。只有 Screenpipe 观察到真实工作和未完成事项后，才会出现有用的恢复起点。","workMemoryReview":"打开一条结果，确认它是否能帮助你继续正确的任务。","meetingFirst":"完成一次真实通话，并开启麦克风和系统音频。会议被采集后才会出现决定和后续步骤。","meetingReview":"检查一条决定或行动项；如果负责人或下一步不正确，请修正。","patternsFirst":"使用几个工作应用 10–15 分钟。需要足够的采集活动才能比较出有用的模式。","patternsReview":"将一条模式与记忆中的实际操作对照，然后标记结果是否有用。","automationFirst":"从头到尾完成一次重复工作流。观察到一次实际运行后，流程图才会建议步骤。","automationReview":"在执行自动化建议前，确认或修正一条观察到的流程步骤。","customFirst":"正常使用 Screenpipe。当采集到足够活动来回答你的请求时，第一条结果就会出现。","customReview":"检查一条结果并标记是否有用，让后续更新更准确。","firstResultReady":"你的第一条真实结果已准备好","reviewHint":"你也可以使用任意卡片上的赞踩按钮，帮助后续更新改进。","reviewed":"我已检查","capture":"采集","captureOn":"Screenpipe 采集已开启。","captureBlocked":"采集需要处理后，此视图才能学习。","captureChecking":"正在检查本地采集状态。","setup":"设置","setupPaused":"设置尚未完成，已暂停。","setupReady":"Screenpipe 已准备好更新此视图。","setupFinishing":"正在完成此视图的设置。","firstResult":"第一条结果","readingNow":"正在读取最近活动。","waitingActivity":"正在等待足够的真实活动。","finishSetup":"完成设置","finishingSetup":"正在完成设置","fixCapture":"修复采集","checking":"检查中","checkNow":"立即检查","leavePage":"你可以离开此页面，Screenpipe 会继续工作。","startsWithWork":"此 Live View 从你的真实工作开始","noSampleData":"这里没有用来假装设置成功的示例数据。","keepRunning":"请保持 Screenpipe 运行；一旦有一条真实结果准备好，此页面就会显示仪表盘。"}
+  ,"settingsSearchUi2":{"referralInviteLink":"邀请链接","referralFreeMonth":"免费月份"}
+  ,"aiPresetUi5":{"getApiKeyAtAnthropic":"在 console.anthropic.com 获取 API 密钥","chatgptAccount":"ChatGPT 账户","recommendedForPipes":"Pipe 推荐：","localModelsGpuWarning":"强烈建议使用 GPU。没有独立 GPU 时，本地模型会非常慢，Pipe 可能超时。为了获得最佳效果，建议使用 Screenpipe Cloud 或 Groq 作为自定义提供商。","maxOutputTokens":"最大输出 token 数","maxOutputTokensDescription":"模型每次响应最多生成的 token 数。"}
+  ,"dashboardUi5":{"buildManually":"或手动构建","whatPowersDashboard":"此仪表盘由什么驱动","customPipeInstructionsKept":"现有的自定义 Pipe 说明会保留。","dashboardLimitReached":"已达到仪表盘数量上限","keepDashboardUnchanged":"保持“{title}”不变","createSections":"这会创建一个包含 {count} 个分区的新仪表盘。","replaceWarning":"这会将“{title}”中的 {count} 个分区替换为 {newCount} 个。之前的布局仍可通过“撤销”恢复。","replaceQuestion":"替换“{title}”？","replaceDescription":"这会将当前 {count} 个分区替换为 {newCount} 个。其他仪表盘不受影响，且可通过“撤销”恢复此布局。","discard":"丢弃","editManually":"手动编辑","savingCanvas":"正在保存画布","undo":"撤销"}
+  ,"brainUi5":{"overviewDescription":"AI 从你的活动中学到了什么，以及为你生成了什么","staleMemories":"记忆已有 {days} 天未更新。请确认已安装并启用记忆写入 Pipe——","browsePipes":"浏览 Pipes","filterBy":"筛选条件","findFilters":"查找筛选条件……","loadingFilters":"正在加载筛选条件……","noFiltersFound":"未找到筛选条件","labels":"标签","sources":"来源","people":"人员","dates":"日期","updateMemoryDescription":"更新已保存的记忆及其标签。","cancel":"取消","save":"保存","itemCount":"{count} 项","clear":"清除","selectedCount":"已选择 {count} 项","deselectAll":"取消全选","selectAll":"全选","delete":"删除","retry":"重试","memoryEmptyDescription":"记忆由从屏幕和音频活动中学习的 Pipe 自动创建。","pipeStore":"Pipe 商店","startBuildingMemories":"开始构建记忆。","add":"添加","installPipesFrom":"从以下位置安装 Pipe：","openPipeRun":"打开 Pipe 运行记录","openChat":"打开聊天","revealInFinder":"在文件管理器中显示","copyPath":"复制路径","deselect":"取消选择","select":"选择","open":"打开","reveal":"显示","copy":"复制"}
+  ,"timelineUi5":{"minutes":"{count} 分钟","windows":"{count} 个窗口","actions":"{count} 个操作","transcripts":"{count} 条转写","moreCount":"再显示 {count} 项","askAi":"询问 AI","retranscribe":"重新转写","deleteRangePrefix":"永久删除此时间范围内的所有屏幕录制、音频和转写内容","cannotUndo":"？此操作无法撤销。","cancel":"取消","deleting":"删除中……","deletePermanently":"永久删除","add":"添加","recordingTimelineSoon":"正在录制……时间线即将出现"}
+  ,"skillsUi4":{"introPrefix":"技能是可复用的","introSuffix":"操作手册，格式与 Claude Code 相同。你可以在这里导入，screenpipe 智能体会在聊天和每个 Pipe 中加载它们。","browseSkills":"浏览技能","imported":"已导入","noImported":"尚未导入技能。请从下方设备列表添加。","loading":"加载中……","foundOnDevice":"此设备上找到的技能","anyFolderSkill":"包含 SKILL.md 的任意文件夹","noNewSkillsIn":"在以下位置未找到新技能：","browserFooter":"技能是智能体在聊天和每个 Pipe 中读取的 Markdown 操作手册，使用前请先检查内容。","added":"已添加","on":"已开启","required":"必需","repairNeeded":"需要修复"}
+  ,"permissionBannerUi":{"disabled":"{permissions} 已禁用","recordingPaused":"— 录制已暂停","fixPermissions":"修复权限"}
+  ,"piUi5":{"installDescription":"将 Pi 软件包安装到 screenpipe 的隔离 Pi 智能体中。","thirdPartyWarning":"第三方 Pi 软件包可以执行本地代码并影响智能体行为。","modelRecommendation":"子智能体和网页自动化最好使用强大的云端模型。使用 Ollama 或其他小型本地模型时，建议从“询问用户”或“软件包搜索”开始。","curated":"精选","recentlyPublished":"最近发布","fromNpm":"来自 npm","allPackages":"全部软件包","searching":"搜索中……","searchError":"暂时无法搜索 npm，精选软件包仍可用。","noMatches":"没有匹配的 npm Pi 软件包。","searchingPackages":"正在搜索 npm 软件包……","tryAnother":"请尝试其他搜索或刷新目录。"},
+  "speakersUi7":{"sampleCount":"{count} 个样本","yesMerge":"是的，合并"},
+  "miscUi6":{"loadingAppsWindows":"正在加载应用和窗口……","noRecentMatch":"最近 7 天没有匹配“{search}”的内容。","noRecordedApps":"尚未记录应用，请先录制一些内容。","added":"已添加","notCapturedYet":"尚未采集，请先在上方添加整个应用。","moreWindows":"还有 {count} 个窗口未显示——输入内容进行搜索","searchTip":"提示：在搜索框中输入内容可同时筛选应用和窗口标题。"}
+  ,"miscUi5":{"inputMonitoringDescription":"允许 screenpipe 采集键盘输入和鼠标点击。此项可选——不启用时剪贴板和应用/窗口切换仍可正常工作。只有需要完整输入回放（Pi 可搜索你输入的内容和点击位置）时才授予此权限。"}
+  ,"artifactUi2":{"loadingArtifact":"正在加载工件……","htmlSandboxed":"HTML · 沙盒模式","source":"源代码","rendered":"已渲染","previewRendered":"预览渲染结果","viewSource":"查看源代码","showLess":"收起","showMore":"展开"}
+  ,"powerUi4":{"thermalWarning":"系统正在限制性能——无论偏好设置如何，省电模式都已启用"}
+  ,"searchUi2":{"screenResults":"屏幕","allSites":"所有网站","frameCount":"{count} 帧"}
+  ,"timelineUi3":{"moreCount":"还有 {count} 项……","messageCount":"{count} 条消息"}
+  ,"aiPresetUi6":{"aiModel":"AI 模型","pressEnterToUse":"按 Enter 使用“{model}”","quotaLeft":"剩余 {count} 次"}
+  ,"storageUi2":{"loadFailed":"加载磁盘用量失败：{error}","gbPerMonth":"约 {value} GB/月","memoryIn":"{months} 个月内存，占用 {dataGb} GB"}
+  ,"liveViewUi2":{"previewDataLoads":"应用此仪表盘后才会加载数据","askingFreshData":"正在向 {pipe} 请求最新数据","notPublished":"{pipe} 尚未发布此数据","connectPipeToFill":"连接 Pipe 以填充此 Block","rangeTo":"{minimum} 至 {maximum}","feedbackOptional":"可选。下次运行时，连接的 Pipe 会使用这条反馈。","clearFeedback":"清除","saveFeedback":"保存反馈","update":"更新","pipeBinding":"Pipe：{pipe}","noPipeConnected":"未连接 Pipe","artifactVersion":"工件 #{id} · v{version}","chooseAnotherToConnect":"请选择其他 Block 或备注进行连接","canvasHelp":"拖动节点 · 使用平移工具或中键拖动 · 捏合或按住 Ctrl/⌘ 滚轮缩放"}
+  ,"safUi":{"evidenceCount":"{count} 条证据"}
+  ,"connectionsUi5":{"openFile":"打开文件","openGuide":"打开指南 →","addInstance":"添加实例"}
+  ,"recordingExtraUi3":{"showingCount":"显示 {shown}/{total} {kind}{hasQuiet, select, true {——隐藏 {quiet} 个静默项} other {}}{hasCandidates, select, true {——包含静默项的候选总数 {candidates}} other {}}","showingCountSimple":"显示 {shown}/{total}","loadedChunks":"已加载片段","readyLoadedChunks":"已加载就绪片段"}
+  ,"retentionUi3":{"totalPrefix":"总计"}
+  ,"referralUi2":{"tenPercentOff":"优惠 10%"}
+  ,"mcpUi2":{"toolCallDescription":"这样 Pipe 和聊天就能通过以下方式调用工具："}
+  ,"agentExtra2":{"onRemote":"在远程主机上"}
+  ,"feedbackUi2":{"docsLink":"docs.screenpi.pe →","youtubeLink":"youtube →","ideasLink":"screenpipe.com/ideas →","openLink":"打开 →","joinLink":"加入 →","changelogLink":"screenpipe.com/changelog →"}
+  ,"previewUi3":{"about":"约"}
+  ,"layoutUi5":{"schemaContract":"{schema}。标题是展示文案。上方说明是连接 Pipe 下次运行时接收的数据契约。","slotPosition":"{index}/{total}"}
+  ,"scheduleUi5":{"cancel":"取消","save":"保存"}
+  ,"liveViewOnboardingUi2":{"firstResult":"第一个结果","startsWithRealWork":"这个 Live View 从你的真实工作开始","noSampleData":"这里没有用于伪装设置成功的示例数据。","keepRunning":"请保持 Screenpipe 运行；真实结果准备好后，此页面会显示仪表盘。"}
+  ,"summaryCardsUi2":{"custom":"自定义"}
+  ,"pipeStoreUi3":{"edit":"编辑","preview":"预览"}
+  ,"aiPresetUi7":{"recommendedPresets":"推荐预设","recommended":"推荐"}
 }

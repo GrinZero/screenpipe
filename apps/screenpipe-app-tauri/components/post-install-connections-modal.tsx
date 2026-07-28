@@ -5,6 +5,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import {
   Dialog,
   DialogContent,
@@ -61,6 +62,8 @@ export function PostInstallConnectionsModal({
   connections,
   onConnectionRemoved,
 }: PostInstallConnectionsModalProps) {
+  const t = useTranslations("connections");
+  const pu = useTranslations("postInstallUi");
   const [statuses, setStatuses] = useState<Record<string, ConnectionStatus>>({});
   const [expanded, setExpanded] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -246,18 +249,17 @@ export function PostInstallConnectionsModal({
       <DialogContent className="max-w-lg max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-sm">
-            set up connections for &quot;{pipeName}&quot;
+            {pu("title", { name: pipeName })}
           </DialogTitle>
           <DialogDescription className="text-xs">
-            this pipe requires the following connections to work properly.
-            configure them now or skip and set them up later in settings.
+            {pu("description")}
           </DialogDescription>
         </DialogHeader>
 
         {loading ? (
           <div className="flex items-center gap-2 py-6 justify-center text-xs text-muted-foreground">
             <Loader2 className="h-3 w-3 animate-spin" />
-            loading connections...
+            {pu("loading")}
           </div>
         ) : (
           <div className="space-y-2 my-2">
@@ -267,14 +269,14 @@ export function PostInstallConnectionsModal({
               const integration = status?.integration;
               const isMcp = status?.kind === "mcp";
               const statusLabel = status?.configured
-                ? "configured"
+                ? pu("configured")
                 : status?.missingReason === "deleted_mcp"
-                  ? "deleted"
+                  ? pu("deleted")
                   : status?.missingReason === "disabled_mcp"
-                    ? "disabled"
+                    ? pu("disabled")
                     : status?.missingReason === "unknown_mcp"
-                      ? "unknown"
-                      : "not configured";
+                      ? pu("unknown")
+                      : pu("notConfigured");
 
               return (
                 <div
@@ -339,28 +341,25 @@ export function PostInstallConnectionsModal({
                       {status?.missingReason === "deleted_mcp" ? (
                         <>
                           <p className="text-xs text-muted-foreground">
-                            this MCP server was deleted or is no longer available.
-                            remove it from this pipe or add a new MCP server from the dropdown.
+                            {pu("deletedMcpDescription")}
                           </p>
                           {status.serverId && (
                             <p className="text-[10px] text-muted-foreground font-mono">
-                              id: {status.serverId}
+                              {pu("serverId", { id: status.serverId })}
                             </p>
                           )}
                         </>
                       ) : status?.missingReason === "disabled_mcp" ? (
                         <p className="text-xs text-muted-foreground">
-                          this MCP server is disabled. enable it in custom MCP
-                          settings or remove it from this pipe.
+                          {pu("disabledMcpDescription")}
                         </p>
                       ) : status?.missingReason === "unknown_mcp" ? (
                         <p className="text-xs text-muted-foreground">
-                          MCP server status could not be loaded. try again or
-                          manage custom MCP servers in settings.
+                          {pu("unknownMcpDescription")}
                         </p>
                       ) : (
                         <p className="text-xs text-muted-foreground">
-                          custom MCP servers are configured once, then selected by pipes.
+                          {pu("customMcpDescription")}
                         </p>
                       )}
                       <div className="flex flex-wrap gap-2">
@@ -375,10 +374,10 @@ export function PostInstallConnectionsModal({
                             {removingConnection === connId ? (
                               <>
                                 <Loader2 className="h-3 w-3 animate-spin mr-1" />
-                                removing...
+                                {pu("removing")}
                               </>
                             ) : (
-                              "remove from pipe"
+                              pu("removeFromPipe")
                             )}
                           </Button>
                         )}
@@ -389,7 +388,7 @@ export function PostInstallConnectionsModal({
                           onClick={openCustomMcpSettings}
                         >
                           <ExternalLink className="h-3 w-3" />
-                          manage MCP servers
+                          {pu("manageMcpServers")}
                         </Button>
                       </div>
                     </div>
@@ -406,10 +405,10 @@ export function PostInstallConnectionsModal({
                         {status?.loading ? (
                           <>
                             <Loader2 className="h-3 w-3 animate-spin mr-1" />
-                            connecting...
+                            {t("connectingDots")}
                           </>
                         ) : (
-                          <>connect with {integration.name}</>
+                          <>{t("connectWith", { name: integration.name })}</>
                         )}
                       </Button>
                     </div>
@@ -418,8 +417,7 @@ export function PostInstallConnectionsModal({
                   {isExpanded && integration && !integration.is_oauth && integration.fields.length === 0 && (
                     <div className="px-3 pb-3 border-t border-border pt-3">
                       <p className="text-xs text-muted-foreground">
-                        connect {integration.name} in{" "}
-                        <strong>settings &gt; connections</strong> then come back here.
+                        {t("connectInSettings", { name: integration.name })}
                       </p>
                     </div>
                   )}
@@ -427,9 +425,7 @@ export function PostInstallConnectionsModal({
                   {isExpanded && !integration && !isMcp && (
                     <div className="px-3 pb-3 border-t border-border pt-3">
                       <p className="text-xs text-muted-foreground">
-                        connection &quot;{connId}&quot; is not available. it
-                        may need to be configured manually in settings &gt;
-                        connections.
+                        {t("connectionUnavailable", { id: connId })}
                       </p>
                     </div>
                   )}
@@ -446,7 +442,7 @@ export function PostInstallConnectionsModal({
             className="text-xs"
             onClick={() => onOpenChange(false)}
           >
-            skip
+            {pu("skip")}
           </Button>
           <Button
             size="sm"
@@ -454,7 +450,7 @@ export function PostInstallConnectionsModal({
             onClick={() => onOpenChange(false)}
             disabled={!allConfigured && false}
           >
-            {allConfigured ? "done" : "done"}
+            {pu("done")}
           </Button>
         </DialogFooter>
       </DialogContent>

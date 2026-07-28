@@ -30,6 +30,7 @@ import {
 } from "@/components/chat/standalone/hooks/pi-event-handlers";
 import type { Message, ToolCall } from "@/lib/chat/types";
 import type { PiForegroundEventsOptions } from "@/components/chat/standalone/hooks/pi-types";
+import { useTranslations } from "next-intl";
 
 const POST_STREAM_SIDE_EFFECT_DELAY_MS = 1_500;
 
@@ -84,6 +85,7 @@ export function usePiForegroundEvents({
   syncThinkingLevelAfterStart,
   turnIntentTextValuesMatch,
 }: PiForegroundEventsOptions) {
+  const u = useTranslations("residualBulk3");
   const getActivePreset = () => activePresetRef?.current ?? activePreset;
   // Listen for Pi / pipe events.
   //
@@ -1088,6 +1090,7 @@ export function usePiForegroundEvents({
         cancelStreamingMessageRender,
         piMessageIdRef,
         setMessages,
+        translate: (key) => u(key as any),
       });
     };
 

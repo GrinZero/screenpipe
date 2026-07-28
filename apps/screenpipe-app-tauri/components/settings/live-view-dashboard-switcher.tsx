@@ -4,6 +4,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Copy, MoreHorizontal, Pencil, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -57,6 +58,8 @@ export function LiveViewDashboardSwitcher({
   onDuplicate: () => void | Promise<void>;
   onDelete: () => void | Promise<void>;
 }) {
+  const t = useTranslations("dashboard");
+  const common = useTranslations("common");
   const [renameOpen, setRenameOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [renameTitle, setRenameTitle] = useState(current.title);
@@ -76,7 +79,7 @@ export function LiveViewDashboardSwitcher({
       <div data-testid="live-view-dashboard-switcher" className="min-w-0">
         <div className="mb-1 flex items-center gap-2">
           <p className="text-[10px] uppercase tracking-wide text-muted-foreground">
-            Dashboards
+            {t("dashboards")}
           </p>
           <span className="text-[10px] tabular-nums text-muted-foreground">
             {views.length}/{MAX_DASHBOARDS}
@@ -85,7 +88,7 @@ export function LiveViewDashboardSwitcher({
         <div className="flex min-w-0 items-center gap-2">
           <select
             data-testid="overview-dashboard-selector"
-            aria-label="Dashboard"
+            aria-label={t("dashboard")}
             value={current.id}
             disabled={selectionDisabled}
             className="h-9 min-w-0 flex-1 border border-border bg-background px-3 text-sm font-medium outline-none focus:border-foreground disabled:opacity-50 sm:min-w-60"
@@ -103,8 +106,8 @@ export function LiveViewDashboardSwitcher({
             variant="outline"
             size="icon"
             className="h-9 w-9 shrink-0 rounded-none"
-            aria-label="create dashboard with AI"
-            title="create dashboard with AI"
+            aria-label={t("createWithAi")}
+            title={t("createWithAi")}
             disabled={busy || views.length >= MAX_DASHBOARDS}
             onClick={onCreate}
           >
@@ -118,7 +121,7 @@ export function LiveViewDashboardSwitcher({
                 variant="outline"
                 size="icon"
                 className="h-9 w-9 shrink-0 rounded-none"
-                aria-label="dashboard actions"
+                aria-label={t("actions")}
                 disabled={busy}
               >
                 <MoreHorizontal className="h-3.5 w-3.5" />
@@ -126,17 +129,17 @@ export function LiveViewDashboardSwitcher({
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-44 rounded-none">
               <DropdownMenuItem onSelect={() => setRenameOpen(true)}>
-                <Pencil className="mr-2 h-3.5 w-3.5" /> rename
+                <Pencil className="mr-2 h-3.5 w-3.5" /> {t("rename")}
               </DropdownMenuItem>
               <DropdownMenuItem onSelect={() => void onDuplicate()}>
-                <Copy className="mr-2 h-3.5 w-3.5" /> duplicate
+                <Copy className="mr-2 h-3.5 w-3.5" /> {t("duplicate")}
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 className="text-destructive focus:text-destructive"
                 onSelect={() => setDeleteOpen(true)}
               >
-                <Trash2 className="mr-2 h-3.5 w-3.5" /> delete
+                <Trash2 className="mr-2 h-3.5 w-3.5" /> {common("delete")}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -146,9 +149,9 @@ export function LiveViewDashboardSwitcher({
       <Dialog open={renameOpen} onOpenChange={setRenameOpen}>
         <DialogContent className="sm:max-w-sm">
           <DialogHeader>
-            <DialogTitle>Rename dashboard</DialogTitle>
+            <DialogTitle>{t("renameDashboard")}</DialogTitle>
             <DialogDescription>
-              Use a name that makes this dashboard easy to recognize.
+              {t("renameDescription")}
             </DialogDescription>
           </DialogHeader>
           <Input
@@ -170,7 +173,7 @@ export function LiveViewDashboardSwitcher({
               variant="outline"
               onClick={() => setRenameOpen(false)}
             >
-              cancel
+              {common("cancel")}
             </Button>
             <Button
               data-testid="overview-confirm-rename"
@@ -181,7 +184,7 @@ export function LiveViewDashboardSwitcher({
                 setRenameOpen(false);
               }}
             >
-              rename
+              {t("rename")}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -190,21 +193,20 @@ export function LiveViewDashboardSwitcher({
       <AlertDialog open={deleteOpen} onOpenChange={setDeleteOpen}>
         <AlertDialogContent className="rounded-none">
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete “{current.title}”?</AlertDialogTitle>
+            <AlertDialogTitle>{t("deleteQuestion", { title: current.title })}</AlertDialogTitle>
             <AlertDialogDescription>
-              This removes the dashboard and its layout. Other dashboards and
-              Pipe artifacts stay available.
+              {t("deleteDescription")}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel disabled={busy}>cancel</AlertDialogCancel>
+            <AlertDialogCancel disabled={busy}>{common("cancel")}</AlertDialogCancel>
             <AlertDialogAction
               data-testid="overview-confirm-delete"
               variant="destructive"
               disabled={busy}
               onClick={() => void onDelete()}
             >
-              delete dashboard
+              {t("deleteDashboard")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

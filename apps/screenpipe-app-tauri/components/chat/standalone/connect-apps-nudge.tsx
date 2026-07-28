@@ -4,6 +4,7 @@
 "use client";
 
 import { X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { IntegrationIcon } from "@/components/settings/connections-section";
 import type { ComposerConnectBannerProps } from "./composer-types";
 
@@ -12,6 +13,7 @@ export function ConnectAppsNudge({
 }: {
   banner: ComposerConnectBannerProps;
 }) {
+  const t = useTranslations("residualUi5");
   if (!banner.show) return null;
 
   return (
@@ -21,7 +23,7 @@ export function ConnectAppsNudge({
         onClick={() => banner.onOpenConnectionSetup("connections")}
         className="text-[11px] text-muted-foreground/70 hover:text-foreground transition-colors flex-1 text-left"
       >
-        Connect your apps to get better answers
+        {t("connectAppsNudge")}
       </button>
       <div className="flex items-center gap-1">
         {banner.suggestedConnectionTiles.map((connection) => (

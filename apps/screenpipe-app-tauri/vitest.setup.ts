@@ -4,6 +4,33 @@
 
 import "@testing-library/jest-dom/vitest";
 import { JSDOM } from "jsdom";
+import enMessages from "./messages/en.json";
+import { vi } from "vitest";
+
+function getMessage(namespace: string, key: string): string {
+  const value = namespace.split(".").concat(key.split(".")).reduce<unknown>(
+    (current, part) =>
+      current && typeof current === "object"
+        ? (current as Record<string, unknown>)[part]
+        : undefined,
+    enMessages,
+  );
+  return typeof value === "string" ? value : namespace + "." + key;
+}
+
+vi.mock("next-intl", () => ({
+  useTranslations: (namespace: string) => (
+    key: string,
+    values?: Record<string, unknown>,
+  ) => {
+    let message = getMessage(namespace, key);
+    for (const [name, value] of Object.entries(values ?? {})) {
+      message = message.replaceAll("{" + name + "}", String(value));
+    }
+    return message;
+  },
+  NextIntlClientProvider: ({ children }: { children: unknown }) => children,
+}));
 
 class ResizeObserverMock implements ResizeObserver {
   observe() {}

@@ -4,6 +4,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   CalendarDays,
   Check,
@@ -30,7 +31,7 @@ export type CalendarProviderId = "native" | "google" | "ics";
 export interface CalendarProviderOption {
   id: CalendarProviderId;
   label: string;
-  description: string;
+  descriptionKey: string;
 }
 
 const NATIVE_DISCONNECTED_KEY = "calendarUserDisconnected";
@@ -67,21 +68,21 @@ export function calendarProviderOptions(platform: {
     {
       id: "native",
       label: nativeLabel,
-      description: platform.isMac
-        ? "Use calendars synced through macOS Internet Accounts."
+      descriptionKey: platform.isMac
+        ? "calendarNativeMac"
         : platform.isWindows
-          ? "Use calendars available through Windows Calendar."
-          : "Use calendars available through your operating system.",
+          ? "calendarNativeWindows"
+          : "calendarNativeOs",
     },
     {
       id: "google",
       label: "Google Calendar",
-      description: "Connect directly with Google OAuth.",
+      descriptionKey: "calendarGoogle",
     },
     {
       id: "ics",
       label: "ICS",
-      description: "Paste a read-only webcal or ICS feed URL.",
+      descriptionKey: "calendarIcs",
     },
   ];
 }
@@ -151,6 +152,8 @@ export function CalendarConnectDialog({
   platform,
   onConnected,
 }: CalendarConnectDialogProps) {
+  const t = useTranslations("meetings");
+  const u = useTranslations("meetingUi2");
   const option = useMemo(
     () =>
       calendarProviderOptions(platform).find(
@@ -173,7 +176,7 @@ export function CalendarConnectDialog({
             />
           </div>
           <DialogTitle>{option.label}</DialogTitle>
-          <DialogDescription>{option.description}</DialogDescription>
+          <DialogDescription>{u(option.descriptionKey)}</DialogDescription>
         </DialogHeader>
 
         {provider === "native" && (
@@ -212,6 +215,7 @@ function NativeCalendarConnect({
   onConnected: () => void | Promise<void>;
   onClose: () => void;
 }) {
+  const u = useTranslations("meetingUi2");
   const [busy, setBusy] = useState(false);
   const [statusText, setStatusText] = useState<string | null>(null);
   const [connected, setConnected] = useState(false);
@@ -263,15 +267,14 @@ function NativeCalendarConnect({
   return (
     <div className="space-y-4">
       <p className="text-sm text-muted-foreground">
-        ScreenPipe reads event titles, times, and attendees so meeting notes can
-        start at the right moment. It does not write to your calendar.
+        {u("nativeDescription")}
       </p>
       <div className="border border-border bg-muted/20 px-3 py-2 text-xs text-muted-foreground">
         {platform.isMac
-          ? "For Google, Outlook, or Exchange via Apple Calendar, add the account in macOS Internet Accounts first."
+          ? u("macAccountHint")
           : platform.isWindows
-            ? "For Google, Outlook, or Exchange via Windows Calendar, add the account in Windows Email & accounts first."
-            : "Use your operating system's calendar account settings to choose which calendars are available."}
+            ? u("windowsAccountHint")
+            : u("osAccountHint")}
       </div>
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -280,7 +283,7 @@ function NativeCalendarConnect({
           ) : (
             <Monitor className="h-3.5 w-3.5" />
           )}
-          {connected ? "connected" : "not connected"}
+          {connected ? u("connected") : u("notConnected")}
         </div>
         <Button onClick={connect} disabled={busy} className="rounded-none">
           {busy ? (
@@ -288,7 +291,7 @@ function NativeCalendarConnect({
           ) : (
             <CalendarDays className="mr-2 h-3.5 w-3.5" />
           )}
-          connect
+          {u("connect")}
         </Button>
       </div>
       {statusText && (
@@ -305,6 +308,7 @@ function GoogleCalendarConnect({
   onConnected: () => void | Promise<void>;
   onClose: () => void;
 }) {
+  const u = useTranslations("meetingUi2");
   const [busy, setBusy] = useState(false);
   const [statusText, setStatusText] = useState<string | null>(null);
 
@@ -332,8 +336,7 @@ function GoogleCalendarConnect({
   return (
     <div className="space-y-4">
       <p className="text-sm text-muted-foreground">
-        Connect your Google Calendar directly. ScreenPipe uses read-only access
-        for meeting detection and note metadata.
+        {u("googleDescription")}
       </p>
       <Button onClick={connect} disabled={busy} className="w-full rounded-none">
         {busy ? (
@@ -345,7 +348,7 @@ function GoogleCalendarConnect({
             className="mr-2 h-3.5 w-3.5"
           />
         )}
-        connect google calendar
+        {u("connectGoogle")}
       </Button>
       {statusText && (
         <p className="text-xs text-muted-foreground">{statusText}</p>
@@ -361,6 +364,8 @@ function IcsCalendarConnect({
   onConnected: () => void | Promise<void>;
   onClose: () => void;
 }) {
+  const u = useTranslations("meetingUi2");
+  const t = useTranslations("meetings");
   const [url, setUrl] = useState("");
   const [name, setName] = useState("");
   const [busy, setBusy] = useState(false);
@@ -408,8 +413,7 @@ function IcsCalendarConnect({
   return (
     <div className="space-y-4">
       <p className="text-sm text-muted-foreground">
-        Paste a private or public ICS/webcal subscription URL. ScreenPipe polls
-        it read-only for upcoming meetings.
+        {t("icsSubscriptionHint")}
       </p>
       <div className="space-y-2">
         <Input
@@ -418,13 +422,13 @@ function IcsCalendarConnect({
             setUrl(event.target.value);
             setStatusText(null);
           }}
-          placeholder="https:// or webcal:// URL"
+          placeholder={t("calendarUrlPlaceholder")}
           className="rounded-none"
         />
         <Input
           value={name}
           onChange={(event) => setName(event.target.value)}
-          placeholder="name, optional"
+          placeholder={t("calendarNamePlaceholder")}
           className="rounded-none"
         />
       </div>
@@ -438,7 +442,7 @@ function IcsCalendarConnect({
         ) : (
           <Plus className="mr-2 h-3.5 w-3.5" />
         )}
-        add feed
+        {u("addFeed")}
       </Button>
       {statusText && (
         <p className="text-xs text-muted-foreground">{statusText}</p>

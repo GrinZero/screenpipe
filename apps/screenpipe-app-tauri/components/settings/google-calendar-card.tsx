@@ -4,6 +4,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -40,6 +41,9 @@ interface CalendarAccount {
 }
 
 export function GoogleCalendarCard({ onConnected, onDisconnected }: { onConnected?: () => void; onDisconnected?: () => void } = {}) {
+  const t = useTranslations("common");
+  const u = useTranslations("legacyUi");
+  const gu = useTranslations("googleCalendarUi");
   const [accounts, setAccounts] = useState<CalendarAccount[]>([]);
   const [needsAttention, setNeedsAttention] = useState(false);
   const [isConnecting, setIsConnecting] = useState(false);
@@ -163,7 +167,7 @@ export function GoogleCalendarCard({ onConnected, onDisconnected }: { onConnecte
       } else if (res.status === "error") {
         const msg = String(res.error ?? "");
         toast({
-          title: "google calendar connect failed",
+          title: u("calendarConnectFailed"),
           description: msg || "Unknown error",
           variant: "destructive",
         });
@@ -171,7 +175,7 @@ export function GoogleCalendarCard({ onConnected, onDisconnected }: { onConnecte
     } catch (e) {
       console.error("google calendar oauth failed:", e);
       toast({
-        title: "google calendar connect failed",
+        title: u("calendarConnectFailed"),
         description: String(e),
         variant: "destructive",
       });
@@ -220,18 +224,17 @@ export function GoogleCalendarCard({ onConnected, onDisconnected }: { onConnecte
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
               <h3 className="text-sm font-semibold text-foreground">
-                Google Calendar
+                {gu("title")}
               </h3>
               {connected && (
                 <span className="px-2 py-0.5 text-xs font-medium bg-foreground text-background rounded-full">
-                  connected
+                  {gu("connected")}
                 </span>
               )}
             </div>
 
             <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
-              Reads your Google Calendar to detect meetings.
-              Read-only — never writes to your calendar.
+              {gu("description")}
             </p>
 
             {!connected ? (
@@ -240,8 +243,7 @@ export function GoogleCalendarCard({ onConnected, onDisconnected }: { onConnecte
                   <div className="flex items-start gap-1.5 text-xs text-destructive bg-destructive/10 border border-destructive/20 rounded px-2 py-1.5">
                     <AlertTriangle className="h-3 w-3 shrink-0 mt-0.5" />
                     <span>
-                      A previous connection exists but its token can&apos;t be read on this
-                      build (usually a keychain mismatch). Reconnect to fix.
+                      {gu("reconnectWarning")}
                     </span>
                   </div>
                 )}
@@ -258,8 +260,8 @@ export function GoogleCalendarCard({ onConnected, onDisconnected }: { onConnecte
                     <img src="/google-calendar-icon.svg" alt="" className="h-3 w-3 mr-1.5" />
                   )}
                   {isConnecting
-                    ? "Waiting for Google..."
-                    : "Connect Google Calendar"}
+                    ? gu("waiting")
+                    : gu("connect")}
                 </Button>
                 <GoogleOAuthUnverifiedAppHint />
               </div>
@@ -273,7 +275,7 @@ export function GoogleCalendarCard({ onConnected, onDisconnected }: { onConnecte
                       return (
                         <div key={key} className="flex items-center justify-between gap-2 text-xs">
                           <span className="text-muted-foreground truncate">
-                            {account.displayName || account.instance || "default account"}
+                            {account.displayName || account.instance || gu("defaultAccount")}
                           </span>
                           <Button
                             variant="ghost"
@@ -306,7 +308,7 @@ export function GoogleCalendarCard({ onConnected, onDisconnected }: { onConnecte
                   ) : (
                     <Plus className="h-3 w-3 mr-1.5" />
                   )}
-                  {isConnecting ? "Waiting for Google..." : "Add another account"}
+                  {isConnecting ? gu("waiting") : gu("addAccount")}
                 </Button>
               </div>
             )}
@@ -318,7 +320,7 @@ export function GoogleCalendarCard({ onConnected, onDisconnected }: { onConnecte
           <div className="px-4 pb-3 pt-1 border-t border-border">
             <div className="flex items-center justify-between mt-2 mb-2">
               <span className="text-xs font-medium text-muted-foreground">
-                upcoming events (next 8h)
+                {gu("upcoming")}
               </span>
               <Button
                 variant="ghost"
@@ -336,10 +338,10 @@ export function GoogleCalendarCard({ onConnected, onDisconnected }: { onConnecte
             </div>
 
             {isLoadingEvents && upcomingEvents.length === 0 ? (
-              <p className="text-xs text-muted-foreground">loading...</p>
+              <p className="text-xs text-muted-foreground">{t("loading")}</p>
             ) : upcomingEvents.length === 0 ? (
               <p className="text-xs text-muted-foreground">
-                no upcoming events in the next 8 hours
+                {gu("noUpcoming")}
               </p>
             ) : (
               <div className="space-y-1.5">
@@ -374,7 +376,7 @@ export function GoogleCalendarCard({ onConnected, onDisconnected }: { onConnecte
                           {event.title}
                           {now && (
                             <span className="ml-1.5 text-[10px] font-medium text-muted-foreground">
-                              NOW
+                              {gu("now")}
                             </span>
                           )}
                         </span>

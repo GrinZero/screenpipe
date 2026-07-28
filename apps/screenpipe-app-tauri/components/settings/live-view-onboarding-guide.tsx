@@ -5,6 +5,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
 import posthog from "posthog-js";
 import {
   FocusedSpotlight,
@@ -30,6 +31,7 @@ export function LiveViewOnboardingGuide({
   onComplete: () => void;
   onActivationChange: () => void;
 }) {
+  const t = useTranslations("onboarding");
   const viewedStepRef = useRef<string | null>(null);
   const visibleStep =
     activation.guideStep === "result" && !hasResult
@@ -90,11 +92,11 @@ export function LiveViewOnboardingGuide({
     return (
       <FocusedSpotlight
         targetSelector='[data-onboarding-guide-target="dashboard"]'
-        eyebrow="your first Live View"
-        step="1 of 3"
-        title="this dashboard was made for your goal"
-        description="Screenpipe created this Live View for the goal you chose. It fills with your real activity."
-        primaryLabel="show me how it fills"
+        eyebrow={t("firstLiveView")}
+        step={t("stepOf3", { step: 1 })}
+        title={t("dashboardMadeForGoal")}
+        description={t("dashboardGoalDescription")}
+        primaryLabel={t("showHowItFills")}
         onPrimary={() => moveTo("waiting")}
         onDismiss={dismiss}
       />
@@ -104,27 +106,27 @@ export function LiveViewOnboardingGuide({
   if (visibleStep === "waiting") {
     const needsRetry = activation.setupStatus === "needs_retry";
     const description = needsRetry
-      ? "Setup paused before it finished. Your dashboard is safe. Finish here instead of starting over."
+      ? t("setupPausedDescription")
       : hasResult
-        ? "Your first result is ready. Open it next and check if it matches what you actually did."
-        : "This shows what is ready and what Screenpipe still needs before your first result appears. You can leave this page while it works.";
+        ? t("firstResultReadyDescription")
+        : t("workingDescription");
     return (
       <FocusedSpotlight
         targetSelector='[data-onboarding-guide-target="activation"]'
-        eyebrow="how it updates"
-        step="2 of 3"
+        eyebrow={t("howItUpdates")}
+        step={t("stepOf3", { step: 2 })}
         title={
-          needsRetry ? "finish the interrupted setup" : "wait for real work"
+          needsRetry ? t("finishInterruptedSetup") : t("waitForRealWork")
         }
         description={description}
         primaryLabel={
           needsRetry
             ? retrying
-              ? "finishing setup..."
-              : "finish setup"
+              ? t("finishingSetup")
+              : t("finishSetup")
             : hasResult
-              ? "show my first result"
-              : "got it, let me work"
+              ? t("showFirstResult")
+              : t("letMeWork")
         }
         busy={retrying}
         onPrimary={needsRetry ? onRetry : () => moveTo("result")}
@@ -136,11 +138,11 @@ export function LiveViewOnboardingGuide({
   return (
     <FocusedSpotlight
       targetSelector='[data-testid="brain-overview-grid"]'
-      eyebrow="your first result"
-      step="3 of 3"
-      title="check it and help it improve"
-      description="Open the result, check it against your work, and use thumbs up or down. Your feedback helps future updates improve."
-      primaryLabel="I found my first result"
+      eyebrow={t("firstResult")}
+      step={t("stepOf3", { step: 3 })}
+      title={t("checkAndImprove")}
+      description={t("checkAndImproveDescription")}
+      primaryLabel={t("foundFirstResult")}
       onPrimary={onComplete}
       onDismiss={dismiss}
     />

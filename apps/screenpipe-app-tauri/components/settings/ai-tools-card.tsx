@@ -12,6 +12,7 @@
 // this card and the onboarding connect-all can never drift.
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Bot, Check, Loader2, Plus, RotateCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import posthog from "posthog-js";
@@ -84,6 +85,7 @@ function ToolIcon({ id }: { id: ConnectAllToolId }) {
 }
 
 export function AiToolsCard({ onChanged }: { onChanged?: () => void }) {
+  const au = useTranslations("aiToolsUi2");
   const [detected, setDetected] = useState<ConnectAllToolId[]>([]);
   const [connected, setConnected] = useState<Partial<Record<ConnectAllToolId, boolean>>>({});
   const [busy, setBusy] = useState<Partial<Record<ConnectAllToolId, ToolBusy>>>({});
@@ -204,10 +206,10 @@ export function AiToolsCard({ onChanged }: { onChanged?: () => void }) {
   if (detected.length === 0) return null;
 
   const summary = noneConnected
-    ? `${detected.length} tool${detected.length === 1 ? "" : "s"} found on this Mac — add screenpipe to ${detected.length === 1 ? "it" : "all of them"} in one click`
+    ? au("foundTools", { count: detected.length, target: detected.length === 1 ? au("it") : au("all") })
     : allConnected
-    ? `All ${detected.length} tools connected`
-    : `${connectedCount} of ${detected.length} connected`;
+    ? au("allConnected", { count: detected.length })
+    : au("connectedCount", { connected: connectedCount, total: detected.length });
 
   return (
     <div className={`rounded-xl border bg-card p-3 transition-colors ${expanded ? "border-foreground bg-accent" : "border-border"}`}>
@@ -222,7 +224,7 @@ export function AiToolsCard({ onChanged }: { onChanged?: () => void }) {
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h3 className="text-sm font-medium text-foreground">AI tools</h3>
+              <h3 className="text-sm font-medium text-foreground">{au("aiTools")}</h3>
               {connectedCount > 0 && <span className="h-2 w-2 rounded-full bg-foreground" />}
             </div>
             <p className="text-xs text-muted-foreground">{summary}</p>
@@ -243,7 +245,7 @@ export function AiToolsCard({ onChanged }: { onChanged?: () => void }) {
             ) : (
               <Plus className="h-3.5 w-3.5" />
             )}
-            {bulkRunning ? "Connecting..." : "Connect all"}
+            {bulkRunning ? au("connecting") : au("connectAll")}
           </Button>
         ) : (
           <Button
@@ -254,7 +256,7 @@ export function AiToolsCard({ onChanged }: { onChanged?: () => void }) {
             className="h-8 gap-1.5 text-xs normal-case font-sans tracking-normal"
           >
             <Plus className="h-3.5 w-3.5" />
-            Manage
+            {au("manage")}
           </Button>
         )}
       </div>
@@ -262,9 +264,7 @@ export function AiToolsCard({ onChanged }: { onChanged?: () => void }) {
       {expanded && (
         <div className="mt-3 border-t border-border">
           <p className="text-xs text-muted-foreground pt-3 pb-1">
-            screenpipe adds its MCP server{" "}
-            <span className="text-muted-foreground/70">+ skills</span> to each tool&apos;s own
-            config — remove any time.
+            {au("configDescription")}
           </p>
           <div>
             {detected.map((id) => {
@@ -279,7 +279,7 @@ export function AiToolsCard({ onChanged }: { onChanged?: () => void }) {
                   <div className="min-w-0 flex-1">
                     <span className="text-[13px] text-foreground">{DISPLAY_NAMES[id]}</span>
                     <span className="ml-2 text-xs text-muted-foreground">
-                      {SKILLS_TARGET[id] ? "MCP + skills" : "MCP"}
+                      {SKILLS_TARGET[id] ? au("mcpSkills") : au("mcp")}
                     </span>
                     {err && (
                       <p className="text-[11px] mt-1 flex items-center gap-1.5 flex-wrap">
@@ -293,7 +293,7 @@ export function AiToolsCard({ onChanged }: { onChanged?: () => void }) {
                             onClick={() => revealPath(err.path!)}
                             className="underline text-foreground/80 hover:text-foreground"
                           >
-                            open file
+                            {au("openFile")}
                           </button>
                         )}
                       </p>
@@ -302,13 +302,13 @@ export function AiToolsCard({ onChanged }: { onChanged?: () => void }) {
                   {toolBusy ? (
                     <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
                       <Loader2 className="h-3 w-3 animate-spin" />
-                      {toolBusy === "connecting" ? "Connecting..." : "Removing..."}
+                      {toolBusy === "connecting" ? au("connecting") : au("removing")}
                     </span>
                   ) : isOn ? (
                     <>
                       <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
                         <Check className="h-3 w-3" />
-                        Connected
+                        {au("connected")}
                       </span>
                       <button
                         type="button"
@@ -316,7 +316,7 @@ export function AiToolsCard({ onChanged }: { onChanged?: () => void }) {
                         disabled={bulkRunning}
                         className="text-xs text-muted-foreground/60 hover:text-foreground transition-colors disabled:opacity-50"
                       >
-                        Remove
+                        {au("remove")}
                       </button>
                     </>
                   ) : (
@@ -326,8 +326,8 @@ export function AiToolsCard({ onChanged }: { onChanged?: () => void }) {
                       variant="outline"
                       onClick={() => connectTool(id)}
                       disabled={bulkRunning}
-                      aria-label={`${err ? "Retry" : "Connect"} ${DISPLAY_NAMES[id]}`}
-                      title={`${err ? "Retry" : "Connect"} ${DISPLAY_NAMES[id]}`}
+                      aria-label={`${err ? au("retry") : au("connect")} ${DISPLAY_NAMES[id]}`}
+                      title={`${err ? au("retry") : au("connect")} ${DISPLAY_NAMES[id]}`}
                       className="h-7 w-7 p-0 shrink-0"
                     >
                       {err ? <RotateCw className="h-3.5 w-3.5" /> : <Plus className="h-3.5 w-3.5" />}
@@ -338,12 +338,12 @@ export function AiToolsCard({ onChanged }: { onChanged?: () => void }) {
             })}
           </div>
           {/* Bulk-action placement rule: one bulk action per place. When
-              nothing is connected the header's "+ Connect all" is the only
+              {au("connectAllHint")}
               bulk control — no footer duplicate. */}
           {connectedCount > 0 && (
             <div className="flex items-center justify-between pt-2.5">
               <span className="text-[11px] text-muted-foreground/70">
-                {connectedCount} of {detected.length} connected
+                {au("connectedCount", { connected: connectedCount, total: detected.length })}
               </span>
               <span className="flex items-center gap-2">
                 <button
@@ -364,7 +364,7 @@ export function AiToolsCard({ onChanged }: { onChanged?: () => void }) {
                     className="h-7 gap-1 text-xs normal-case font-sans tracking-normal"
                   >
                     <Plus className="h-3 w-3" />
-                    Connect all
+                    {au("connectAll")}
                   </Button>
                 )}
               </span>

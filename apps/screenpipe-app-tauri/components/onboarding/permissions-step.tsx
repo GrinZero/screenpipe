@@ -12,6 +12,7 @@ import { requestPermissionWithFlow } from "@/lib/utils/permission-flow";
 import { usePlatform } from "@/lib/hooks/use-platform";
 import { motion } from "framer-motion";
 import posthog from "posthog-js";
+import { useTranslations } from "next-intl";
 
 interface PermissionsStepProps {
   handleNextSlide: () => void;
@@ -66,6 +67,7 @@ function PermissionRow({
   distance: number;
   onGrant: () => void;
 }) {
+  const t = useTranslations("onboardingPermissionsUi");
   const interactive = focused && !granted;
 
   return (
@@ -116,11 +118,11 @@ function PermissionRow({
       <div className="ml-auto shrink-0">
         {granted ? (
           <span className="font-mono text-[10px] text-muted-foreground">
-            granted
+            {t("granted")}
           </span>
         ) : interactive ? (
           <span className="font-mono text-[10px] text-muted-foreground group-hover:text-background/70">
-            grant →
+            {t("grant")}
           </span>
         ) : null}
       </div>
@@ -132,6 +134,8 @@ export default function PermissionsStep({
   handleNextSlide,
   onProgressChange,
 }: PermissionsStepProps) {
+  const u = useTranslations("residualUi");
+  const t = useTranslations("onboardingPermissionsUi");
   const { isMac, isLoading: isPlatformLoading } = usePlatform();
   const [statuses, setStatuses] = useState<Record<string, boolean>>({});
   const [requesting, setRequesting] = useState(false);
@@ -153,16 +157,16 @@ export default function PermissionsStep({
     {
       id: "mic",
       icon: <Mic className="w-3.5 h-3.5" strokeWidth={1.5} />,
-      title: "Capture what you say",
-      subtitle: "Lets Screenpipe transcribe your voice in meetings and calls",
+      title: u("transcribeAudio"),
+      subtitle: u("transcribeAudio"),
       check: () => commands.checkMicrophonePermission(),
       request: () => commands.requestPermission("microphone"),
     },
     {
       id: "accessibility",
       icon: <Keyboard className="w-3.5 h-3.5" strokeWidth={1.5} />,
-      title: "Read on-screen text",
-      subtitle: "Lets Screenpipe understand app content without OCR",
+      title: u("readText"),
+      subtitle: u("readText"),
       // Silent poll until the user asks for it, then the live tccd probe so a
       // grant made in Settings is seen without an app relaunch.
       check: () =>
@@ -178,13 +182,12 @@ export default function PermissionsStep({
     {
       id: "screen",
       icon: <Monitor className="w-3.5 h-3.5" strokeWidth={1.5} />,
-      title: "Capture your screen",
+      title: u("captureDisplay"),
       subtitle: (
         <>
-          Lets Screenpipe index what&apos;s on your screen — windows, docs,
-          chats, code. {" "}
+          {t("screenDescription")} {" "}
           <strong className="font-bold">
-            restart after granting this permission.
+            {t("restartAfterGrant")}
           </strong>
         </>
       ),
@@ -364,10 +367,10 @@ export default function PermissionsStep({
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img className="w-12 h-12 mb-2" src="/128x128.png" alt="screenpipe" />
         <h1 className="font-mono text-base font-bold text-foreground">
-          Unlock the full experience
+          {t("unlockTitle")}
         </h1>
         <p className="font-mono text-[10px] text-muted-foreground mt-1 text-center max-w-xs">
-          Three permissions unlock recording. Optional access can wait.
+          {t("unlockDescription")}
         </p>
       </div>
 
@@ -406,7 +409,7 @@ export default function PermissionsStep({
           }}
           className="mt-5 font-mono text-[10px] text-muted-foreground/50 hover:text-foreground transition-colors"
         >
-          continue without all permissions →
+          {t("continueWithoutAll")}
         </motion.button>
       )}
     </motion.div>
