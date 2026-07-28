@@ -1,3 +1,7 @@
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     output: 'export',
@@ -18,5 +22,5 @@ const nextConfig = {
     // that release, then flip back. Last triage: v2.4.255 for React #185.
     productionBrowserSourceMaps: process.env.SHIP_SOURCE_MAPS === '1',
 }
-export default nextConfig;
+export default withNextIntl(nextConfig);
 

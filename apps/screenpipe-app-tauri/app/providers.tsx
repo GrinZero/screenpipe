@@ -21,6 +21,7 @@ import { usePathname } from "next/navigation";
 import { readCachedAnalyticsId, readCachedAnalyticsEnabled } from "@/lib/analytics-id";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "@/lib/query-client";
+import { I18nProvider } from "@/components/i18n-provider";
 
 /// Global mount point for the updater event listener. Lives here (not in
 /// per-page hooks) so the listener is registered for the lifetime of the
@@ -103,6 +104,7 @@ export const Providers = forwardRef<
   return (
     <Suspense>
       <NuqsAdapter>
+        <I18nProvider>
         <QueryClientProvider client={queryClient}>
           <SettingsProvider>
             <ManagedPolicyProvider>
@@ -129,6 +131,7 @@ export const Providers = forwardRef<
             </ManagedPolicyProvider>
           </SettingsProvider>
         </QueryClientProvider>
+        </I18nProvider>
       </NuqsAdapter>
     </Suspense>
   );

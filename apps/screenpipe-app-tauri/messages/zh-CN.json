@@ -1,0 +1,47 @@
+{
+  "common": {
+    "save": "保存",
+    "cancel": "取消",
+    "reset": "重置",
+    "open": "打开",
+    "enabled": "已启用",
+    "disabled": "已禁用"
+  },
+  "settings": {
+    "general": {
+      "title": "通用",
+      "subtitle": "启动、更新与通知",
+      "autoStart": "开机启动",
+      "autoStartDesc": "登录时在后台自动启动",
+      "autoStartEnabled": "开机启动已启用",
+      "autoStartEnabledDesc": "screenpipe 将在您登录时自动在后台启动",
+      "autoStartDisabled": "开机启动已禁用",
+      "autoStartDisabledDesc": "screenpipe 不会在登录时自动启动",
+      "autoUpdate": "自动更新",
+      "autoUpdateDesc": "下载更新后自动重启。关闭后将显示「重启以更新」横幅。",
+      "checkForUpdates": "检查更新",
+      "checkForUpdatesDesc": "立即检查新版本",
+      "runningVersion": "当前版本 v{version}",
+      "checking": "检查中...",
+      "checkNow": "立即检查",
+      "autoUpdatePipes": "自动更新 Pipes",
+      "autoUpdatePipesDesc": "更新未手动修改的商店 Pipes",
+      "version": "版本",
+      "versionDescManaged": "打开由您的组织管理的构建版本",
+      "versionDesc": "在 screenpipe.com 查看最近的稳定版本",
+      "yourGoal": "您的目标",
+      "yourGoalDesc": "您希望 screenpipe 帮助您完成什么",
+      "noSpecificGoal": "无特定目标",
+      "resetOnboarding": "重置引导",
+      "resetOnboardingDesc": "重新运行设置向导",
+      "resetting": "重置中...",
+      "headless": "无头模式",
+      "headlessDesc": "完全关闭应用界面，录制在托盘中继续",
+      "headlessNote": "在从托盘重新打开 screenpipe 之前，快捷键和界面将不可用。",
+      "recordOnly": "仅录制",
+      "recordOnlyDesc": "无头模式下跳过定时 Pipe 运行",
+      "language": "语言",
+      "languageDesc": "选择您偏好的显示语言"
+    }
+  }
+}

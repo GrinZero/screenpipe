@@ -53,6 +53,7 @@ import {
   describeEnterpriseUpdateMode,
   normalizeEnterpriseAppUpdatePolicy,
 } from "@/lib/enterprise/app-update-policy";
+import LanguageSettings from "@/components/settings/language-settings";
 
 export default function GeneralSettings() {
   const { isManagedDeployment } = useManagedPolicy();
@@ -486,6 +487,10 @@ export default function GeneralSettings() {
           )}
         </CardContent>
       </Card>
+
+      <Separator />
+
+      <LanguageSettings />
 
     </div>
   );

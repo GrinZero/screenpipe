@@ -1,0 +1,47 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "reset": "Reset",
+    "open": "Open",
+    "enabled": "Enabled",
+    "disabled": "Disabled"
+  },
+  "settings": {
+    "general": {
+      "title": "General",
+      "subtitle": "Startup, updates, and notifications",
+      "autoStart": "Auto-start",
+      "autoStartDesc": "Start in the background when you log in",
+      "autoStartEnabled": "auto-start enabled",
+      "autoStartEnabledDesc": "screenpipe will start in the background when you log in",
+      "autoStartDisabled": "auto-start disabled",
+      "autoStartDisabledDesc": "screenpipe won't launch at startup",
+      "autoUpdate": "Auto-update",
+      "autoUpdateDesc": "Restart automatically when an update is downloaded. Off: a \"restart to update\" banner appears instead.",
+      "checkForUpdates": "Check for updates",
+      "checkForUpdatesDesc": "Look for a new version now",
+      "runningVersion": "Running v{version}",
+      "checking": "checking...",
+      "checkNow": "check now",
+      "autoUpdatePipes": "Auto-Update Pipes",
+      "autoUpdatePipesDesc": "Update store pipes you haven't modified",
+      "version": "Version",
+      "versionDescManaged": "Open builds managed by your organization",
+      "versionDesc": "Open recent stable versions on screenpipe.com",
+      "yourGoal": "Your goal",
+      "yourGoalDesc": "What you want screenpipe to help you accomplish",
+      "noSpecificGoal": "No specific goal",
+      "resetOnboarding": "Reset Onboarding",
+      "resetOnboardingDesc": "Run the setup wizard again",
+      "resetting": "resetting...",
+      "headless": "Headless",
+      "headlessDesc": "Close the app UI completely while recording continues in the tray",
+      "headlessNote": "App shortcuts and the UI are unavailable until you open screenpipe from the tray.",
+      "recordOnly": "Record only",
+      "recordOnlyDesc": "Skip scheduled pipe runs while the UI is headless",
+      "language": "Language",
+      "languageDesc": "Choose your preferred display language"
+    }
+  }
+}

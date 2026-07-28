@@ -245,6 +245,19 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
+                // Apply locale to <html> lang to prevent flash
+                try {
+                  var locale = localStorage.getItem('screenpipe-ui-locale');
+                  if (locale) document.documentElement.lang = locale;
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
                 // Apply theme to prevent flash and ensure sidebar/main content consistency.
                 // Priority: stored preference > system preference
                 try {
