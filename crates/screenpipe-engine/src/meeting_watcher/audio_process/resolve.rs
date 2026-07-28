@@ -517,6 +517,15 @@ pub(crate) fn known_native_bundle_platform(field_lower: &str) -> Option<&'static
     {
         return Some("Microsoft Teams");
     }
+    if field_lower == "com.electron.lark"
+        || field_lower.starts_with("com.electron.lark.")
+        || field_lower == "lark"
+        || field_lower == "feishu"
+        || field_lower == "lark.exe"
+        || field_lower == "feishu.exe"
+    {
+        return Some("Lark");
+    }
     if field_lower.starts_with("com.tinyspeck.slackmacgap")
         || field_lower == "slack"
         || field_lower == "slack.exe"

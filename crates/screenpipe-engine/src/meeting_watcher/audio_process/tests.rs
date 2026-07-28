@@ -114,6 +114,30 @@ fn native_bundle_maps_to_platform() {
 }
 
 #[test]
+fn lark_bundle_and_display_names_map_to_platform() {
+    for identity in [
+        "com.electron.lark",
+        "com.electron.lark.helper.renderer",
+        "Lark",
+        "Feishu",
+    ] {
+        assert_eq!(
+            known_native_bundle_platform(&identity.to_lowercase()),
+            Some("Lark"),
+            "{identity} should resolve to Lark"
+        );
+    }
+
+    let profiles = load_detection_profiles();
+    let profile = profiles
+        .iter()
+        .find(|profile| profile.app_identifiers.macos_app_names.contains(&"lark"))
+        .expect("Lark detection profile should be registered");
+    assert!(profile.app_identifiers.macos_app_names.contains(&"feishu"));
+    assert!(!profile.requires_call_signal);
+}
+
+#[test]
 fn windows_exe_names_map_to_native_platform() {
     // Windows snapshots carry exe basenames (from the WASAPI sensor) rather
     // than macOS bundle ids; the matcher must resolve both.
@@ -122,6 +146,8 @@ fn windows_exe_names_map_to_native_platform() {
         ("ms-teams.exe", "Microsoft Teams"),
         ("teams.exe", "Microsoft Teams"),
         ("ms-teams_modulehost.exe", "Microsoft Teams"),
+        ("lark.exe", "Lark"),
+        ("feishu.exe", "Lark"),
         ("slack.exe", "Slack"),
         ("webex.exe", "Webex"),
     ] {

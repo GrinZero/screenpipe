@@ -147,6 +147,41 @@ pub fn load_detection_profiles() -> Vec<MeetingDetectionProfile> {
             ignore_window_titles: &[],
             requires_call_signal: false,
         },
+        // Lark / Feishu Desktop
+        //
+        // The international macOS app is installed as Lark.app but reports
+        // CFBundleName=Feishu and CFBundleIdentifier=com.electron.lark. Keep
+        // both display names here; the audio-process detector also recognizes
+        // the bundle id directly, including Electron helper processes.
+        MeetingDetectionProfile {
+            app_identifiers: AppIdentifiers {
+                macos_app_names: &["lark", "feishu"],
+                windows_process_names: &["lark.exe", "feishu.exe"],
+                browser_url_patterns: &[],
+                browser_title_patterns: &[],
+            },
+            call_signals: vec![
+                CallSignal::RoleWithName {
+                    role: "AXButton",
+                    name_contains: "leave meeting",
+                },
+                CallSignal::RoleWithName {
+                    role: "AXButton",
+                    name_contains: "end meeting",
+                },
+                CallSignal::RoleWithName {
+                    role: "AXButton",
+                    name_contains: "离开会议",
+                },
+                CallSignal::RoleWithName {
+                    role: "AXButton",
+                    name_contains: "结束会议",
+                },
+            ],
+            min_signals_required: 1,
+            ignore_window_titles: &[],
+            requires_call_signal: false,
+        },
         // Zoom Desktop
         // Note: Zoom on macOS does NOT expose AXWindow — only AXMenuBar.
         // Meeting controls are available as AXMenuBarItem ("Meeting" menu)
