@@ -269,6 +269,10 @@ custom-protocol = ["tauri/custom-protocol"]
 # Source builds without this flag will show "auto-updates unavailable"
 official-build = []
 
+# Explicit opt-in for personal source builds that should not enforce local
+# free-plan limits. This must never be combined with an official build flavor.
+self-hosted-unlimited = []
+
 # Enterprise build: updates are policy-managed (Intune/MDM or Screenpipe),
 # tauri.enterprise
 # bundle identifier, and the periodic telemetry sync that pushes screen + audio

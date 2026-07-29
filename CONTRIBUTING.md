@@ -584,4 +584,14 @@ if you want to exercise paid-plan features (search filters, cloud sync, etc.) wi
 | **skip interactive onboarding** | `SCREENPIPE_SKIP_ONBOARDING=1` (or `true` / `yes`) |
 | **seed e2e tests (e.g. onboarding)** | `SCREENPIPE_E2E_SEED=onboarding` |
 
+For a personal source build that also disables native local free-plan limits
+(such as the installed-pipe cap and free retention policy), add the
+`self-hosted-unlimited` Cargo feature:
+
+```bash
+bun tauri build --features "metal,self-hosted-unlimited"
+```
+
+This feature cannot be combined with `official-build` or `enterprise-build`.
+
 You can also force the billing gate in a bypassed dev environment by setting the `screenpipe_e2e_force_billing_gate` key in `localStorage` to `"1"`.

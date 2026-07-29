@@ -1724,6 +1724,13 @@ impl SettingsStore {
     /// server-verified plan evidence. Missing, conflicting, stale-paid, and
     /// future-dated evidence remains explicitly unknown.
     pub(crate) fn local_plan_policy(&self) -> LocalPlanPolicy {
+        // Personal source builds can explicitly opt out of local free-plan
+        // limits. Official and enterprise builds are prevented from compiling
+        // with this feature in main.rs.
+        if cfg!(feature = "self-hosted-unlimited") {
+            return LocalPlanPolicy::VerifiedPaid;
+        }
+
         if self.has_verified_paid_plan() {
             LocalPlanPolicy::VerifiedPaid
         } else if self.has_verified_free_plan() {
@@ -2348,6 +2355,18 @@ mod tests {
         assert!(store.restricts_paid_local_features());
         let config = store.to_recording_config(std::path::PathBuf::from("/tmp/screenpipe"));
         assert_eq!(config.max_non_template_pipes, Some(2));
+        assert!(!config.enforce_free_plan_retention);
+    }
+
+    #[cfg(feature = "self-hosted-unlimited")]
+    #[test]
+    fn self_hosted_unlimited_treats_missing_identity_as_verified_paid() {
+        let store = SettingsStore::default();
+        assert_eq!(store.local_plan_policy(), LocalPlanPolicy::VerifiedPaid);
+        assert!(!store.restricts_paid_local_features());
+
+        let config = store.to_recording_config(std::path::PathBuf::from("/tmp/screenpipe"));
+        assert_eq!(config.max_non_template_pipes, None);
         assert!(!config.enforce_free_plan_retention);
     }
 

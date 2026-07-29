@@ -9,6 +9,12 @@
 // (128) overflows while expanding the macro. Raise it for the whole crate.
 #![recursion_limit = "256"]
 
+#[cfg(all(
+    feature = "self-hosted-unlimited",
+    any(feature = "official-build", feature = "enterprise-build")
+))]
+compile_error!("self-hosted-unlimited cannot be combined with official-build or enterprise-build");
+
 use analytics::AnalyticsManager;
 use serde_json::json;
 use std::env;
