@@ -568,6 +568,7 @@ export function buildMeetingSummarizeInstructions(
   options?: { followUpAsk?: boolean },
 ): string {
   const lines = [
+    `read the screenpipe-api skill first so you know the meetings + search endpoints.`,
     `search screenpipe for what happened during this meeting and summarize it: key topics, decisions, action items.`,
     ``,
     `meeting id: ${meetingId}`,
@@ -575,7 +576,7 @@ export function buildMeetingSummarizeInstructions(
     `fallback transcript source: /search?content_type=audio for the meeting time window. audio rows use content.transcription (not content.text); content.text may be missing for audio and should not be treated as an empty transcript.`,
     `also read the screenpipe-api skill and query the screen for what was *shown* during the meeting: GET /search?content_type=ocr for the meeting window (this returns the frame's on-screen text — accessibility tree + OCR merged, not just OCR) — shared slides, docs, code, demos, and the on-screen name tags video-call apps render for participants. fold anything useful into the summary, and use on-screen names to fill in attendees who never spoke.`,
     `then name the speakers from the screen (do this every run, don't ask first): for every speaker still unnamed or generic ("speaker 1", "unknown", "") in the transcript above, line up when they were talking with the on-screen name tag showing at that moment, then GET /speakers/unnamed?limit=20 and POST /speakers/update {"id": <SPEAKER_ID>, "name": "<NAME_FROM_SCREEN>"} for each confident match. only rename when the on-screen evidence is unambiguous — never guess from voice alone. note which speakers you renamed (and which you left as-is) in your reply.`,
-    `*if available*, use the cloud media (video/audio) model only for a concrete visual question that transcript and OCR cannot answer — diagrams, charts, whiteboards, slide figures, UI demos, or screen-shared video. choose up to 4 representative frame_id values already returned by the bounded OCR search, fetch those still images with GET /frames/<frame_id>, and send them as image_url[] to POST /v1/chat/completions with "model": "gemma4-e4b". NEVER call POST /export or run ffmpeg for a routine meeting summary; a full media export requires an explicit user request. if the cloud-media block is absent or returns 503 cloud_token_missing, skip visual analysis and summarize from transcript + OCR.`,
+    `*if available*, use the cloud media (video/audio) model for what text alone can't capture: diagrams, charts, whiteboards, slide figures, UI demos, or screen-shared video. export the meeting with POST /export using this meeting id, or ffmpeg-sample a few keyframes from the captured media, then send up to 4 frames per request as image_url[] to POST /v1/chat/completions with "model": "gemma4-e4b" and ask what they show; it can also take audio_url directly for hard-to-transcribe spans. this step is optional — if the cloud-media block isn't present, or the call returns 503 cloud_token_missing, skip it and summarize from transcript + OCR.`,
     `if your summary is worth saving, append it to the meeting note (and refresh the title in the same call) via:`,
     `  curl -s -X PUT "http://localhost:3030/meetings/${meetingId}" \\`,
     `    -H "Authorization: Bearer $SCREENPIPE_LOCAL_API_KEY" \\`,
@@ -587,7 +588,7 @@ export function buildMeetingSummarizeInstructions(
   if (options?.followUpAsk) {
     lines.push(
       ``,
-      `after the PUT, offer to push the summary into one of the user's *connected* apps — ask first, never push on your own. don't guess at the integration list: GET http://localhost:3030/connections and keep only the ones with "connected": true, then ask in one short message which of those (if any) to push to. rank them by relevance — an app used during the meeting (see "apps used during meeting" / "tabs/docs visited") comes first. if nothing is connected, say so in one line (connecting Notion/Slack/Telegram/… would let you push next time) and stop. when they pick one, push via that connection's endpoint (POST /connections/<id>/send for slack/telegram/discord, POST /connections/<id>/proxy/... for notion/linear/etc.) and confirm specifics (channel, parent page) before anything leaves the machine.`,
+      `after the PUT, offer to push the summary into one of the user's connected apps — ask first, never push on your own. list what's actually connected with GET http://localhost:3030/connections and keep only the ones with "connected": true. rank the connected targets by relevance — an app used during the meeting first. then post a desktop notification whose action buttons are those targets, using POST http://localhost:11435/notify; each button should map to that connection's endpoint from its description (POST /connections/<id>/send for slack/telegram/discord, POST /connections/<id>/proxy/... for notion/linear/etc.). when a target needs a destination you can't infer, make that button "review in chat" so the user confirms specifics before anything leaves the machine. if nothing is connected, say so in one line (connecting an app would let you push summaries next time) and stop.`,
     );
   }
 

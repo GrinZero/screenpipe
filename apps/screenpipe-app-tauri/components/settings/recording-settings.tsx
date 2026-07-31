@@ -2741,7 +2741,7 @@ Your screen is a pipe. Everything you see, hear, and type flows through it. Scre
                       <SelectItem value="whisper-tiny">Whisper Tiny</SelectItem>
                       <SelectItem value="whisper-tiny-quantized">Whisper Tiny ({t("fast")})</SelectItem>
                       {!isMacOS && <SelectItem value="qwen3-asr">Qwen3-ASR</SelectItem>}
-                      <SelectItem value="parakeet">Parakeet{isMacOS ? ` (${t("experimental")})` : ""}</SelectItem>
+                      <SelectItem value="parakeet">Parakeet{isMacOS ? ` (${u5("experimental")})` : ""}</SelectItem>
                     </SelectGroup>
                     <SelectGroup>
                       <SelectLabel className="text-[10px] text-muted-foreground/70 uppercase tracking-wider">{t("other")}</SelectLabel>
@@ -3583,7 +3583,7 @@ Your screen is a pipe. Everything you see, hear, and type flows through it. Scre
                 <div>
                   <h3 className="text-sm font-medium text-foreground">{t("bluetoothMics")}</h3>
                   <p className="text-xs text-muted-foreground">
-                    {t("bluetoothMicsDescription")}
+                    {u5("bluetoothMicsDescription")}
                   </p>
                 </div>
               </div>
@@ -3607,11 +3607,11 @@ Your screen is a pipe. Everything you see, hear, and type flows through it. Scre
               <VolumeX className="h-4 w-4 text-muted-foreground shrink-0" />
               <div>
                 <h3 className="text-sm font-medium text-foreground">
-                  {t("excludeSystemAudio")}
+                  {u5("excludeSystemAudio")}
                 </h3>
                 <p className="text-xs text-muted-foreground">
-                  {t("excludeSystemAudioDescription")}
-                  {isWindows && ` ${t("windowsOneExcludedApp")}`}
+                  {u5("excludeSystemAudioDescription")}
+                  {isWindows && ` ${u5("windowsOneExcludedApp")}`}
                 </p>
               </div>
             </div>

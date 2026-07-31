@@ -34,6 +34,7 @@
     "test:e2e:sck-startup-recovery:macos": "SCREENPIPE_E2E_SEED=onboarding,no-audio,sck-enumeration-hang-once bun run wdio run e2e/wdio.conf.ts --spec e2e/specs/sck-startup-recovery.spec.ts",
     "test:e2e:search-bugs": "SCREENPIPE_E2E_SEED=onboarding,no-recording,search-fixture SCREENPIPE_PORT=3041 bun run wdio run e2e/wdio.conf.ts --spec e2e/specs/search/search-bugs-4645.spec.ts",
     "typecheck": "bunx tsc --noEmit",
+    "i18n:check": "node scripts/check-i18n.mjs",
     "bindings:check": "cargo test -p screenpipe-app tauri_bindings_are_current --manifest-path src-tauri/Cargo.toml -- --nocapture",
     "bindings:generate": "UPDATE_TAURI_BINDINGS=1 cargo test -p screenpipe-app export_typescript_bindings --manifest-path src-tauri/Cargo.toml -- --nocapture",
     "skills:generate": "bun scripts/gen-skill-content.js",
