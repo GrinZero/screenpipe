@@ -778,7 +778,7 @@ function MergeBanner({
   onMerge: (keepId: number, mergeId: number) => Promise<void>;
   onDismiss: (speakerId: number, similarId: number) => void;
 }) {
-  const su5 = useTranslations("speakersUi7");
+  const su5 = useTranslations("speakersUi5");
   const [current, setCurrent] = useState(0);
   const [merging, setMerging] = useState(false);
 

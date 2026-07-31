@@ -3733,6 +3733,7 @@ export function ConnectionsSection({
 }: ConnectionsSectionProps = {}) {
   const t = useTranslations("connections");
   const tg = useTranslations("connectionGuides");
+  const gt = useTranslations("connectionGuideText");
   const c = useTranslations("connectionsUi");
   const ct = useTranslations("connectionTileUi");
   const ca = useTranslations("connectionAdvancedUi");
@@ -4154,7 +4155,7 @@ export function ConnectionsSection({
           <OAuthMcpPanel
             name={mcpProvider.name}
             mcpUrl={mcpProvider.url}
-            description={tg(`oauth.${mcpProvider.descriptionKey}`)}
+            description={gt(`oauth.${mcpProvider.descriptionKey}`)}
             onConnected={() => setMcpProviderConnected(m => ({ ...m, [mcpProvider.id]: true }))}
             onDisconnected={() => setMcpProviderConnected(m => ({ ...m, [mcpProvider.id]: false }))}
           />

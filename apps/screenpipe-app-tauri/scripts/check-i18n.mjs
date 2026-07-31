@@ -74,17 +74,36 @@ for (const file of files) {
   const source = fs.readFileSync(file, "utf8");
   const namespaces = new Map();
   for (const match of source.matchAll(/\b(?:const|let)\s+(\w+)\s*=\s*useTranslations\(\s*["']([^"']+)["']\s*\)/g)) {
-    namespaces.set(match[1], match[2]);
+    const declared = namespaces.get(match[1]) ?? [];
+    declared.push({ namespace: match[2], index: match.index ?? 0 });
+    namespaces.set(match[1], declared);
   }
-  for (const [variable, namespace] of namespaces) {
-    const scope = resolveNamespace(messages.en, namespace);
-    if (!scope || typeof scope !== "object" || Array.isArray(scope)) {
-      errors.push(`missing namespace ${namespace}: ${path.relative(process.cwd(), file)}`);
-      continue;
-    }
+  for (const [variable, declarations] of namespaces) {
     const calls = new RegExp(`\\b${variable}\\(\\s*[\\"']([^\\"']+)[\\"']`, "g");
     for (const match of source.matchAll(calls)) {
+      const declaration = declarations.filter(({ index }) => index < (match.index ?? 0)).at(-1);
+      if (!declaration) continue;
+      const { namespace } = declaration;
+      const scope = resolveNamespace(messages.en, namespace);
+      if (!scope || typeof scope !== "object" || Array.isArray(scope)) {
+        errors.push(`missing namespace ${namespace}: ${path.relative(process.cwd(), file)}`);
+        continue;
+      }
       if (!(match[1] in scope)) errors.push(`missing ${namespace}.${match[1]}: ${path.relative(process.cwd(), file)}`);
+    }
+  }
+  for (const match of source.matchAll(/\b(\w+)\(\s*`([^$`]*)\$\{/g)) {
+    const [, variable, prefix] = match;
+    const declarations = namespaces.get(variable);
+    if (!declarations) continue;
+    const declaration = declarations.filter(({ index }) => index < (match.index ?? 0)).at(-1);
+    if (!declaration || !prefix.endsWith(".")) continue;
+    const namespace = declaration.namespace;
+    const keyPrefix = prefix.slice(0, -1);
+    const scope = resolveNamespace(messages.en, namespace);
+    const dynamicScope = resolveNamespace(scope, keyPrefix);
+    if (!dynamicScope || typeof dynamicScope !== "object" || Array.isArray(dynamicScope)) {
+      errors.push(`missing dynamic namespace ${namespace}.${keyPrefix}: ${path.relative(process.cwd(), file)}`);
     }
   }
   for (const match of source.matchAll(/useTranslations\(\s*["']([^"']+)["']\s*\)\s*\(\s*["']([^"']+)["']/g)) {
