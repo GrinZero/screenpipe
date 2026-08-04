@@ -15,6 +15,7 @@ export const searchIndex: SettingsField[] = [
 ];
 import { open as openUrl } from "@tauri-apps/plugin-shell";
 import { tauriFetchWithDeadline } from "@/lib/http/tauri-fetch";
+import { getAIProviderFetch } from "@/lib/http/ai-provider-transport";
 import { homeDir, join } from "@tauri-apps/api/path";
 import { Button } from "../ui/button";
 import {
@@ -135,16 +136,6 @@ const formatPresetName = (name: string): string => {
     return `Preset ${name.slice(0, 8)}...`;
   }
   return name;
-};
-
-const isLocalhostUrl = (url?: string): boolean => {
-  if (!url) return false;
-  try {
-    const hostname = new URL(url).hostname.toLowerCase();
-    return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1";
-  } catch {
-    return false;
-  }
 };
 
 type DiagnosticStatus = "pass" | "fail" | "skip" | "pending" | "running";
@@ -694,16 +685,12 @@ const AISection = ({
         chat: { status: "running", message: u("sendingTest") },
       }));
     } else {
-      // Local providers (Ollama, custom localhost) must go through native HTTP —
-      // a browser fetch from the tauri://localhost webview to a local http server
-      // is blocked by WKWebView (mixed-content / cross-origin CORS). The
+      // Local providers and every custom endpoint must go through native HTTP —
+      // browser fetch requires provider-specific CORS support and WKWebView also
+      // blocks mixed-content requests to local HTTP servers. The
       // wrapper composes `abort.signal` (cancel-on-restart) with its own
       // deadline, so a wedged local server can no longer hang diagnostics.
-      const modelsFetchFn =
-        settingsPreset?.provider === "native-ollama" ||
-        (settingsPreset?.provider === "custom" && isLocalhostUrl(settingsPreset?.url))
-          ? tauriFetchWithDeadline
-          : fetch;
+      const modelsFetchFn = getAIProviderFetch(settingsPreset?.provider);
       try {
         modelsResponse = await modelsFetchFn(modelsUrl, {
           headers,
@@ -837,8 +824,8 @@ const AISection = ({
       chatHeaders["OpenAI-Beta"] = "responses=experimental";
     }
 
-    // Use native HTTP for chatgpt.com, Anthropic, and local Ollama to bypass
-    // CORS / WKWebView mixed-content blocking (localhost:11434 over http).
+    // Use native HTTP for chatgpt.com, Anthropic, Ollama, and custom endpoints
+    // to bypass CORS / WKWebView mixed-content blocking.
     //
     // The wrapper's deadline covers the response body, not just the headers, and
     // it is flat rather than idle-based. That is fine for every arm here: the
@@ -847,7 +834,10 @@ const AISection = ({
     // body nobody wanted — and drops the Rust body resource with it. A caller
     // that genuinely needs to consume a long-lived stream must pass
     // `{ timeoutMs: Number.POSITIVE_INFINITY }`.
-    const fetchFn = (isChatGpt || isAnthropic || settingsPreset?.provider === "native-ollama") ? tauriFetchWithDeadline : fetch;
+    const fetchFn =
+      isChatGpt || isAnthropic
+        ? tauriFetchWithDeadline
+        : getAIProviderFetch(settingsPreset?.provider);
 
     const chatStart = performance.now();
     try {
@@ -988,7 +978,7 @@ const AISection = ({
           break;
         case "custom":
           try {
-            const customFetchFn = isLocalhostUrl(settingsPreset?.url) ? tauriFetchWithDeadline : fetch;
+            const customFetchFn = getAIProviderFetch(settingsPreset?.provider);
             const customResponse = await customFetchFn(
               aiEndpointUrl(settingsPreset?.url, "models"),
               {

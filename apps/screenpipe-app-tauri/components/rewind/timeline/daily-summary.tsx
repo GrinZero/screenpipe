@@ -78,9 +78,15 @@ function cacheSummary(date: Date, summary: string) {
 	}
 }
 
-function friendlyGenerationError(error: unknown, translate: (key: string) => string): string {
+function friendlyGenerationError(
+	error: unknown,
+	usesCloudModel: boolean,
+	translate: (key: string) => string,
+): string {
 	if (!(error instanceof Error)) return translate("generationFailed");
-	if (/401|403/.test(error.message)) return translate("sessionExpired");
+	if (/401|403/.test(error.message)) {
+		return translate(usesCloudModel ? "sessionExpired" : "providerAuthFailed");
+	}
 	if (/429/.test(error.message)) return translate("aiBusy");
 	if (/timed out/i.test(error.message)) return translate("generationTimedOut");
 	return translate("generationFailedRetry");
@@ -114,6 +120,10 @@ export function TimelineDailySummary({
 		() => pickPipePreset((settings?.aiPresets ?? []) as AIPreset[]),
 		[settings?.aiPresets],
 	);
+	const usesCloudModel =
+		dailySummaryPreset?.provider === "screenpipe-cloud" ||
+		dailySummaryPreset?.provider === "pi";
+	const requiresLogin = usesCloudModel && !userToken;
 	const isGenerating = status === "gathering";
 
 	const dateLabel = useMemo(
@@ -139,8 +149,8 @@ export function TimelineDailySummary({
 	}, [dateId]);
 
 	const generate = useCallback(
-		async (token = userToken) => {
-			if (!token) {
+		async (token: string | null = userToken || null) => {
+			if (usesCloudModel && !token) {
 				setEnableDialogOpen(true);
 				return;
 			}
@@ -201,7 +211,11 @@ export function TimelineDailySummary({
 				}
 				console.error("daily summary generation failed", generationError);
 				setStatus("error");
-				setError(friendlyGenerationError(generationError, (key) => ds2(key)));
+				setError(
+					friendlyGenerationError(generationError, usesCloudModel, (key) =>
+						ds2(key),
+					),
+				);
 				posthog.capture("timeline_daily_summary_failed", {
 					selected_date: dateId,
 					reason:
@@ -211,7 +225,7 @@ export function TimelineDailySummary({
 				});
 			}
 		},
-		[currentDate, dailySummaryPreset, dateId, userToken],
+		[currentDate, dailySummaryPreset, dateId, ds2, userToken, usesCloudModel],
 	);
 
 	const handleTriggerClick = () => {
@@ -229,11 +243,11 @@ export function TimelineDailySummary({
 			return;
 		}
 
-		if (!enhancedAI || !userToken) {
+		if (!enhancedAI || requiresLogin) {
 			setEnableDialogOpen(true);
 			posthog.capture("timeline_daily_summary_enable_prompt_opened", {
 				selected_date: dateId,
-				requires_login: !userToken,
+				requires_login: requiresLogin,
 			});
 			return;
 		}
@@ -247,7 +261,7 @@ export function TimelineDailySummary({
 	};
 
 	const handleEnableAndGenerate = async () => {
-		if (!userToken) {
+		if (requiresLogin) {
 			setEnableDialogOpen(false);
 			await commands.showWindow({ Home: { page: "account" } });
 			return;
@@ -256,19 +270,21 @@ export function TimelineDailySummary({
 		setIsEnabling(true);
 		try {
 			await updateSettings({ enhancedAI: true });
-			try {
-				const result = await commands.setEnhancedAiSuggestions(true, userToken);
-				if (result.status === "error") console.warn(result.error);
-			} catch (syncError) {
-				// The setting is already persisted. The native suggestion cache will
-				// hydrate again on app launch, so do not block this on-demand request.
-				console.warn("failed to sync Enhanced AI suggestion state", syncError);
+			if (userToken) {
+				try {
+					const result = await commands.setEnhancedAiSuggestions(true, userToken);
+					if (result.status === "error") console.warn(result.error);
+				} catch (syncError) {
+					// The setting is already persisted. The native suggestion cache will
+					// hydrate again on app launch, so do not block this on-demand request.
+					console.warn("failed to sync Enhanced AI suggestion state", syncError);
+				}
 			}
 			posthog.capture("timeline_daily_summary_enhanced_ai_enabled", {
 				selected_date: dateId,
 			});
 			setEnableDialogOpen(false);
-			await generate(userToken);
+			await generate(userToken || null);
 		} catch (enableError) {
 			console.error("failed to enable enhanced AI", enableError);
 			setEnableDialogOpen(false);
@@ -526,25 +542,25 @@ export function TimelineDailySummary({
 				>
 					<DialogHeader>
 						<div className="mb-3 flex h-10 w-10 items-center justify-center border border-foreground bg-foreground text-background">
-							{userToken ? (
-								<Sparkles className="h-5 w-5" />
-							) : (
+							{requiresLogin ? (
 								<LogIn className="h-5 w-5" />
+							) : (
+								<Sparkles className="h-5 w-5" />
 							)}
 						</div>
 						<DialogTitle>
-							{userToken
-								? ds("turnOnEnhancedAi")
-								: ds("signInDailySummaries")}
+							{requiresLogin
+								? ds("signInDailySummaries")
+								: ds("turnOnEnhancedAi")}
 						</DialogTitle>
 						<DialogDescription>
-							{userToken
-								? ds("generateRecap", { date: dateLabel.toLowerCase() })
-								: ds("accountAndCloudModel")}
+							{requiresLogin
+								? ds("accountAndCloudModel")
+								: ds("generateRecap", { date: dateLabel.toLowerCase() })}
 						</DialogDescription>
 					</DialogHeader>
 
-					{userToken && (
+					{!requiresLogin && (
 						<div className="space-y-3 border-y border-border py-4 text-sm">
 							<div className="flex items-start gap-3">
 								<CalendarDays className="mt-0.5 h-4 w-4 shrink-0" />
@@ -582,7 +598,7 @@ export function TimelineDailySummary({
 							{isEnabling ? (
 								<Loader2 className="mr-2 h-4 w-4 animate-spin" />
 							) : null}
-							{userToken ? ds("turnOnAndSummarize") : ds("signIn")}
+							{requiresLogin ? ds("signIn") : ds("turnOnAndSummarize")}
 						</Button>
 					</DialogFooter>
 				</DialogContent>

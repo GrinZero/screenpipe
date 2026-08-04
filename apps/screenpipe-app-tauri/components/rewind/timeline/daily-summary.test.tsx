@@ -23,6 +23,14 @@ const PIPE_PRESET = {
 	prompt: "",
 };
 
+const CUSTOM_PIPE_PRESET = {
+	...PIPE_PRESET,
+	provider: "custom" as const,
+	url: "https://models.example.com/v1",
+	model: "my-private-model",
+	apiKey: "private-key",
+};
+
 const GENERATED_SUMMARY = `The captured evidence shows a focused implementation session.
 
 ### Accomplishments
@@ -182,16 +190,102 @@ describe("TimelineDailySummary", () => {
 		expect(screen.queryByText("turn on enhanced ai?")).not.toBeInTheDocument();
 	});
 
+	it("requires login before regenerating a cached Screenpipe Cloud summary", () => {
+		const selectedDate = new Date(2026, 6, 25);
+		mocks.settings.enhancedAI = true;
+		mocks.settings.user = null;
+		window.localStorage.setItem(
+			dailySummaryCacheKey(selectedDate),
+			GENERATED_SUMMARY,
+		);
+
+		render(<TimelineDailySummary currentDate={selectedDate} />);
+		fireEvent.click(screen.getByTestId("timeline-daily-summary-trigger"));
+		fireEvent.click(
+			screen.getByRole("button", { name: "Regenerate daily summary" }),
+		);
+
+		expect(
+			screen.getByText("sign in to use daily summaries"),
+		).toBeInTheDocument();
+		expect(mocks.runDailySummaryWithPi).not.toHaveBeenCalled();
+	});
+
 	it("asks for explicit consent instead of starting Pi when Enhanced AI is off", () => {
 		render(<TimelineDailySummary currentDate={new Date(2026, 6, 25)} />);
 
 		fireEvent.click(screen.getByTestId("timeline-daily-summary-trigger"));
 
-		expect(screen.getByText("turn on enhanced ai?")).toBeInTheDocument();
+		expect(screen.getByText(/turn on enhanced ai\?/i)).toBeInTheDocument();
 		expect(
 			screen.getByText(/never run on a timer or generate automatically/i),
 		).toBeInTheDocument();
 		expect(screen.getByText(/bounded, read-only access/i)).toBeInTheDocument();
+		expect(mocks.runDailySummaryWithPi).not.toHaveBeenCalled();
+	});
+
+	it("uses a configured custom model without requiring a Screenpipe login", async () => {
+		const selectedDate = new Date(2026, 6, 25);
+		mocks.settings.enhancedAI = true;
+		mocks.settings.user = null;
+		mocks.settings.aiPresets = [CUSTOM_PIPE_PRESET];
+
+		render(<TimelineDailySummary currentDate={selectedDate} />);
+		fireEvent.click(screen.getByTestId("timeline-daily-summary-trigger"));
+
+		await waitFor(() => {
+			expect(mocks.runDailySummaryWithPi).toHaveBeenCalledWith(
+				expect.objectContaining({
+					preset: CUSTOM_PIPE_PRESET,
+					userToken: null,
+				}),
+			);
+		});
+		expect(
+			screen.queryByText("sign in to use daily summaries"),
+		).not.toBeInTheDocument();
+		expect(mocks.showWindow).not.toHaveBeenCalled();
+	});
+
+	it("enables Enhanced AI for a logged-out custom model and generates locally", async () => {
+		mocks.settings.user = null;
+		mocks.settings.aiPresets = [CUSTOM_PIPE_PRESET];
+
+		render(<TimelineDailySummary currentDate={new Date(2026, 6, 25)} />);
+		fireEvent.click(screen.getByTestId("timeline-daily-summary-trigger"));
+
+		expect(screen.getByText("turn on enhanced AI?")).toBeInTheDocument();
+		fireEvent.click(
+			screen.getByRole("button", { name: "Turn on and summarize" }),
+		);
+
+		await waitFor(() => {
+			expect(mocks.runDailySummaryWithPi).toHaveBeenCalledWith(
+				expect.objectContaining({
+					preset: CUSTOM_PIPE_PRESET,
+					userToken: null,
+				}),
+			);
+		});
+		expect(mocks.updateSettings).toHaveBeenCalledWith({ enhancedAI: true });
+		expect(mocks.setEnhancedAiSuggestions).not.toHaveBeenCalled();
+		expect(mocks.showWindow).not.toHaveBeenCalled();
+	});
+
+	it("still requires login when the selected model uses Screenpipe Cloud", async () => {
+		mocks.settings.user = null;
+
+		render(<TimelineDailySummary currentDate={new Date(2026, 6, 25)} />);
+		fireEvent.click(screen.getByTestId("timeline-daily-summary-trigger"));
+
+		expect(
+			screen.getByText("sign in to use daily summaries"),
+		).toBeInTheDocument();
+		fireEvent.click(screen.getByRole("button", { name: "Sign in" }));
+
+		await waitFor(() => {
+			expect(mocks.showWindow).toHaveBeenCalledWith({ Home: { page: "account" } });
+		});
 		expect(mocks.runDailySummaryWithPi).not.toHaveBeenCalled();
 	});
 
